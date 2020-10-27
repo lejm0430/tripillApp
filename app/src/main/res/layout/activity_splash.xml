@@ -17,6 +17,27 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="당신의 증상에 적합한 약을 추천해드립니다."
+        android:textColor="@color/slate"
+        android:textSize="14dp"
+        android:fontFamily="@font/noto_sans_cj_kkr_demilight"
+        android:includeFontPadding="false"
+        android:layout_below="@+id/splash_icon"
+        android:layout_marginTop="24dp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="안전한 여행되세요"
+        android:textColor="@color/greyish_brown"
+        android:textSize="14dp"
+        android:fontFamily="@font/noto_sans_cj_kkr_medium"
+        android:includeFontPadding="false"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="32dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

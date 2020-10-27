@@ -1,18 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/menuBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_menu_blue"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/logo_txt"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/mainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please select a\npainful area."
+        android:layout_below="@+id/action_bar"
+        android:textSize="24dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"/>
+
+    <RelativeLayout
+        android:id="@+id/headBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mainText"
+        android:layout_marginTop="37dp"
+        android:layout_marginLeft="16dp">
+
+        <ImageView
+            android:id="@+id/headBtn_ring"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/circle_border_sunflower"
+            android:src="@drawable/main_pressed_head"
+            android:scaleType="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="head"
+            android:textColor="@color/slate"
+            android:textSize="16dp"
+            android:layout_below="@id/headBtn_ring"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:includeFontPadding="false"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/neckBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mainText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp">
+
+
+            <ImageView
+                android:id="@+id/neckBtn_ring"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:background="@drawable/circle_border_sunflower"
+                android:src="@drawable/main_pressed_throat"
+                android:scaleType="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="neck"
+                android:textColor="@color/slate"
+                android:textSize="16dp"
+                android:layout_below="@id/neckBtn_ring"
+                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/noto_sans_cj_kkr_medium"
+                android:includeFontPadding="false"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/stomachBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mainText"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="37dp"
+        android:layout_marginRight="16dp">
+
+
+        <ImageView
+            android:id="@+id/stomachBtn_ring"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/circle_border_sunflower"
+            android:src="@drawable/main_pressed_stomach"
+            android:scaleType="center"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="stomach"
+            android:textColor="@color/slate"
+            android:textSize="16dp"
+            android:layout_below="@id/stomachBtn_ring"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:includeFontPadding="false"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/armBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headBtn"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp">
+
+
+        <ImageView
+            android:id="@+id/armBtn_ring"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/circle_border_sunflower"
+            android:src="@drawable/main_pressed_arm"
+            android:scaleType="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="arm"
+            android:textColor="@color/slate"
+            android:textSize="16dp"
+            android:layout_below="@id/armBtn_ring"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:includeFontPadding="false"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/legBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/neckBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp">
+
+
+        <ImageView
+            android:id="@+id/legBtn_ring"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/circle_border_sunflower"
+            android:src="@drawable/main_pressed_leg"
+            android:scaleType="center"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="leg"
+            android:textColor="@color/slate"
+            android:textSize="16dp"
+            android:layout_below="@id/legBtn_ring"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:includeFontPadding="false"/>
+
+</RelativeLayout>
+
+    <RelativeLayout
+    android:id="@+id/musclePainBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/stomachBtn"
+    android:layout_alignParentRight="true"
+    android:layout_marginTop="16dp"
+    android:layout_marginRight="16dp">
+
+
+        <ImageView
+            android:id="@+id/musclePainBtn_ring"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/circle_border_sunflower"
+            android:src="@drawable/main_pressed_musclespain"
+            android:scaleType="center"/>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="muscle pain"
+        android:textColor="@color/slate"
+        android:textSize="16dp"
+        android:layout_below="@id/musclePainBtn_ring"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/noto_sans_cj_kkr_medium"
+        android:includeFontPadding="false"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
+
+    <RelativeLayout
+    android:id="@+id/burnBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/armBtn"
+    android:layout_marginTop="16dp"
+    android:layout_marginLeft="16dp">
+
+
+        <ImageView
+            android:id="@+id/burnBtn_ring"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/circle_border_sunflower"
+            android:src="@drawable/main_pressed_burn"
+            android:scaleType="center"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="burn"
+        android:textColor="@color/slate"
+        android:textSize="16dp"
+        android:layout_below="@id/burnBtn_ring"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/noto_sans_cj_kkr_medium"
+        android:includeFontPadding="false"/>
+
+</RelativeLayout>
+
+    <RelativeLayout
+    android:id="@+id/woundBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/legBtn"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="16dp">
+
+
+        <ImageView
+            android:id="@+id/woundBtn_ring"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/circle_border_sunflower"
+            android:src="@drawable/main_pressed_wound"
+            android:scaleType="center"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="wound"
+        android:textColor="@color/slate"
+        android:textSize="16dp"
+        android:layout_below="@id/woundBtn_ring"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/noto_sans_cj_kkr_medium"
+        android:includeFontPadding="false"/>
+
+</RelativeLayout>
+
+    <RelativeLayout
+    android:id="@+id/beerBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/musclePainBtn"
+    android:layout_alignParentRight="true"
+    android:layout_marginTop="16dp"
+    android:layout_marginRight="16dp">
+
+
+        <ImageView
+            android:id="@+id/beerBtn_ring"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/circle_border_sunflower"
+            android:src="@drawable/main_pressed_hangover"
+            android:scaleType="center"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hangover"
+        android:textColor="@color/slate"
+        android:textSize="16dp"
+        android:layout_below="@id/beerBtn_ring"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/noto_sans_cj_kkr_medium"
+        android:includeFontPadding="false"/>
+
+</RelativeLayout>
+
+</RelativeLayout>

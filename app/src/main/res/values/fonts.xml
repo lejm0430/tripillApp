@@ -12,7 +12,10 @@
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
- --><resources>
+ -->
+
+
+<resources>
   <style name="TextStyle10">
     <item name="android:gravity">end</item>
     <item name="android:fontFamily">@font/noto_sans_cj_kkr_medium</item>

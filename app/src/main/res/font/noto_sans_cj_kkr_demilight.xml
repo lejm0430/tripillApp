@@ -12,9 +12,11 @@
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
- --><font-family xmlns:android="http://schemas.android.com/apk/res/android">
+ -->
+
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
   <font
     android:fontStyle="normal"
     android:fontWeight="300"
-    android:font="@font/noto_sans_cj_kkr_demi_light" />
+    android:font="@font/noto_sans_cj_kkr_demilight" />
 </font-family>

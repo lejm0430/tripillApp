@@ -3,4 +3,14 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="white">#ffffff</color>
+    <color name="cobalt">#1a4f82</color>
+    <color name="sunflower">#ffc10d</color>
+    <color name="coral">#fb4c4c</color>
+    <color name="slate">#51677d</color>
+    <color name="greyish_brown">#595959</color>
+    <color name="warm_grey">#8b8b8b</color>
+    <color name="black">#2a2a2a</color>
+
 </resources>

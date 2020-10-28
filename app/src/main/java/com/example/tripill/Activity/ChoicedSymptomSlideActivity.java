@@ -1,10 +1,13 @@
 package com.example.tripill.Activity;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,7 +35,6 @@ public class ChoicedSymptomSlideActivity extends BottomSheetDialogFragment {
         final CheckBox Symptom3 = v.findViewById(R.id.Symptom3);
         TextView nextBtn = v.findViewById(R.id.nextBtn);
         ImageView backBtn = v.findViewById(R.id.backbtn);
-
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override

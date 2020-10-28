@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);
         TextView stomach = findViewById(R.id.stomach);
@@ -32,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
         TextView burn = findViewById(R.id.burn);
         TextView wound = findViewById(R.id.wound);
         TextView hangover = findViewById(R.id.hangover);
-
 
 
         ImageView menuBtn = findViewById(R.id.menuBtn);
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
             public void onClick(View view) {
                 GoAge.putExtra("part", neck.getText().toString());
                 startActivity(GoAge);
+
             }
         });
 

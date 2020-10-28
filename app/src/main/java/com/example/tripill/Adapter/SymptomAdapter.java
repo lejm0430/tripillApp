@@ -1,19 +1,14 @@
-package com.example.tripill;
+package com.example.tripill.Adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.example.tripill.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 
 public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.MainHolder> {
     private String[] main_text;

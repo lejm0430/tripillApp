@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity"
+    tools:context=".Activity.SplashActivity"
     android:background="@color/white">
 
     <ImageView
@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="당신의 증상에 적합한 약을 추천해드립니다."
+        android:text="We recommend a medicine that is suitable for your symptoms."
         android:textColor="@color/slate"
         android:textSize="14dp"
         android:fontFamily="@font/noto_sans_cj_kkr_demilight"

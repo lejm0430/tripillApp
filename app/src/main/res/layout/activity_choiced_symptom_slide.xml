@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Activity.ChoicedSymptomSlideActivity"
+    android:background="@drawable/symptomchoice_background_white_r24"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close_blue"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="20dp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/SymptomArea"
+        android:layout_width="50dp"
+        android:layout_height="22dp"
+        android:layout_marginLeft="16dp"
+        android:gravity="center"
+        android:text="부위"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:fontFamily="@font/noto_sans_cj_kkr_demilight"
+        android:includeFontPadding="false"
+        android:background="@drawable/rec_coner_button"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="증상을 선택해주세요."
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/noto_sans_cj_kkr_demilight"
+        android:includeFontPadding="false"/>
+
+    <TextView
+        android:id="@+id/TwoChoiceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:text="최대 2개 선택 가능"
+        android:textColor="@color/coral"
+        android:textSize="14dp"
+        android:fontFamily="@font/noto_sans_cj_kkr_regular"
+        android:includeFontPadding="false"
+        android:visibility="visible"/>
+
+    <CheckBox
+        android:id="@+id/Symptom1"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:paddingLeft="12dp"
+        android:text="증상1"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/noto_sans_cj_kkr_regular"
+        android:includeFontPadding="false"
+        android:button="@drawable/symptom_check_selector"/>
+
+    <CheckBox
+        android:id="@+id/Symptom2"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginLeft="16dp"
+        android:paddingLeft="12dp"
+        android:text="증상2"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/noto_sans_cj_kkr_regular"
+        android:includeFontPadding="false"
+        android:button="@drawable/symptom_check_selector"/>
+
+    <CheckBox
+        android:id="@+id/Symptom3"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginLeft="16dp"
+        android:paddingLeft="12dp"
+        android:text="증상3"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/noto_sans_cj_kkr_regular"
+        android:includeFontPadding="false"
+        android:button="@drawable/symptom_check_selector"/>
+
+    <TextView
+        android:id="@+id/nextBtn"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/textview_bottom_button_border"
+        android:text="다음"
+        android:textSize="16dp"
+        android:textColor="@color/cobalt"
+        android:fontFamily="@font/noto_sans_cj_kkr_medium"
+        android:includeFontPadding="false"/>
+
+
+</LinearLayout>

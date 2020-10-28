@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -90,5 +91,11 @@ public class AgeActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
+    }
+
+    protected void onUserLeaveHint(){
+        super.onUserLeaveHint();
+        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 }

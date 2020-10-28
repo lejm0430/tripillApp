@@ -1,10 +1,12 @@
-package com.example.tripill;
+package com.example.tripill.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.example.tripill.R;
 
 public class SplashActivity extends AppCompatActivity {
 

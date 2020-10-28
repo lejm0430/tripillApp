@@ -1,17 +1,20 @@
-package com.example.tripill;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
+package com.example.tripill.Activity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.tripill.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+public class MainActivity extends AppCompatActivity implements ChoicedSymptomSlideActivity.BottomSheetListener{
 
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
@@ -20,6 +23,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TextView head = findViewById(R.id.head);
+        TextView neck = findViewById(R.id.neck);
+        TextView stomach = findViewById(R.id.stomach);
+        TextView arm = findViewById(R.id.arm);
+        TextView leg = findViewById(R.id.leg);
+        TextView muscle_pain = findViewById(R.id.muscle_pain);
+        TextView burn = findViewById(R.id.burn);
+        TextView wound = findViewById(R.id.wound);
+        TextView hangover = findViewById(R.id.hangover);
+
+
 
         ImageView menuBtn = findViewById(R.id.menuBtn);
         final ImageView headBtn = findViewById(R.id.headBtn_ring);
@@ -35,23 +49,20 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout menuDrawer = findViewById(R.id.menu_drawer);
 
         menuDrawer.setOnClickListener((v)->{});
-
         mainDrawer.closeDrawer(menuDrawer);
-
-       menuBtn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 mainDrawer.openDrawer(menuDrawer);
-           }
-       });
-
+            }
+        });
         final Intent GoAge = new Intent(getApplicationContext(), AgeActivity.class);
 
         headBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                startActivity(GoAge);
+                ChoicedSymptomSlideActivity bottomSheet=new ChoicedSymptomSlideActivity();
+                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlideActivity");
 
             }
         });
@@ -59,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         neckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GoAge.putExtra("part", neck.getText().toString());
                 startActivity(GoAge);
             }
         });
@@ -66,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         stomachBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GoAge.putExtra("part", stomach.getText().toString());
                 startActivity(GoAge);
             }
         });
@@ -73,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         armBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GoAge.putExtra("part", arm.getText().toString());
                 startActivity(GoAge);
             }
         });
@@ -80,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         legBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GoAge.putExtra("part", leg.getText().toString());
                 startActivity(GoAge);
             }
         });
@@ -87,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         musclePainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GoAge.putExtra("part", muscle_pain.getText().toString());
                 startActivity(GoAge);
             }
         });
@@ -94,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         burnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GoAge.putExtra("part", burn.getText().toString());
                 startActivity(GoAge);
             }
         });
@@ -101,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         woundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GoAge.putExtra("part", wound.getText().toString());
                 startActivity(GoAge);
             }
         });
@@ -108,17 +126,20 @@ public class MainActivity extends AppCompatActivity {
         beerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GoAge.putExtra("part", hangover.getText().toString());
                 startActivity(GoAge);
             }
         });
 
     }
 
+
+
+
     @Override
     public void onBackPressed() {
         long temptime = System.currentTimeMillis();
         long intervalTime = temptime - backPressedTime;
-
         if(0<= intervalTime && FINISH_INTERVAL_TIME >= intervalTime){
             finish();
         }
@@ -127,4 +148,17 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
+
+    @Override
+    public void onButtonClicked(String text) {
+
+    }
+
+
+
+
+
 }

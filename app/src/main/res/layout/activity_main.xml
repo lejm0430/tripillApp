@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Activity.MainActivity"
     android:background="@color/white">
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
@@ -67,6 +67,7 @@
             android:scaleType="center"/>
 
         <TextView
+            android:id="@+id/head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="head"
@@ -97,6 +98,7 @@
                 android:src="@drawable/main_pressed_throat"
                 android:scaleType="center"/>
             <TextView
+                android:id="@+id/neck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="neck"
@@ -130,6 +132,7 @@
 
 
         <TextView
+            android:id="@+id/stomach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="stomach"
@@ -161,6 +164,7 @@
             android:scaleType="center"/>
 
         <TextView
+            android:id="@+id/arm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="arm"
@@ -193,6 +197,7 @@
 
 
         <TextView
+            android:id="@+id/leg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="leg"
@@ -226,6 +231,7 @@
 
 
     <TextView
+        android:id="@+id/muscle_pain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="muscle pain"
@@ -258,6 +264,7 @@
 
 
     <TextView
+        android:id="@+id/burn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="burn"
@@ -290,6 +297,7 @@
 
 
     <TextView
+        android:id="@+id/wound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="wound"
@@ -323,6 +331,7 @@
 
 
     <TextView
+        android:id="@+id/hangover"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="hangover"

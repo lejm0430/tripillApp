@@ -29,7 +29,7 @@ public class AgeDialog extends AppCompatActivity {
         dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dlg.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        dlg.setContentView(R.layout.allusedialog);
+        dlg.setContentView(R.layout.dialog_alluse);
 
         WindowManager.LayoutParams params = dlg.getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;

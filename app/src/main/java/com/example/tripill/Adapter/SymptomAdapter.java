@@ -39,7 +39,7 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.MainHold
     @NonNull
     @Override
     public MainHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View holderView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_symptom_item, parent, false);
+        View holderView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_activity_symptom, parent, false);
 
         return new MainHolder(holderView);
 

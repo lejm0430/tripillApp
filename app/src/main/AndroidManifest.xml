@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.PillRecommendActivity"></activity>
-        <activity android:name=".Activity.ChoicedSymptomSlideActivity" />
+        <activity android:name=".Dialog.ChoicedSymptomSlide" />
         <activity
             android:name=".Activity.AgeActivity"
             android:screenOrientation="portrait" />

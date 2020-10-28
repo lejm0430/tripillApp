@@ -9,12 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tripill.Dialog.ChoicedSymptomSlide;
 import com.example.tripill.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class MainActivity extends AppCompatActivity implements ChoicedSymptomSlideActivity.BottomSheetListener{
+public class MainActivity extends AppCompatActivity{
 
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
@@ -50,26 +51,31 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
 
         menuDrawer.setOnClickListener((v)->{});
         mainDrawer.closeDrawer(menuDrawer);
+
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mainDrawer.openDrawer(menuDrawer);
             }
         });
+
         final Intent GoAge = new Intent(getApplicationContext(), AgeActivity.class);
 
         headBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ChoicedSymptomSlideActivity bottomSheet=new ChoicedSymptomSlideActivity();
-                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlideActivity");
-
+                ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
+                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
             }
         });
 
         neckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+
                 GoAge.putExtra("part", neck.getText().toString());
                 startActivity(GoAge);
 
@@ -79,6 +85,11 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
         stomachBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+
+
                 GoAge.putExtra("part", stomach.getText().toString());
                 startActivity(GoAge);
             }
@@ -87,6 +98,11 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
         armBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+
+
                 GoAge.putExtra("part", arm.getText().toString());
                 startActivity(GoAge);
             }
@@ -95,6 +111,11 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
         legBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+
+
                 GoAge.putExtra("part", leg.getText().toString());
                 startActivity(GoAge);
             }
@@ -103,6 +124,11 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
         musclePainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+
+
                 GoAge.putExtra("part", muscle_pain.getText().toString());
                 startActivity(GoAge);
             }
@@ -111,6 +137,11 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
         burnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+
+
                 GoAge.putExtra("part", burn.getText().toString());
                 startActivity(GoAge);
             }
@@ -119,6 +150,11 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
         woundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+
+
                 GoAge.putExtra("part", wound.getText().toString());
                 startActivity(GoAge);
             }
@@ -127,6 +163,11 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
         beerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+
+
                 GoAge.putExtra("part", hangover.getText().toString());
                 startActivity(GoAge);
             }
@@ -148,14 +189,6 @@ public class MainActivity extends AppCompatActivity implements ChoicedSymptomSli
             backPressedTime = temptime;
             Toast.makeText(getApplicationContext(), "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
-    }
-
-
-
-
-    @Override
-    public void onButtonClicked(String text) {
-
     }
 
 

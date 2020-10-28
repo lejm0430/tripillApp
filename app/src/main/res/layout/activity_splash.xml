@@ -18,15 +18,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="We recommend a medicine that is\n suitable for your symptoms."
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:text="We recommend a medicine that is suitable for your symptoms."
         android:textColor="@color/slate"
         android:textSize="14dp"
         android:fontFamily="@font/noto_sans_cj_kkr_demilight"
         android:includeFontPadding="false"
         android:layout_below="@+id/splash_icon"
         android:layout_marginTop="24dp"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"/>
+        android:layout_centerHorizontal="true"/>
 
 
     <TextView

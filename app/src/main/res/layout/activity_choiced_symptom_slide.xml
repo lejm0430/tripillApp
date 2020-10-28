@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".Activity.ChoicedSymptomSlideActivity"
+    tools:context=".Dialog.ChoicedSymptomSlide"
     android:orientation="vertical"
+    android:id="@+id/bottom_sheet"
+    android:background="@drawable/symptomchoice_background_white_r24"
     >
 
     <RelativeLayout
@@ -100,6 +102,15 @@
         android:fontFamily="@font/noto_sans_cj_kkr_regular"
         android:includeFontPadding="false"
         android:button="@drawable/symptom_check_selector"/>
+
+    <!--<androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_symptom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp">
+
+
+    </androidx.recyclerview.widget.RecyclerView>-->
 
     <TextView
         android:id="@+id/nextBtn"

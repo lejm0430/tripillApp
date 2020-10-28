@@ -2,10 +2,8 @@ package com.example.tripill.Activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -38,12 +36,14 @@ public class AgeActivity extends AppCompatActivity {
         TextView recobtn = (TextView)findViewById(R.id.recobtn);
         ImageView xbtn = (ImageView)findViewById(R.id.xbtn);
 
+
         age.requestFocus();
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
         String part = getIntent().getStringExtra("part");
+
 
         xbtn.setOnClickListener(new View.OnClickListener() {
             @Override

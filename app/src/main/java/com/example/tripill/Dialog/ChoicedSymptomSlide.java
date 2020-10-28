@@ -53,21 +53,33 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
         Symptom1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Symptom1.setSelected(true);
+                if (Symptom1.isChecked()) {
+
+                } else {
+
+                }
             }
         });
 
         Symptom2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Symptom2.setSelected(true);
+                if (Symptom2.isChecked()) {
+
+                } else {
+
+                }
             }
         });
 
         Symptom3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Symptom3.setSelected(true);
+                if (Symptom3.isChecked()) {
+
+                } else {
+
+                }
             }
         });
 

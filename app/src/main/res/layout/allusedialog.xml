@@ -20,12 +20,13 @@
             android:layout_height="160dp"
             android:textColor="@color/black"
             android:text="입력한 나이에 해당하는\n추천 약이 없습니다."
-            android:includeFontPadding="false"
             android:textSize="16dp"
             android:paddingLeft="24dp"
             android:paddingTop="24dp"
             android:background="@color/white"
             style="@style/TextStyle5"
+            android:fontFamily="@font/noto_sans_cj_kkr_regular"
+
             />
         <Button
             android:id="@+id/okbtn"

@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@color/white">
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:id="@+id/main_drawer"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/action_bar"
@@ -326,5 +334,13 @@
         android:includeFontPadding="false"/>
 
 </RelativeLayout>
+        </RelativeLayout>
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_gravity="start"
+            layout="@layout/view_drawer"/>
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </RelativeLayout>

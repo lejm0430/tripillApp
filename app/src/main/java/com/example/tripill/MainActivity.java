@@ -1,14 +1,20 @@
 package com.example.tripill;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long backPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,63 +31,100 @@ public class MainActivity extends AppCompatActivity {
         ImageView burnBtn = findViewById(R.id.burnBtn_ring);
         ImageView woundBtn = findViewById(R.id.woundBtn_ring);
         ImageView beerBtn = findViewById(R.id.beerBtn_ring);
+        DrawerLayout mainDrawer = findViewById(R.id.main_drawer);
+        LinearLayout menuDrawer = findViewById(R.id.menu_drawer);
 
-        menuBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        menuDrawer.setOnClickListener((v)->{});
 
-            }
-        });
+        mainDrawer.closeDrawer(menuDrawer);
 
+       menuBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+                mainDrawer.openDrawer(menuDrawer);
+           }
+       });
+
+        final Intent GoAge = new Intent(getApplicationContext(), AgeActivity.class);
 
         headBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent head = new Intent(getApplicationContext(), AgeActivity.class);
-                startActivity(head);
-                finish();
+
+                startActivity(GoAge);
+
             }
         });
 
         neckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {           }
+            public void onClick(View view) {
+                startActivity(GoAge);
+            }
         });
 
         stomachBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {           }
+            public void onClick(View view) {
+                startActivity(GoAge);
+            }
         });
 
         armBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {           }
+            public void onClick(View view) {
+                startActivity(GoAge);
+            }
         });
 
         legBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {           }
+            public void onClick(View view) {
+                startActivity(GoAge);
+            }
         });
 
         musclePainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {           }
+            public void onClick(View view) {
+                startActivity(GoAge);
+            }
         });
 
         burnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {           }
+            public void onClick(View view) {
+                startActivity(GoAge);
+            }
         });
 
         woundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {           }
+            public void onClick(View view) {
+                startActivity(GoAge);
+            }
         });
 
         beerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {           }
+            public void onClick(View view) {
+                startActivity(GoAge);
+            }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        long temptime = System.currentTimeMillis();
+        long intervalTime = temptime - backPressedTime;
+
+        if(0<= intervalTime && FINISH_INTERVAL_TIME >= intervalTime){
+            finish();
+        }
+        else{
+            backPressedTime = temptime;
+            Toast.makeText(getApplicationContext(), "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

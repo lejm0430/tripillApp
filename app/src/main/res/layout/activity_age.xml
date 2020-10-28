@@ -42,7 +42,6 @@
 </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/age"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,6 +60,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
         <EditText
+            android:id="@+id/age"
             android:layout_width="132dp"
             android:layout_height="54dp"
             android:layout_marginTop="24dp"
@@ -68,8 +68,12 @@
             android:textColor="@color/cobalt"
             android:background="@drawable/age_underline"
             style="@style/TextStyle10"
-
-            />
+            android:maxLength="2"
+            android:maxLines="1"
+            android:imeOptions="actionDone"
+            android:inputType="number">
+            <requestFocus/>
+        </EditText>
             <TextView
                 android:layout_marginTop="24dp"
                 android:layout_marginLeft="8dp"
@@ -91,13 +95,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/recobtn"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:text="약 추천받기"
             android:textColor="@color/cobalt"
             style="@style/TextStyle8"
             android:textSize="16dp"
-            android:background="@color/sunflower"/>
+            android:background="@drawable/textview_bottom_button_border"
+            android:gravity="center"/>
     </LinearLayout>
     </RelativeLayout>
 

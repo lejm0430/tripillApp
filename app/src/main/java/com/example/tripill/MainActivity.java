@@ -2,6 +2,7 @@ package com.example.tripill;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
         headBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {           }
+            public void onClick(View view) {
+                Intent head = new Intent(getApplicationContext(), AgeActivity.class);
+                startActivity(head);
+                finish();
+            }
         });
 
         neckBtn.setOnClickListener(new View.OnClickListener() {

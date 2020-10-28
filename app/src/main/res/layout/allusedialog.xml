@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    >
+
+    <RelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rec_coner_dialog"
+        >
+        <TextView
+            android:id="@+id/notrecommend"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:textColor="@color/black"
+            android:text="입력한 나이에 해당하는\n추천 약이 없습니다."
+            android:includeFontPadding="false"
+            android:textSize="16dp"
+            android:paddingLeft="24dp"
+            android:paddingTop="24dp"
+            android:background="@color/white"
+            style="@style/TextStyle5"
+            />
+        <Button
+            android:id="@+id/okbtn"
+            android:layout_width="78dp"
+            android:layout_height="32dp"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:layout_alignBottom="@+id/notrecommend"
+            android:layout_alignParentRight="true"
+            android:text="확인"
+            android:includeFontPadding="false"
+            android:background="@drawable/rec_coner_button"
+            android:layout_marginBottom="24dp"
+            android:layout_marginRight="24dp"/>
+
+    </RelativeLayout>
+</LinearLayout>

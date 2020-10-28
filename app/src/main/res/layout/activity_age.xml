@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:background="@color/white">
     <RelativeLayout
+        android:id="@+id/head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -28,20 +29,15 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_close_blue"/>
     </RelativeLayout>
-<LinearLayout
-    android:layout_marginTop="16dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14dp"
-        android:fontFamily="@font/noto_sans_cj_kkr_demilight"
-        android:text="머리"/>
-</LinearLayout>
+        android:layout_marginLeft="12dp"
+        />
 
     <LinearLayout
+        android:id="@+id/body"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

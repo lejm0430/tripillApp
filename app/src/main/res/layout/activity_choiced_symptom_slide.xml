@@ -75,7 +75,8 @@
         android:textColor="@color/black"
         android:fontFamily="@font/noto_sans_cj_kkr_regular"
         android:includeFontPadding="false"
-        android:button="@drawable/symptom_check_selector"/>
+        android:button="@drawable/symptom_check_selector"
+        />
 
     <CheckBox
         android:id="@+id/Symptom2"

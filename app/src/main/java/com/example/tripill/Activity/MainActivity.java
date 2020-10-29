@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity{
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
 
+    DrawerLayout mainDrawer;
+    LinearLayout menuDrawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +49,8 @@ public class MainActivity extends AppCompatActivity{
         ImageView burnBtn = findViewById(R.id.burnBtn_ring);
         ImageView woundBtn = findViewById(R.id.woundBtn_ring);
         ImageView beerBtn = findViewById(R.id.beerBtn_ring);
-        DrawerLayout mainDrawer = findViewById(R.id.main_drawer);
-        LinearLayout menuDrawer = findViewById(R.id.menu_drawer);
+        mainDrawer = findViewById(R.id.main_drawer);
+        menuDrawer = findViewById(R.id.menu_drawer);
 
         menuDrawer.setOnClickListener((v)->{});
         mainDrawer.closeDrawer(menuDrawer);
@@ -180,19 +183,21 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-        long temptime = System.currentTimeMillis();
-        long intervalTime = temptime - backPressedTime;
-        if(0<= intervalTime && FINISH_INTERVAL_TIME >= intervalTime){
-            finish();
+        if(mainDrawer.isDrawerOpen(menuDrawer)){
+            mainDrawer.closeDrawer(menuDrawer);
+        }else {
+            long temptime = System.currentTimeMillis();
+            long intervalTime = temptime - backPressedTime;
+            if(0<= intervalTime && FINISH_INTERVAL_TIME >= intervalTime){
+                finish();
+            }
+            else{
+                backPressedTime = temptime;
+                Toast.makeText(getApplicationContext(), "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            }
         }
-        else{
-            backPressedTime = temptime;
-            Toast.makeText(getApplicationContext(), "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
-        }
+
     }
-
-
-
 
 
 }

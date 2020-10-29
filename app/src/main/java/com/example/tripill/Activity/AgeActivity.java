@@ -28,6 +28,8 @@ public class AgeActivity extends AppCompatActivity {
 
     SymptomAdapter adapter;
 
+    ImageView backbtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class AgeActivity extends AppCompatActivity {
         age = (EditText)findViewById(R.id.age);
         TextView recobtn = (TextView)findViewById(R.id.recobtn);
         ImageView xbtn = (ImageView)findViewById(R.id.xbtn);
+        backbtn = findViewById(R.id.backbtn);
 
 
         age.requestFocus();
@@ -45,6 +48,15 @@ public class AgeActivity extends AppCompatActivity {
 
         String part = getIntent().getStringExtra("part");
 
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                finish();
+            }
+        });
 
         xbtn.setOnClickListener(new View.OnClickListener() {
             @Override

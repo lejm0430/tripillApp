@@ -9,6 +9,8 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -38,10 +40,12 @@ public class PillRecommendActivity extends AppCompatActivity {
 
     ImageView arrowIc;
     ImageView arrowIcWarning;
+    ImageView backbtn;
 
     TextView expect;
     TextView warning;
     TextView text;
+    TextView sos;
 
 
     @Override
@@ -60,8 +64,32 @@ public class PillRecommendActivity extends AppCompatActivity {
         expect = findViewById(R.id.expect);
         warning = findViewById(R.id.warning);
         text = findViewById(R.id.tv1);
+        backbtn = findViewById(R.id.backbtn);
+        sos = findViewById(R.id.sos);
 
         pillphoto.setClipToOutline(true);
+
+        sos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String symptom1 = "두통";
+                String symptom2 = "어지러움";
+                try{
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage("01046506632", null , symptom1+symptom2,null,null);
+                    Log.e("Send","TEST");
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         expectexp.setOnExpansionUpdateListener(new ExpandableLayout.OnExpansionUpdateListener() {
             @Override

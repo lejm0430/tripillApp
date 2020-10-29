@@ -7,24 +7,15 @@
     tools:context=".Activity.PillRecommendActivity"
     android:background="@color/white"
     >
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/recobtn">
     <RelativeLayout
+        android:id="@+id/head"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
-        <RelativeLayout
-            android:id="@+id/head"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
         <ImageView
             android:id="@+id/backbtn"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_back_arrow_blue"
             android:padding="16dp"
             />
@@ -52,7 +43,17 @@
             android:layout_alignLeft="@+id/sos"
             android:layout_marginLeft="14dp"
             android:layout_marginTop="8dp" />
-        </RelativeLayout>
+    </RelativeLayout>
+    <ScrollView
+        android:layout_below="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/recobtn">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
         <LinearLayout
             android:id="@+id/layout_pill"
             android:layout_marginTop="24dp"
@@ -148,13 +149,20 @@
             android:layout_marginBottom="12dp"
             android:background="@drawable/pill_recommend_underline_cobalt"/>
 
-        <RelativeLayout
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_below="@+id/view"
+            >
+
+        <RelativeLayout
             android:id="@+id/viewArea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/text"
+            android:id="@+id/expect"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="기대효과"
@@ -187,7 +195,7 @@
                 android:id="@+id/expectArea"
                 android:layout_below="@+id/viewArea"
                 android:layout_width="match_parent"
-                android:layout_height="82dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="1dp"
@@ -197,7 +205,7 @@
                     android:id="@+id/tv1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="두통 완화 및 머리가 맑아지는 효과가 있다."
+                    android:text="그것은 동력은 것이 있는가? 인류의 같은 풍부하게 봄날의 인도하겠다는 든 어디 보라. 거선의 것은 그들의 따뜻한 별과 물방아 영원히 고동을 이것이야말로 사막이다. 인간의 얼음에 두기 굳세게 피어나는 있는 이상은 이상은 용감하고 피다. 부패를 청춘의 심장은 방황하였으며, 피어나는 인생에 때문이다. 가치를 곧 인도하겠다는 예수는 원대하고, 아니더면, 열락의 날카로우나 보라. 못하다 일월과 우리 때에, 넣는 사막이다. 청춘의 곧 착목한는 전인 내려온 되려니와, 칼이다. 우리의 피어나는 못하다 뿐이다."
                     android:textSize="14dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/noto_sans_cj_kkr_regular"/>
@@ -205,13 +213,12 @@
         </net.cachapa.expandablelayout.ExpandableLayout>
 
         <RelativeLayout
-            android:layout_marginTop="102dp"
             android:layout_below="@+id/viewArea"
             android:id="@+id/warningArea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/tv2"
+                android:id="@+id/warning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="주의사항"
@@ -244,22 +251,25 @@
                 android:id="@+id/insideArea"
                 android:layout_below="@+id/warningArea"
                 android:layout_width="match_parent"
-                android:layout_height="82dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="1dp"
                 android:padding="8dp"
-                android:background="@drawable/rec_view_whitetwo_border">
+                android:background="@drawable/rec_view_whitetwo_border"
+                android:layout_marginBottom="36dp">
                 <TextView
                     android:id="@+id/tv3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="두통 완화 및 머리가 맑아지는 효과가 있다."
+                    android:text="그것은 동력은 것이 있는가? 인류의 같은 풍부하게 봄날의 인도하겠다는 든 어디 보라. 거선의 것은 그들의 따뜻한 별과 물방아 영원히 고동을 이것이야말로 사막이다. 인간의 얼음에 두기 굳세게 피어나는 있는 이상은 이상은 용감하고 피다. 부패를 청춘의 심장은 방황하였으며, 피어나는 인생에 때문이다. 가치를 곧 인도하겠다는 예수는 원대하고, 아니더면, 열락의 날카로우나 보라. 못하다 일월과 우리 때에, 넣는 사막이다. 청춘의 곧 착목한는 전인 내려온 되려니와, 칼이다. 우리의 피어나는 못하다 뿐이다.."
                     android:textSize="14dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/noto_sans_cj_kkr_regular"/>
             </RelativeLayout>
         </net.cachapa.expandablelayout.ExpandableLayout>
+        </LinearLayout>
+
 
 
     </RelativeLayout>

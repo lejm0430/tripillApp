@@ -1,9 +1,6 @@
 package com.example.tripill.Dialog;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,21 +11,18 @@ import android.widget.TextView;
 import com.example.tripill.Activity.AgeActivity;
 import com.example.tripill.Adapter.ChoiceSymptomRecyclerAdapter;
 import com.example.tripill.R;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
-
+    static final int SYMPTOMCODE = 1111;
     List<String> list;
-    RecyclerView.LayoutManager layoutManager;
-    ChoiceSymptomRecyclerAdapter adapter;
+    public String title;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -36,10 +30,8 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
         TextView nextBtn = v.findViewById(R.id.nextBtn);
         ImageView backBtn = v.findViewById(R.id.backbtn);
-
         RecyclerView recyclerView = v.findViewById(R.id.recycler_symptom);
-
-
+        TextView SymptomArea = v.findViewById(R.id.SymptomArea);
 
         list = new ArrayList<>();
         list.add("두통");
@@ -54,9 +46,9 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = v.getContext();
+
                 Intent intent = new Intent(getContext(), AgeActivity.class);
-                context.startActivity(intent);
+                getContext().startActivity(intent);
             }
         });
 
@@ -67,33 +59,31 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
             }
         });
 
+
+            SymptomArea.setText(title);
+
             return v;
 
     }
 
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Dialog dialog = getDialog();
-        if (dialog != null) {
-            View bottomSheet = dialog.findViewById(R.id.bottom_sheet);
-            bottomSheet.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
 
-            View view = getView();
-            view.post(() -> {
-                View parent = (View) view.getParent();
-                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) (parent).getLayoutParams();
-                CoordinatorLayout.Behavior behavior = params.getBehavior();
-                BottomSheetBehavior bottomSheetBehavior = (BottomSheetBehavior) behavior;
-                bottomSheetBehavior.setPeekHeight(view.getMeasuredHeight());
-                ((View) bottomSheet.getParent()).setBackgroundColor(Color.TRANSPARENT);
+/*    public void onActivityResult(LayoutInflater inflater, @Nullable ViewGroup container,int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-            });
+        View v = inflater.inflate(R.layout.activity_choiced_symptom_slide, container, false);
+
+        TextView SymptomArea = v.findViewById(R.id.SymptomArea);
+        String symptomNameText = data.getStringExtra("symptomName");
+
+        if(requestCode == SYMPTOMCODE && resultCode == Activity.RESULT_OK){ //결과값
+            SymptomArea.setText(symptomNameText);
         }
-    }
 
-
+    */
 
 }
+
+
+

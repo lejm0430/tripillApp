@@ -1,7 +1,6 @@
 
 package com.example.tripill.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 public class MainActivity extends AppCompatActivity{
 
+    static final int SYMPTOMCODE = 1111;
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
 
@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity{
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);
         TextView stomach = findViewById(R.id.stomach);
-        TextView arm = findViewById(R.id.arm);
-        TextView leg = findViewById(R.id.leg);
         TextView muscle_pain = findViewById(R.id.muscle_pain);
         TextView burn = findViewById(R.id.burn);
         TextView wound = findViewById(R.id.wound);
@@ -43,8 +41,6 @@ public class MainActivity extends AppCompatActivity{
         final ImageView headBtn = findViewById(R.id.headBtn_ring);
         ImageView neckBtn = findViewById(R.id.neckBtn_ring);
         ImageView stomachBtn = findViewById(R.id.stomachBtn_ring);
-        ImageView armBtn = findViewById(R.id.armBtn_ring);
-        ImageView legBtn = findViewById(R.id.legBtn_ring);
         ImageView musclePainBtn = findViewById(R.id.musclePainBtn_ring);
         ImageView burnBtn = findViewById(R.id.burnBtn_ring);
         ImageView woundBtn = findViewById(R.id.woundBtn_ring);
@@ -62,13 +58,20 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        final Intent GoAge = new Intent(getApplicationContext(), AgeActivity.class);
 
         headBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String s_head = head.getText().toString();
+
                 ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
+
+                bottomSheet.title = s_head;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+
+
+
             }
         });
 
@@ -76,11 +79,14 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
+                String s_neck = neck.getText().toString();
+
                 ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+
+                bottomSheet.title = s_neck;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
 
-                GoAge.putExtra("part", neck.getText().toString());
-                startActivity(GoAge);
+
 
             }
         });
@@ -89,38 +95,15 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
+                String s_stomach = stomach.getText().toString();
+
                 ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+
+                bottomSheet.title = s_stomach;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
 
 
-                GoAge.putExtra("part", stomach.getText().toString());
-                startActivity(GoAge);
-            }
-        });
 
-        armBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
-                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
-
-
-                GoAge.putExtra("part", arm.getText().toString());
-                startActivity(GoAge);
-            }
-        });
-
-        legBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
-                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
-
-
-                GoAge.putExtra("part", leg.getText().toString());
-                startActivity(GoAge);
             }
         });
 
@@ -128,12 +111,15 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
+                String s_musclePain = muscle_pain.getText().toString();
+
                 ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+
+                bottomSheet.title = s_musclePain;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
 
 
-                GoAge.putExtra("part", muscle_pain.getText().toString());
-                startActivity(GoAge);
+
             }
         });
 
@@ -141,12 +127,15 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
+                String s_burn = burn.getText().toString();
+
                 ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+
+                bottomSheet.title = s_burn;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
 
 
-                GoAge.putExtra("part", burn.getText().toString());
-                startActivity(GoAge);
+
             }
         });
 
@@ -154,12 +143,15 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
+                String s_wound = wound.getText().toString();
+
                 ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+
+                bottomSheet.title = s_wound;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
 
 
-                GoAge.putExtra("part", wound.getText().toString());
-                startActivity(GoAge);
+
             }
         });
 
@@ -167,12 +159,15 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
+                String s_beer = hangover.getText().toString();
+
                 ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
+
+                bottomSheet.title = s_beer;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
 
 
-                GoAge.putExtra("part", hangover.getText().toString());
-                startActivity(GoAge);
+
             }
         });
 

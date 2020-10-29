@@ -147,78 +147,12 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/armBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/headBtn"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp">
-
-
-        <ImageView
-            android:id="@+id/armBtn_ring"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:background="@drawable/circle_border_sunflower"
-            android:src="@drawable/main_pressed_arm"
-            android:scaleType="center"/>
-
-        <TextView
-            android:id="@+id/arm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="arm"
-            android:textColor="@color/slate"
-            android:textSize="16dp"
-            android:layout_below="@id/armBtn_ring"
-            android:layout_marginTop="8dp"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-            android:includeFontPadding="false"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/legBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/neckBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp">
-
-
-        <ImageView
-            android:id="@+id/legBtn_ring"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:background="@drawable/circle_border_sunflower"
-            android:src="@drawable/main_pressed_leg"
-            android:scaleType="center"/>
-
-
-        <TextView
-            android:id="@+id/leg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="leg"
-            android:textColor="@color/slate"
-            android:textSize="16dp"
-            android:layout_below="@id/legBtn_ring"
-            android:layout_marginTop="8dp"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-            android:includeFontPadding="false"/>
-
-</RelativeLayout>
-
-    <RelativeLayout
     android:id="@+id/musclePainBtn"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/stomachBtn"
-    android:layout_alignParentRight="true"
+    android:layout_below="@+id/headBtn"
     android:layout_marginTop="16dp"
-    android:layout_marginRight="16dp">
+    android:layout_marginLeft="16dp">
 
 
         <ImageView
@@ -249,9 +183,9 @@
     android:id="@+id/burnBtn"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/armBtn"
+    android:layout_below="@+id/neckBtn"
     android:layout_marginTop="16dp"
-    android:layout_marginLeft="16dp">
+        android:layout_centerHorizontal="true">
 
 
         <ImageView
@@ -282,8 +216,9 @@
     android:id="@+id/woundBtn"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/legBtn"
-    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/stomachBtn"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
     android:layout_marginTop="16dp">
 
 
@@ -316,9 +251,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@+id/musclePainBtn"
-    android:layout_alignParentRight="true"
     android:layout_marginTop="16dp"
-    android:layout_marginRight="16dp">
+        android:layout_marginLeft="16dp">
 
 
         <ImageView

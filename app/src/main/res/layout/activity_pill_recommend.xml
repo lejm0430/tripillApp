@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.PillRecommendActivity"
-    android:orientation="vertical">
-    <RelativeLayout
-        android:id="@+id/head"
+    android:background="@color/white"
+    >
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/recobtn">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         >
+        <RelativeLayout
+            android:id="@+id/head"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
         <ImageView
             android:id="@+id/backbtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/ic_back_arrow_blue"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"/>
+            android:padding="16dp"
+            />
         <TextView
             android:id="@+id/sos"
             android:layout_marginTop="9dp"
@@ -42,8 +51,230 @@
             android:layout_alignTop="@+id/sos"
             android:layout_alignLeft="@+id/sos"
             android:layout_marginLeft="14dp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp" />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/layout_pill"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/head"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp">
+           <ImageView
+               android:id="@+id/pillphoto"
+               android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:src="@drawable/mucos"
+               android:background="@drawable/rec_imgview_border_sunflower"
+               />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="116dp"
+                android:layout_marginLeft="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cj_kkr_regular"
+                    android:text="증상"
+                    android:textColor="@color/warm_grey"
+                    android:textSize="14dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   />
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/SymptomArea"
+            android:layout_below="@+id/layout_pill"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:background="@drawable/rec_view_whitetwo_border">
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="약사에게 해당 문구를 보여주세요."
+            android:textSize="14dp"
+            android:textColor="@color/warm_grey"
+            android:fontFamily="@font/noto_sans_cj_kkr_regular"/>
+            <TextView
+                android:id="@+id/symptom"
+                android:layout_below="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="두통 / 어지럼증"
+                android:textSize="24dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_cj_kkr_regular"/>
+            <View
+                android:id="@+id/circle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/circle_border_cobalt"
+                android:layout_below="@+id/tv"
+                android:layout_alignParentEnd="true"
+                android:padding="7dp"/>
+            <ImageView
+                android:layout_below="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_speaker_yellow"/>
+
+        </RelativeLayout>
+        <View
+            android:id="@+id/view"
+            android:layout_below="@+id/SymptomArea"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/pill_recommend_underline_cobalt"/>
+
+        <RelativeLayout
+            android:layout_below="@+id/view"
+            android:id="@+id/viewArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="기대효과"
+            android:paddingRight="16dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="16dp"
+            android:textSize="16dp"
+            android:textColor="@color/cobalt"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"/>
+       <ImageView
+           android:id="@+id/arrowIc"
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:paddingRight="16dp"
+           android:paddingTop="15dp"
+           android:paddingBottom="15dp"
+           android:paddingLeft="16dp"
+           android:src="@drawable/ic_close_arrow_light_gray"
+           android:layout_alignParentEnd="true"
+           />
+        </RelativeLayout>
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:layout_below="@+id/viewArea"
+            android:id="@+id/expectexp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_expanded="true">
+            <RelativeLayout
+                android:id="@+id/expectArea"
+                android:layout_below="@+id/viewArea"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="1dp"
+                android:padding="8dp"
+                android:background="@drawable/rec_view_whitetwo_border">
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="두통 완화 및 머리가 맑아지는 효과가 있다."
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/noto_sans_cj_kkr_regular"/>
+            </RelativeLayout>
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="102dp"
+            android:layout_below="@+id/viewArea"
+            android:id="@+id/warningArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주의사항"
+                android:paddingRight="16dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingLeft="16dp"
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_cj_kkr_medium"/>
+            <ImageView
+                android:id="@+id/arrowIcWarning"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingRight="18dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingLeft="18dp"
+                android:src="@drawable/ic_close_arrow_light_gray"
+                android:layout_alignParentEnd="true"
+                />
+        </RelativeLayout>
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:layout_below="@+id/warningArea"
+            android:id="@+id/warningexp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_expanded="false">
+            <RelativeLayout
+                android:id="@+id/insideArea"
+                android:layout_below="@+id/warningArea"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="1dp"
+                android:padding="8dp"
+                android:background="@drawable/rec_view_whitetwo_border">
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="두통 완화 및 머리가 맑아지는 효과가 있다."
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/noto_sans_cj_kkr_regular"/>
+            </RelativeLayout>
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+
     </RelativeLayout>
 
-
-</LinearLayout>
+    </ScrollView>
+        <TextView
+            android:id="@+id/recobtn"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="약 추천받기"
+            android:textColor="@color/cobalt"
+            style="@style/TextStyle8"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:textSize="16dp"
+            android:background="@drawable/textview_bottom_button_border"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"/>
+</RelativeLayout>

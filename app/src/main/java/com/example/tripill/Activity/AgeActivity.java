@@ -2,6 +2,7 @@ package com.example.tripill.Activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -65,6 +66,9 @@ public class AgeActivity extends AppCompatActivity {
                     if (i == 2) {
                         AgeDialog dialog = new AgeDialog(AgeActivity.this);
                         dialog.callFunction();
+                    }else{
+                        Intent intent = new Intent(getApplicationContext(), PillRecommendActivity.class);
+                        startActivity(intent);
                     }
                 }
             }

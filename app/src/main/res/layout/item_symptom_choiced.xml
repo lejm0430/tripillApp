@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:layoutManager="LinearLayoutManager">
@@ -10,12 +10,17 @@
         android:id="@+id/SymptomBtn"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
-        android:paddingLeft="8dp"
+        android:button="@drawable/symptom_check_selector"/>
+
+    <TextView
+        android:id="@+id/SymptomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="증상2"
         android:textSize="16dp"
+        android:layout_marginLeft="8dp"
         android:textColor="@color/black"
         android:fontFamily="@font/noto_sans_cj_kkr_regular"
-        android:includeFontPadding="false"
-        android:button="@drawable/symptom_check_selector"/>
+        android:includeFontPadding="false"/>
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.example.tripill.R;
 
@@ -50,8 +51,8 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
     @Override
     public void onBindViewHolder(@NonNull MainHolder holder, int position) {
 
-        holder.SymptomBtn.setText(list.get(position));
         holder.SymptomBtn.setChecked(position == pos);
+        holder.SymptomText.setText(list.get(position));
 
     }
 
@@ -68,11 +69,13 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
     public class MainHolder extends RecyclerView.ViewHolder{
 
         public CheckBox SymptomBtn;
+        public TextView SymptomText;
 
         public MainHolder(View v){
             super(v);
 
             this.SymptomBtn = v.findViewById(R.id.SymptomBtn);
+            this.SymptomText = v.findViewById(R.id.SymptomText);
 
             SymptomBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

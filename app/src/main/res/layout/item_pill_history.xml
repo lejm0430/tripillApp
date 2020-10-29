@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/symptom1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="증상1"
+            android:textColor="@color/slate"
+            android:textSize="16dp"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:includeFontPadding="false" />
+
+        <TextView
+            android:id="@+id/coma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=", "
+            android:textColor="@color/slate"
+            android:textSize="16dp"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:includeFontPadding="false"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/symptom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="증상2"
+            android:textColor="@color/slate"
+            android:textSize="16dp"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:includeFontPadding="false"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/ageText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나이 : "
+            android:textSize="16dp"
+            android:textColor="@color/slate"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:includeFontPadding="false"/>
+
+
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ageText"
+            android:text="20"
+            android:textSize="16dp"
+            android:textColor="@color/slate"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:includeFontPadding="false"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="01.31.2020"
+            android:textSize="14dp"
+            android:textColor="@color/warm_grey"
+            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:includeFontPadding="false"/>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="약이름"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:fontFamily="@font/noto_sans_cj_kkr_medium"
+        android:includeFontPadding="false"/>
+
+
+    <View
+        android:id="@+id/bottomline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cccccc"/>
+
+
+
+
+</LinearLayout>

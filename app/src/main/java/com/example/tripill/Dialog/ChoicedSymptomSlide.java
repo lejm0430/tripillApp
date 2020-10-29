@@ -8,23 +8,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tripill.Activity.AgeActivity;
+import com.example.tripill.Adapter.ChoiceSymptomRecyclerAdapter;
 import com.example.tripill.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
-/*    List<String> list;
+    List<String> list;
     RecyclerView.LayoutManager layoutManager;
-    ChoiceSymptomRecyclerAdapter adapter;*/
+    ChoiceSymptomRecyclerAdapter adapter;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -32,56 +36,18 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
         TextView nextBtn = v.findViewById(R.id.nextBtn);
         ImageView backBtn = v.findViewById(R.id.backbtn);
-        CheckBox Symptom1 = v.findViewById(R.id.Symptom1);
-        CheckBox Symptom2 = v.findViewById(R.id.Symptom2);
-        CheckBox Symptom3 = v.findViewById(R.id.Symptom3);
 
-/*        RecyclerView recyclerView = v.findViewById(R.id.recycler_symptom);
+        RecyclerView recyclerView = v.findViewById(R.id.recycler_symptom);
 
-//        Context context_re = v.getContext();  //권한부여
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
 
-        ChoiceSymptomRecyclerAdapter adapter = new ChoiceSymptomRecyclerAdapter(list,this);
-        recyclerView.setAdapter(adapter);
 
         list = new ArrayList<>();
         list.add("두통");
         list.add("어지럼증");
-        list.add("발열");*/
+        list.add("발열");
 
-        Symptom1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Symptom1.isChecked()) {
-
-                } else {
-
-                }
-            }
-        });
-
-        Symptom2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Symptom2.isChecked()) {
-
-                } else {
-
-                }
-            }
-        });
-
-        Symptom3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Symptom3.isChecked()) {
-
-                } else {
-
-                }
-            }
-        });
+        ChoiceSymptomRecyclerAdapter adapter = new ChoiceSymptomRecyclerAdapter(list,getContext());   //세팅된 리스트를 어댑터로 보냄
+        recyclerView.setAdapter(adapter);
 
 
 

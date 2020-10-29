@@ -63,7 +63,7 @@
         android:includeFontPadding="false"
         android:visibility="visible"/>
 
-    <CheckBox
+<!--    <CheckBox
         android:id="@+id/Symptom1"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
@@ -102,16 +102,18 @@
         android:textColor="@color/black"
         android:fontFamily="@font/noto_sans_cj_kkr_regular"
         android:includeFontPadding="false"
-        android:button="@drawable/symptom_check_selector"/>
+        android:button="@drawable/symptom_check_selector"/>-->
 
-    <!--<androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_symptom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp">
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginLeft="16dp"
+        android:overScrollMode="never">
 
 
-    </androidx.recyclerview.widget.RecyclerView>-->
+    </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
         android:id="@+id/nextBtn"

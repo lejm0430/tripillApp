@@ -63,8 +63,8 @@
             android:layout_width="88dp"
             android:layout_height="88dp"
             android:background="@drawable/circle_border_sunflower"
-            android:src="@drawable/main_pressed_head"
-            android:scaleType="center"/>
+            android:scaleType="center"
+            android:src="@drawable/main_pressed_head" />
 
         <TextView
             android:id="@+id/head"
@@ -345,6 +345,7 @@
 
 </RelativeLayout>
         </RelativeLayout>
+
         <include
             android:layout_width="match_parent"
             android:layout_height="match_parent"

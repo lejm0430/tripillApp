@@ -11,7 +11,8 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/symptomchoice_background_white_r24">
 
         <ImageView
             android:id="@+id/backbtn"

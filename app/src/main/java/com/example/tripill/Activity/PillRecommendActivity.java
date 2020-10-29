@@ -1,29 +1,25 @@
 package com.example.tripill.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
-import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.tripill.Adapter.SymptomAdapter;
 import com.example.tripill.Adapter.SymptomRecommendAdpater;
 import com.example.tripill.R;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class PillRecommendActivity extends AppCompatActivity {
+
+
 
     ImageView pillphoto;
     RelativeLayout viewArea;

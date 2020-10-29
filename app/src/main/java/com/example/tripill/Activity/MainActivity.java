@@ -8,11 +8,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tripill.Adapter.PillHistoryAdapter;
 import com.example.tripill.Dialog.ChoicedSymptomSlide;
 import com.example.tripill.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -23,10 +28,13 @@ public class MainActivity extends AppCompatActivity{
     DrawerLayout mainDrawer;
     LinearLayout menuDrawer;
 
+    List<String> pillList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);
@@ -50,6 +58,16 @@ public class MainActivity extends AppCompatActivity{
 
         menuDrawer.setOnClickListener((v)->{});
         mainDrawer.closeDrawer(menuDrawer);
+
+        RecyclerView drawer_recycler = findViewById(R.id.drawer_recycler);
+
+        pillList = new ArrayList<>();
+        pillList.add("11");
+
+        PillHistoryAdapter adapter = new PillHistoryAdapter(pillList,this);
+        drawer_recycler.setAdapter(adapter);
+
+
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override

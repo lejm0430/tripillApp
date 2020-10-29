@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.tripill.R;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-class PiilHistoryAdapter extends RecyclerView.Adapter<PiilHistoryAdapter.MainHolder>{
+public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.MainHolder>{
 
 
     private List<String> pill_history_list;
@@ -21,7 +22,8 @@ class PiilHistoryAdapter extends RecyclerView.Adapter<PiilHistoryAdapter.MainHol
     private LayoutInflater inflate;
 
 
-    public PiilHistoryAdapter(List<String> pill_history_list, Context context) {
+
+    public PillHistoryAdapter(List<String> pill_history_list, Context context) {
 
         this.pill_history_list = pill_history_list;
         this.context = context;
@@ -33,10 +35,10 @@ class PiilHistoryAdapter extends RecyclerView.Adapter<PiilHistoryAdapter.MainHol
 
     @NonNull
     @Override
-    public PiilHistoryAdapter.MainHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pill_history, parent, false);
 
-        PiilHistoryAdapter.MainHolder mainHolder = new PiilHistoryAdapter.MainHolder(v);
+        MainHolder mainHolder = new MainHolder(v);
 
         return mainHolder;
     }
@@ -45,6 +47,7 @@ class PiilHistoryAdapter extends RecyclerView.Adapter<PiilHistoryAdapter.MainHol
 
     @Override
     public void onBindViewHolder(@NonNull MainHolder holder, int position) {
+
     }
 
 
@@ -61,7 +64,11 @@ class PiilHistoryAdapter extends RecyclerView.Adapter<PiilHistoryAdapter.MainHol
         public MainHolder(View v){
             super(v);
 
-
+            TextView symptom1 = v.findViewById(R.id.symptom1);
+            TextView symptom2 = v.findViewById(R.id.symptom2);
+            TextView age = v.findViewById(R.id.age);
+            TextView date = v.findViewById(R.id.date);
+            TextView pillname = v.findViewById(R.id.pillname);
 
         }
     }

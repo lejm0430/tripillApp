@@ -63,6 +63,7 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
         return v;
 
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT)); //다이얼로그 기본 바탕 투명으로
     }
 }
 

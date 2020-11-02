@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.PharmacyMap"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_arrow_blue"
+            android:padding="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="반경 1km내 약국"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/noto_sans_cj_kkr_demilight"
+            android:includeFontPadding="false"
+            android:layout_toRightOf="@+id/backbtn"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+
+    <com.naver.maps.map.MapView
+        android:id="@+id/navermap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.naver.maps.map.MapView>
+
+
+</LinearLayout>

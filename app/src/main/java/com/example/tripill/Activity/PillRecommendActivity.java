@@ -1,5 +1,6 @@
 package com.example.tripill.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -42,6 +43,7 @@ public class PillRecommendActivity extends AppCompatActivity {
     TextView warning;
     TextView text;
     TextView sos;
+    TextView goPHbtn;
 
 
     @Override
@@ -62,6 +64,7 @@ public class PillRecommendActivity extends AppCompatActivity {
         text = findViewById(R.id.tv1);
         backbtn = findViewById(R.id.backbtn);
         sos = findViewById(R.id.sos);
+        goPHbtn = findViewById(R.id.goPHbtn);
 
         pillphoto.setClipToOutline(true);
 
@@ -131,6 +134,14 @@ public class PillRecommendActivity extends AppCompatActivity {
             public void onClick(View view) {
                 warningexp.toggle();
                 arrowIcWarning.setImageResource(warningexp.isExpanded() ? R.drawable.ic_close_arrow_light_gray : R.drawable.ic_open_arrow_light_gray);
+            }
+        });
+
+        goPHbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PillRecommendActivity.this,PharmacyMap.class);
+                startActivity(intent);
             }
         });
 

@@ -49,10 +49,20 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
 
 
     @Override
-    public void onBindViewHolder(@NonNull MainHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MainHolder holder,final int position) {
 
-        holder.SymptomBtn.setChecked(position == pos);
+        String selectedList = list.get(position);
         holder.SymptomText.setText(list.get(position));
+        holder.SymptomBtn.setChecked(selectedList.isEmpty());
+
+        holder.SymptomBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                CheckBox sb = (CheckBox) view;
+//                int clickPos = (Integer) sb.getTag();
+
+            }
+        });
 
     }
 

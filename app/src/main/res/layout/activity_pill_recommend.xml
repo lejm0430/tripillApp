@@ -276,10 +276,10 @@
 
     </ScrollView>
         <TextView
-            android:id="@+id/recobtn"
+            android:id="@+id/goPHbtn"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:text="약 추천받기"
+            android:text="내 주변 약국 찾기"
             android:textColor="@color/cobalt"
             style="@style/TextStyle8"
             android:fontFamily="@font/noto_sans_cj_kkr_medium"

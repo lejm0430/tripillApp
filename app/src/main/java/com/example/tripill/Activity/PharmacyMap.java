@@ -2,6 +2,9 @@ package com.example.tripill.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.tripill.R;
 import com.naver.maps.map.MapView;
@@ -14,6 +17,7 @@ import androidx.annotation.NonNull;
 public class PharmacyMap extends Activity implements OnMapReadyCallback {
 
     private MapView navermap;
+    private RelativeLayout gpsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +27,16 @@ public class PharmacyMap extends Activity implements OnMapReadyCallback {
         navermap = findViewById(R.id.navermap);
         navermap.onCreate(savedInstanceState);
 
+        gpsBtn = findViewById(R.id.gpsBtn);
+
         naverMapBasicSettings();
+
+        gpsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
 
     }
 
@@ -36,7 +49,7 @@ public class PharmacyMap extends Activity implements OnMapReadyCallback {
         UiSettings uiSettings = naverMap.getUiSettings();
         uiSettings.setLocationButtonEnabled(false);
 
-        naverMap.setMapType(NaverMap.MapType.Basic);  //Satellite - 지도 어떻게표현
+        naverMap.setMapType(NaverMap.MapType.Basic);
     }
 
     @Override

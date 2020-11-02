@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Dialog.NaverMapBottomSheet"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/pharmacyName_kr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="언라이크 종합 약국"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:fontFamily="@font/noto_sans_cj_kkr_demilight"
+        android:includeFontPadding="false"/>
+
+    <TextView
+        android:id="@+id/pharmacyName_en"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Unlike pharmacy"
+        android:textSize="14dp"
+        android:textColor="@color/warm_grey"
+        android:fontFamily="@font/noto_sans_cj_kkr_regular"
+        android:includeFontPadding="false"/>
+
+    <RelativeLayout
+        android:layout_width="93dp"
+        android:layout_height="32dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:layout_gravity="right">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/circle_border_sunflower_navermap"/>
+
+        <TextView
+            android:id="@+id/findroadBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="길찾기"
+            android:textSize="16dp"
+            android:textColor="#194f82"
+            android:fontFamily="@font/noto_sans_cj_kkr_regular"
+            android:includeFontPadding="false"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

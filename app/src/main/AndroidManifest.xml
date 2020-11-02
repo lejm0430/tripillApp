@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.PharmacyMap"></activity>
+        <activity android:name=".Dialog.NaverMapBottomSheet"></activity>
+        <activity android:name=".Activity.PharmacyMap" />
         <activity
             android:name=".Activity.PillRecommendActivity"
             android:screenOrientation="portrait" />
@@ -36,8 +37,7 @@
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="ywosvvzznj"/>
-
+            android:value="ywosvvzznj" />
     </application>
 
 </manifest>

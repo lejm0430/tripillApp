@@ -46,7 +46,7 @@ public class SosDialog extends AppCompatActivity {
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
         dlg.show();
-        dlg.setCancelable(false);
+        dlg.setCancelable(true);
 
         final Button cancle = (Button) dlg.findViewById(R.id.canclebtn);
         final Button ok = (Button) dlg.findViewById(R.id.okbtn);
@@ -68,8 +68,8 @@ public class SosDialog extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((PillRecommendActivity)context).intent();
                 dlg.dismiss();
+                ((PillRecommendActivity)context).intent();
             }
         });
 

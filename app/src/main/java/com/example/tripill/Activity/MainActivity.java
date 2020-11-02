@@ -3,6 +3,7 @@ package com.example.tripill.Activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -28,22 +29,32 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import io.realm.Realm;
+import io.realm.RealmObject;
+
 public class MainActivity extends AppCompatActivity{
 
     static final int SYMPTOMCODE = 1111;
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
     private final int MY_PERMISSION_REQUEST_SMS = 1001;
+    private Realm realm;
+
+    public static Context mcontext;
 
     DrawerLayout mainDrawer;
     LinearLayout menuDrawer;
 
     ArrayList<PillList> pillList;
 
+    ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Realm.init(this);
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
@@ -93,8 +104,8 @@ public class MainActivity extends AppCompatActivity{
 
         //리스트 추가
         pillList.add(new PillList("두통","발열","21","2020.09.11","약이름1"));
-        pillList.add(new PillList("어지럼증","두통","15","2020.18.05","약이름2"));
-        pillList.add(new PillList("상처","","37","2020.26.03","약이름3"));
+//        pillList.add(new PillList("어지럼증","두통","15","2020.18.05","약이름2"));
+//        pillList.add(new PillList("상처","","37","2020.26.03","약이름3"));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         drawer_recycler.setLayoutManager(linearLayoutManager);
@@ -246,6 +257,4 @@ public class MainActivity extends AppCompatActivity{
         }
 
     }
-
-
 }

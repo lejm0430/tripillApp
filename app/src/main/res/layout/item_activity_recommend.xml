@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_point_circle_yellow"
         android:layout_gravity="center"
-        android:paddingTop="3dp"
+        android:paddingTop="1dp"
         />
     <TextView
         android:id="@+id/symptom"

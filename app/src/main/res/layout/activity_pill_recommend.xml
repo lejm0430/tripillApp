@@ -48,7 +48,7 @@
         android:layout_below="@+id/head"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/recobtn">
+        android:layout_above="@+id/goPHbtn">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -65,18 +65,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
            <ImageView
-               android:id="@+id/pillphoto"
+               android:id="@+id/background"
                android:layout_width="100dp"
                android:layout_height="100dp"
-               android:src="@drawable/mucos"
                android:background="@drawable/rec_imgview_border_sunflower"
                />
+                <ImageView
+                    android:id="@+id/pillphoto"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/tylenol"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    />
                 <ImageView
                     android:id="@+id/pullimg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/pillphoto"
-                    android:layout_alignRight="@+id/pillphoto"
+                    android:layout_alignTop="@+id/background"
+                    android:layout_alignRight="@+id/background"
                     android:layout_marginTop="4dp"
                     android:layout_marginRight="4dp"
                     android:src="@drawable/ic_fullscreen"/>
@@ -298,9 +305,6 @@
             </RelativeLayout>
         </net.cachapa.expandablelayout.ExpandableLayout>
         </LinearLayout>
-
-
-
     </RelativeLayout>
 
     </ScrollView>

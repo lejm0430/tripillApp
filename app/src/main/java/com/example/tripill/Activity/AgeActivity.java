@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -29,6 +30,8 @@ public class AgeActivity extends AppCompatActivity {
     SymptomAdapter adapter;
 
     ImageView backbtn;
+
+    public Context mcontext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,7 @@ public class AgeActivity extends AppCompatActivity {
                         dialog.callFunction();
                     }else{
                         Intent intent = new Intent(getApplicationContext(), PillRecommendActivity.class);
+                        intent.putExtra("age",String.valueOf(i.intValue()));
                         startActivity(intent);
                     }
                 }

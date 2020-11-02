@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tripill.Adapter.SymptomRecommendAdpater;
+import com.example.tripill.Dialog.FullImagDialog;
 import com.example.tripill.Dialog.SosDialog;
 import com.example.tripill.R;
 
@@ -78,11 +79,19 @@ public class PillRecommendActivity extends AppCompatActivity {
         goPHbtn = findViewById(R.id.goPHbtn);
 
         pillphoto.setClipToOutline(true);
+        pillphoto.setImageResource(R.drawable.mibo);
+
+        String age = getIntent().getStringExtra("age");
+        String symtom;
+        Log.e("test",age);
+
+        Integer i = Integer.parseInt(age);
 
         pullimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FullImagDialog dialog = new FullImagDialog(PillRecommendActivity.this);
+                dialog.callFunction();
             }
         });
 

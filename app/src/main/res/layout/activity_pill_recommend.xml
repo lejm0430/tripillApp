@@ -305,7 +305,7 @@
 
     </ScrollView>
         <TextView
-            android:id="@+id/recobtn"
+            android:id="@+id/goPHbtn"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:text="내 주변 약국 찾기"

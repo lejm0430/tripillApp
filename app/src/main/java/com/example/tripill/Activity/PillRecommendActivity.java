@@ -7,25 +7,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.tripill.Adapter.SymptomAdapter;
 import com.example.tripill.Adapter.SymptomRecommendAdpater;
 import com.example.tripill.Dialog.SosDialog;
 import com.example.tripill.R;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class PillRecommendActivity extends AppCompatActivity {
+
+
 
     ImageView pillphoto;
     RelativeLayout viewArea;
@@ -49,6 +51,7 @@ public class PillRecommendActivity extends AppCompatActivity {
     TextView warning;
     TextView text;
     TextView sos;
+    TextView goPHbtn;
 
     public static Context mcontext;
 
@@ -72,6 +75,7 @@ public class PillRecommendActivity extends AppCompatActivity {
         backbtn = findViewById(R.id.backbtn);
         sos = findViewById(R.id.sos);
         pullimg = findViewById(R.id.pullimg);
+        goPHbtn = findViewById(R.id.goPHbtn);
 
         pillphoto.setClipToOutline(true);
 
@@ -141,6 +145,14 @@ public class PillRecommendActivity extends AppCompatActivity {
             public void onClick(View view) {
                 warningexp.toggle();
                 arrowIcWarning.setImageResource(warningexp.isExpanded() ? R.drawable.ic_close_arrow_light_gray : R.drawable.ic_open_arrow_light_gray);
+            }
+        });
+
+        goPHbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PillRecommendActivity.this,PharmacyMap.class);
+                startActivity(intent);
             }
         });
 

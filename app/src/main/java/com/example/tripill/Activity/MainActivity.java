@@ -12,14 +12,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tripill.Adapter.PillHistoryAdapter;
+import com.example.tripill.Adapter.PillList;
 import com.example.tripill.Dialog.ChoicedSymptomSlide;
 import com.example.tripill.Dialog.SosDialog;
 import com.example.tripill.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -30,6 +37,8 @@ public class MainActivity extends AppCompatActivity{
 
     DrawerLayout mainDrawer;
     LinearLayout menuDrawer;
+
+    ArrayList<PillList> pillList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +86,23 @@ public class MainActivity extends AppCompatActivity{
 
         menuDrawer.setOnClickListener((v)->{});
         mainDrawer.closeDrawer(menuDrawer);
+
+        RecyclerView drawer_recycler = findViewById(R.id.drawer_recycler);
+
+        pillList = new ArrayList<PillList>();
+
+        //리스트 추가
+        pillList.add(new PillList("두통","발열","21","2020.09.11","약이름1"));
+        pillList.add(new PillList("어지럼증","두통","15","2020.18.05","약이름2"));
+        pillList.add(new PillList("상처","","37","2020.26.03","약이름3"));
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        drawer_recycler.setLayoutManager(linearLayoutManager);
+
+        PillHistoryAdapter adapter = new PillHistoryAdapter(pillList,this);
+        drawer_recycler.setAdapter(adapter);
+
+
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override

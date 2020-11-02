@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal">
 
         <TextView
@@ -28,8 +29,7 @@
             android:textColor="@color/slate"
             android:textSize="16dp"
             android:fontFamily="@font/noto_sans_cj_kkr_medium"
-            android:includeFontPadding="false"
-            android:visibility="gone"/>
+            android:includeFontPadding="false"/>
 
         <TextView
             android:id="@+id/symptom2"
@@ -39,8 +39,7 @@
             android:textColor="@color/slate"
             android:textSize="16dp"
             android:fontFamily="@font/noto_sans_cj_kkr_medium"
-            android:includeFontPadding="false"
-            android:visibility="gone"/>
+            android:includeFontPadding="false"/>
 
     </LinearLayout>
 
@@ -57,7 +56,7 @@
             android:text="나이 : "
             android:textSize="16dp"
             android:textColor="@color/slate"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:fontFamily="@font/noto_sans_cj_kkr_regular"
             android:includeFontPadding="false"/>
 
 
@@ -69,24 +68,26 @@
             android:text="20"
             android:textSize="16dp"
             android:textColor="@color/slate"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:fontFamily="@font/noto_sans_cj_kkr_regular"
             android:includeFontPadding="false"/>
 
 
         <TextView
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="01.31.2020"
             android:textSize="14dp"
             android:textColor="@color/warm_grey"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            android:fontFamily="@font/noto_sans_cj_kkr_regular"
             android:includeFontPadding="false"/>
 
 
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/pillname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -99,6 +100,7 @@
 
     <View
         android:id="@+id/bottomline"
+        android:layout_marginTop="15.5dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#cccccc"/>

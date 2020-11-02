@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: net.cachapa.expandablelayout:expandablelayout:2.9.2@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/59cf0c253f703e97c9f9ad5d3ff96c38/jetified-expandablelayout-2.9.2/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/59cf0c253f703e97c9f9ad5d3ff96c38/jetified-expandablelayout-2.9.2/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/59cf0c253f703e97c9f9ad5d3ff96c38/jetified-expandablelayout-2.9.2/res" />
     </CLASSES>

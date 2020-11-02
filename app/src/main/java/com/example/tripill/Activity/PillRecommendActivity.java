@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.tripill.Adapter.SymptomAdapter;
 import com.example.tripill.Adapter.SymptomRecommendAdpater;
+import com.example.tripill.Dialog.SosDialog;
 import com.example.tripill.R;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -41,11 +43,14 @@ public class PillRecommendActivity extends AppCompatActivity {
     ImageView arrowIc;
     ImageView arrowIcWarning;
     ImageView backbtn;
+    ImageView pullimg;
 
     TextView expect;
     TextView warning;
     TextView text;
     TextView sos;
+
+    public static Context mcontext;
 
 
     @Override
@@ -66,21 +71,22 @@ public class PillRecommendActivity extends AppCompatActivity {
         text = findViewById(R.id.tv1);
         backbtn = findViewById(R.id.backbtn);
         sos = findViewById(R.id.sos);
+        pullimg = findViewById(R.id.pullimg);
 
         pillphoto.setClipToOutline(true);
+
+        pullimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         sos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String symptom1 = "두통";
-                String symptom2 = "어지러움";
-                try{
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage("01046506632", null , symptom1+symptom2,null,null);
-                    Log.e("Send","TEST");
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                SosDialog dialog = new SosDialog(PillRecommendActivity.this);
+                dialog.callFunction();
             }
         });
 
@@ -157,4 +163,21 @@ public class PillRecommendActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    public void intent() {
+        String address ="서울 강남구 신사동 123-123";
+        String s1 = "두통";
+        String s2 = "어지럼증";
+
+        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+
+        String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 증상은 " + s1+s2 +"입니다. 살려줘";
+
+        sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
+
+        sendIntent.putExtra("address", "01011112222"); // 받는사람 번호
+
+        sendIntent.setType("vnd.android-dir/mms-sms");
+
+        startActivity(sendIntent);
+    }
 }

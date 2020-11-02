@@ -1,6 +1,10 @@
 
 package com.example.tripill.Activity;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,9 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tripill.Dialog.ChoicedSymptomSlide;
+import com.example.tripill.Dialog.SosDialog;
 import com.example.tripill.R;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class MainActivity extends AppCompatActivity{
@@ -19,6 +26,7 @@ public class MainActivity extends AppCompatActivity{
     static final int SYMPTOMCODE = 1111;
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
+    private final int MY_PERMISSION_REQUEST_SMS = 1001;
 
     DrawerLayout mainDrawer;
     LinearLayout menuDrawer;
@@ -27,6 +35,25 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("info");
+                builder.setMessage("asdf");
+
+                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }else{
+                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
+            }
+        }
 
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);

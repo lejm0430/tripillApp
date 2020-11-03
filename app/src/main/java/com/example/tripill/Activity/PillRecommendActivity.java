@@ -55,7 +55,6 @@ public class PillRecommendActivity extends AppCompatActivity {
 
     public static Context mcontext;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

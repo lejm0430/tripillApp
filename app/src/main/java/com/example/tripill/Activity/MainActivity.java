@@ -19,7 +19,9 @@ import com.example.tripill.Dialog.ChoicedSymptomSlide;
 import com.example.tripill.Dialog.SosDialog;
 import com.example.tripill.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -48,6 +50,10 @@ public class MainActivity extends AppCompatActivity{
 
     ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
 
+    long now;
+    Date date;
+    SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,21 +61,9 @@ public class MainActivity extends AppCompatActivity{
 
         Realm.init(this);
 
-
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("info");
-                builder.setMessage("asdf");
-
-                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
             }else{
                 ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
             }
@@ -103,7 +97,7 @@ public class MainActivity extends AppCompatActivity{
         pillList = new ArrayList<PillList>();
 
         //리스트 추가
-        pillList.add(new PillList("두통","발열","21","2020.09.11","약이름1"));
+        pillList.add(new PillList("두통","발열","21",getTime(),"약이름1"));
 //        pillList.add(new PillList("어지럼증","두통","15","2020.18.05","약이름2"));
 //        pillList.add(new PillList("상처","","37","2020.26.03","약이름3"));
 
@@ -235,6 +229,12 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    private String getTime(){
+        now = System.currentTimeMillis();
+        date = new Date(now);
+        return format.format(date);
     }
 
 

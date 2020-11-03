@@ -9,11 +9,20 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class PillDB extends RealmObject {
-    @PrimaryKey
+        @PrimaryKey
+        private String key;
+
         private String Pillname;
         private String Symptom1;
         private String Symptom2;
-        private int age;
+        //private int age;
+
+    public String getKey(){
+        return key;
+    }
+    public void setKey(String key){
+        this.key = key;
+    }
 
         public String getName(){
             return Pillname;
@@ -39,12 +48,12 @@ public class PillDB extends RealmObject {
     }
 
 
-    public int getAge(){
-        return age;
-    }
-    public void setAge(int age){
-        this.age = age;
-    }
+//    public int getAge(){
+//        return age;
+//    }
+//    public void setAge(int age){
+//        this.age = age;
+//    }
 
 
 }

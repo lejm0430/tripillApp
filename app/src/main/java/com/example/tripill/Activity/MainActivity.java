@@ -59,16 +59,17 @@ public class MainActivity extends AppCompatActivity{
     ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
 
     long now;
+    long nows;
     Date date;
+    Date dates;
     SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+    SimpleDateFormat formats = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        realm = Realm.getDefaultInstance();
-//        basicCRUD(realm);
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
@@ -105,8 +106,10 @@ public class MainActivity extends AppCompatActivity{
 
         pillList = new ArrayList<PillList>();
 
+        realm = Realm.getDefaultInstance();
+        basicCRUD(realm);
+
         //리스트 추가
-       // pillList.add(new PillList("두통","발열","4",getTime(),name));
 //        pillList.add(new PillList("어지럼증","두통","15","2020.18.05","약이름2"));
 //        pillList.add(new PillList("상처","","37","2020.26.03","약이름3"));
 
@@ -245,6 +248,12 @@ public class MainActivity extends AppCompatActivity{
         return format.format(date);
     }
 
+    private String getTimes(){
+        nows = System.currentTimeMillis();
+        dates = new Date(nows);
+        return formats.format(dates);
+    }
+
 
 
 
@@ -266,25 +275,26 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-//    protected void onDestroy(){
-//        super.onDestroy();
-//        realm.close();
-//    }
-//
-//
-//    private void basicCRUD(Realm realm){
-//        realm.executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                PillDB pd = realm.createObject(PillDB.class, UUID.randomUUID().toString());
-//                pd.setName("타이레놀");
-//                pd.setAge(11);
-//                pd.setS1("asdf");
-//                pd.setS2("qwer");
-//            }
-//        });
-//
-//        final PillDB pd = realm.where(PillDB.class).findFirst();
-//        pillList.add(new PillList("두통","발열","4",getTime(),pd.getName()));
-//    }
+    protected void onDestroy(){
+        super.onDestroy();
+        realm.close();
+    }
+
+
+    private void basicCRUD(Realm realm){
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                PillDB pd = realm.createObject(PillDB.class,getTimes());
+                pd.setName("타이레놀");
+                pd.setS1("두통");
+                pd.setS2("headache");
+
+                pillList.add(new PillList(pd.getS1(),pd.getS2(),"3",getTime(),pd.getName()));
+            }
+        });
+
+        final PillDB pd = realm.where(PillDB.class).findFirst();
+
+    }
 }

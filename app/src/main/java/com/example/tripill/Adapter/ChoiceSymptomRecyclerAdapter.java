@@ -1,5 +1,6 @@
 package com.example.tripill.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tripill.Activity.MainActivity;
+import com.example.tripill.Dialog.NotChoiceDialog;
 import com.example.tripill.R;
 
 import java.util.List;
@@ -20,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSymptomRecyclerAdapter.MainHolder>  {
 
     private List<String> list;
-    private Context context;
+    public static Context context;
     private RecyclerView recyclerView;
     private LayoutInflater inflate;
 
@@ -67,7 +70,7 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
         CheckBox.OnCheckedChangeListener checkedChangeListener =new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Log.d("TAG :" , "pre COunt : " + count);
+
                 if (b) {
                     count++;
                     if (count > 2) {
@@ -77,13 +80,10 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
                         Toast.makeText(context, "2개만 선택가능", Toast.LENGTH_SHORT).show();
                         holder.SymptomBtn.setOnCheckedChangeListener(this);
                         count--;
-                    }else{
-
                     }
                 }else{
                     count--;
                 }
-                Log.d("TAG :" , "post COunt : " + count);
 
             }
         };

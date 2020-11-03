@@ -28,8 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class PillRecommendActivity extends AppCompatActivity {
 
-
-
     ImageView pillphoto;
     RelativeLayout viewArea;
     RelativeLayout warningArea;
@@ -53,6 +51,7 @@ public class PillRecommendActivity extends AppCompatActivity {
     TextView text;
     TextView sos;
     TextView goPHbtn;
+    String age;
 
     public static Context mcontext;
 
@@ -79,11 +78,14 @@ public class PillRecommendActivity extends AppCompatActivity {
         goPHbtn = findViewById(R.id.goPHbtn);
 
         pillphoto.setClipToOutline(true);
-        pillphoto.setImageResource(R.drawable.mibo);
+        pillphoto.setImageResource(R.drawable.mibo);//수정사항
 
-        String age = getIntent().getStringExtra("age");
-        String symtom;
-        Log.e("test",age);
+//        String hab = getIntent().getStringExtra("sum");
+//
+//        Integer sum = Integer.parseInt(hab);
+
+        age = getIntent().getStringExtra("age");
+
 
         Integer i = Integer.parseInt(age);
 
@@ -91,7 +93,7 @@ public class PillRecommendActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FullImagDialog dialog = new FullImagDialog(PillRecommendActivity.this);
-                dialog.callFunction();
+                dialog.callFunction(i); //점수도 같이 들어가야됨
             }
         });
 
@@ -188,10 +190,13 @@ public class PillRecommendActivity extends AppCompatActivity {
         String address ="서울 강남구 신사동 123-123";
         String s1 = "두통";
         String s2 = "어지럼증";
+        String age = getIntent().getStringExtra("age");
+//        String symptom1 = getIntent().getStringExtra("s1");
+//        String symptom2 = getIntent().getStringExtra("s2");
 
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 
-        String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 증상은 " + s1+s2 +"입니다. 살려줘";
+        String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + age +"세 입니다. 저의 증상은 "+ s1+ "," + s2 +"입니다. 살려줘";
 
         sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
 

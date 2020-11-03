@@ -50,6 +50,9 @@ public class AgeActivity extends AppCompatActivity {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
         String part = getIntent().getStringExtra("part");
+//        String symptom1 = getIntent().getStringExtra("s1");
+//        String symptom2 = getIntent().getStringExtra("s2");
+//        String sum = getIntent().getStringExtra("sum");
 
 
         backbtn.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +75,7 @@ public class AgeActivity extends AppCompatActivity {
         });
 
 
-        recobtn.setOnClickListener(new View.OnClickListener() {
+        recobtn.setOnClickListener(new View.OnClickListener() { //점수랑 나이 비교해서 dialog띄우기
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {

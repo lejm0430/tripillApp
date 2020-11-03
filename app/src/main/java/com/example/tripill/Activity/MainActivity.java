@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.tripill.Adapter.PillHistoryAdapter;
 import com.example.tripill.Adapter.PillList;
+import com.example.tripill.DataBase.PillDB;
 import com.example.tripill.Dialog.ChoicedSymptomSlide;
 import com.example.tripill.Dialog.SosDialog;
 import com.example.tripill.R;
@@ -22,6 +24,7 @@ import com.example.tripill.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -31,6 +34,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -39,7 +44,10 @@ public class MainActivity extends AppCompatActivity{
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
     private final int MY_PERMISSION_REQUEST_SMS = 1001;
+    public static final String TAG = MainActivity.class.getName();
     private Realm realm;
+    String name;
+    int age;
 
     public static Context mcontext;
 
@@ -59,7 +67,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Realm.init(this);
+//        realm = Realm.getDefaultInstance();
+//        basicCRUD(realm);
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
@@ -97,7 +106,7 @@ public class MainActivity extends AppCompatActivity{
         pillList = new ArrayList<PillList>();
 
         //리스트 추가
-        pillList.add(new PillList("두통","발열","21",getTime(),"약이름1"));
+       // pillList.add(new PillList("두통","발열","4",getTime(),name));
 //        pillList.add(new PillList("어지럼증","두통","15","2020.18.05","약이름2"));
 //        pillList.add(new PillList("상처","","37","2020.26.03","약이름3"));
 
@@ -228,7 +237,6 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
-
     }
 
     private String getTime(){
@@ -257,4 +265,26 @@ public class MainActivity extends AppCompatActivity{
         }
 
     }
+
+//    protected void onDestroy(){
+//        super.onDestroy();
+//        realm.close();
+//    }
+//
+//
+//    private void basicCRUD(Realm realm){
+//        realm.executeTransaction(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                PillDB pd = realm.createObject(PillDB.class, UUID.randomUUID().toString());
+//                pd.setName("타이레놀");
+//                pd.setAge(11);
+//                pd.setS1("asdf");
+//                pd.setS2("qwer");
+//            }
+//        });
+//
+//        final PillDB pd = realm.where(PillDB.class).findFirst();
+//        pillList.add(new PillList("두통","발열","4",getTime(),pd.getName()));
+//    }
 }

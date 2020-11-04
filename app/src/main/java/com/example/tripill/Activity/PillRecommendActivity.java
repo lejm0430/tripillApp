@@ -249,7 +249,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     public void onInit(int status) {
         if(status == TextToSpeech.SUCCESS){
             int language = tts.setLanguage(Locale.KOREAN);
-
         }
     }
 

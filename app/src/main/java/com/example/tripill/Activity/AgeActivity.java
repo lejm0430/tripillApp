@@ -50,9 +50,9 @@ public class AgeActivity extends AppCompatActivity {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
         String part = getIntent().getStringExtra("part");
-//        String symptom1 = getIntent().getStringExtra("s1");
-//        String symptom2 = getIntent().getStringExtra("s2");
-//        String sum = getIntent().getStringExtra("sum");
+        String symptom1 = getIntent().getStringExtra("s1");
+        String symptom2 = getIntent().getStringExtra("s2");
+        String sum = getIntent().getStringExtra("sum");
 
 
         backbtn.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +103,7 @@ public class AgeActivity extends AppCompatActivity {
 
 
 
-        String[] main_text =  {part};
+        String[] main_text =  {part, symptom1, symptom2};
 
 
         adapter = new SymptomAdapter(main_text);

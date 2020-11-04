@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tripill.Adapter.SymptomRecommendAdpater;
 import com.example.tripill.Dialog.FullImagDialog;
@@ -26,7 +28,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PillRecommendActivity extends AppCompatActivity {
+import org.w3c.dom.Text;
+
+import java.util.Locale;
+
+public class PillRecommendActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     ImageView pillphoto;
     RelativeLayout viewArea;
@@ -40,6 +46,7 @@ public class PillRecommendActivity extends AppCompatActivity {
     SymptomRecommendAdpater adapter;
     ExpandableLayout expectexp;
     ExpandableLayout warningexp;
+    RelativeLayout speaker;
 
     ImageView arrowIc;
     ImageView arrowIcWarning;
@@ -51,11 +58,14 @@ public class PillRecommendActivity extends AppCompatActivity {
     TextView text;
     TextView sos;
     TextView goPHbtn;
+    TextView sym;
     String age;
     String s1;
     String s2;
+    String pillname;
 
     public static Context mcontext;
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +87,13 @@ public class PillRecommendActivity extends AppCompatActivity {
         sos = findViewById(R.id.sos);
         pullimg = findViewById(R.id.pullimg);
         goPHbtn = findViewById(R.id.goPHbtn);
+        sym = findViewById(R.id.symptom);
+        speaker = findViewById(R.id.speaker);
 
         pillphoto.setClipToOutline(true);
-        pillphoto.setImageResource(R.drawable.mibo);//수정사항
+
+        tts = new TextToSpeech(this, this);
+
 
 //        String hab = getIntent().getStringExtra("sum");
 //
@@ -88,14 +102,23 @@ public class PillRecommendActivity extends AppCompatActivity {
         age = getIntent().getStringExtra("age");
         s1 = getIntent().getStringExtra("s1");
         s2 = getIntent().getStringExtra("s2");
+        pillname = getIntent().getStringExtra("name");
+
+            pillphoto.setImageResource(R.drawable.buscopan);//수정사항
 
         Integer i = Integer.parseInt(age);
+
+        if(s2.isEmpty()){
+            sym.setText(s1);
+        }else {
+            sym.setText(s1 + "/" + s2);
+        }
 
         pullimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FullImagDialog dialog = new FullImagDialog(PillRecommendActivity.this);
-                dialog.callFunction(i); //점수도 같이 들어가야됨
+                dialog.callFunction(pillname);
             }
         });
 
@@ -169,6 +192,14 @@ public class PillRecommendActivity extends AppCompatActivity {
             }
         });
 
+        speaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Speech();
+                Log.e("test","asdf");
+            }
+        });
+
 
 
 
@@ -190,11 +221,9 @@ public class PillRecommendActivity extends AppCompatActivity {
 
     public void intent() {
         String address ="서울 강남구 신사동 123-123";
-        String s1 = "두통";
-        String s2 = "어지럼증";
-        String age = getIntent().getStringExtra("age");
-        String symptom1 = getIntent().getStringExtra("s1");
-        String symptom2 = getIntent().getStringExtra("s2");
+        age = getIntent().getStringExtra("age");
+        s1 = getIntent().getStringExtra("s1");
+        s2= getIntent().getStringExtra("s2");
 
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 
@@ -207,5 +236,28 @@ public class PillRecommendActivity extends AppCompatActivity {
         sendIntent.setType("vnd.android-dir/mms-sms");
 
         startActivity(sendIntent);
+    }
+
+    private void Speech(){
+        String text = sym.getText().toString().trim();
+        tts.setPitch((float) 0.8);
+        tts.setSpeechRate((float) 1.0);
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    @Override
+    public void onInit(int status) {
+        if(status == TextToSpeech.SUCCESS){
+            int language = tts.setLanguage(Locale.KOREAN);
+
+        }
+    }
+
+    protected void onDestroy(){
+        if(tts != null){
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
     }
 }

@@ -59,6 +59,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
                 intent.putExtra("s1",holder.symptom1.getText());
                 intent.putExtra("s2",holder.symptom2.getText());
                 intent.putExtra("age",holder.age.getText());
+                intent.putExtra("name",holder.pillname.getText());
                 context.startActivity(intent);
 
             }

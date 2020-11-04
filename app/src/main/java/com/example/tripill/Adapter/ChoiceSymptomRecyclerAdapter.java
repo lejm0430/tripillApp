@@ -3,6 +3,7 @@ package com.example.tripill.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationListener;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -143,9 +144,6 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
 
         }
     }
-
-
-
 }
 
 

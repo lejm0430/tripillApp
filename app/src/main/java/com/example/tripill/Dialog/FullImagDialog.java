@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -16,7 +17,7 @@ public class FullImagDialog extends AppCompatActivity {
     public Context context;
 
     public FullImagDialog(Context context){this.context = context;}
-    public void callFunction(Integer i){
+    public void callFunction(String pillname){
         final Dialog dlg = new Dialog(context);
 
         dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -25,12 +26,18 @@ public class FullImagDialog extends AppCompatActivity {
         dlg.setContentView(R.layout.dialog_image);
 
         ImageView pillphoto = (ImageView) dlg.findViewById(R.id.pillphoto);
-        pillphoto.setImageResource(R.drawable.mibo); //수정사항
 
         WindowManager.LayoutParams params = dlg.getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
+        if(pillname.equals("타이레놀")){
+            pillphoto.setImageResource(R.drawable.tylenol); //수정사항
+        }else{
+            pillphoto.setImageResource(R.drawable.mibo); //수정사항
+        }
+
+        pillphoto.setImageResource(R.drawable.buscopan);//수정사항
         dlg.show();
         dlg.setCancelable(true);
     }

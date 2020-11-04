@@ -2,6 +2,7 @@ package com.example.tripill.Dialog;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,6 +107,7 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
                 intent.putExtra("s2",adapter.getSelected_list().get(1).toString());
                 intent.putExtra("sum", sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore()));
                 getContext().startActivity(intent);
+
             }
         });
 

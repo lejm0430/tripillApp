@@ -5,8 +5,10 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,9 +47,13 @@ public class MainActivity extends AppCompatActivity{
     private long backPressedTime = 0;
     private final int MY_PERMISSION_REQUEST_SMS = 1001;
     public static final String TAG = MainActivity.class.getName();
+    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private Realm realm;
     String name;
     int age;
+    TextView nonehistory;
+
+    RecyclerView drawer_recycler;
 
     public static Context mcontext;
 
@@ -102,7 +108,8 @@ public class MainActivity extends AppCompatActivity{
         menuDrawer.setOnClickListener((v)->{});
         mainDrawer.closeDrawer(menuDrawer);
 
-        RecyclerView drawer_recycler = findViewById(R.id.drawer_recycler);
+        drawer_recycler = findViewById(R.id.drawer_recycler);
+        nonehistory = findViewById(R.id.nonehistory);
 
         pillList = new ArrayList<PillList>();
 
@@ -284,10 +291,15 @@ public class MainActivity extends AppCompatActivity{
                 PillDB pd = realm.createObject(PillDB.class,getTimes());
                 pd.setName("타이레놀");
                 pd.setS1("두통");
-                pd.setS2("headache");
+                pd.setS2("어지러움");
                 pd.setAge(6);
 
-                pillList.add(new PillList(pd.getS1(), pd.getS2(), String.valueOf(pd.getAge()), getTime(), pd.getName()));
+                if(pd.getName().isEmpty()){
+                    drawer_recycler.setVisibility(View.GONE);
+                }else{
+                    pillList.add(new PillList(pd.getS1(), pd.getS2(), String.valueOf(pd.getAge()), getTime(), pd.getName()));
+                    nonehistory.setVisibility(View.GONE);
+                }
                 }
         });
 

@@ -1,19 +1,13 @@
 package com.example.tripill.Dialog;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tripill.Activity.AgeActivity;
 import com.example.tripill.Adapter.ChoiceSymptomRecyclerAdapter;
@@ -22,15 +16,15 @@ import com.example.tripill.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
     ArrayList<SymptomList> list = new ArrayList();
+    ArrayList<Integer> score = new ArrayList<Integer>();
+
     public String title;
 
     ChoicedSymptomSlide choicedSymptomSlide;
@@ -51,23 +45,6 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v=inflater.inflate(R.layout.activity_choiced_symptom_slide, container, false);
-
-        final int dutong = 1;
-        int agirum = 2;
-        int balyel = 4;
-
-        int inhutong = 7;
-        int gichim = 8;
-
-        int sohwabullyang = 40;
-        int boktong = 50;
-        int sanglitong = 100;
-
-        int musclepain = 20;
-        int wound = 25;
-        int burn = 60;
-        int hangover = 35;
-
 
         TextView nextBtn=v.findViewById(R.id.nextBtn);
         TextView TwoChoiceMungu=v.findViewById(R.id.TwoChoiceMungu);
@@ -125,17 +102,9 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
                 Intent intent=new Intent(getContext(), AgeActivity.class);
                 intent.putExtra("part",title);
-                intent.putExtra("s1", adapter.getSelected_list().toString());  // 선택한 값 포지션
-
-               /* if(adapter.getSelected_list() = dutong) { // TODO: 2020-11-03 선택한게 두통이랑 어지럼증일때
-                    intent.putExtra("s1",list.get(0).toString());
-                    intent.putExtra("s2",list.get(0).toString());
-                    intent.putExtra("sum", sum(dutong,agirum));
-                }else if(adapter.getCheckedItem() == list.get(0)){
-
-                }*/
-
-
+                intent.putExtra("s1",adapter.getSelected_list().get(0).toString());
+                intent.putExtra("s2",adapter.getSelected_list().get(1).toString());
+                intent.putExtra("sum", sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore()));
                 getContext().startActivity(intent);
             }
         });

@@ -56,27 +56,22 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
         return mainHolder;
     }
 
-    public List<SymptomList> getSelected_list() { //선택된 아이템 포지션 리스트
+    public List<SymptomList> getSelected_list() { // // TODO: 2020-11-04 선택된 아이템 스코어값
         return selected_list;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MainHolder holder,final int position) {
 
-
         holder.SymptomText.setText(list.get(position).getSymptom());
 
-
-
-        holder.SymptomLay.setOnClickListener(new View.OnClickListener() {
+        holder.SymptomLay.setOnClickListener(new View.OnClickListener() { //레이아웃을 선택하면
             @Override
             public void onClick(View view) {
-                holder.SymptomBtn.performClick();
+                holder.SymptomBtn.performClick();   //체크박스가 체크된다
                 holder.SymptomBtn.setTag(list.get(position));
             }
         });
-
-
 
 
         CheckBox.OnCheckedChangeListener checkedChangeListener =new CompoundButton.OnCheckedChangeListener() {
@@ -86,14 +81,16 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
                 if (b) {
                     count++;
 
+
                     selected_list.add(list.get(position));
-                    Log.d("selected_item","선택된 아이템 : "+selected_list.toString());
+                    Log.d("TAG","선택된 아이템 : "+selected_list.toString());
+
                     if (count > 2) {
                         // 3개쨰 선택시
                         holder.SymptomBtn.setOnCheckedChangeListener(null); //리스너 막기
                         holder.SymptomBtn.setChecked(false);  //체크 금지
                         Toast.makeText(context, "2개만 선택가능", Toast.LENGTH_SHORT).show();
-//                        holder.SymptomBtn.setOnCheckedChangeListener(this);
+                        holder.SymptomBtn.setOnCheckedChangeListener(this);
 
                         count--;
                     }else{
@@ -102,7 +99,7 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
                 }else{
                     count--;
                     selected_list.remove(list.get(position));
-                    Log.d("selected_item","해체된 아이템 : "+selected_list.toString());
+                    Log.d("TAG","해체된 아이템 : "+selected_list.toString());
                 }
                 Log.d("TAG :" , "post Count : " + count);
 

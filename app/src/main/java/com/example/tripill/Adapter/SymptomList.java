@@ -18,6 +18,14 @@ public class SymptomList {
         this.symptom=symptom;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score=score;
+    }
+
     public boolean isSelected() {
         return isSelected;
     }

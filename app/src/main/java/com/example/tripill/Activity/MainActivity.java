@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity{
     long nows;
     Date date;
     Date dates;
-    SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+    SimpleDateFormat format = new SimpleDateFormat("MM. dd. yyyy");
     SimpleDateFormat formats = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     @Override
@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void execute(Realm realm) {
                 PillDB pd = realm.createObject(PillDB.class,getTimes());
-                pd.setName("타이레놀");
+                pd.setName("aw");
                 pd.setS1("두통");
                 pd.setS2("어지러움");
                 pd.setAge(6);

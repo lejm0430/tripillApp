@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.tripill.Activity.PillRecommendActivity;
@@ -19,15 +20,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.MainHolder>{
 
-    ArrayList<PillList> pillList = new ArrayList<PillList>();
+    ArrayList<PillList> pilllist = new ArrayList<PillList>();
     private Context context;
     private RecyclerView recyclerView;
     private LayoutInflater inflate;
 
 
 
-    public PillHistoryAdapter(ArrayList<PillList> pillList,Context context) {
-        this.pillList = pillList;
+    public PillHistoryAdapter(ArrayList<PillList> pilllist,Context context) {
+        this.pilllist = pilllist;
         this.context = context;
     }
 
@@ -47,7 +48,9 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MainHolder holder, int position) {
-        holder.onBind(pillList.get(position)); //SymptomBtn
+        final PillList pillList = pilllist.get(position);
+        holder.onBind(pilllist.get(position)); //SymptomBtn
+
         holder.linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,14 +63,13 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
 
             }
         });
-
     }
 
 
 
     @Override
     public int getItemCount() {
-        return pillList.size();
+        return pilllist.size();
     }
 
 

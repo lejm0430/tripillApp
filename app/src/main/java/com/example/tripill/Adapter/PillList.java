@@ -57,4 +57,5 @@ public class PillList {
     public void setPillname(String pillname) {
         this.pillname=pillname;
     }
+
 }

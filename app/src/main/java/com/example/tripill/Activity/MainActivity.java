@@ -109,10 +109,6 @@ public class MainActivity extends AppCompatActivity{
         realm = Realm.getDefaultInstance();
         basicCRUD(realm);
 
-        //리스트 추가
-//        pillList.add(new PillList("어지럼증","두통","15","2020.18.05","약이름2"));
-//        pillList.add(new PillList("상처","","37","2020.26.03","약이름3"));
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         drawer_recycler.setLayoutManager(linearLayoutManager);
 
@@ -289,12 +285,12 @@ public class MainActivity extends AppCompatActivity{
                 pd.setName("타이레놀");
                 pd.setS1("두통");
                 pd.setS2("headache");
+                pd.setAge(6);
 
-                pillList.add(new PillList(pd.getS1(),pd.getS2(),"3",getTime(),pd.getName()));
-            }
+                pillList.add(new PillList(pd.getS1(), pd.getS2(), String.valueOf(pd.getAge()), getTime(), pd.getName()));
+                }
         });
 
         final PillDB pd = realm.where(PillDB.class).findFirst();
-
     }
 }

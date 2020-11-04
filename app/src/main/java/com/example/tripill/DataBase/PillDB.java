@@ -15,7 +15,7 @@ public class PillDB extends RealmObject {
         private String Pillname;
         private String Symptom1;
         private String Symptom2;
-        //private int age;
+        private int age;
 
     public String getKey(){
         return key;
@@ -48,12 +48,12 @@ public class PillDB extends RealmObject {
     }
 
 
-//    public int getAge(){
-//        return age;
-//    }
-//    public void setAge(int age){
-//        this.age = age;
-//    }
+    public int getAge(){
+        return age;
+    }
+    public void setAge(int age){
+        this.age = age;
+    }
 
 
 }

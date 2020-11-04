@@ -52,6 +52,8 @@ public class PillRecommendActivity extends AppCompatActivity {
     TextView sos;
     TextView goPHbtn;
     String age;
+    String s1;
+    String s2;
 
     public static Context mcontext;
 
@@ -84,7 +86,8 @@ public class PillRecommendActivity extends AppCompatActivity {
 //        Integer sum = Integer.parseInt(hab);
 
         age = getIntent().getStringExtra("age");
-
+        s1 = getIntent().getStringExtra("s1");
+        s2 = getIntent().getStringExtra("s2");
 
         Integer i = Integer.parseInt(age);
 
@@ -177,7 +180,7 @@ public class PillRecommendActivity extends AppCompatActivity {
 
 
 
-        String[] main_text =  {"두통","어지럼증"};
+        String[] main_text =  {s1,s2};
 
 
         adapter = new SymptomRecommendAdpater(main_text);
@@ -190,8 +193,8 @@ public class PillRecommendActivity extends AppCompatActivity {
         String s1 = "두통";
         String s2 = "어지럼증";
         String age = getIntent().getStringExtra("age");
-//        String symptom1 = getIntent().getStringExtra("s1");
-//        String symptom2 = getIntent().getStringExtra("s2");
+        String symptom1 = getIntent().getStringExtra("s1");
+        String symptom2 = getIntent().getStringExtra("s2");
 
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 

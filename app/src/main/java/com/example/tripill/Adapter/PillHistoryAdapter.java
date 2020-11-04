@@ -1,11 +1,14 @@
 package com.example.tripill.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.tripill.Activity.PillRecommendActivity;
 import com.example.tripill.R;
 
 import java.util.ArrayList;
@@ -45,6 +48,18 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull MainHolder holder, int position) {
         holder.onBind(pillList.get(position)); //SymptomBtn
+        holder.linear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context mcontext = v.getContext();
+                Intent intent = new Intent(v.getContext(), PillRecommendActivity.class);
+                intent.putExtra("s1",holder.symptom1.getText());
+                intent.putExtra("s2",holder.symptom2.getText());
+                intent.putExtra("age",holder.age.getText());
+                context.startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -64,6 +79,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
         public TextView age;
         public TextView date;
         public TextView pillname;
+        public LinearLayout linear;
 
         public MainHolder(View v){
             super(v);
@@ -73,6 +89,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
             age = v.findViewById(R.id.age);
             date = v.findViewById(R.id.date);
             pillname = v.findViewById(R.id.pillname);
+            linear = v.findViewById(R.id.layout);
 
         }
 

@@ -117,13 +117,14 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
                 } else if(adapter.getSelected_list().size() == 1){
                         intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());
+                        intent.putExtra("sum",adapter.getSelected_list().get(0).getScore());
                         getContext().startActivity(intent);
 
                 } else {
                     intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());
                     intent.putExtra("s2",adapter.getSelected_list().get(1).getSymptom());  // TODO: 2020-11-04 증상 글자
                     intent.putExtra("sum", sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore()));
-                    Log.d("TAG","sum : "+ sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore()));
+                    Log.d("TAG","sum"+ sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore()));
                     getContext().startActivity(intent);
                 }
 

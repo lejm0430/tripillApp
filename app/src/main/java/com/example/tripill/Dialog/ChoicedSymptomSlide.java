@@ -2,6 +2,7 @@ package com.example.tripill.Dialog;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tripill.Activity.AgeActivity;
 import com.example.tripill.Adapter.ChoiceSymptomRecyclerAdapter;
@@ -17,6 +19,7 @@ import com.example.tripill.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +27,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
     ArrayList<SymptomList> list = new ArrayList();
-    ArrayList<Integer> score = new ArrayList<Integer>();
+    ArrayList<Integer> scorelist;
+    ArrayList<String> symptomlist;
 
     public String title;
 
@@ -93,9 +97,13 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
         }
 
+        symptomlist = new ArrayList<String>();
+
 
         ChoiceSymptomRecyclerAdapter adapter=new ChoiceSymptomRecyclerAdapter(list, getContext());   //세팅된 리스트를 어댑터로 보냄
         recyclerView.setAdapter(adapter);
+
+        NotChoiceDialog notChoiceDialog = new NotChoiceDialog(getContext());
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,10 +111,22 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
                 Intent intent=new Intent(getContext(), AgeActivity.class);
                 intent.putExtra("part",title);
-                intent.putExtra("s1",adapter.getSelected_list().get(0).toString());
-                intent.putExtra("s2",adapter.getSelected_list().get(1).toString());
-                intent.putExtra("sum", sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore()));
-                getContext().startActivity(intent);
+
+                if (adapter.getSelected_list().isEmpty()){
+                    notChoiceDialog.callFunction();
+
+                } else if(adapter.getSelected_list().size() == 1){
+                        intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());
+                        getContext().startActivity(intent);
+
+                } else {
+                    intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());
+                    intent.putExtra("s2",adapter.getSelected_list().get(1).getSymptom());  // TODO: 2020-11-04 증상 글자
+                    intent.putExtra("sum", sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore()));
+                    Log.d("TAG","sum : "+ sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore()));
+                    getContext().startActivity(intent);
+                }
+
 
             }
         });

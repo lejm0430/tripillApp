@@ -20,12 +20,13 @@ import com.example.tripill.Dialog.NotChoiceDialog;
 import com.example.tripill.R;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSymptomRecyclerAdapter.MainHolder>  {
+public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSymptomRecyclerAdapter.MainHolder> implements View.OnClickListener{
 
     private List<SymptomList> list;
     private List<SymptomList> selected_list = new ArrayList<>();
@@ -36,10 +37,6 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
     public int pos = -1;
 
     int count = 0;
-
-    public String getCheckedItem() {  //엑티비티를 위한 메소드 인텐트에 담아줄거
-        return list.get(pos).toString();
-    } // 선택 한 아이템 포지션 TODO: 2개선택시?
 
 
     public ChoiceSymptomRecyclerAdapter(List<SymptomList> list, Context context) {
@@ -62,9 +59,11 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MainHolder holder,final int position) {
+    public void onBindViewHolder(@NonNull MainHolder holder, final int position) {
+
 
         holder.SymptomText.setText(list.get(position).getSymptom());
+
 
         holder.SymptomLay.setOnClickListener(new View.OnClickListener() { //레이아웃을 선택하면
             @Override
@@ -75,14 +74,14 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
         });
 
 
+
         CheckBox.OnCheckedChangeListener checkedChangeListener =new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 Log.d("TAG :" , "pre Count : " + count);
+
                 if (b) {
                     count++;
-
-
                     selected_list.add(list.get(position));
                     Log.d("TAG","선택된 아이템 : "+selected_list.toString());
 
@@ -90,7 +89,7 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
                         // 3개쨰 선택시
                         holder.SymptomBtn.setOnCheckedChangeListener(null); //리스너 막기
                         holder.SymptomBtn.setChecked(false);  //체크 금지
-                        Toast.makeText(context, "2개만 선택가능", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "2개까지만 선택가능", Toast.LENGTH_SHORT).show();
                         holder.SymptomBtn.setOnCheckedChangeListener(this);
 
                         count--;
@@ -118,6 +117,12 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
         return list.size();
     }
 
+    @Override
+    public void onClick(View view) {
+
+    }
+
+
 
     public class MainHolder extends RecyclerView.ViewHolder{
 
@@ -132,13 +137,16 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
             this.SymptomText = v.findViewById(R.id.SymptomText);
             this.SymptomLay = v.findViewById(R.id.SymptomLay);
 
+
+
             SymptomBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     pos = getAdapterPosition();
                     notifyDataSetChanged();
 
-                    Log.d("position","선택한 값"+list.get(pos).toString());
+
+                    Log.d("TAG","선택한 값 : "+list.get(pos));
                 }
             });
 

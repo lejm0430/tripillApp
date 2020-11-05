@@ -106,10 +106,47 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         if(sum>=1 && sum <=3) {
             pillphoto.setImageResource(R.drawable.penzal);
+            pillname = "penzal";
+        }else if(sum>=4 && sum<=6){
+            pillphoto.setImageResource(R.drawable.tylenol);
+            pillname = "tylenol";
+        }else if(sum ==7){
+            pillphoto.setImageResource(R.drawable.strepsil);
+            pillname = "strepsil";
+        }
+        else if(sum == 7 && age < 12){
+            pillphoto.setImageResource(R.drawable.minol);
+            pillname = "minol";
+        }else if(sum ==8 || sum == 15){
+            pillphoto.setImageResource(R.drawable.mucoj);
+            pillname = "mucoj";
+        }else if(sum ==8 || sum == 15 && age < 15){
+            pillphoto.setImageResource(R.drawable.mucos);
+            pillname = "mucos";
+        }else if(sum == 20){
+            pillphoto.setImageResource(R.drawable.lirexpen);
+            pillname = "lirexpen";
+        }else if(sum == 25){
+            pillphoto.setImageResource(R.drawable.whosidin);
+            pillname = "whosidin";
+        }else if(sum == 35){
+            pillphoto.setImageResource(R.drawable.ru);
+            pillname = "ru";
+        }else if(sum == 40 || sum == 90){
+            pillphoto.setImageResource(R.drawable.sohwa);
+            pillname = "sohwa";
+        }else if(sum == 50){
+            pillphoto.setImageResource(R.drawable.buscopan);
+            pillname = "buscopan";
+        }else if(sum == 60){
+            pillphoto.setImageResource(R.drawable.mibo);
+            pillname = "mibo";
+        }else if(sum >= 100){
+            pillphoto.setImageResource(R.drawable.easyn);
+            pillname = "easyn";
         }
 
-
-        if(s2.isEmpty()){
+        if(s2 == null){
             sym.setText(s1);
         }else {
             sym.setText(s1 + "/" + s2);
@@ -209,13 +246,22 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         recyclerView.setLayoutManager(layoutManager);
 
 
+        if(s2 == null){
+            String[] main_text =  {s1};
 
-        String[] main_text =  {s1,s2};
+
+            adapter = new SymptomRecommendAdpater(main_text);
+
+            recyclerView.setAdapter(adapter);
+        }else{
+            String[] main_text =  {s1,s2};
 
 
-        adapter = new SymptomRecommendAdpater(main_text);
+            adapter = new SymptomRecommendAdpater(main_text);
 
-        recyclerView.setAdapter(adapter);
+            recyclerView.setAdapter(adapter);
+        }
+
     }
 
     public void intent() {
@@ -224,17 +270,31 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         s1 = getIntent().getStringExtra("s1");
         s2= getIntent().getStringExtra("s2");
 
+
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 
-        String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + age +"세 입니다. 저의 증상은 "+ s1+ "," + s2 +"입니다. 살려줘";
+        if(s2 != null){
+            String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1+ "," + s2 +"입니다. 살려줘";
 
-        sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
+            sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
 
-        sendIntent.putExtra("address", "01011112222"); // 받는사람 번호
+            sendIntent.putExtra("address", "01011112222"); // 받는사람 번호
 
-        sendIntent.setType("vnd.android-dir/mms-sms");
+            sendIntent.setType("vnd.android-dir/mms-sms");
 
-        startActivity(sendIntent);
+            startActivity(sendIntent);
+        }else{
+            String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1+"입니다. 살려줘";
+
+            sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
+
+            sendIntent.putExtra("address", "01011112222"); // 받는사람 번호
+
+            sendIntent.setType("vnd.android-dir/mms-sms");
+
+            startActivity(sendIntent);
+        }
+
     }
 
     private void Speech(){

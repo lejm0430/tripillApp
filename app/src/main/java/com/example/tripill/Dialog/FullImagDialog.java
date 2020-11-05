@@ -31,13 +31,34 @@ public class FullImagDialog extends AppCompatActivity {
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        if(pillname.equals("타이레놀")){
+        if(pillname.equals("penzal")){
+            pillphoto.setImageResource(R.drawable.penzal); //수정사항
+        }else if(pillname.equals("tylenol")){
             pillphoto.setImageResource(R.drawable.tylenol); //수정사항
-        }else{
+        }else if(pillname.equals("strepsil")){
+            pillphoto.setImageResource(R.drawable.strepsil); //수정사항
+        }else if(pillname.equals("minol")){
+            pillphoto.setImageResource(R.drawable.minol); //수정사항
+        }else if(pillname.equals("mucoj")){
+            pillphoto.setImageResource(R.drawable.mucoj); //수정사항
+        }else if(pillname.equals("mucos")){
+            pillphoto.setImageResource(R.drawable.mucos); //수정사항
+        }else if(pillname.equals("lirexpen")){
+            pillphoto.setImageResource(R.drawable.lirexpen); //수정사항
+        }else if(pillname.equals("whosidin")){
+            pillphoto.setImageResource(R.drawable.whosidin); //수정사항
+        }else if(pillname.equals("ru")){
+            pillphoto.setImageResource(R.drawable.ru); //수정사항
+        }else if(pillname.equals("sohwa")){
+            pillphoto.setImageResource(R.drawable.sohwa); //수정사항
+        }else if(pillname.equals("buscopan")){
+            pillphoto.setImageResource(R.drawable.buscopan); //수정사항
+        }else if(pillname.equals("mibo")){
             pillphoto.setImageResource(R.drawable.mibo); //수정사항
+        }else if(pillname.equals("easyn")){
+            pillphoto.setImageResource(R.drawable.easyn); //수정사항
         }
 
-        pillphoto.setImageResource(R.drawable.buscopan);//수정사항
         dlg.show();
         dlg.setCancelable(true);
     }

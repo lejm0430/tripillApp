@@ -88,8 +88,10 @@ public class AgeActivity extends AppCompatActivity {
                         dialog.callFunction();
                     }else{
                         Intent intent = new Intent(getApplicationContext(), PillRecommendActivity.class);
-                        intent.putExtra("age",age.getText());
+                        intent.putExtra("age",age.getText().toString());
                         intent.putExtra("sum",sumS);
+                        intent.putExtra("s1",symptom1);
+                        intent.putExtra("s2",symptom2);
                         startActivity(intent);
                     }
                 }

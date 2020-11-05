@@ -73,8 +73,8 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
         }else if(title.contains("neck")){
             TwoChoiceMungu.setVisibility((View.VISIBLE));
 
-            list.add(new SymptomList("인후통",4));
-            list.add(new SymptomList("기침",4));
+            list.add(new SymptomList("인후통",7));
+            list.add(new SymptomList("기침",8));
         }else if(title.contains("stomach")){
 
             TwoChoiceMungu.setVisibility((View.VISIBLE));

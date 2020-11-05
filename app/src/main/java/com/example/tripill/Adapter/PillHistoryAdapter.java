@@ -49,8 +49,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull MainHolder holder, int position) {
         final PillList pillList = pilllist.get(position);
-        holder.onBind(pilllist.get(position)); //SymptomBtn
-
+        holder.onBind(pilllist.get(position));
         holder.linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

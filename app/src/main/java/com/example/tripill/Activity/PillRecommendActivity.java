@@ -196,10 +196,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             @Override
             public void onClick(View view) {
                 Speech();
-                Log.e("test","asdf");
             }
         });
-
 
 
 

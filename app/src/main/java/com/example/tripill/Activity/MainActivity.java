@@ -37,6 +37,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmObject;
 import io.realm.RealmResults;
 
 
@@ -53,14 +54,15 @@ public class MainActivity extends AppCompatActivity{
     int age;
     TextView nonehistory;
 
-    RecyclerView drawer_recycler;
+    public static RecyclerView drawer_recycler;
 
     public static Context mcontext;
 
     DrawerLayout mainDrawer;
     LinearLayout menuDrawer;
 
-    ArrayList<PillList> pillList;
+    public static ArrayList<PillList> pillList;
+    PillHistoryAdapter adapter;
 
     ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
 
@@ -119,7 +121,7 @@ public class MainActivity extends AppCompatActivity{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         drawer_recycler.setLayoutManager(linearLayoutManager);
 
-        PillHistoryAdapter adapter = new PillHistoryAdapter(pillList,this);
+        adapter = new PillHistoryAdapter(pillList,this);
         drawer_recycler.setAdapter(adapter);
 
 
@@ -289,15 +291,20 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void execute(Realm realm) {
                 PillDB pd = realm.createObject(PillDB.class,getTimes());
-                pd.setName("aw");
+                pd.setName("bb");
                 pd.setS1("두통");
                 pd.setS2("어지러움");
-                pd.setAge(6);
-
+                pd.setAge("6");
+                pd.setDate(getTime());
                 if(pd.getName().isEmpty()){
                     drawer_recycler.setVisibility(View.GONE);
                 }else{
-                    pillList.add(new PillList(pd.getS1(), pd.getS2(), String.valueOf(pd.getAge()), getTime(), pd.getName()));
+                    RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
+
+                    for (PillDB pill : result) {
+                        pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName()));
+                    }
+//                    pillList.add(new PillList(pd.getS1(), pd.getS2(), String.valueOf(pd.getAge()), getTime(), pd.getName()));
                     nonehistory.setVisibility(View.GONE);
                 }
                 }

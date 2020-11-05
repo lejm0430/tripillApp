@@ -1,5 +1,7 @@
 package com.example.tripill.Adapter;
 
+import com.example.tripill.DataBase.PillDB;
+
 import java.util.ArrayList;
 
 public class PillList {
@@ -16,6 +18,14 @@ public class PillList {
         this.age=age;
         this.date=date;
         this.pillname=pillname;
+    }
+
+    public PillList(PillDB pillDB) {
+        this.symptom1=pillDB.getS1();
+        this.symptom2=pillDB.getS2();
+        this.age=pillDB.getAge();
+        this.date=pillDB.getDate();
+        this.pillname=pillDB.getName();
     }
 
     public String getSymptom1() {

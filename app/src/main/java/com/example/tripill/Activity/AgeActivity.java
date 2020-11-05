@@ -52,9 +52,11 @@ public class AgeActivity extends AppCompatActivity {
         String part = getIntent().getStringExtra("part");
         String symptom1 = getIntent().getStringExtra("s1");
         String symptom2 = getIntent().getStringExtra("s2");
-        String sum = getIntent().getStringExtra("sum");
+        String sumS = getIntent().getStringExtra("sum");
+        int sum = Integer.parseInt(sumS);
 
-        Log.e("TEST", sum + "");
+
+        Log.e("TEST", sumS);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,12 +83,13 @@ public class AgeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (age.length() > 0) {
                     Integer i = Integer.parseInt(age.getText().toString());
-                    if (i == 2) {
+                    if (sum>=1 && sum<=3 && i < 15 || sum >=4 && sum <=6 && i<7 || sum ==8 && i <2 || sum ==15 && i<2 || sum == 20 && i<15 || sum == 35 && i<15 || sum == 50 && i<15 || sum >= 100 && i<8){
                         AgeDialog dialog = new AgeDialog(AgeActivity.this);
                         dialog.callFunction();
                     }else{
                         Intent intent = new Intent(getApplicationContext(), PillRecommendActivity.class);
-                        intent.putExtra("age",String.valueOf(i.intValue()));
+                        intent.putExtra("age",age.getText());
+                        intent.putExtra("sum",sumS);
                         startActivity(intent);
                     }
                 }

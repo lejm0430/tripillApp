@@ -59,9 +59,12 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     TextView sos;
     TextView goPHbtn;
     TextView sym;
-    String age;
+    String ageS;
+    int age;
     String s1;
     String s2;
+    String sumS;
+    int sum;
     String pillname;
 
     public static Context mcontext;
@@ -94,19 +97,17 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         tts = new TextToSpeech(this, this);
 
-
-//        String hab = getIntent().getStringExtra("sum");
-//
-//        Integer sum = Integer.parseInt(hab);
-
-        age = getIntent().getStringExtra("age");
+        ageS = getIntent().getStringExtra("age");
         s1 = getIntent().getStringExtra("s1");
         s2 = getIntent().getStringExtra("s2");
-        pillname = getIntent().getStringExtra("name");
+        sumS = getIntent().getStringExtra("sum");
+        sum = Integer.parseInt(sumS);
+        age = Integer.parseInt(ageS);
 
-            pillphoto.setImageResource(R.drawable.buscopan);//수정사항
+        if(sum>=1 && sum <=3) {
+            pillphoto.setImageResource(R.drawable.penzal);
+        }
 
-        Integer i = Integer.parseInt(age);
 
         if(s2.isEmpty()){
             sym.setText(s1);
@@ -219,7 +220,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     public void intent() {
         String address ="서울 강남구 신사동 123-123";
-        age = getIntent().getStringExtra("age");
+        ageS = getIntent().getStringExtra("age");
         s1 = getIntent().getStringExtra("s1");
         s2= getIntent().getStringExtra("s2");
 

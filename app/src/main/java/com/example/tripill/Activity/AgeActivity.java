@@ -54,7 +54,7 @@ public class AgeActivity extends AppCompatActivity {
         String symptom2 = getIntent().getStringExtra("s2");
         String sum = getIntent().getStringExtra("sum");
 
-
+        Log.e("TEST", sum + "");
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,13 +102,17 @@ public class AgeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
 
+        if(symptom2 == null) {
+            String[] main_text = {part, symptom1};
+            adapter = new SymptomAdapter(main_text);
 
-        String[] main_text =  {part, symptom1, symptom2};
+            recyclerView.setAdapter(adapter);
+        }else{
+            String[] main_text = {part, symptom1, symptom2};
+            adapter = new SymptomAdapter(main_text);
 
-
-        adapter = new SymptomAdapter(main_text);
-
-        recyclerView.setAdapter(adapter);
+            recyclerView.setAdapter(adapter);
+        }
 
     }
 

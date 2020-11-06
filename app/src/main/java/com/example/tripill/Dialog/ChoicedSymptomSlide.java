@@ -83,18 +83,6 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
             list.add(new SymptomList("복통",50));
             list.add(new SymptomList("생리통",100));
 
-        }else if(title.contains("muscle pain")){
-            list.add(new SymptomList("근육통",20));
-
-        }else if(title.contains("wound")){
-            list.add(new SymptomList("상처",25));
-
-        }else if(title.contains("burn")){
-            list.add(new SymptomList("화상",60));
-
-        }else if(title.contains("hangover")){
-            list.add(new SymptomList("숙취",35));
-
         }
 
         symptomlist = new ArrayList<String>();

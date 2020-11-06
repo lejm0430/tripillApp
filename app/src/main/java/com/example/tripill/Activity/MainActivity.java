@@ -26,6 +26,7 @@ import com.example.tripill.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,29 +50,30 @@ public class MainActivity extends AppCompatActivity{
     private final int MY_PERMISSION_REQUEST_SMS = 1001;
     public static final String TAG = MainActivity.class.getName();
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private Realm realm;
+
     String name;
     int age;
-    TextView nonehistory;
+    //static 수정
+    public static TextView nonehistory;
 
     public static RecyclerView drawer_recycler;
 
+    public static ArrayList<PillList> pillList;
+
     public static Context mcontext;
+
 
     DrawerLayout mainDrawer;
     LinearLayout menuDrawer;
 
-    public static ArrayList<PillList> pillList;
-    PillHistoryAdapter adapter;
 
-    ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
+    public static PillHistoryAdapter historyadapter;
 
-    long now;
-    long nows;
-    Date date;
-    Date dates;
-    SimpleDateFormat format = new SimpleDateFormat("MM. dd. yyyy");
-    SimpleDateFormat formats = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+
+    public static ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,18 +115,25 @@ public class MainActivity extends AppCompatActivity{
         drawer_recycler = findViewById(R.id.drawer_recycler);
         nonehistory = findViewById(R.id.nonehistory);
 
-        pillList = new ArrayList<PillList>();
-
-        realm = Realm.getDefaultInstance();
-        basicCRUD(realm);
+        PillRecommendActivity.realm = Realm.getDefaultInstance();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
         drawer_recycler.setLayoutManager(linearLayoutManager);
 
-        adapter = new PillHistoryAdapter(pillList,this);
-        drawer_recycler.setAdapter(adapter);
+        pillList= new ArrayList<PillList>();
+        historyadapter = new PillHistoryAdapter(pillList,this);
+        drawer_recycler.setAdapter(historyadapter);
 
 
+        RealmResults<PillDB> result = PillRecommendActivity.realm.where(PillDB.class).findAll();
+        Log.d("TEST", String.valueOf(result));
+        for (PillDB pill : result) {
+            pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName()));
+            }
+
+        Intent intent = new Intent(getApplicationContext(), AgeActivity.class);
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,12 +197,10 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_musclePain = muscle_pain.getText().toString();
 
-                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
-
-                bottomSheet.title = s_musclePain;
-                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
-
-
+                intent.putExtra("part",s_musclePain);
+                intent.putExtra("s1","근육통");
+                intent.putExtra("sum","20");
+                startActivity(intent);
 
             }
         });
@@ -204,10 +211,10 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_burn = burn.getText().toString();
 
-                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
-
-                bottomSheet.title = s_burn;
-                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+                intent.putExtra("part",s_burn);
+                intent.putExtra("s1","화상");
+                intent.putExtra("sum","60");
+                startActivity(intent);
 
 
 
@@ -220,10 +227,10 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_wound = wound.getText().toString();
 
-                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
-
-                bottomSheet.title = s_wound;
-                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+                intent.putExtra("part",s_wound);
+                intent.putExtra("s1","상처");
+                intent.putExtra("sum","25");
+                startActivity(intent);
 
 
 
@@ -236,28 +243,20 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_beer = hangover.getText().toString();
 
-                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
-
-                bottomSheet.title = s_beer;
-                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+                intent.putExtra("part",s_beer);
+                intent.putExtra("s1","숙취");
+                intent.putExtra("sum","35");
+                startActivity(intent);
 
 
 
             }
         });
+
+
     }
 
-    private String getTime(){
-        now = System.currentTimeMillis();
-        date = new Date(now);
-        return format.format(date);
-    }
 
-    private String getTimes(){
-        nows = System.currentTimeMillis();
-        dates = new Date(nows);
-        return formats.format(dates);
-    }
 
 
 
@@ -282,34 +281,8 @@ public class MainActivity extends AppCompatActivity{
 
     protected void onDestroy(){
         super.onDestroy();
-        realm.close();
+        PillRecommendActivity.realm.close();
     }
 
 
-    private void basicCRUD(Realm realm){
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                PillDB pd = realm.createObject(PillDB.class,getTimes());
-                pd.setName("bb");
-                pd.setS1("두통");
-                pd.setS2("어지러움");
-                pd.setAge("6");
-                pd.setDate(getTime());
-                if(pd.getName().isEmpty()){
-                    drawer_recycler.setVisibility(View.GONE);
-                }else{
-                    RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
-
-                    for (PillDB pill : result) {
-                        pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName()));
-                    }
-//                    pillList.add(new PillList(pd.getS1(), pd.getS2(), String.valueOf(pd.getAge()), getTime(), pd.getName()));
-                    nonehistory.setVisibility(View.GONE);
-                }
-                }
-        });
-
-        final PillDB pd = realm.where(PillDB.class).findFirst();
-    }
 }

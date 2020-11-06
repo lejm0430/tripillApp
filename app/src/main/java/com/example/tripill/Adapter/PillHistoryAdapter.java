@@ -26,7 +26,6 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
     private LayoutInflater inflate;
 
 
-
     public PillHistoryAdapter(ArrayList<PillList> pilllist,Context context) {
         this.pilllist = pilllist;
         this.context = context;
@@ -80,6 +79,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
         public TextView symptom2;
         public TextView age;
         public TextView date;
+        public TextView coma;
         public TextView pillname;
         public LinearLayout linear;
 
@@ -92,6 +92,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
             date = v.findViewById(R.id.date);
             pillname = v.findViewById(R.id.pillname);
             linear = v.findViewById(R.id.layout);
+            coma = v.findViewById(R.id.coma);
 
         }
 

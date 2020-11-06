@@ -17,7 +17,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tripill.Adapter.PillHistoryAdapter;
+import com.example.tripill.Adapter.PillList;
 import com.example.tripill.Adapter.SymptomRecommendAdpater;
+import com.example.tripill.DataBase.PillDB;
 import com.example.tripill.Dialog.FullImagDialog;
 import com.example.tripill.Dialog.SosDialog;
 import com.example.tripill.R;
@@ -30,7 +33,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class PillRecommendActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
@@ -66,8 +75,20 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     String sumS;
     int sum;
     String pillname;
+    String name;
 
-    public static Context mcontext;
+    long now;
+    long nows;
+    Date date;
+    Date dates;
+    SimpleDateFormat format = new SimpleDateFormat("MM. dd. yyyy");
+    SimpleDateFormat formats = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+
+
+    public static Realm realm; //수정
+
+    public Context mcontext;
     private TextToSpeech tts;
 
     @Override
@@ -93,6 +114,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         sym = findViewById(R.id.symptom);
         speaker = findViewById(R.id.speaker);
 
+        mcontext = this;
+
         pillphoto.setClipToOutline(true);
 
         tts = new TextToSpeech(this, this);
@@ -101,9 +124,13 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         s1 = getIntent().getStringExtra("s1");
         s2 = getIntent().getStringExtra("s2");
         sumS = getIntent().getStringExtra("sum");
-        sum = Integer.parseInt(sumS);
+        name  = getIntent().getStringExtra("name");
+
         age = Integer.parseInt(ageS);
 
+        if(sumS != null){
+            sum = Integer.parseInt(sumS);
+        }
         if(sum>=1 && sum <=3) {
             pillphoto.setImageResource(R.drawable.penzal);
             pillname = "penzal";
@@ -117,7 +144,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         else if(sum == 7 && age < 12){
             pillphoto.setImageResource(R.drawable.minol);
             pillname = "minol";
-        }else if(sum ==8 || sum == 15){
+        }else if(sum ==8 || sum == 15) {
             pillphoto.setImageResource(R.drawable.mucoj);
             pillname = "mucoj";
         }else if(sum ==8 || sum == 15 && age < 15){
@@ -129,10 +156,10 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         }else if(sum == 25){
             pillphoto.setImageResource(R.drawable.whosidin);
             pillname = "whosidin";
-        }else if(sum == 35){
+        }else if(sum == 35 ){
             pillphoto.setImageResource(R.drawable.ru);
             pillname = "ru";
-        }else if(sum == 40 || sum == 90){
+        }else if(sum == 40 || sum == 90 ){
             pillphoto.setImageResource(R.drawable.sohwa);
             pillname = "sohwa";
         }else if(sum == 50){
@@ -146,7 +173,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             pillname = "easyn";
         }
 
-        if(s2 == null){
+        if(s2 == null || s2.isEmpty()){
             sym.setText(s1);
         }else {
             sym.setText(s1 + "/" + s2);
@@ -246,7 +273,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         recyclerView.setLayoutManager(layoutManager);
 
 
-        if(s2 == null){
+        if(s2 == null || s2.isEmpty()){
             String[] main_text =  {s1};
 
 
@@ -261,6 +288,19 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
             recyclerView.setAdapter(adapter);
         }
+
+        MainActivity.pillList = new ArrayList<PillList>();
+
+        realm = Realm.getDefaultInstance();
+        basicCRUD(realm);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        MainActivity.drawer_recycler.setLayoutManager(linearLayoutManager);
+
+        MainActivity.historyadapter = new PillHistoryAdapter(MainActivity.pillList,this);
+        MainActivity.drawer_recycler.setAdapter(MainActivity.historyadapter);
 
     }
 
@@ -317,5 +357,42 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             tts.shutdown();
         }
         super.onDestroy();
+
+    }
+
+    public String getTime(){
+        now = System.currentTimeMillis();
+        date = new Date(now);
+        return format.format(date);
+    }
+
+    public String getTimes(){
+        nows = System.currentTimeMillis();
+        dates = new Date(nows);
+        return formats.format(dates);
+    }
+
+    public void basicCRUD(Realm realm){
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                PillDB pd = realm.createObject(PillDB.class,getTimes());
+                pd.setName(pillname);
+                pd.setS1(s1);
+                pd.setS2(s2);
+                pd.setAge(ageS);
+                pd.setDate(getTime());
+                if(pd.getName() == null){
+                    MainActivity.drawer_recycler.setVisibility(View.GONE);
+                }else{
+                    RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
+
+                    for (PillDB pill : result) {
+                        MainActivity.pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName()));
+                    }
+                    MainActivity.nonehistory.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }

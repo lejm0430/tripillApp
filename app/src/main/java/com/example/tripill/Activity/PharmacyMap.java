@@ -84,12 +84,17 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
                     mlongitude=gpsTracker.getLongitude();
                     mlatitude = gpsTracker.getLatitude();
 
+                    CameraUpdate cameraUpdate = CameraUpdate.scrollAndZoomTo(
+                            new LatLng(mlatitude, mlongitude),15)
+                            .animate(CameraAnimation.Fly, 3000);
+
+                    mNaverMap.moveCamera(cameraUpdate);
 
                     Log.d("makerlongitude"," : " +mlatitude);
                     Log.d("makerlatitude"," : " +mlongitude);//위치 좌표
 
-                    Marker marker = new Marker();  //마커 생성
-//                    marker.setIcon(OverlayImage.fromResource(R.drawable.ic_my_marker));
+                   /* Marker marker = new Marker();  //마커 생성
+                    marker.setIcon(OverlayImage.fromResource(R.drawable.ic_my_marker));
 
                     marker.setWidth(Marker.SIZE_AUTO);  //마커 사이즈
                     marker.setHeight(Marker.SIZE_AUTO);
@@ -99,17 +104,10 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
                     marker.setPosition(new LatLng(mlatitude, mlongitude));
 
 
-                    marker.setMap(mNaverMap);  //마커 지도에 표시
+                    marker.setMap(mNaverMap);  //마커 지도에 표시*/
 
                 }
-                CameraUpdate cameraUpdate = CameraUpdate.scrollAndZoomTo(
-                        new LatLng(mlongitude, mlatitude),15)
-                        .animate(CameraAnimation.Fly, 1500);
 
-                mNaverMap.moveCamera(cameraUpdate);
-
-                Log.d("longitude"," : " +gpsTracker.getLongitude());
-                Log.d("latitude"," : " +gpsTracker.getLatitude());
             }
 
         });

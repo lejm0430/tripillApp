@@ -73,8 +73,6 @@ public class AgeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
-
                 InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 setResult(RESULT_OK);

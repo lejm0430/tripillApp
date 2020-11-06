@@ -24,6 +24,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
     private Context context;
     private RecyclerView recyclerView;
     private LayoutInflater inflate;
+    String s2;
 
 
     public PillHistoryAdapter(ArrayList<PillList> pilllist,Context context) {
@@ -49,15 +50,19 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
     public void onBindViewHolder(@NonNull MainHolder holder, int position) {
         final PillList pillList = pilllist.get(position);
         holder.onBind(pilllist.get(position));
+        s2 = holder.symptom2.getText().toString();
+        if(s2.isEmpty()){
+            holder.coma.setVisibility(View.GONE);
+        }
         holder.linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Context mcontext = v.getContext();
                 Intent intent = new Intent(v.getContext(), PillRecommendActivity.class);
-                intent.putExtra("s1",holder.symptom1.getText());
-                intent.putExtra("s2",holder.symptom2.getText());
-                intent.putExtra("age",holder.age.getText());
-                intent.putExtra("name",holder.pillname.getText());
+                intent.putExtra("s1",holder.symptom1.getText().toString());
+                intent.putExtra("s2",holder.symptom2.getText().toString());
+                intent.putExtra("age",holder.age.getText().toString());
+                intent.putExtra("name",holder.pillname.getText().toString());
                 context.startActivity(intent);
 
             }
@@ -82,6 +87,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
         public TextView coma;
         public TextView pillname;
         public LinearLayout linear;
+        String sum;
 
         public MainHolder(View v){
             super(v);

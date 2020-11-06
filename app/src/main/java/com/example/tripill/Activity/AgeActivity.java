@@ -33,6 +33,8 @@ public class AgeActivity extends AppCompatActivity {
 
     public Context mcontext;
 
+    String name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,6 @@ public class AgeActivity extends AppCompatActivity {
         int sum = Integer.parseInt(sumS);
 
 
-        Log.e("TEST", sumS);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,11 +88,40 @@ public class AgeActivity extends AppCompatActivity {
                         AgeDialog dialog = new AgeDialog(AgeActivity.this);
                         dialog.callFunction();
                     }else{
+                        if(sum>=1 && sum <=3) {
+                            name = "penzal";
+                        }else if(sum>=4 && sum<=6){
+                            name = "tylenol";
+                        }else if(sum ==7){
+                            name = "strepsil";
+                        }
+                        else if(sum == 7 && i < 12){
+                            name = "minol";
+                        }else if(sum ==8 || sum == 15) {
+                            name = "mucoj";
+                        }else if(sum ==8 || sum == 15 && i < 15){
+                            name = "mucos";
+                        }else if(sum == 20 ){
+                            name = "lirexpen";
+                        }else if(sum == 25){
+                            name = "whosidin";
+                        }else if(sum == 35){
+                            name = "ru";
+                        }else if(sum == 40 || sum == 90){
+                            name = "sohwa";
+                        }else if(sum == 50){
+                            name = "buscopan";
+                        }else if(sum == 60){
+                            name = "mibo";
+                        }else if(sum >= 100){
+                            name = "easyn";
+                        }
                         Intent intent = new Intent(getApplicationContext(), PillRecommendActivity.class);
                         intent.putExtra("age",age.getText().toString());
                         intent.putExtra("sum",sumS);
                         intent.putExtra("s1",symptom1);
                         intent.putExtra("s2",symptom2);
+                        intent.putExtra("name",name);
                         startActivity(intent);
                     }
                 }

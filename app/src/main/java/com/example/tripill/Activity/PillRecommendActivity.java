@@ -86,9 +86,9 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
 
 
-    public static Realm realm;
+    public static Realm realm; //--
 
-    public static Context prcontext;
+    public static Context prcontext; //--
     private TextToSpeech tts;
 
 //    private static PillRecommendActivity instance = new PillRecommendActivity();
@@ -134,47 +134,50 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         if(sumS != null){
             sum = Integer.parseInt(sumS);
         }
-        if(sum>=1 && sum <=3) {
+
+        if(sum>=1 && sum <=3 || name.equals("penzal")) {
             pillphoto.setImageResource(R.drawable.penzal);
             pillname = "penzal";
-        }else if(sum>=4 && sum<=6){
+        }else if(sum>=4 && sum<=6 || name.equals("tylenol")){
             pillphoto.setImageResource(R.drawable.tylenol);
             pillname = "tylenol";
-        }else if(sum ==7){
+        }else if(sum ==7 || name.equals("strepsil")){
             pillphoto.setImageResource(R.drawable.strepsil);
             pillname = "strepsil";
         }
-        else if(sum == 7 && age < 12){
+        else if(sum == 7 && age < 12 || name.equals("minol")){
             pillphoto.setImageResource(R.drawable.minol);
             pillname = "minol";
-        }else if(sum ==8 || sum == 15) {
+        }else if(sum ==8 || sum == 15 || name.equals("mucoj")) {
             pillphoto.setImageResource(R.drawable.mucoj);
             pillname = "mucoj";
-        }else if(sum ==8 || sum == 15 && age < 15){
+        }else if(sum ==8 || sum == 15 && age < 15 || name.equals("mucos")){
             pillphoto.setImageResource(R.drawable.mucos);
             pillname = "mucos";
-        }else if(sum == 20){
+        }else if(sum == 20 || name.equals("lirexpen")){
             pillphoto.setImageResource(R.drawable.lirexpen);
             pillname = "lirexpen";
-        }else if(sum == 25){
+        }else if(sum == 25 || name.equals("whosidin")){
             pillphoto.setImageResource(R.drawable.whosidin);
             pillname = "whosidin";
-        }else if(sum == 35 ){
+        }else if(sum == 35 ||  name.equals("ru")){
             pillphoto.setImageResource(R.drawable.ru);
             pillname = "ru";
-        }else if(sum == 40 || sum == 90 ){
+        }else if(sum == 40 || sum == 90 || name.equals("sohwa")){
             pillphoto.setImageResource(R.drawable.sohwa);
             pillname = "sohwa";
-        }else if(sum == 50){
+        }else if(sum == 50 || name.equals("buscopan")){
             pillphoto.setImageResource(R.drawable.buscopan);
             pillname = "buscopan";
-        }else if(sum == 60){
+        }else if(sum == 60 || name.equals("mibo")){
             pillphoto.setImageResource(R.drawable.mibo);
             pillname = "mibo";
-        }else if(sum >= 100){
+        }else if(sum >= 100 || name.equals("easyn")){
             pillphoto.setImageResource(R.drawable.easyn);
             pillname = "easyn";
         }
+
+        name = null;
 
         if(s2 == null || s2.isEmpty()){
             sym.setText(s1);

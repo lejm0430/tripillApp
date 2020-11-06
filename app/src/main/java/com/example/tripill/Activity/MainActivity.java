@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity{
 
     PillHistoryAdapter historyadapter;
 
-    public static ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
+    public ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
 
     private Realm realm;
 

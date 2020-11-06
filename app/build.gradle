@@ -48,4 +48,5 @@ dependencies {
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
     implementation 'com.naver.maps:map-sdk:3.10.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 }

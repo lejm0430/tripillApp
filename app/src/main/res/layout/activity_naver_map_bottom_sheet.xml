@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".Dialog.NaverMapBottomSheet"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bottomsheet_background_white_r24">
 
     <TextView
         android:id="@+id/pharmacyName_kr"

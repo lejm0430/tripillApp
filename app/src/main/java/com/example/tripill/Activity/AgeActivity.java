@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.tripill.Adapter.SymptomAdapter;
 import com.example.tripill.Dialog.AgeDialog;
+import com.example.tripill.Dialog.ChoicedSymptomSlide;
 import com.example.tripill.R;
 
 import androidx.annotation.RequiresApi;
@@ -64,16 +65,21 @@ public class AgeActivity extends AppCompatActivity {
                 InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 finish();
+
             }
         });
 
         xbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
+
                 InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 setResult(RESULT_OK);
                 finish();
+                bottomSheet.dismiss();
             }
         });
 

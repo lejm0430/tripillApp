@@ -132,6 +132,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         name  = getIntent().getStringExtra("name");
 
         age = Integer.parseInt(ageS);
+        sum = Integer.parseInt(sumS);
+        //age = Integer.parseInt(ageS);
 
         if(sumS != null){
             sum = Integer.parseInt(sumS);

@@ -7,13 +7,13 @@
     tools:context=".Dialog.ChoicedSymptomSlide"
     android:orientation="vertical"
     android:id="@+id/bottom_sheet"
-    android:background="@drawable/symptomchoice_background_white_r24"
+    android:background="@drawable/bottomsheet_background_white_r24"
     style="@style/CustomBottomSheetDialogTheme">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/symptomchoice_background_white_r24">
+        android:background="@drawable/bottomsheet_background_white_r24">
 
         <ImageView
             android:id="@+id/backbtn"

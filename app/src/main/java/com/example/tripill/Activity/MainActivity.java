@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity{
 
                 bottomSheet.title = s_head;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+
             }
         });
 

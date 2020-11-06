@@ -79,7 +79,6 @@ public class AgeActivity extends AppCompatActivity {
                 immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 setResult(RESULT_OK);
                 finish();
-                bottomSheet.dismiss();
             }
         });
 

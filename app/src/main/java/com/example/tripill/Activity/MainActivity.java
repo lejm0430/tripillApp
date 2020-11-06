@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity{
     LinearLayout menuDrawer;
 
     //static 수정
-    TextView nonehistory;
+    public TextView nonehistory;
 
     RecyclerView drawer_recycler;
 
@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity{
 
     protected void onDestroy(){
         super.onDestroy();
-        PillRecommendActivity.realm.close();
+        realm.close();
     }
 
 

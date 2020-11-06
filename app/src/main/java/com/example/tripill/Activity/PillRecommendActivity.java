@@ -86,10 +86,12 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
 
 
-    public static Realm realm; //--
+    private Realm realm;
 
     public static Context prcontext; //--
     private TextToSpeech tts;
+
+    public MainActivity mainActivity = new MainActivity();
 
 //    private static PillRecommendActivity instance = new PillRecommendActivity();
 //    public static PillRecommendActivity getInstance(){return instance;}
@@ -294,6 +296,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
             recyclerView.setAdapter(adapter);
         }
+        ///////list
 
         ((MainActivity)MainActivity.mcontext).pillList = new ArrayList<PillList>();
 

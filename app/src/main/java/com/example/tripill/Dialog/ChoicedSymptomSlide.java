@@ -1,5 +1,6 @@
 package com.example.tripill.Dialog;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
@@ -32,13 +34,21 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
     public String title;
 
+    private static final int REQUEST_CODE = 1001;
+
     ChoicedSymptomSlide choicedSymptomSlide;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        title = data.getStringExtra("ChoicedSymptomSlide");
+
+        if(requestCode == REQUEST_CODE){
+            if(resultCode != Activity.RESULT_OK){
+                return;
+            }
+            dismiss();
+        }
     }
 
     @Override
@@ -106,14 +116,14 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
                 } else if(adapter.getSelected_list().size() == 1){
                         intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());
                         intent.putExtra("sum",Integer.toString(adapter.getSelected_list().get(0).getScore()));
-                        getContext().startActivity(intent);
+                    startActivityForResult(intent,REQUEST_CODE);
 
                 } else {
                     intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());
                     intent.putExtra("s2",adapter.getSelected_list().get(1).getSymptom());  // TODO: 2020-11-04 증상 글자
                     intent.putExtra("sum", Integer.toString(sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore())));
                     Log.d("TAG","sum"+ sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore()));
-                    getContext().startActivity(intent);
+                    startActivityForResult(intent,REQUEST_CODE);
                 }
 
 
@@ -134,8 +144,5 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
     public int sum(int s1, int s2) {
         return s1+s2;
     }
-
-
-
 }
 

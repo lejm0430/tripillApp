@@ -49,29 +49,27 @@ public class MainActivity extends AppCompatActivity{
     private long backPressedTime = 0;
     private final int MY_PERMISSION_REQUEST_SMS = 1001;
     public static final String TAG = MainActivity.class.getName();
-    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
 
     String name;
     int age;
-    //static 수정
-    public static TextView nonehistory;
-
-    public static RecyclerView drawer_recycler;
-
-    public static ArrayList<PillList> pillList;
-
-    public static Context mcontext;
-
 
     DrawerLayout mainDrawer;
     LinearLayout menuDrawer;
 
+    //static 수정
+    TextView nonehistory;
 
-    public static PillHistoryAdapter historyadapter;
+    RecyclerView drawer_recycler;
 
+    ArrayList<PillList> pillList;
 
+    public static Context mcontext;
+
+    PillHistoryAdapter historyadapter;
 
     public static ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
+
+    private Realm realm;
 
 
 
@@ -80,6 +78,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mcontext = this;
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
@@ -115,7 +114,7 @@ public class MainActivity extends AppCompatActivity{
         drawer_recycler = findViewById(R.id.drawer_recycler);
         nonehistory = findViewById(R.id.nonehistory);
 
-        PillRecommendActivity.realm = Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
@@ -127,10 +126,13 @@ public class MainActivity extends AppCompatActivity{
         drawer_recycler.setAdapter(historyadapter);
 
 
-        RealmResults<PillDB> result = PillRecommendActivity.realm.where(PillDB.class).findAll();
+        RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
         Log.d("TEST", String.valueOf(result));
         for (PillDB pill : result) {
             pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName()));
+            if(pill.getName() != null){
+                nonehistory.setVisibility(View.GONE);
+            }
             }
 
         Intent intent = new Intent(getApplicationContext(), AgeActivity.class);
@@ -153,9 +155,6 @@ public class MainActivity extends AppCompatActivity{
 
                 bottomSheet.title = s_head;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
-
-
-
             }
         });
 

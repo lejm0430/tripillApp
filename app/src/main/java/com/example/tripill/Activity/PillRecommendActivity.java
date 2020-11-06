@@ -86,10 +86,13 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
 
 
-    public static Realm realm; //수정
+    public static Realm realm;
 
-    public Context mcontext;
+    public static Context prcontext;
     private TextToSpeech tts;
+
+//    private static PillRecommendActivity instance = new PillRecommendActivity();
+//    public static PillRecommendActivity getInstance(){return instance;}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +117,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         sym = findViewById(R.id.symptom);
         speaker = findViewById(R.id.speaker);
 
-        mcontext = this;
+        prcontext = this;
 
         pillphoto.setClipToOutline(true);
 
@@ -289,7 +292,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             recyclerView.setAdapter(adapter);
         }
 
-        MainActivity.pillList = new ArrayList<PillList>();
+        ((MainActivity)MainActivity.mcontext).pillList = new ArrayList<PillList>();
 
         realm = Realm.getDefaultInstance();
         basicCRUD(realm);
@@ -297,10 +300,10 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
-        MainActivity.drawer_recycler.setLayoutManager(linearLayoutManager);
+        ((MainActivity)MainActivity.mcontext).drawer_recycler.setLayoutManager(linearLayoutManager);
 
-        MainActivity.historyadapter = new PillHistoryAdapter(MainActivity.pillList,this);
-        MainActivity.drawer_recycler.setAdapter(MainActivity.historyadapter);
+        ((MainActivity)MainActivity.mcontext).historyadapter = new PillHistoryAdapter(((MainActivity)MainActivity.mcontext).pillList,this);
+        ((MainActivity)MainActivity.mcontext).drawer_recycler.setAdapter(((MainActivity)MainActivity.mcontext).historyadapter);
 
     }
 
@@ -383,14 +386,14 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 pd.setAge(ageS);
                 pd.setDate(getTime());
                 if(pd.getName() == null){
-                    MainActivity.drawer_recycler.setVisibility(View.GONE);
+                    ((MainActivity)MainActivity.mcontext).drawer_recycler.setVisibility(View.GONE);
                 }else{
                     RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
 
                     for (PillDB pill : result) {
-                        MainActivity.pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName()));
+                        ((MainActivity)MainActivity.mcontext).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName()));
                     }
-                    MainActivity.nonehistory.setVisibility(View.GONE);
+                    ((MainActivity)MainActivity.mcontext).nonehistory.setVisibility(View.GONE);
                 }
             }
         });

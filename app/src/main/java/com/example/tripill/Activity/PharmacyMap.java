@@ -41,9 +41,15 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
                         && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){  //권환 획득 여부
 
 
+<<<<<<< HEAD
                     setDefaultLocation();
 
                     //showPlaceInformation();
+=======
+                    CameraUpdate cameraUpdate = CameraUpdate.scrollAndZoomTo(
+                            new LatLng(mlatitude, mlongitude),30)
+                            .animate(CameraAnimation.Fly, 3000);
+>>>>>>> origin/master
 
 
                     Log.d("makerlongitude"," : " +mlatitude);

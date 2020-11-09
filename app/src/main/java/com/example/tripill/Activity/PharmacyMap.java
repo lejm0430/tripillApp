@@ -85,7 +85,7 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
                     mlatitude = gpsTracker.getLatitude();
 
                     CameraUpdate cameraUpdate = CameraUpdate.scrollAndZoomTo(
-                            new LatLng(mlatitude, mlongitude),15)
+                            new LatLng(mlatitude, mlongitude),30)
                             .animate(CameraAnimation.Fly, 3000);
 
                     mNaverMap.moveCamera(cameraUpdate);

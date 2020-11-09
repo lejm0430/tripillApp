@@ -1,0 +1,26 @@
+
+¤
+java:S1186­"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ûà§èıÿÿÿÿ8á®Ú½Ú.
+P
+java:S1068!".Remove this unused "PERMISSION" private field.(ååèåÿÿÿÿÿ8¬ê»Ú.
+M
+java:S1481¤"*Remove this unused "place" local variable.(ã¹‘şıÿÿÿÿ8á®Ú½Ú.
+K	java:S108¤")Either remove or fill this block of code.(ã¹‘şıÿÿÿÿ8ÊÓë½Ú.
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(°Ê€úøÿÿÿÿ
+Y
+java:S2589j"7Remove this expression which always evaluates to "true"(¸¾æÿÿÿÿÿ8ç÷µ¾Ú.
+E
+java:S1604W"(Make this anonymous inner class a lambda(÷—ˆª8á®Ú½Ú.
+W	java:S110"<This class has 9 parents which is greater than 5 authorized.(âÔ×8¦”ÆæÙ.
+Ÿ
+java:S1186–"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(í ’–8á®Ú½Ú.
+K
+java:S1604¡"(Make this anonymous inner class a lambda(˜ã¯şÿÿÿÿ8á®Ú½Ú.
+J
+java:S1604="(Make this anonymous inner class a lambda(áçñúÿÿÿÿ8¹Ã¼Ú.
+X
+java:S1068 ";Remove this unused "PERMISSION_REQUEST_CODE" private field.(çŠ“8¬ê»Ú.
+g
+java:S1128"ERemove this unused import 'com.google.android.gms.maps.model.Marker'.(ƒï¢Áüÿÿÿÿ8ëÆê½Ú.
+Ÿ
+java:S1186›"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÜäÎ8á®Ú½Ú.

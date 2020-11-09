@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Activity.PharmacyMap"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:id="@+id/layout_main">
 
     <RelativeLayout
         android:id="@+id/head"
@@ -41,7 +42,7 @@
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.naver.maps.map.MapFragment"/>
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
 
 
         <ImageView
@@ -54,6 +55,16 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/white_rec_r8_map_gps"
             android:src="@drawable/ic_gps" />
+
+        <Button
+            android:text="약국찾기"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/white_rec_r8_map_gps"
+            android:id="@+id/button"/>
 
     </RelativeLayout>
 

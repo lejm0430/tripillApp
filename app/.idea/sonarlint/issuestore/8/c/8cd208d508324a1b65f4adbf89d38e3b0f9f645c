@@ -1,0 +1,68 @@
+
+Q
+java:S1161í":Add the "@Override" annotation above this method signature(ÍÙ÷¢
+q
+java:S1450Y"TRemove the "realm" field and declare it as a local variable in the relevant methods.(•¢¦Ï8¥›ÌåÙ.
+K
+java:S1604È"(Make this anonymous inner class a lambda(¨‹©øÿÿÿÿ8¥›ÌåÙ.
+s	java:S117Ÿ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ì¶âÚûÿÿÿÿ8¥›ÌåÙ.
+F
+java:S1604ö"(Make this anonymous inner class a lambda(°”ˆ¢8¥›ÌåÙ.
+X
+java:S2696z"6Make the enclosing method "static" or remove this set.(…£ƒşÿÿÿÿ8¥›ÌåÙ.
+K
+java:S1604æ"(Make this anonymous inner class a lambda(À‰Ö€üÿÿÿÿ8¥›ÌåÙ.
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(°Ê€úøÿÿÿÿ
+K
+java:S1604Ğ"(Make this anonymous inner class a lambda(ÌûªÚûÿÿÿÿ8¥›ÌåÙ.
+N
+java:S1128"9Remove this unused import 'android.telephony.SmsManager'.(ü÷ÈI
+H
+java:S1128"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ
+X
+java:S1854é"<Remove this useless assignment to local variable "language".(›˜ê‘ùÿÿÿÿ
+u
+java:S1104^"XMake mainActivity a static final constant or non-public and provide accessors if needed.(“ÓÖá8¥›ÌåÙ.
+K
+java:S1604"(Make this anonymous inner class a lambda(ëèıûşÿÿÿÿ8¥›ÌåÙ.
+K
+java:S1604À"(Make this anonymous inner class a lambda(Üš¢ûÿÿÿÿ8¥›ÌåÙ.
+9
+java:S1128"Remove this duplicated import.(ôœ¹ºıÿÿÿÿ
+F
+java:S1604†"(Make this anonymous inner class a lambda(ÑÂóˆ8¥›ÌåÙ.
+t
+java:S3776d"RRefactor this method to reduce its Cognitive Complexity from 60 to the 15 allowed.(¨Œşÿÿÿÿ8¥›ÌåÙ.
+4
+java:S1128"Remove this duplicated import.(€¶£î
+D
+java:S1874ã"-Remove this use of "speak"; it is deprecated.(ùü™¶
+R
+java:S1066ï"/Merge this if statement with the enclosing one.(Î¬Ì®ùÿÿÿÿ8¥›ÌåÙ.
+K
+java:S1604ş"(Make this anonymous inner class a lambda(Çå£áıÿÿÿÿ8¥›ÌåÙ.
+a
+java:S1128"FRemove this unused import 'androidx.core.content.res.ResourcesCompat'.(ß‚£µıÿÿÿÿ
+I
+java:S1481é"-Remove this unused "language" local variable.(›˜ê‘ùÿÿÿÿ
+r
+java:S1104["UMake prcontext a static final constant or non-public and provide accessors if needed.( ÉÜ8¥›ÌåÙ.
+O
+java:S1117à"8Rename "text" which hides the field declared at line 67.(ï¸Ï
+R
+java:S1066ß"/Merge this if statement with the enclosing one.(şšõàøÿÿÿÿ8¥›ÌåÙ.
+D
+java:S1604ƒ"(Make this anonymous inner class a lambda(ÔßÃºşÿÿÿÿ
+K
+java:S1604×"(Make this anonymous inner class a lambda(Ù“ä‘ùÿÿÿÿ8¥›ÌåÙ.
+n	java:S117¦"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ò¦Å8¥›ÌåÙ.
+9
+java:S1128 "Remove this duplicated import.(Îèòçøÿÿÿÿ
+H
+java:S1128""-Remove this unused import 'org.w3c.dom.Text'.(¶Äè‹şÿÿÿÿ
+L
+java:S1128"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ
+V	java:S110,"<This class has 9 parents which is greater than 5 authorized.(ÿ¡ÿËùÿÿÿÿ
+d	java:S100ß"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆÁÜ¡
+L
+java:S1444["/Make this "public static prcontext" field final( ÉÜ8¥›ÌåÙ.

@@ -1,74 +1,36 @@
 package com.example.tripill.Activity;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
-import com.example.tripill.R;
-import com.naver.maps.geometry.LatLng;
-import com.naver.maps.map.CameraAnimation;
-import com.naver.maps.map.CameraPosition;
-import com.naver.maps.map.CameraUpdate;
-import com.naver.maps.map.LocationTrackingMode;
-import com.naver.maps.map.MapFragment;
-import com.naver.maps.map.NaverMap;
-import com.naver.maps.map.OnMapReadyCallback;
-import com.naver.maps.map.UiSettings;
-import com.naver.maps.map.overlay.Marker;
-import com.naver.maps.map.overlay.OverlayImage;
-import com.naver.maps.map.util.FusedLocationSource;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback {
+/*
+public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback, PlacesListener {
+
+    List<Marker> previous_marker = null;
 
     private static final int PERMISSION_REQUEST_CODE=100;  //권환 허용 코드
     private static final String[] PERMISSION={
             Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
     };
 
-    private FusedLocationSource LocationSource;
-    private NaverMap mNaverMap;
+    private GoogleMap mgoogleMap;
     private GpsTracker gpsTracker;
 
     double mlatitude;
     double mlongitude;
-//    locationListener locationListener1 = new locationListener();
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pharmacy_map);
-
         ImageView gpsBtn=findViewById(R.id.gpsBtn);
         RelativeLayout head=findViewById(R.id.head);
 
-        FragmentManager fm=getSupportFragmentManager();
-        MapFragment mapFragment=(MapFragment) fm.findFragmentById(R.id.map);
 
-        if (mapFragment == null) {
-            mapFragment=MapFragment.newInstance();
-            fm.beginTransaction().add(R.id.map, mapFragment).commit();
-        }
+        SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        supportMapFragment.getMapAsync(this);
 
-        mapFragment.getMapAsync(this);
-
-        LocationSource=new FusedLocationSource(this, PERMISSION_REQUEST_CODE);   //위치를 받아오는 구현체
 
         gpsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,34 +39,15 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
 
                 if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                         && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){  //권환 획득 여부
-                /*if(ActivityCompat.shouldShowRequestPermissionRationale(PharmacyMap.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                    ActivityCompat.requestPermissions(PharmacyMap.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
 
-                }*/
-                    mlongitude=gpsTracker.getLongitude();
-                    mlatitude = gpsTracker.getLatitude();
 
-                    CameraUpdate cameraUpdate = CameraUpdate.scrollAndZoomTo(
-                            new LatLng(mlatitude, mlongitude),15)
-                            .animate(CameraAnimation.Fly, 3000);
+                    setDefaultLocation();
 
-                    mNaverMap.moveCamera(cameraUpdate);
+                    //showPlaceInformation();
+
 
                     Log.d("makerlongitude"," : " +mlatitude);
                     Log.d("makerlatitude"," : " +mlongitude);//위치 좌표
-
-                   /* Marker marker = new Marker();  //마커 생성
-                    marker.setIcon(OverlayImage.fromResource(R.drawable.ic_my_marker));
-
-                    marker.setWidth(Marker.SIZE_AUTO);  //마커 사이즈
-                    marker.setHeight(Marker.SIZE_AUTO);
-                    marker.setFlat(false);
-                    marker.setIconPerspectiveEnabled(false);
-
-                    marker.setPosition(new LatLng(mlatitude, mlongitude));
-
-
-                    marker.setMap(mNaverMap);  //마커 지도에 표시*/
 
                 }
 
@@ -113,15 +56,9 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
         });
 
 
-
-
-
-                
         head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(PharmacyMap.this, PillRecommendActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
@@ -129,173 +66,643 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-    public void onProviderEnabled(String provider) {  //O
+    public void setDefaultLocation() {
+
+        mlongitude=gpsTracker.getLongitude();
+        mlatitude = gpsTracker.getLatitude();
+
+        LatLng latLng = new LatLng(mlatitude,mlongitude);
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.draggable(true);
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_my_marker));
+        mgoogleMap.addMarker(markerOptions);
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
+        mgoogleMap.moveCamera(cameraUpdate);
 
     }
 
-    public void onProviderDisabled(String provider) { //X
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        mgoogleMap = googleMap;
+
+
+
+
+    }
+
+
+    @Override
+    public void onPlacesFailure(PlacesException e) {
 
     }
-    
-    
-    
-    
-    
-    
 
-    /*public void getCurrentLocation() {
+    @Override
+    public void onPlacesStart() {
 
-        final LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    }
+
+    @Override
+    public void onPlacesSuccess(final List<Place> places) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mgoogleMap.clear();//지도 클리어
 
 
+                for (noman.googleplaces.Place place : places) {
 
-        if ( ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED )
-        {
-            ActivityCompat.requestPermissions( PharmacyMap.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
-                    PERMISSION_REQUEST_CODE );  //권한 안되어있으면 해라
-        }
-        else{
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);   //가장 최근에 받은 위치 -> 리스너 한번 실행 후(안하면 널값)
-            if(location != null){
-//                String provider = location.getProvider();
-                double longitude = location.getLongitude();
-                double latitude = location.getLatitude();
+                    LatLng latLng = new LatLng(place.getLatitude(), place.getLongitude());
 
-                *//*Log.d("longitude"," : " +location.getLongitude());
-                Log.d("latitude"," : " +location.getLatitude());*//*
+
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(latLng);
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
+                    Marker item = mgoogleMap.addMarker(markerOptions);
+                    previous_marker.add(item);
+
+                }
+
+                //중복 마커 제거
+                HashSet<Marker> hashSet = new HashSet<Marker>();
+                hashSet.addAll(previous_marker);
+                previous_marker.clear();
+                previous_marker.addAll(hashSet);
 
             }
+        });
+    }
 
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    500,
-                    1,
-                    locationListener1);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                    500,
-                    1,
-                    locationListener1);
+    @Override
+    public void onPlacesFinished() {
+
+    }
+
+    public void showPlaceInformation(LatLng location)
+    {
+        mgoogleMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(PharmacyMap.this)
+                .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(1000) //500 미터 내에서 검색
+                .type(PlaceType.PHARMACY) //음식점
+                .build()
+                .execute();
+    }
+
+
+}
+*/
+
+
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.os.Looper;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.tripill.Activity.GpsTracker;
+import com.example.tripill.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import noman.googleplaces.NRPlaces;
+import noman.googleplaces.Place;
+import noman.googleplaces.PlaceType;
+import noman.googleplaces.PlacesException;
+import noman.googleplaces.PlacesListener;
+
+public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener {
+    private GoogleMap mMap;
+    private Marker currentMarker = null;
+
+    List<Marker> previous_marker = null;
+    private GpsTracker gpsTracker;
+
+    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
+    private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
+
+
+    // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별
+    private static final int PERMISSIONS_REQUEST_CODE = 100;
+    boolean needRequest = false;
+
+    String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
+
+
+    Location mCurrentLocatiion;
+    LatLng currentPosition;
+
+
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationRequest locationRequest;
+    private Location location;
+
+
+    private View mLayout;  // Snackbar 사용하기 위해서는 View
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        setContentView(R.layout.activity_pharmacy_map);
+
+        mLayout = findViewById(R.id.layout_main);
+
+        locationRequest = new LocationRequest()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(UPDATE_INTERVAL_MS)
+                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
+
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+
+        builder.addLocationRequest(locationRequest);
+
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        Button button = (Button)findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPlaceInformation(currentPosition);
+            }
+        });
+
+    }
+    @Override
+    public void onMapReady(final GoogleMap googleMap) {
+
+        mMap = googleMap;
+
+        //지도의 초기위치
+//        setDefaultLocation();
+        //       showPlaceInformation(currentPosition);
+
+        int hasFineLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+
+
+        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) { //퍼미션 허용 O
+
+            startLocationUpdates(); // 위치 업데이트 시작
+
+        }else {  //퍼미션 허용
+
+            // 사용자가 퍼미션 거부를 한 적이 있는 경우에는
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
+                //스낵바 설명
+                Snackbar.make(mLayout, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.",
+                        Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // 퍼미션 허용됨. 요청 결과는 onRequestPermissionResult에서 수신
+                        ActivityCompat.requestPermissions( PharmacyMap.this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
+                    }
+                }).show();
+            } else {
+                // 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로
+                // 요청 결과는 onRequestPermissionResult에서 수신
+                ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
+            }
+
         }
 
 
+
+        mMap.getUiSettings().setMyLocationButtonEnabled(true); //gps버튼
+
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+            }
+        });
     }
-    
-    
-    
-    
-    
-    
-    
 
-    private class locationListener implements LocationListener {
-
+    LocationCallback locationCallback = new LocationCallback() {
         @Override
-        public void onLocationChanged(@NonNull Location location) {
+        public void onLocationResult(LocationResult locationResult) {
+            super.onLocationResult(locationResult);
+
+            List<Location> locationList = locationResult.getLocations();
+
+            if (locationList.size() > 0) {
+                location = locationList.get(locationList.size() - 1);
+                //location = locationList.get(0);
+
+                currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
 
 
-            Marker marker = new Marker();  //마커 생성
-            marker.setIcon(OverlayImage.fromResource(R.drawable.ic_my_marker));
+                String markerTitle = getCurrentAddress(currentPosition);
+                String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
+                        + " 경도:" + String.valueOf(location.getLongitude());
 
-            marker.setWidth(Marker.SIZE_AUTO);  //마커 사이즈
-            marker.setHeight(Marker.SIZE_AUTO);
 
-                    marker.setMap(mNaverMap);  //마커 지도에 표시
-            if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){  //권환 획득 여부
-                *//*if(ActivityCompat.shouldShowRequestPermissionRationale(PharmacyMap.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                    ActivityCompat.requestPermissions(PharmacyMap.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
+                //현재 위치에 마커 생성하고 이동
+                setCurrentLocation(location, markerTitle, markerSnippet);
 
-                }*//*
-                double longitude=location.getLongitude();
-                double latitude=location.getLatitude();
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+                mCurrentLocatiion = location;
+            }
 
-                marker.setPosition(new LatLng(latitude, longitude));   //위치 좌표
 
-                Log.d("longitude"," : " +location.getLongitude());
-                Log.d("latitude"," : " +location.getLatitude());
+        }
+
+    };
 
 
 
-            }else {
+    private void startLocationUpdates() {
+
+        if (!checkLocationServicesStatus()) {
+
+        }else {
+
+            int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION);
+            int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION);
+
+
+
+            if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED ||
+                    hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED   ) {
+
+                return;
             }
 
 
 
-        }
+            mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-        }
-
-        public void onProviderEnabled(String provider) {
+            if (checkPermission())
+                mMap.setMyLocationEnabled(true);
 
         }
 
-        public void onProviderDisabled(String provider) {
+    }
 
+
+/*
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (checkPermission()) {
+
+            mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+
+            if (mMap!=null)
+                mMap.setMyLocationEnabled(true);
+
+        }
+
+
+    }
+*/
+
+
+/*
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+
+        if (mFusedLocationClient != null) {
+
+            mFusedLocationClient.removeLocationUpdates(locationCallback);
         }
     }
 */
 
-    
 
-    @Override
-    public void onMapReady(@NonNull NaverMap naverMap) {
+    /************************************************************************************************************/
 
-        mNaverMap = naverMap;
-        mNaverMap.setLocationSource(LocationSource);
-        mNaverMap.setMaxZoom(18.0);  //최대
+    public String getCurrentAddress(LatLng latlng) {
 
+        //지오코더... GPS를 주소로 변환
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
-        ActivityCompat.requestPermissions(this,PERMISSION,PERMISSION_REQUEST_CODE);  // 권한확인. 결과는 onRequestPermissionsResult 콜백 매서드 호출
+        List<Address> addresses;
 
-        /*Marker marker = new Marker();  //마커 생성
-        marker.setIcon(OverlayImage.fromResource(R.drawable.ic_my_marker));
+        try {
+            addresses = geocoder.getFromLocation(
+                    latlng.latitude,
+                    latlng.longitude,
+                    1);
+        } catch (IOException ioException) {
+            //네트워크 문제
+            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
+            return "지오코더 서비스 사용불가";
+        } catch (IllegalArgumentException illegalArgumentException) {
+            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
+            return "잘못된 GPS 좌표";
 
-        marker.setWidth(Marker.SIZE_AUTO);  //마커 사이즈
-        marker.setHeight(Marker.SIZE_AUTO);
-
-        marker.setPosition(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)));   //위치 좌표
-          //마커 지도에 표시*/
-
-        UiSettings uiSettings = mNaverMap.getUiSettings();
-        uiSettings.setCompassEnabled(false); // 기본값 : true
-        uiSettings.setScaleBarEnabled(false); // 기본값 : true
-        uiSettings.setZoomControlEnabled(false); // 기본값 : true
-        uiSettings.setLogoClickEnabled(false);
-    }
-
-
-
-
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        ///권환 획득 여부 확인
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-
-        /*if(requestCode == PERMISSION_REQUEST_CODE){
-            if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){  //권환 획득 여부
-
-            }else{
-
-            }
-
-        }*/
-
-
-        if (LocationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
-        mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-            return;
         }
 
 
+        if (addresses == null || addresses.size() == 0) {
+            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+            return "주소 미발견";
 
-
-
+        } else {
+            Address address = addresses.get(0);
+            return address.getAddressLine(0).toString();
+        }
 
     }
+
+
+    public boolean checkLocationServicesStatus() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+
+    public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
+
+
+        if (currentMarker != null) currentMarker.remove();
+
+
+        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+        /*MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(currentLatLng);
+        markerOptions.draggable(true);
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_my_marker));
+
+
+        currentMarker = mMap.addMarker(markerOptions);*/
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
+        mMap.moveCamera(cameraUpdate);
+
+    }
+
+
+/*    public void setDefaultLocation() {
+
+
+        //디폴트 위치, Seoul
+        LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
+        String markerTitle = "위치정보 가져올 수 없음";
+        String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
+
+
+        if (currentMarker != null) currentMarker.remove();
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(DEFAULT_LOCATION);
+        markerOptions.title(markerTitle);
+        markerOptions.snippet(markerSnippet);
+        markerOptions.draggable(true);
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_my_marker));
+        currentMarker = mMap.addMarker(markerOptions);
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
+        mMap.moveCamera(cameraUpdate);
+
+    }*/
+
+
+    //여기부터는 런타임 퍼미션 처리을 위한 메소드들
+    private boolean checkPermission() {
+
+        int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION);
+
+
+
+        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+
+
+    /*
+     * ActivityCompat.requestPermissions를 사용한 퍼미션 요청의 결과를 리턴받는 메소드입니다.
+     */
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grandResults) {
+
+        if ( permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
+
+            // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
+
+            boolean check_result = true;
+
+
+            // 모든 퍼미션을 허용했는지 체크합니다.
+
+            for (int result : grandResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    check_result = false;
+                    break;
+                }
+            }
+
+
+            if ( check_result ) {
+
+                // 퍼미션을 허용했다면 위치 업데이트를 시작합니다.
+                startLocationUpdates();
+            }
+            else {
+                // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
+                        || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
+
+
+                    // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
+                    Snackbar.make(mLayout, "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요. ",
+                            Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+
+                            finish();
+                        }
+                    }).show();
+
+                }else {
+
+
+                    // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우에는 설정(앱 정보)에서 퍼미션을 허용해야 앱을 사용할 수 있습니다.
+                    Snackbar.make(mLayout, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ",
+                            Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+
+                            finish();
+                        }
+                    }).show();
+                }
+            }
+
+        }
+    }
+
+
+    //여기부터는 GPS 활성화를 위한 메소드들
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+
+            case GPS_ENABLE_REQUEST_CODE:
+
+                //사용자가 GPS 활성 시켰는지 검사
+                if (checkLocationServicesStatus()) {
+                    if (checkLocationServicesStatus()) {
+
+
+                        needRequest = true;
+
+                        return;
+                    }
+                }
+
+                break;
+        }
+    }
+
+    @Override
+    public void onPlacesFailure(PlacesException e) {
+
+    }
+
+    @Override
+    public void onPlacesStart() {
+
+    }
+
+    @Override
+    public void onPlacesSuccess(final List<noman.googleplaces.Place> places) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                for (noman.googleplaces.Place place : places) {
+
+                    LatLng latLng = new LatLng(place.getLatitude(), place.getLongitude());
+
+                    String markerSnippet = getCurrentAddress(latLng);
+
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(latLng);
+                    markerOptions.title(place.getName());
+                    markerOptions.snippet(markerSnippet);
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
+                    Marker item = mMap.addMarker(markerOptions);
+                    previous_marker.add(item);
+
+                }
+
+                //중복 마커 제거
+                HashSet<Marker> hashSet = new HashSet<Marker>();
+                hashSet.addAll(previous_marker);
+                previous_marker.clear();
+                previous_marker.addAll(hashSet);
+
+            }
+        });
+    }
+
+    @Override
+    public void onPlacesFinished() {
+
+    }
+
+
+
+
+    public void showPlaceInformation(LatLng location)
+    {
+        mMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(PharmacyMap.this)
+                .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(1000) //500 미터 내에서 검색
+                .type(PlaceType.PHARMACY) //음식점
+                .build()
+                .execute();
+    }
+
+
 
 
 }

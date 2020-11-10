@@ -1,3 +1,4 @@
+/*
 package com.example.tripill.Dialog;
 
 
@@ -148,3 +149,4 @@ public class SosDialog extends AppCompatActivity {
 
 
 }
+*/

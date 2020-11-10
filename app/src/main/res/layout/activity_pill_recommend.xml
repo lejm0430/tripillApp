@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/noto_sans_cj_kkr_regular"
-                    android:text="증상"
+                    android:text="@string/symptom"
                     android:textColor="@color/warm_grey"
                     android:textSize="14dp" />
 
@@ -124,7 +124,7 @@
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="약사에게 해당 문구를 보여주세요."
+            android:text="@string/show_pharmacist"
             android:textSize="14dp"
             android:textColor="@color/warm_grey"
             android:fontFamily="@font/noto_sans_cj_kkr_regular"/>
@@ -201,7 +201,7 @@
             android:id="@+id/expect"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="기대효과"
+            android:text="@string/expect"
             android:paddingRight="16dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
@@ -238,7 +238,7 @@
                 android:padding="8dp"
                 android:background="@drawable/rec_view_whitetwo_border">
                 <TextView
-                    android:id="@+id/tv1"
+                    android:id="@+id/expecttext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="그것은 동력은 것이 있는가? 인류의 같은 풍부하게 봄날의 인도하겠다는 든 어디 보라. 거선의 것은 그들의 따뜻한 별과 물방아 영원히 고동을 이것이야말로 사막이다. 인간의 얼음에 두기 굳세게 피어나는 있는 이상은 이상은 용감하고 피다. 부패를 청춘의 심장은 방황하였으며, 피어나는 인생에 때문이다. 가치를 곧 인도하겠다는 예수는 원대하고, 아니더면, 열락의 날카로우나 보라. 못하다 일월과 우리 때에, 넣는 사막이다. 청춘의 곧 착목한는 전인 내려온 되려니와, 칼이다. 우리의 피어나는 못하다 뿐이다."
@@ -257,7 +257,7 @@
                 android:id="@+id/warning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="주의사항"
+                android:text="@string/precautions"
                 android:paddingRight="16dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
@@ -295,7 +295,7 @@
                 android:background="@drawable/rec_view_whitetwo_border"
                 android:layout_marginBottom="36dp">
                 <TextView
-                    android:id="@+id/tv3"
+                    android:id="@+id/precautionstext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="그것은 동력은 것이 있는가? 인류의 같은 풍부하게 봄날의 인도하겠다는 든 어디 보라. 거선의 것은 그들의 따뜻한 별과 물방아 영원히 고동을 이것이야말로 사막이다. 인간의 얼음에 두기 굳세게 피어나는 있는 이상은 이상은 용감하고 피다. 부패를 청춘의 심장은 방황하였으며, 피어나는 인생에 때문이다. 가치를 곧 인도하겠다는 예수는 원대하고, 아니더면, 열락의 날카로우나 보라. 못하다 일월과 우리 때에, 넣는 사막이다. 청춘의 곧 착목한는 전인 내려온 되려니와, 칼이다. 우리의 피어나는 못하다 뿐이다.."
@@ -312,7 +312,7 @@
             android:id="@+id/goPHbtn"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:text="내 주변 약국 찾기"
+            android:text="@string/find_pharmacy"
             android:textColor="@color/cobalt"
             style="@style/TextStyle8"
             android:fontFamily="@font/noto_sans_cj_kkr_medium"

@@ -17,6 +17,8 @@ public class PillDB extends RealmObject {
         private String Symptom2;
         private String age;
         private String date;
+        private String Symtom1kr;
+        private String Symtom2kr;
 
     public String getKey(){
         return key;
@@ -61,6 +63,20 @@ public class PillDB extends RealmObject {
     }
     public void setDate(String date){
         this.date = date;
+    }
+
+    public String getS1kr(){
+        return Symtom1kr;
+    }
+    public void setS1kr(String Symtom1kr){
+        this.Symtom1kr = Symtom1kr;
+    }
+
+    public String getS2kr(){
+        return Symtom2kr;
+    }
+    public void setS2kr(String Symtom2kr){
+        this.Symtom2kr = Symtom2kr;
     }
 
 }

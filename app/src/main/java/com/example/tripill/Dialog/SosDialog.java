@@ -53,8 +53,8 @@ public class SosDialog extends AppCompatActivity {
         final RelativeLayout layout = (RelativeLayout) dlg.findViewById(R.id.layout);
         final TextView text = (TextView) dlg.findViewById(R.id.text);
 
-        text.setText("당신의 증상과 위치가\n응급메시지로 전송됩니다.\n정말 메시지를 전송할까요?");
-        ok.setText("전송");
+        text.setText(R.string.sos);
+        ok.setText(R.string.send);
 
         layout.setClipToOutline(true);
 

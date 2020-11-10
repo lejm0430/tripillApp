@@ -73,24 +73,24 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
         list=new ArrayList<>();
 
-        if(title.contains("head")){
+        if(title.contains(getString(R.string.head))){
             TwoChoiceMungu.setVisibility((View.VISIBLE));
 
-            list.add(new SymptomList("두통", 1));
-            list.add(new SymptomList("어지럼증",2));
-            list.add(new SymptomList("발열",4));
-        }else if(title.contains("neck")){
+            list.add(new SymptomList(getString(R.string.headache), 1 ,"두통"));
+            list.add(new SymptomList(getString(R.string.dizziness),2, "어지럼증"));
+            list.add(new SymptomList(getString(R.string.fever),4, "발열"));
+        }else if(title.contains(getString(R.string.neck))){
             TwoChoiceMungu.setVisibility((View.VISIBLE));
 
-            list.add(new SymptomList("인후통",7));
-            list.add(new SymptomList("기침",8));
-        }else if(title.contains("stomach")){
+            list.add(new SymptomList(getString(R.string.sore_throat),7, "인후통"));
+            list.add(new SymptomList(getString(R.string.cough),8, "기침"));
+        }else if(title.contains(getString(R.string.abdominal))){
 
             TwoChoiceMungu.setVisibility((View.VISIBLE));
 
-            list.add(new SymptomList("소화불량",40));
-            list.add(new SymptomList("복통",50));
-            list.add(new SymptomList("생리통",100));
+            list.add(new SymptomList(getString(R.string.indigestion),40, "소화불량"));
+            list.add(new SymptomList(getString(R.string.colic),50, "복통"));
+            list.add(new SymptomList(getString(R.string.period_pains),100, "생리통"));
 
         }
 
@@ -114,12 +114,15 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
                 } else if(adapter.getSelected_list().size() == 1){
                         intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());
+                        intent.putExtra("s1kr",adapter.getSelected_list().get(0).getSymptomkr());
                         intent.putExtra("sum",Integer.toString(adapter.getSelected_list().get(0).getScore()));
                     startActivityForResult(intent,REQUEST_CODE);
 
                 } else {
                     intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());
+                    intent.putExtra("s1kr",adapter.getSelected_list().get(0).getSymptomkr());
                     intent.putExtra("s2",adapter.getSelected_list().get(1).getSymptom());  // TODO: 2020-11-04 증상 글자
+                    intent.putExtra("s2kr",adapter.getSelected_list().get(1).getSymptomkr());
                     intent.putExtra("sum", Integer.toString(sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore())));
                     Log.d("TAG","sum"+ sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore()));
                     startActivityForResult(intent,REQUEST_CODE);

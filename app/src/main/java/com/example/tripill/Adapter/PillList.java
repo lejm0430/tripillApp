@@ -11,13 +11,17 @@ public class PillList {
     String age;
     String date;
     String pillname;
+    String symptom1kr;
+    String symptom2kr;
 
-    public PillList(String symptom1, String symptom2, String age, String date, String pillname) {
+    public PillList(String symptom1, String symptom2, String age, String date, String pillname, String symptom1kr, String symptom2kr) {
         this.symptom1=symptom1;
         this.symptom2=symptom2;
         this.age=age;
         this.date=date;
         this.pillname=pillname;
+        this.symptom1kr = symptom1kr;
+        this.symptom2kr = symptom2kr;
     }
 
     public PillList(PillDB pillDB) {
@@ -26,6 +30,8 @@ public class PillList {
         this.age=pillDB.getAge();
         this.date=pillDB.getDate();
         this.pillname=pillDB.getName();
+        this.symptom1kr=pillDB.getS1kr();
+        this.symptom2kr=pillDB.getS2kr();
     }
 
     public String getSymptom1() {
@@ -66,6 +72,23 @@ public class PillList {
 
     public void setPillname(String pillname) {
         this.pillname=pillname;
+    }
+
+
+    public String getSymptom1kr() {
+        return symptom1kr;
+    }
+
+    public void setSymptom1kr(String symptom1kr) {
+        this.symptom1kr=symptom1kr;
+    }
+
+    public String getSymptom2kr() {
+        return symptom2kr;
+    }
+
+    public void setSymptom2kr(String symptom2kr) {
+        this.symptom2kr=symptom2kr;
     }
 
 

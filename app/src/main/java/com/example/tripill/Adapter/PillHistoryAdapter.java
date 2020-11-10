@@ -2,6 +2,7 @@ package com.example.tripill.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
     private RecyclerView recyclerView;
     private LayoutInflater inflate;
     String s2;
+    String s1kr;
+    String s2kr;
 
 
     public PillHistoryAdapter(ArrayList<PillList> pilllist,Context context) {
@@ -48,10 +51,10 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MainHolder holder, int position) {
-        final PillList pillList = pilllist.get(position);
+        //final PillList pillList = pilllist.get(position);
         holder.onBind(pilllist.get(position));
         s2 = holder.symptom2.getText().toString();
-        if(s2.isEmpty()){
+        if(s2.isEmpty() && s2kr == null){
             holder.coma.setVisibility(View.GONE);
         }
         holder.linear.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +66,8 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
                 intent.putExtra("s2",holder.symptom2.getText().toString());
                 intent.putExtra("age",holder.age.getText().toString());
                 intent.putExtra("name",holder.pillname.getText().toString());
+                intent.putExtra("s1kr",s1kr);
+                intent.putExtra("s2kr",s2kr);
                 context.startActivity(intent);
 
             }
@@ -108,6 +113,8 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
             age.setText(list.getAge());
             date.setText(list.getDate());
             pillname.setText(list.getPillname());
+            s1kr = list.getSymptom1kr();
+            s2kr = list.getSymptom2kr();
         }
 
     }

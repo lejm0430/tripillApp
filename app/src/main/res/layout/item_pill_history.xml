@@ -58,7 +58,7 @@
             android:id="@+id/ageText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="나이 : "
+            android:text="@string/history_age"
             android:textSize="16dp"
             android:textColor="@color/slate"
             android:fontFamily="@font/noto_sans_cj_kkr_regular"

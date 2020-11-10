@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">tripill</string>
+    <string name="confirm">Confirm</string>
+    <string name="next">Next</string>
+    <string name="cancle">Cancle</string>
+    <string name="recommend_you">Recommend a medicine suitable for your symptoms.</string>
+    <string name="safe_trip">Have a safe trip.</string>
+    <string name="select_part">Please select \na painful part.</string>
+    <string name="head">Head</string>
+    <string name="neck">Neck</string>
+    <string name="abdominal">Abdominal</string>
+    <string name="muscle_pain">Muscle pain</string>
+    <string name="burn">Burn</string>
+    <string name="wound">Wound</string>
+    <string name="hangover">Hangover</string>
+    <string name="select_symptom">Please select symptoms.</string>
+    <string name="maximum_two_choice">Maximum of 2 choices available</string>
+    <string name="headache">Headache</string>
+    <string name="fever">Fever</string>
+    <string name="dizziness">Dizziness</string>
+    <string name="sore_throat">Sore throat</string>
+    <string name="cough">Cough</string>
+    <string name="indigestion">Indigestion</string>
+    <string name="period_pains">Period pains</string>
+    <string name="colic">Colic</string>
+    <string name="enter_age">Please enter\nthe age of the user.</string>
+    <string name="age">years old</string>
+    <string name="recommend_drug">Get drug recommendations</string>
+    <string name="not_recommend">There is no recommended medicine for the age you entered.</string>
+    <string name="show_pharmacist">Show the pharmacist the sentence.</string>
+    <string name="expect">Expectation effectiveness</string>
+    <string name="precautions">Precautions</string>
+    <string name="find_pharmacy">Find a pharmacy around me</string>
+    <string name="search_pharmacy_round">pharmacies within a 1 kilometer radius</string>
+    <string name="previous">Previous Take</string>
+    <string name="symptom">Symptom</string>
+    <string name="penzal">Penzal</string>
+    <string name="tylenol">Tylenol</string>
+    <string name="strepsil">Strepsil</string>
+    <string name="minol">Minol-F Troche</string>
+    <string name="mucopect_Tab">Mucopect Tab</string>
+    <string name="mucopect_Syrup">Mucopect Syrup</string>
+    <string name="lirexpen">Lirexpen Tab</string>
+    <string name="fucidin">Fucidin Ointment</string>
+    <string name="gas">Gas Whal Myung Su</string>
+    <string name="buscopan">Buscopan Plus Tab</string>
+    <string name="ru">RU-21</string>
+    <string name="mebo">Mebo Ointment</string>
+    <string name="ezn">EZN 6 Eve</string>
+    <string name="not_use">There are no usage details.</string>
+    <string name="sos">Your symptoms and location are sent\nby an emergency message.\nDo you really want me to send a message?</string>
+    <string name="send">SEND</string>
+    <string name="history_age">Age : "</string>
+    <string name="onemoretime_destory">Press once more to exit.</string>
+
+    <string name="penzal_expect">headache, toothache, sore throat, pain in the ear\n neuralgia, backache, muscle aches, bruises, chills</string>
+    <string name="penzal_precautions">Avoid empty stomachs up to three times a day.\n
+        The interval between doses shall be four hours..\n
+        Adults (15 years old or older):One dose.\n
+        11 years of age or older to 15 years of age: 1/2 to 2/3 years of age once\n
+        8 years old or older-under 11 years old: 1/2 per time</string>
+    <string name="tylenol_expect">runny nose, stuffy nose, sneezing, sore throat\n cough, chills, fever, headache</string>
+    <string name="tylenol_precautions">Three times a day, 30 minutes after meals\n
+        Single-time capacity: 1 set for 15 years of age or older</string>
+    <string name="strepsil_expect">pain relief in the neck</string>
+    <string name="strepsil_precautions">Up to 5 at intervals of 3 to 6 hours a day\n
+        12+ years old: 1\n
+        Do not take under 12 years of age</string>
+    <string name="minol_expect">cough, phlegm, asthma, stomatitis</string>
+    <string name="minol_precautions">once between the ages of 8 and 11 years old, three times a day.\n
+        an interval of more than four hours between doses</string>
+    <string name="mucopect_Tab_expect">relieving phlegm discharge difficulty symptom in respiratory disease</string>
+    <string name="mucopect_Tab_precautions">1 over 15 years old\n
+       up to three times a day</string>
+    <string name="mucopect_Syrup_expect">Chronic respiratory disease: Chronic bronchitis, asthmatic bronchitis</string>
+    <string name="mucopect_Syrup_precautions">No medication under 2 years of age\n
+        2 to 4 years old: 7.5 mg per time for daily recovery\n
+        15 mg once aged 5 or older, for daily 2-3 recovery
+       </string>
+    <string name="lirexpen_expect">relieving neuralgia, muscle pain\n
+        joint pain, and myocardial cramps</string>
+    <string name="lirexpen_precautions">Take two tablets once over 15 years old, up to four times a day\n
+        Under 15 years of age: once a time.\n
+        Do not take under 12 years of age</string>
+    <string name="fucidin_expect">abatement of skin infection</string>
+    <string name="fucidin_precautions">Clean the affected area and apply an appropriate amount to the affected area\nonce or twice a day or spread it over the gauze.</string>
+    <string name="gas_expect">loss of appetite, indigestion, overeating</string>
+    <string name="gas_precautions">15+ years old: 1 bottle a time\n
+        11 years of age or older to 15 years of age: 2/3 bottle\n
+        8 to 11 years of age: 1/2 bottle per time\n
+        5 years of age or older to 8 years of age: 1/3 bottle/n
+        3 years old to 5 years old: 1/4 bottle/n
+        1 to 3 years of age: 1/5 bottles a time</string>
+    <string name="buscopan_expect">Functional disorders and convulsions of women reproductive machines\nsuch as seizures of gastrointestinal diseases or biliary tract systems\nurology machines, and menstrual dyspnea.
+</string>
+    <string name="buscopan_precautions">1 or 2 doses per adult, 3 times a day\n
+        The maximum daily capacity shall not exceed six.</string>
+    <string name="ru_expect">relieving hangover</string>
+    <string name="ru_precautions">two tablets a day</string>
+    <string name="mebo_expect">abatement of burns or wounds</string>
+    <string name="mebo_precautions">Apply thinly to the wound 2-3 times a day.</string>
+    <string name="ezn_expect">menstrual pain relief</string>
+    <string name="ezn_precautions">8 or older to 15 years of age: 1 to 3 times a day, 1 capsule\n
+        15+ years old: 1~3 times a day, 1~2 capsules\n
+        The interval between doses shall be at least four hours.</string>
+</resources>

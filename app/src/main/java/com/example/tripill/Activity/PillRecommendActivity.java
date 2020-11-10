@@ -64,7 +64,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     TextView expect;
     TextView warning;
-    TextView text;
+    TextView expecttext;
+    TextView precautionstext;
     TextView sos;
     TextView goPHbtn;
     TextView sym;
@@ -76,6 +77,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     int sum;
     String pillname;
     String name;
+    String s1kr;
+    String s2kr;
 
     long now;
     long nows;
@@ -111,7 +114,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         arrowIcWarning = findViewById(R.id.arrowIcWarning);
         expect = findViewById(R.id.expect);
         warning = findViewById(R.id.warning);
-        text = findViewById(R.id.tv1);
+        expecttext = findViewById(R.id.expecttext);
+        precautionstext = findViewById(R.id.precautionstext);
         backbtn = findViewById(R.id.backbtn);
         sos = findViewById(R.id.sos);
         pullimg = findViewById(R.id.pullimg);
@@ -130,55 +134,82 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         s2 = getIntent().getStringExtra("s2");
         sumS = getIntent().getStringExtra("sum");
         name  = getIntent().getStringExtra("name");
+        s1kr = getIntent().getStringExtra("s1kr");
+        s2kr = getIntent().getStringExtra("s2kr");
 
         age = Integer.parseInt(ageS);
-        sum = Integer.parseInt(sumS);
-        //age = Integer.parseInt(ageS);
 
         if(sumS != null){
             sum = Integer.parseInt(sumS);
         }
 
-        if(sum>=1 && sum <=3 || name.equals("penzal")) {
+        if(sum>=1 && sum <=3 || name.equals(getString(R.string.penzal))) {
             pillphoto.setImageResource(R.drawable.penzal);
-            pillname = "penzal";
-        }else if(sum>=4 && sum<=6 || name.equals("tylenol")){
+            pillname = getString(R.string.penzal);
+
+            expecttext.setText(getString(R.string.penzal_expect));
+            precautionstext.setText(R.string.penzal_precautions);
+        }else if(sum>=4 && sum<=6 || name.equals(getString(R.string.tylenol))){
             pillphoto.setImageResource(R.drawable.tylenol);
-            pillname = "tylenol";
-        }else if(sum ==7 || name.equals("strepsil")){
+            pillname = "Tylenol";
+            expecttext.setText(R.string.tylenol_expect);
+            precautionstext.setText(R.string.tylenol_precautions);
+        }else if(sum ==7 || name.equals(getString(R.string.strepsil))){
             pillphoto.setImageResource(R.drawable.strepsil);
-            pillname = "strepsil";
+            pillname = "Strepsil";
+            expecttext.setText(R.string.strepsil_expect);
+            precautionstext.setText(R.string.strepsil_precautions);
         }
-        else if(sum == 7 && age < 12 || name.equals("minol")){
+        else if(sum == 7 && age < 12 || name.equals(getString(R.string.minol))){
             pillphoto.setImageResource(R.drawable.minol);
-            pillname = "minol";
-        }else if(sum ==8 || sum == 15 || name.equals("mucoj")) {
+            pillname = "Minol-F Troche";
+            expecttext.setText(R.string.minol_expect);
+            precautionstext.setText(R.string.minol_precautions);
+        }else if(sum ==8 || sum == 15 || name.equals(getString(R.string.mucopect_Tab))) {
             pillphoto.setImageResource(R.drawable.mucoj);
-            pillname = "mucoj";
-        }else if(sum ==8 || sum == 15 && age < 15 || name.equals("mucos")){
+            pillname = "Mucopect Tab";
+            expecttext.setText(R.string.mucopect_Tab_expect);
+            precautionstext.setText(R.string.mucopect_Tab_precautions);
+        }else if(sum ==8 || sum == 15 && age < 15 || name.equals(getString(R.string.mucopect_Syrup))){
             pillphoto.setImageResource(R.drawable.mucos);
-            pillname = "mucos";
-        }else if(sum == 20 || name.equals("lirexpen")){
+            pillname = "Mucopect Syrup";
+            expecttext.setText(R.string.mucopect_Syrup_expect);
+            precautionstext.setText(R.string.mucopect_Syrup_precautions);
+        }else if(sum == 20 || name.equals(getString(R.string.lirexpen))){
             pillphoto.setImageResource(R.drawable.lirexpen);
-            pillname = "lirexpen";
-        }else if(sum == 25 || name.equals("whosidin")){
+            pillname = "Lirexpen Tab";
+            expecttext.setText(R.string.lirexpen_expect);
+            precautionstext.setText(R.string.lirexpen_precautions);
+        }else if(sum == 25 || name.equals(getString(R.string.fucidin))){
             pillphoto.setImageResource(R.drawable.whosidin);
-            pillname = "whosidin";
-        }else if(sum == 35 ||  name.equals("ru")){
+            pillname = "Fucidin Ointment";
+            expecttext.setText(R.string.fucidin_expect);
+            precautionstext.setText(R.string.fucidin_precautions);
+        }else if(sum == 35 ||  name.equals(getString(R.string.ru))){
             pillphoto.setImageResource(R.drawable.ru);
-            pillname = "ru";
-        }else if(sum == 40 || sum == 90 || name.equals("sohwa")){
+            pillname = "RU-21";
+            expecttext.setText(R.string.ru_expect);
+            precautionstext.setText(R.string.ru_precautions);
+        }else if(sum == 40 || sum == 90 || name.equals(getString(R.string.gas))){
             pillphoto.setImageResource(R.drawable.sohwa);
-            pillname = "sohwa";
-        }else if(sum == 50 || name.equals("buscopan")){
+            pillname = "Gas Whal Myung Su";
+            expecttext.setText(R.string.gas_expect);
+            precautionstext.setText(R.string.gas_precautions);
+        }else if(sum == 50 || name.equals(getString(R.string.buscopan))){
             pillphoto.setImageResource(R.drawable.buscopan);
-            pillname = "buscopan";
-        }else if(sum == 60 || name.equals("mibo")){
+            pillname = "Buscopan Plus Tab";
+            expecttext.setText(R.string.buscopan_expect);
+            precautionstext.setText(R.string.buscopan_precautions);
+        }else if(sum == 60 || name.equals(getString(R.string.mebo))){
             pillphoto.setImageResource(R.drawable.mibo);
-            pillname = "mibo";
-        }else if(sum >= 100 || name.equals("easyn")){
+            pillname = "Mebo Ointment";
+            expecttext.setText(R.string.mebo_expect);
+            precautionstext.setText(R.string.mebo_precautions);
+        }else if(sum >= 100 || name.equals(getString(R.string.ezn))){
             pillphoto.setImageResource(R.drawable.easyn);
-            pillname = "easyn";
+            pillname = "EZN 6 Eve";
+            expecttext.setText(R.string.ezn_expect);
+            precautionstext.setText(R.string.ezn_precautions);
         }
 
         name = null;
@@ -318,14 +349,14 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     public void intent() {
         String address ="서울 강남구 신사동 123-123";
         ageS = getIntent().getStringExtra("age");
-        s1 = getIntent().getStringExtra("s1");
-        s2= getIntent().getStringExtra("s2");
+        s1kr = getIntent().getStringExtra("s1kr");
+        s2kr= getIntent().getStringExtra("s2kr");
 
 
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 
-        if(s2 != null){
-            String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1+ "," + s2 +"입니다. 살려줘";
+        if(s2kr != null){
+            String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1kr+ "," + s2kr +"입니다. 살려줘";
 
             sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
 
@@ -335,7 +366,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
             startActivity(sendIntent);
         }else{
-            String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1+"입니다. 살려줘";
+            String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1kr+"입니다. 살려줘";
 
             sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
 
@@ -393,13 +424,15 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 pd.setS2(s2);
                 pd.setAge(ageS);
                 pd.setDate(getTime());
+                pd.setS1kr(s1kr);
+                pd.setS2kr(s2kr);
                 if(pd.getName() == null){
                     ((MainActivity)MainActivity.mcontext).drawer_recycler.setVisibility(View.GONE);
                 }else{
                     RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
 
                     for (PillDB pill : result) {
-                        ((MainActivity)MainActivity.mcontext).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName()));
+                        ((MainActivity)MainActivity.mcontext).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
                     }
                     ((MainActivity)MainActivity.mcontext).nonehistory.setVisibility(View.GONE);
                 }

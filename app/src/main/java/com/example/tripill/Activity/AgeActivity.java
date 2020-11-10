@@ -35,6 +35,8 @@ public class AgeActivity extends AppCompatActivity {
     public Context mcontext;
 
     String name;
+    String s1kr;
+    String s2kr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class AgeActivity extends AppCompatActivity {
         String symptom1 = getIntent().getStringExtra("s1");
         String symptom2 = getIntent().getStringExtra("s2");
         String sumS = getIntent().getStringExtra("sum");
+        s1kr = getIntent().getStringExtra("s1kr");
+        s2kr = getIntent().getStringExtra("s2kr");
         int sum = Integer.parseInt(sumS);
 
 
@@ -92,32 +96,32 @@ public class AgeActivity extends AppCompatActivity {
                         dialog.callFunction();
                     }else{
                         if(sum>=1 && sum <=3) {
-                            name = "penzal";
+                            name = getString(R.string.penzal);
                         }else if(sum>=4 && sum<=6){
-                            name = "tylenol";
+                            name = getString(R.string.tylenol);
                         }else if(sum ==7){
-                            name = "strepsil";
+                            name = getString(R.string.strepsil);
                         }
                         else if(sum == 7 && i < 12){
-                            name = "minol";
+                            name = getString(R.string.minol);
                         }else if(sum ==8 || sum == 15) {
-                            name = "mucoj";
+                            name = getString(R.string.mucopect_Tab);
                         }else if(sum ==8 || sum == 15 && i < 15){
-                            name = "mucos";
+                            name = getString(R.string.mucopect_Syrup);
                         }else if(sum == 20 ){
-                            name = "lirexpen";
+                            name = getString(R.string.lirexpen);
                         }else if(sum == 25){
-                            name = "whosidin";
+                            name = getString(R.string.fucidin);
                         }else if(sum == 35){
-                            name = "ru";
+                            name = getString(R.string.ru);
                         }else if(sum == 40 || sum == 90){
-                            name = "sohwa";
+                            name = getString(R.string.gas);
                         }else if(sum == 50){
-                            name = "buscopan";
+                            name = getString(R.string.buscopan);
                         }else if(sum == 60){
-                            name = "mibo";
+                            name = getString(R.string.mebo);
                         }else if(sum >= 100){
-                            name = "easyn";
+                            name = getString(R.string.ezn);
                         }
                         Intent intent = new Intent(getApplicationContext(), PillRecommendActivity.class);
                         intent.putExtra("age",age.getText().toString());
@@ -125,6 +129,8 @@ public class AgeActivity extends AppCompatActivity {
                         intent.putExtra("s1",symptom1);
                         intent.putExtra("s2",symptom2);
                         intent.putExtra("name",name);
+                        intent.putExtra("s1kr",s1kr);
+                        intent.putExtra("s2kr",s2kr);
                         startActivity(intent);
                     }
                 }

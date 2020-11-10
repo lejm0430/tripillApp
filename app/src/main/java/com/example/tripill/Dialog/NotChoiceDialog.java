@@ -44,7 +44,7 @@ public class NotChoiceDialog extends AppCompatActivity {
         final TextView text = dlg.findViewById(R.id.text);
 
 
-        text.setText("증상을 선택해주세요");
+        text.setText(R.string.select_symptom);
 
         canclebtn.setVisibility(View.GONE);
 

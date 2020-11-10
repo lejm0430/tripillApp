@@ -1,14 +1,9 @@
 
 package com.example.tripill.Activity;
 
-import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,25 +15,16 @@ import com.example.tripill.Adapter.PillHistoryAdapter;
 import com.example.tripill.Adapter.PillList;
 import com.example.tripill.DataBase.PillDB;
 import com.example.tripill.Dialog.ChoicedSymptomSlide;
-import com.example.tripill.Dialog.SosDialog;
 import com.example.tripill.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmObject;
 import io.realm.RealmResults;
 
 
@@ -47,7 +33,6 @@ public class MainActivity extends AppCompatActivity{
     static final int SYMPTOMCODE = 1111;
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
-    private final int MY_PERMISSION_REQUEST_SMS = 1001;
     public static final String TAG = MainActivity.class.getName();
 
     String name;
@@ -72,7 +57,6 @@ public class MainActivity extends AppCompatActivity{
     private Realm realm;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,13 +64,6 @@ public class MainActivity extends AppCompatActivity{
 
         mcontext = this;
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
-                ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
-            }else{
-                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
-            }
-        }
 
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);
@@ -127,9 +104,8 @@ public class MainActivity extends AppCompatActivity{
 
 
         RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
-        Log.d("TEST", String.valueOf(result));
         for (PillDB pill : result) {
-            pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName()));
+            pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
             if(pill.getName() != null){
                 nonehistory.setVisibility(View.GONE);
             }
@@ -198,8 +174,9 @@ public class MainActivity extends AppCompatActivity{
                 String s_musclePain = muscle_pain.getText().toString();
 
                 intent.putExtra("part",s_musclePain);
-                intent.putExtra("s1","근육통");
+                intent.putExtra("s1",getString(R.string.muscle_pain));
                 intent.putExtra("sum","20");
+                intent.putExtra("s1kr","근육통");
                 startActivity(intent);
 
             }
@@ -212,8 +189,9 @@ public class MainActivity extends AppCompatActivity{
                 String s_burn = burn.getText().toString();
 
                 intent.putExtra("part",s_burn);
-                intent.putExtra("s1","화상");
+                intent.putExtra("s1",getString(R.string.burn));
                 intent.putExtra("sum","60");
+                intent.putExtra("s1kr","화상");
                 startActivity(intent);
 
 
@@ -228,8 +206,9 @@ public class MainActivity extends AppCompatActivity{
                 String s_wound = wound.getText().toString();
 
                 intent.putExtra("part",s_wound);
-                intent.putExtra("s1","상처");
+                intent.putExtra("s1",getString(R.string.wound));
                 intent.putExtra("sum","25");
+                intent.putExtra("s1kr","상처");
                 startActivity(intent);
 
 
@@ -244,8 +223,9 @@ public class MainActivity extends AppCompatActivity{
                 String s_beer = hangover.getText().toString();
 
                 intent.putExtra("part",s_beer);
-                intent.putExtra("s1","숙취");
+                intent.putExtra("s1",getString(R.string.hangover));
                 intent.putExtra("sum","35");
+                intent.putExtra("s1kr","숙취");
                 startActivity(intent);
 
 
@@ -273,7 +253,7 @@ public class MainActivity extends AppCompatActivity{
             }
             else{
                 backPressedTime = temptime;
-                Toast.makeText(getApplicationContext(), "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.onemoretime_destory, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -283,6 +263,5 @@ public class MainActivity extends AppCompatActivity{
         super.onDestroy();
         realm.close();
     }
-
 
 }

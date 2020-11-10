@@ -31,31 +31,31 @@ public class FullImagDialog extends AppCompatActivity {
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        if(pillname.equals("penzal")){
+        if(pillname.equals("Penzal")){
             pillphoto.setImageResource(R.drawable.penzal); //수정사항
-        }else if(pillname.equals("tylenol")){
+        }else if(pillname.equals("Tylenol")){
             pillphoto.setImageResource(R.drawable.tylenol); //수정사항
-        }else if(pillname.equals("strepsil")){
+        }else if(pillname.equals("Strepsil")){
             pillphoto.setImageResource(R.drawable.strepsil); //수정사항
-        }else if(pillname.equals("minol")){
+        }else if(pillname.equals("Minol-F Troche")){
             pillphoto.setImageResource(R.drawable.minol); //수정사항
-        }else if(pillname.equals("mucoj")){
+        }else if(pillname.equals("Mucopect Tab")){
             pillphoto.setImageResource(R.drawable.mucoj); //수정사항
-        }else if(pillname.equals("mucos")){
+        }else if(pillname.equals("Mucopect Syrup")){
             pillphoto.setImageResource(R.drawable.mucos); //수정사항
-        }else if(pillname.equals("lirexpen")){
+        }else if(pillname.equals("Lirexpen Tab")){
             pillphoto.setImageResource(R.drawable.lirexpen); //수정사항
-        }else if(pillname.equals("whosidin")){
+        }else if(pillname.equals("Fucidin Ointment")){
             pillphoto.setImageResource(R.drawable.whosidin); //수정사항
-        }else if(pillname.equals("ru")){
+        }else if(pillname.equals("RU-21")){
             pillphoto.setImageResource(R.drawable.ru); //수정사항
-        }else if(pillname.equals("sohwa")){
+        }else if(pillname.equals("Gas Whal Myung Su")){
             pillphoto.setImageResource(R.drawable.sohwa); //수정사항
-        }else if(pillname.equals("buscopan")){
+        }else if(pillname.equals("Buscopan Plus Tab")){
             pillphoto.setImageResource(R.drawable.buscopan); //수정사항
-        }else if(pillname.equals("mibo")){
+        }else if(pillname.equals("Mebo Ointment")){
             pillphoto.setImageResource(R.drawable.mibo); //수정사항
-        }else if(pillname.equals("easyn")){
+        }else if(pillname.equals("EZN 6 Eve")){
             pillphoto.setImageResource(R.drawable.easyn); //수정사항
         }
 

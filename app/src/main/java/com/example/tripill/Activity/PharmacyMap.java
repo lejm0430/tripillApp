@@ -7,12 +7,14 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -56,6 +58,9 @@ import noman.googleplaces.PlacesListener;
 public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener {
     private GoogleMap mMap;
     private Marker currentMarker = null;
+    private Marker lastClicked;
+
+    ImageView imgmarker;
 
     List<Marker> previous_marker = null;
     private GpsTracker gpsTracker;
@@ -126,7 +131,9 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             @Override
             public void onClick(View view) {
                 finish();
-            }
+
+                }
+
         });
 
     }
@@ -177,16 +184,26 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
             @Override
             public void onMapClick(LatLng latLng) {
-
+                if(lastClicked != null){
+                    lastClicked.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
+                }
+                lastClicked = null;
             }
         });
+
+
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-
+                if(lastClicked != null){
+                    lastClicked.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
+                }
+                lastClicked = marker;
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_choice));
                 return true;
             }
         });
+
 
     }
 
@@ -465,6 +482,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     Marker item = mMap.addMarker(markerOptions);
                     previous_marker.add(item);
 
+
                 }
 
                 //중복 마커 제거
@@ -476,8 +494,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             }
         });
     }
-
-
 
     public void showPlaceInformation(LatLng location)
     {
@@ -501,4 +517,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
 
 }
-
+//navigation
+//                Uri gmmIntentUri = Uri.parse("google.navigation:q=Taronga+Zoo,+Sydney+Australia&mode=w");
+//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//                mapIntent.setPackage("com.google.android.apps.maps");
+//                startActivity(mapIntent);

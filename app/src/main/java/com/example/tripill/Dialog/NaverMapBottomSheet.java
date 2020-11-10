@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tripill.Adapter.pharmacyList;
@@ -24,6 +25,8 @@ public class NaverMapBottomSheet extends BottomSheetDialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+
+
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class NaverMapBottomSheet extends BottomSheetDialogFragment {
 
         TextView pharmacyName_kr = v.findViewById(R.id.pharmacyName_kr);
         TextView pharmacyName_en = v.findViewById(R.id.pharmacyName_en);
+        RelativeLayout findroadBtn = v.findViewById(R.id.findroadBtn);
 
         pharmacyLists = new ArrayList<pharmacyList>();
 

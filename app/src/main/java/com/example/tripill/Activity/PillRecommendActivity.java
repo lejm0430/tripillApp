@@ -1,17 +1,24 @@
 package com.example.tripill.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,20 +31,23 @@ import com.example.tripill.DataBase.PillDB;
 import com.example.tripill.Dialog.FullImagDialog;
 import com.example.tripill.Dialog.SosDialog;
 import com.example.tripill.R;
-
 import net.cachapa.expandablelayout.ExpandableLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
 
-import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -98,6 +108,15 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
 //    private static PillRecommendActivity instance = new PillRecommendActivity();
 //    public static PillRecommendActivity getInstance(){return instance;}
+
+    private GpsTracker gpsTracker;
+
+
+
+    private static final int GPS_ENABLE_REQUEST_CODE = 300;
+    private static final int PERMISSIONS_REQUEST_CODE = 100;
+    String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -231,8 +250,9 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         sos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SosDialog dialog = new SosDialog(PillRecommendActivity.this);
-                dialog.callFunction();
+//                SosDialog dialog = new SosDialog(PillRecommendActivity.this);
+//                dialog.callFunction();
+                callFunction();
             }
         });
 
@@ -346,12 +366,237 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     }
 
+
+
+
+
+    public void callFunction() {
+
+        final Dialog dlg=new Dialog(this);
+
+        dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dlg.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        dlg.setContentView(R.layout.dialog_alluse);
+
+        WindowManager.LayoutParams params=dlg.getWindow().getAttributes();
+        params.width=WindowManager.LayoutParams.MATCH_PARENT;
+        params.height=WindowManager.LayoutParams.WRAP_CONTENT;
+
+        dlg.show();
+        dlg.setCancelable(true);
+
+        final Button cancle=(Button) dlg.findViewById(R.id.canclebtn);
+        final Button ok=(Button) dlg.findViewById(R.id.okbtn);
+        final RelativeLayout layout=(RelativeLayout) dlg.findViewById(R.id.layout);
+        final TextView text=(TextView) dlg.findViewById(R.id.text);
+
+        text.setText("당신의 증상과 위치가\n응급메시지로 전송됩니다.\n정말 메시지를 전송할까요?");
+        ok.setText("전송");
+
+        layout.setClipToOutline(true);
+
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dlg.dismiss();
+            }
+        });
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dlg.dismiss();
+
+                check();
+
+            }
+        });
+
+    }
+
+
+    public void check(){
+        int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+
+
+        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) { //퍼미션 허용 O
+
+
+        } else {  //퍼미션 허용
+
+            // 사용자가 퍼미션 거부를 한 적이 있는 경우에는
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
+
+                // 퍼미션 허용됨. 요청 결과는 onRequestPermissionResult에서 수신
+                ActivityCompat.requestPermissions(PillRecommendActivity.this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
+
+            } else {
+                // 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로
+                // 요청 결과는 onRequestPermissionResult에서 수신
+                ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
+            }
+
+
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grandResults) {
+
+        if ( permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
+
+            // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
+
+            boolean check_result = true;
+
+
+            // 모든 퍼미션을 허용했는지 체크합니다.
+
+            for (int result : grandResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    check_result = false;
+                    break;
+                }
+
+            } //for
+        }
+
+    }
+
+
+
+
+
+
+    void checkRunTimePermission(){
+
+        //런타임 퍼미션 처리
+        // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
+        int hasFineLocationPermission = ContextCompat.checkSelfPermission(PillRecommendActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(PillRecommendActivity.this,
+                Manifest.permission.ACCESS_COARSE_LOCATION);
+
+
+        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
+            PillRecommendActivity.this.intent(); //권한 허용 버튼을 눌렀을 때 실행
+
+            // 2. 이미 퍼미션을 가지고 있다면
+            // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
+
+        } else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
+
+            // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
+
+                // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
+                Toast.makeText(this, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
+                // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
+                ActivityCompat.requestPermissions(PillRecommendActivity.this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
+
+
+            } else {
+                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
+                // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
+                ActivityCompat.requestPermissions(PillRecommendActivity.this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
+            }
+
+        }
+
+    }
+
+    public String getCurrentAddress( double latitude, double longitude) {
+
+        //지오코더... GPS를 주소로 변환
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        List<Address> addresses;
+
+        try {
+
+            addresses = geocoder.getFromLocation(
+                    latitude,
+                    longitude,
+                    7);
+        } catch (IOException ioException) {
+            //네트워크 문제
+            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
+            return "지오코더 서비스 사용불가";
+        } catch (IllegalArgumentException illegalArgumentException) {
+            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
+            return "잘못된 GPS 좌표";
+
+        }
+
+
+
+        if (addresses == null || addresses.size() == 0) {
+            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+            return "'주소 미발견'";
+
+        }
+
+        Address address = addresses.get(0);
+        return address.getAddressLine(0).toString()+"\n";
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+
+            case GPS_ENABLE_REQUEST_CODE:
+
+                //사용자가 GPS 활성 시켰는지 검사
+                if (checkLocationServicesStatus()) {
+                    if (checkLocationServicesStatus()) {
+
+                        Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
+                        checkRunTimePermission();
+                        return;
+                    }
+                }
+
+                break;
+        }
+    }
+
+    public boolean checkLocationServicesStatus() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+
     public void intent() {
-        String address ="서울 강남구 신사동 123-123";
+
+
+        gpsTracker = new GpsTracker(PillRecommendActivity.this);
+        double latitude = gpsTracker.getLatitude();
+        double longitude = gpsTracker.getLongitude();
+
+        String address = getCurrentAddress(latitude,longitude);
+
+        Log.d("TAG","latitude : "+latitude);
+        Log.d("TAG","longitude : "+longitude);
+
+
+//        String address ="서울 강남구 신사동 123-123";
         ageS = getIntent().getStringExtra("age");
         s1kr = getIntent().getStringExtra("s1kr");
         s2kr= getIntent().getStringExtra("s2kr");
-
 
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 
@@ -378,6 +623,9 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         }
 
     }
+
+
+
 
     private void Speech(){
         String text = sym.getText().toString().trim();

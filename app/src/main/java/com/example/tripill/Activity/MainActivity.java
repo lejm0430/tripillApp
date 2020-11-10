@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity{
     static final int SYMPTOMCODE = 1111;
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
+
     public static final String TAG = MainActivity.class.getName();
 
     String name;
@@ -64,7 +65,16 @@ public class MainActivity extends AppCompatActivity{
 
         mcontext = this;
 
+        /*if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
+                ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
+            }else{
+                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
+            }
+        }
+>>>>>>> Stashed changes
 
+*/
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);
         TextView stomach = findViewById(R.id.stomach);
@@ -109,7 +119,7 @@ public class MainActivity extends AppCompatActivity{
             if(pill.getName() != null){
                 nonehistory.setVisibility(View.GONE);
             }
-            }
+        }
 
         Intent intent = new Intent(getApplicationContext(), AgeActivity.class);
 

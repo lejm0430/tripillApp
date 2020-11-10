@@ -35,6 +35,7 @@
         android:includeFontPadding="false"/>
 
     <RelativeLayout
+        android:id="@+id/findroadBtn"
         android:layout_width="93dp"
         android:layout_height="32dp"
         android:layout_marginRight="16dp"
@@ -48,7 +49,6 @@
             android:background="@drawable/circle_border_sunflower_navermap"/>
 
         <TextView
-            android:id="@+id/findroadBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="길찾기"

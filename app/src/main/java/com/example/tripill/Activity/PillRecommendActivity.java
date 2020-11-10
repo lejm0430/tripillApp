@@ -29,7 +29,6 @@ import com.example.tripill.Adapter.PillList;
 import com.example.tripill.Adapter.SymptomRecommendAdpater;
 import com.example.tripill.DataBase.PillDB;
 import com.example.tripill.Dialog.FullImagDialog;
-import com.example.tripill.Dialog.SosDialog;
 import com.example.tripill.R;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -252,6 +251,9 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             public void onClick(View view) {
 //                SosDialog dialog = new SosDialog(PillRecommendActivity.this);
 //                dialog.callFunction();
+
+
+                check();
                 callFunction();
             }
         });
@@ -407,9 +409,19 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             @Override
             public void onClick(View view) {
 
-                dlg.dismiss();
 
-                check();
+
+                int hasFineLocationPermission = ContextCompat.checkSelfPermission(PillRecommendActivity.this,
+                        Manifest.permission.ACCESS_FINE_LOCATION);
+                int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(PillRecommendActivity.this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION);
+
+                if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                        hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED){
+                    messege();
+                }
+
+                dlg.dismiss();
 
             }
         });
@@ -425,18 +437,13 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) { //퍼미션 허용 O
 
+        } else {  //퍼미션 허용 X
 
-        } else {  //퍼미션 허용
-
-            // 사용자가 퍼미션 거부를 한 적이 있는 경우에는
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
 
-                // 퍼미션 허용됨. 요청 결과는 onRequestPermissionResult에서 수신
                 ActivityCompat.requestPermissions(PillRecommendActivity.this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
 
             } else {
-                // 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로
-                // 요청 결과는 onRequestPermissionResult에서 수신
                 ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
             }
 
@@ -457,7 +464,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             boolean check_result = true;
 
 
-            // 모든 퍼미션을 허용했는지 체크합니다.
+            // 모든 퍼미션을 허용했는지 체크
 
             for (int result : grandResults) {
                 if (result != PackageManager.PERMISSION_GRANTED) {
@@ -475,37 +482,56 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+
+            case GPS_ENABLE_REQUEST_CODE:
+
+                //사용자가 GPS 활성 시켰는지 검사
+                if (!checkLocationServicesStatus()) {
+                    Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
+                    if (checkLocationServicesStatus()) {
+
+                        checkRunTimePermission();
+                        return;
+                    }
+                }
+
+                break;
+        }
+    }
+
+    public boolean checkLocationServicesStatus() {   //gps 네트워크 여부
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+
     void checkRunTimePermission(){
 
-        //런타임 퍼미션 처리
-        // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
+        // 위치 퍼미션을 가지고 있는지 체크
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(PillRecommendActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(PillRecommendActivity.this,
                 Manifest.permission.ACCESS_COARSE_LOCATION);
 
-
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
-            PillRecommendActivity.this.intent(); //권한 허용 버튼을 눌렀을 때 실행
 
-            // 2. 이미 퍼미션을 가지고 있다면
-            // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
-
-        } else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
-
-            // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
+        } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
 
-                // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
                 Toast.makeText(this, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
-                // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
                 ActivityCompat.requestPermissions(PillRecommendActivity.this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
 
 
             } else {
-                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
-                // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
                 ActivityCompat.requestPermissions(PillRecommendActivity.this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
             }
 
@@ -515,7 +541,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     public String getCurrentAddress( double latitude, double longitude) {
 
-        //지오코더... GPS를 주소로 변환
+        //GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
         List<Address> addresses;
@@ -550,37 +576,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-
-            case GPS_ENABLE_REQUEST_CODE:
-
-                //사용자가 GPS 활성 시켰는지 검사
-                if (checkLocationServicesStatus()) {
-                    if (checkLocationServicesStatus()) {
-
-                        Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
-                        checkRunTimePermission();
-                        return;
-                    }
-                }
-
-                break;
-        }
-    }
-
-    public boolean checkLocationServicesStatus() {
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
-
-
-    public void intent() {
+    public void messege() {
 
 
         gpsTracker = new GpsTracker(PillRecommendActivity.this);

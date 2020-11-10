@@ -65,16 +65,6 @@ public class MainActivity extends AppCompatActivity{
 
         mcontext = this;
 
-        /*if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
-                ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
-            }else{
-                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
-            }
-        }
->>>>>>> Stashed changes
-
-*/
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);
         TextView stomach = findViewById(R.id.stomach);

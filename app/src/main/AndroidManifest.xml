@@ -18,7 +18,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Dialog.NaverMapBottomSheet"></activity>
         <activity android:name=".Activity.PharmacyMap" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.PillRecommendActivity"
@@ -32,11 +36,7 @@
         <activity
             android:name=".Activity.SplashActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.MainActivity"

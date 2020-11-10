@@ -1,346 +1,4 @@
-/*
 package com.example.tripill.Activity;
-
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-
-import com.example.tripill.R;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import noman.googleplaces.Place;
-import noman.googleplaces.PlacesException;
-import noman.googleplaces.PlacesListener;
-
-public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback, PlacesListener {
-
-    private static final int PERMISSION_REQUEST_CODE=100;  //권환 허용 코드
-    private static final String[] PERMISSION={
-            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
-    };
-
-    private GoogleMap mgoogleMap;
-    private GpsTracker gpsTracker;
-
-    double mlatitude;
-    double mlongitude;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pharmacy_map);
-
-        ImageView gpsBtn=findViewById(R.id.gpsBtn);
-        RelativeLayout head=findViewById(R.id.head);
-
-
-        SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        supportMapFragment.getMapAsync(this);
-
-
-        gpsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gpsTracker = new GpsTracker(PharmacyMap.this);
-
-                if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                        && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){  //권환 획득 여부
-
-                    mlongitude=gpsTracker.getLongitude();
-                    mlatitude = gpsTracker.getLatitude();
-
-                    LatLng latLng = new LatLng(mlatitude,mlongitude);
-
-                    mgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));
-
-                    setDefaultLocation();
-
-
-                    Log.d("makerlongitude"," : " +mlatitude);
-                    Log.d("makerlatitude"," : " +mlongitude);//위치 좌표
-
-                }
-
-            }
-
-        });
-
-
-        head.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-    }
-
-
-
-
-    public void setDefaultLocation() {
-
-        mlongitude=gpsTracker.getLongitude();
-        mlatitude = gpsTracker.getLatitude();
-
-        LatLng latLng = new LatLng(mlatitude,mlongitude);
-
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.draggable(true);
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_my_marker));
-        mgoogleMap.addMarker(markerOptions);
-
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
-        mgoogleMap.moveCamera(cameraUpdate);
-
-    }
-
-
-
-
-
-    public void onProviderEnabled(String provider) {  //gps가 활성화 되어있음
-
-    }
-
-    public void onProviderDisabled(String provider) { //gps가 활성화 안되어 있음
-
-    }
-
-
-
-
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        mgoogleMap = googleMap;
-
-
-
-
-
-    }
-
-
-
-
-
-
-    @Override
-    public void onPlacesFailure(PlacesException e) {
-
-    }
-
-    @Override
-    public void onPlacesStart() {
-
-    }
-
-    @Override
-    public void onPlacesSuccess(List<Place> places) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                for(noman.googleplaces.Place place : places){
-
-
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onPlacesFinished() {
-
-    }
-
-
-
-}
-
-*/
-package com.example.tripill.Activity;
-
-
-
-
-/*
-public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback, PlacesListener {
-
-    List<Marker> previous_marker = null;
-
-    private static final int PERMISSION_REQUEST_CODE=100;  //권환 허용 코드
-    private static final String[] PERMISSION={
-            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
-    };
-
-    private GoogleMap mgoogleMap;
-    private GpsTracker gpsTracker;
-
-    double mlatitude;
-    double mlongitude;
-
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pharmacy_map);
-        ImageView gpsBtn=findViewById(R.id.gpsBtn);
-        RelativeLayout head=findViewById(R.id.head);
-
-
-        SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        supportMapFragment.getMapAsync(this);
-
-
-        gpsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gpsTracker = new GpsTracker(PharmacyMap.this);
-
-                if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                        && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){  //권환 획득 여부
-
-
-                    setDefaultLocation();
-
-                    //showPlaceInformation();
-
-
-                    Log.d("makerlongitude"," : " +mlatitude);
-                    Log.d("makerlatitude"," : " +mlongitude);//위치 좌표
-
-                }
-
-            }
-
-        });
-
-
-        head.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-    }
-
-
-    public void setDefaultLocation() {
-
-        mlongitude=gpsTracker.getLongitude();
-        mlatitude = gpsTracker.getLatitude();
-
-        LatLng latLng = new LatLng(mlatitude,mlongitude);
-
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.draggable(true);
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_my_marker));
-        mgoogleMap.addMarker(markerOptions);
-
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
-        mgoogleMap.moveCamera(cameraUpdate);
-
-    }
-
-
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        mgoogleMap = googleMap;
-
-
-
-
-    }
-
-
-    @Override
-    public void onPlacesFailure(PlacesException e) {
-
-    }
-
-    @Override
-    public void onPlacesStart() {
-
-    }
-
-    @Override
-    public void onPlacesSuccess(final List<Place> places) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mgoogleMap.clear();//지도 클리어
-
-
-                for (noman.googleplaces.Place place : places) {
-
-                    LatLng latLng = new LatLng(place.getLatitude(), place.getLongitude());
-
-
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(latLng);
-                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
-                    Marker item = mgoogleMap.addMarker(markerOptions);
-                    previous_marker.add(item);
-
-                }
-
-                //중복 마커 제거
-                HashSet<Marker> hashSet = new HashSet<Marker>();
-                hashSet.addAll(previous_marker);
-                previous_marker.clear();
-                previous_marker.addAll(hashSet);
-
-            }
-        });
-    }
-
-    @Override
-    public void onPlacesFinished() {
-
-    }
-
-    public void showPlaceInformation(LatLng location)
-    {
-        mgoogleMap.clear();//지도 클리어
-
-        if (previous_marker != null)
-            previous_marker.clear();//지역정보 마커 클리어
-
-        new NRPlaces.Builder()
-                .listener(PharmacyMap.this)
-                .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
-                .latlng(location.latitude, location.longitude)//현재 위치
-                .radius(1000) //500 미터 내에서 검색
-                .type(PlaceType.PHARMACY) //음식점
-                .build()
-                .execute();
-    }
-
-
-}
-*/
-
-
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -378,6 +36,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -432,6 +91,8 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_pharmacy_map);
 
         mLayout = findViewById(R.id.layout_main);
+
+        previous_marker = new ArrayList<Marker>();
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -782,7 +443,7 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onPlacesSuccess(final List<noman.googleplaces.Place> places) {
+    public void onPlacesSuccess(final List<Place> places) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -823,12 +484,57 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
 
         new NRPlaces.Builder()
                 .listener(PharmacyMap.this)
-                .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
+                .key("AIzaSyDKS1jSRPdpY014AguQ5ORacQQLc4e3nyo")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1키로 내에서 검색
                 .type(PlaceType.PHARMACY) //약국
                 .build()
                 .execute();
+
+//        if(Locale.getDefault().getLanguage().equals("kr")) {
+//            new NRPlaces.Builder()
+//                    .listener(PharmacyMap.this)
+//                    .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
+//                    .latlng(location.latitude, location.longitude)//현재 위치
+//                    .radius(1000) //1키로 내에서 검색
+//                    .type(PlaceType.PHARMACY) //약국
+//                    .language("ko", "KR")
+//                    .build()
+//                    .execute();
+//        }
+//        else if(Locale.getDefault().getLanguage().equals("zh")){
+//            new NRPlaces.Builder()
+//                    .listener(PharmacyMap.this)
+//                    .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
+//                    .latlng(location.latitude, location.longitude)//현재 위치
+//                    .radius(1000) //1키로 내에서 검색
+//                    .type(PlaceType.PHARMACY) //약국
+//                    .language("zh", "CN")
+//                    .build()
+//                    .execute();
+//        }
+//        else if(Locale.getDefault().getLanguage().equals("en")){
+//            new NRPlaces.Builder()
+//                    .listener(PharmacyMap.this)
+//                    .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
+//                    .latlng(location.latitude, location.longitude)//현재 위치
+//                    .radius(1000) //1키로 내에서 검색
+//                    .type(PlaceType.PHARMACY) //약국
+//                    .language("en", "US")
+//                    .build()
+//                    .execute();
+//        }
+//        else if(Locale.getDefault().getLanguage().equals("ja")){
+//            new NRPlaces.Builder()
+//                    .listener(PharmacyMap.this)
+//                    .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
+//                    .latlng(location.latitude, location.longitude)//현재 위치
+//                    .radius(1000) //1키로 내에서 검색
+//                    .type(PlaceType.PHARMACY) //약국
+//                    .language("ja", "JP")
+//                    .build()
+//                    .execute();
+//        }
     }
 
 

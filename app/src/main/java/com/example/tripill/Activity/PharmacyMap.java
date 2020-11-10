@@ -45,13 +45,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import noman.googleplaces.NRPlaces;
 import noman.googleplaces.Place;
 import noman.googleplaces.PlaceType;
 import noman.googleplaces.PlacesException;
 import noman.googleplaces.PlacesListener;
 
-public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener {
+public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener {
     private GoogleMap mMap;
     private Marker currentMarker = null;
 
@@ -178,7 +180,17 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
 
             }
         });
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                return true;
+            }
+        });
+
     }
+
+
 
 
 
@@ -315,16 +327,8 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-        /*MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(currentLatLng);
-        markerOptions.draggable(true);
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_my_marker));
-
-
-        currentMarker = mMap.addMarker(markerOptions);*/
-
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-        mMap.moveCamera(cameraUpdate);
+//        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
+//        mMap.moveCamera(cameraUpdate);
 
     }
 
@@ -491,50 +495,6 @@ public class PharmacyMap extends AppCompatActivity implements OnMapReadyCallback
                 .build()
                 .execute();
 
-//        if(Locale.getDefault().getLanguage().equals("kr")) {
-//            new NRPlaces.Builder()
-//                    .listener(PharmacyMap.this)
-//                    .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
-//                    .latlng(location.latitude, location.longitude)//현재 위치
-//                    .radius(1000) //1키로 내에서 검색
-//                    .type(PlaceType.PHARMACY) //약국
-//                    .language("ko", "KR")
-//                    .build()
-//                    .execute();
-//        }
-//        else if(Locale.getDefault().getLanguage().equals("zh")){
-//            new NRPlaces.Builder()
-//                    .listener(PharmacyMap.this)
-//                    .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
-//                    .latlng(location.latitude, location.longitude)//현재 위치
-//                    .radius(1000) //1키로 내에서 검색
-//                    .type(PlaceType.PHARMACY) //약국
-//                    .language("zh", "CN")
-//                    .build()
-//                    .execute();
-//        }
-//        else if(Locale.getDefault().getLanguage().equals("en")){
-//            new NRPlaces.Builder()
-//                    .listener(PharmacyMap.this)
-//                    .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
-//                    .latlng(location.latitude, location.longitude)//현재 위치
-//                    .radius(1000) //1키로 내에서 검색
-//                    .type(PlaceType.PHARMACY) //약국
-//                    .language("en", "US")
-//                    .build()
-//                    .execute();
-//        }
-//        else if(Locale.getDefault().getLanguage().equals("ja")){
-//            new NRPlaces.Builder()
-//                    .listener(PharmacyMap.this)
-//                    .key("AIzaSyCWufAXi7KmcTnATgNWhjCXS1ABb9-Dp3c")
-//                    .latlng(location.latitude, location.longitude)//현재 위치
-//                    .radius(1000) //1키로 내에서 검색
-//                    .type(PlaceType.PHARMACY) //약국
-//                    .language("ja", "JP")
-//                    .build()
-//                    .execute();
-//        }
     }
 
 

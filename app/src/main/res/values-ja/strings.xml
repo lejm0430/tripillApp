@@ -80,4 +80,5 @@
     <string name="mebo_precautions">1日2~3回, 傷口に薄く塗る.</string>
     <string name="ezn_expect">生理痛緩和</string>
     <string name="ezn_precautions">8歳以上~15歳未満:1日1~3回, 1回1カプセル\n15歳以上:1日1~3回, 1回1~2カプセル\n服用間隔は4時間以上とする.</string>
+    <string name="search_load">道探し</string>
 </resources>

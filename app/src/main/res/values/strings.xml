@@ -88,4 +88,5 @@
     <string name="ezn_expect">생리통 완화</string>
     <string name="ezn_precautions">8세 이상~15세 미만 : 1일 1~3회, 1회 1캡슐\n
     15세 이상 : 1일 1~3회, 1회 1~2캡슐\n 복용간격은 4시간 이상으로 한다.</string>
+    <string name="search_load">길찾기</string>
 </resources>

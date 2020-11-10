@@ -173,7 +173,6 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_musclePain = muscle_pain.getText().toString();
 
-                intent.putExtra("part",s_musclePain);
                 intent.putExtra("s1",getString(R.string.muscle_pain));
                 intent.putExtra("sum","20");
                 intent.putExtra("s1kr","근육통");
@@ -188,7 +187,6 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_burn = burn.getText().toString();
 
-                intent.putExtra("part",s_burn);
                 intent.putExtra("s1",getString(R.string.burn));
                 intent.putExtra("sum","60");
                 intent.putExtra("s1kr","화상");
@@ -205,7 +203,6 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_wound = wound.getText().toString();
 
-                intent.putExtra("part",s_wound);
                 intent.putExtra("s1",getString(R.string.wound));
                 intent.putExtra("sum","25");
                 intent.putExtra("s1kr","상처");
@@ -222,7 +219,6 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_beer = hangover.getText().toString();
 
-                intent.putExtra("part",s_beer);
                 intent.putExtra("s1",getString(R.string.hangover));
                 intent.putExtra("sum","35");
                 intent.putExtra("s1kr","숙취");

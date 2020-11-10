@@ -146,8 +146,13 @@ public class AgeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        if(symptom2 == null) {
+        if(symptom2 == null && part != null) {
             String[] main_text = {part, symptom1};
+            adapter = new SymptomAdapter(main_text);
+
+            recyclerView.setAdapter(adapter);
+        }else if(part == null){
+            String[] main_text = {symptom1};
             adapter = new SymptomAdapter(main_text);
 
             recyclerView.setAdapter(adapter);

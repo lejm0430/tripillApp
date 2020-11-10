@@ -390,8 +390,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
 
                     // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
-                    Snackbar.make(mLayout, "권한이 거부되었습니다. 권한을 허용해주세요. ",
-                            Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                    Snackbar.make(mLayout, getString(R.string.preference_none),
+                            Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.confirm), new View.OnClickListener() {
 
                         @Override
                         public void onClick(View view) {
@@ -404,8 +404,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
 
                     // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우에는 설정(앱 정보)에서 퍼미션을 허용해야 앱을 사용할 수 있습니다.
-                    Snackbar.make(mLayout, "권한이 거부되었습니다. 설정(앱 정보)에서 권한을 허용해야 합니다. ",
-                            Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                    Snackbar.make(mLayout, getString(R.string.preference_none_setting),
+                            Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.confirm), new View.OnClickListener() {
 
                         @Override
                         public void onClick(View view) {

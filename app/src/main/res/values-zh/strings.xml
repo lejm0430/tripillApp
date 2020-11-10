@@ -53,7 +53,6 @@
     <string name="send">传送</string>
     <string name="history_age">岁数儿 : "</string>
     <string name="onemoretime_destory">再按一次就结束了.</string>
-
     <string name="penzal_expect">头痛，牙痛，咽喉痛，耳朵疼痛\n神经痛，腰痛，肌肉痛，瘀痛，恶寒</string>
     <string name="penzal_precautions">1日3次避免空腹服用.\n服用间隔为4小时\n成人(15岁以上):1次 1片\n满11岁以上~满15岁以下:1次 1/2~2/3片\n满8周岁以上~满11周岁以下:1次1/2粒</string>
     <string name="tylenol_expect">鼻涕, 鼻塞, 打喷嚏, 咽喉痛\n咳嗽, 恶寒, 发热, 头痛</string>
@@ -81,4 +80,6 @@
     <string name="ezn_expect">缓解痛经</string>
     <string name="ezn_precautions">8岁以上~15岁以下:1日1~3次，1次 1粒胶囊\n15岁以上:每日1~3次, 每次1~2粒\n服用间隔为4小时以上.</string>
     <string name="search_load">寻路</string>
+    <string name="preference_none">权利被否决了. 请允许我的权限.</string>
+    <string name="preference_none_setting">权利被否决了. 在设置（应用程序信息）中应该允许权限.</string>
 </resources>

@@ -52,33 +52,24 @@
     <string name="send">전송</string>
     <string name="history_age">나이 : "</string>
     <string name="onemoretime_destory">한번 더 누르면 종료됩니다.</string>
-
     <string name="penzal_expect">두통, 치통, 인후통, 귀의 통증,\n신경통, 요통, 근육통, 타박통, 오한 완화</string>
-    <string name="penzal_precautions">1일 3회까지 공복을 피하여 복용한다.\n복용간격은 4시간으로 한다.
-        \n성인(15세 이상):1회 1정\n만11세 이상 ~ 만15세 미만 : 1회 1/2~2/3정\n
-        만8세 이상 ~ 만11세 미만 : 1회 1/2정</string>
+    <string name="penzal_precautions">1일 3회까지 공복을 피하여 복용한다.\n복용간격은 4시간으로 한다.\n성인(15세 이상):1회 1정\n만11세 이상 ~ 만15세 미만 : 1회 1/2~2/3정\n만8세 이상 ~ 만11세 미만 : 1회 1/2정</string>
     <string name="tylenol_expect">콧물, 코막힘, 재채기, 인후통\n기침, 오한, 발열, 두통 완화</string>
     <string name="tylenol_precautions">1일 3회 식후 30분\n1회 용량 : 15세 이상 1정</string>
     <string name="strepsil_expect">목의 통증 완화</string>
-    <string name="strepsil_precautions">1일 3~6시간 간격으로 최대 5개\n
-    12세 이상 : 1개\n12세 미만 복용금지</string>
+    <string name="strepsil_precautions">1일 3~6시간 간격으로 최대 5개\n12세 이상 : 1개\n12세 미만 복용금지</string>
     <string name="minol_expect">기침, 가래, 천식, 구내염 완화</string>
     <string name="minol_precautions">8세~11세 1회 1정씩 1일 3회\n 복용간격 4시간 이상</string>
     <string name="mucopect_Tab_expect">호흡기질환에서의 가래 배출 곤란증상 완화제</string>
     <string name="mucopect_Tab_precautions">15세 이상 1정\n 1일 최대 3회</string>
     <string name="mucopect_Syrup_expect">급·만성 호흡기질환 : 급·만성기관지염, 천식성기관지염</string>
-    <string name="mucopect_Syrup_precautions">2세 미만 투약 금지\n2~4세 : 1회 7.5mg 1일 3회복용\n회
-        5세 이상 1회 15mg 1일 2~3회복용</string>
+    <string name="mucopect_Syrup_precautions">2세 미만 투약 금지\n2~4세 : 1회 7.5mg 1일 3회복용\n회5세 이상 1회 15mg 1일 2~3회복용</string>
     <string name="lirexpen_expect">신경통, 근육통, 관절통, 근경련 완화</string>
-    <string name="lirexpen_precautions">15세 이상 1회 2정, 1일 최대 4회 복용\n
-    15세 미만 : 1회 1정\n12세 미만 복용금지</string>
+    <string name="lirexpen_precautions">15세 이상 1회 2정, 1일 최대 4회 복용\n15세 미만 : 1회 1정\n12세 미만 복용금지</string>
     <string name="fucidin_expect">피부감염 완화</string>
-    <string name="fucidin_precautions">환부를 깨끗이 하고 1일 1~2회 적당량을 환부에\n
-    직접 바르거나 거즈에 넓게 펴발라 붙인다.</string>
+    <string name="fucidin_precautions">환부를 깨끗이 하고 1일 1~2회 적당량을 환부에\n직접 바르거나 거즈에 넓게 펴발라 붙인다.</string>
     <string name="gas_expect">식욕감퇴, 소화불량, 과식 완화</string>
-    <string name="gas_precautions">15세 이상 : 1회 1병\n11세 이상~15세 미만 : 1회 2/3병\n
-    8세이상~11세 미만 : 1회 1/2병\n5세 이상~8세 미만 : 1회 1/3병\n
-    3세 이상~5세 미만 : 1회 1/4병\n1세 이상~3세 미만 : 1회 1/5병</string>
+    <string name="gas_precautions">15세 이상 : 1회 1병\n11세 이상~15세 미만 : 1회 2/3병\n8세이상~11세 미만 : 1회 1/2병\n5세 이상~8세 미만 : 1회 1/3병\n3세 이상~5세 미만 : 1회 1/4병\n1세 이상~3세 미만 : 1회 1/5병</string>
     <string name="buscopan_expect">위장관계 질환의 발작성 동통 또는 담도계, 비뇨기계,\n월경곤란증 등 여성생식기계의 기능장애 및 경련성 동통</string>
     <string name="buscopan_precautions">성인 1회 1~2정씩 1일 3회 투여\n 1일 최대용량은 6정을 초과해서는 안된다.</string>
     <string name="ru_expect">숙취 완화</string>
@@ -86,7 +77,8 @@
     <string name="mebo_expect">화상 또는 상처 완화</string>
     <string name="mebo_precautions">1일 2-3회 상처부위에 얇게 바른다.</string>
     <string name="ezn_expect">생리통 완화</string>
-    <string name="ezn_precautions">8세 이상~15세 미만 : 1일 1~3회, 1회 1캡슐\n
-    15세 이상 : 1일 1~3회, 1회 1~2캡슐\n 복용간격은 4시간 이상으로 한다.</string>
+    <string name="ezn_precautions">8세 이상~15세 미만 : 1일 1~3회, 1회 1캡슐\n15세 이상 : 1일 1~3회, 1회 1~2캡슐\n 복용간격은 4시간 이상으로 한다.</string>
     <string name="search_load">길찾기</string>
+    <string name="preference_none">권한이 거부되었습니다. 권한을 허용해주세요.</string>
+    <string name="preference_none_setting">권한이 거부되었습니다. 설정(앱 정보)에서 권한을 허용해야 합니다.</string>
 </resources>

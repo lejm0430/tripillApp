@@ -53,7 +53,6 @@
     <string name="send">てんそう</string>
     <string name="history_age">年齢 : "</string>
     <string name="onemoretime_destory">もう一度押すと終了します.</string>
-
     <string name="penzal_expect">頭痛, 歯痛, 喉の痛み, 耳の痛み\n神経痛, 腰痛, 筋肉痛, 打撲痛, 悪寒</string>
     <string name="penzal_precautions">1日3回まで空腹を避けて服用する.\n服用間隔は4時間とする.\n成人(15歳以上):1回1錠\n満11歳以上~満15歳未満:1回12~23錠\n満8歳以上~満11歳未満:1回12錠</string>
     <string name="tylenol_expect">鼻水, 鼻づまり, くしゃみ, のどの痛み\n咳, 寒気, 発熱, 頭痛</string>
@@ -81,4 +80,6 @@
     <string name="ezn_expect">生理痛緩和</string>
     <string name="ezn_precautions">8歳以上~15歳未満:1日1~3回, 1回1カプセル\n15歳以上:1日1~3回, 1回1~2カプセル\n服用間隔は4時間以上とする.</string>
     <string name="search_load">道探し</string>
+    <string name="preference_none">権限が拒否されました. 権限を許可してください.</string>
+    <string name="preference_none_setting">権限が拒否されました. 設定(アプリ情報)で権限を許可する必要があります.</string>
 </resources>

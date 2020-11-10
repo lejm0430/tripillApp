@@ -118,13 +118,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPlaceInformation(currentPosition);
-            }
-        });
+
 
         RelativeLayout head = findViewById(R.id.head);
         head.setOnClickListener(new View.OnClickListener() {
@@ -173,6 +167,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
             }
 
+
         }
 
 
@@ -201,6 +196,13 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 lastClicked = marker;
                 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_choice));
                 return true;
+            }
+        });
+        mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+            @Override
+            public boolean onMyLocationButtonClick() {
+                showPlaceInformation(currentPosition);
+                return false;
             }
         });
 
@@ -493,6 +495,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
             }
         });
+
     }
 
     public void showPlaceInformation(LatLng location)

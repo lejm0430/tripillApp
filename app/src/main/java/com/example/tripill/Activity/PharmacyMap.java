@@ -205,13 +205,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             }
         });
 
-
-<<<<<<< HEAD
-        mMap.getUiSettings().setMyLocationButtonEnabled(true); //gps버튼
-=======
         mMap.getUiSettings().setMyLocationButtonEnabled(false); //gps버튼
 
->>>>>>> fb59aaf96641007f0f3ac22828144d3526504765
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 

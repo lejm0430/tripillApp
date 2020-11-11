@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -34,6 +35,7 @@ import androidx.annotation.NonNull;
 
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,6 +45,7 @@ import java.util.Locale;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
@@ -89,9 +92,12 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     long now;
     long nows;
+    long nowaisa;
     Date date;
     Date dates;
+    Date dateasia;
     SimpleDateFormat format = new SimpleDateFormat("MM. dd. yyyy");
+    SimpleDateFormat formatasia = new SimpleDateFormat("yyyy. MM. dd");
     SimpleDateFormat formats = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 
@@ -114,6 +120,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pill_recommend);
+
+        prcontext = this;
 
         pillphoto = findViewById(R.id.pillphoto);
         viewArea = findViewById(R.id.viewArea);
@@ -260,10 +268,14 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 if(state == 2){
                     if (expect.getCurrentTextColor() != getColor(R.color.cobalt)) {
                         expect.setTextColor(getColor(R.color.cobalt));
+                        Typeface face = ResourcesCompat.getFont(prcontext, R.font.bold);
+                        expect.setTypeface(face);
                     }
                 }else if(state == 1){
                     if (expect.getCurrentTextColor() != getColor(R.color.black)) {
                         expect.setTextColor(getColor(R.color.black));
+                        Typeface face = ResourcesCompat.getFont(prcontext, R.font.medium);
+                        expect.setTypeface(face);
                     }
                 }
             }
@@ -275,11 +287,14 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 if(state == 2){
                     if (warning.getCurrentTextColor() != getColor(R.color.cobalt)) {
                         warning.setTextColor(getColor(R.color.cobalt));
-
+                        Typeface face = ResourcesCompat.getFont(prcontext, R.font.bold);
+                        warning.setTypeface(face);
                     }
                 }else if(state == 1){
                     if (warning.getCurrentTextColor() != getColor(R.color.black)) {
                         warning.setTextColor(getColor(R.color.black));
+                        Typeface face = ResourcesCompat.getFont(prcontext, R.font.medium);
+                        warning.setTypeface(face);
                     }
                 }
             }
@@ -574,8 +589,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         String address = getCurrentAddress(latitude,longitude);
 
-        Log.d("TAG","latitude : "+latitude);
-        Log.d("TAG","longitude : "+longitude);
 
 
 //        String address ="서울 강남구 신사동 123-123";
@@ -647,7 +660,16 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         return formats.format(dates);
     }
 
+    public String getTimeAsia(){
+        nowaisa = System.currentTimeMillis();
+        dateasia = new Date(nowaisa);
+        return formatasia.format(dateasia);
+    }
+
+
     public void basicCRUD(Realm realm){
+        Locale locale = getResources().getConfiguration().locale;
+        String language = locale.getLanguage();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -656,7 +678,11 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 pd.setS1(s1);
                 pd.setS2(s2);
                 pd.setAge(ageS);
-                pd.setDate(getTime());
+                if(language == "ko" || language == "ja" || language == "zh"){
+                    pd.setDate(getTimeAsia());
+                }else{
+                    pd.setDate(getTime());
+                }
                 pd.setS1kr(s1kr);
                 pd.setS2kr(s2kr);
                 if(pd.getName() == null){

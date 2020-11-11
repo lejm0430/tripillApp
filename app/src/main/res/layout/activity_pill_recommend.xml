@@ -58,7 +58,7 @@
             android:id="@+id/layout_pill"
             android:layout_marginTop="24dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:orientation="horizontal"
             android:paddingLeft="16dp">
             <RelativeLayout
@@ -203,18 +203,20 @@
             android:layout_height="match_parent"
             android:text="@string/expect"
             android:paddingRight="16dp"
-            android:paddingTop="15dp"
+            android:paddingTop="16dp"
             android:paddingBottom="15dp"
             android:paddingLeft="16dp"
             android:textSize="16dp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/bold"
             android:textColor="@color/cobalt"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"/>
+            />
        <ImageView
            android:id="@+id/arrowIc"
            android:layout_width="wrap_content"
            android:layout_height="match_parent"
            android:paddingRight="16dp"
-           android:paddingTop="15dp"
+           android:paddingTop="20dp"
            android:paddingBottom="15dp"
            android:paddingLeft="16dp"
            android:src="@drawable/ic_close_arrow_light_gray"
@@ -259,20 +261,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/precautions"
                 android:paddingRight="16dp"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
                 android:paddingLeft="16dp"
+                android:includeFontPadding="false"
                 android:textSize="16dp"
                 android:textColor="@color/black"
-                android:fontFamily="@font/noto_sans_cj_kkr_medium"/>
+                android:fontFamily="@font/medium"
+                />
             <ImageView
                 android:id="@+id/arrowIcWarning"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingRight="18dp"
-                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="20dp"
                 android:paddingBottom="15dp"
-                android:paddingLeft="18dp"
+                android:paddingLeft="16dp"
                 android:src="@drawable/ic_open_arrow_light_gray"
                 android:layout_alignParentEnd="true"
                 />

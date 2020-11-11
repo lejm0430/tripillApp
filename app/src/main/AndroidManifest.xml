@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.tripill">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -15,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Dialog.NaverMapBottomSheet"></activity>
+        <activity android:name=".Dialog.NaverMapBottomSheet"
+            tools:ignore="Instantiatable" />
         <activity android:name=".Activity.PharmacyMap" >
 
         </activity>
@@ -24,7 +26,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Dialog.ChoicedSymptomSlide"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".Activity.AgeActivity"
             android:screenOrientation="portrait" />

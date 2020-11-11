@@ -2,6 +2,8 @@ package com.example.tripill.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import com.example.tripill.Activity.PillRecommendActivity;
 import com.example.tripill.DataBase.PillList;
 import com.example.tripill.R;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -52,7 +55,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
         //final PillList pillList = pilllist.get(position);
         holder.onBind(pilllist.get(position));
         s2 = holder.symptom2.getText().toString();
-        if(s2.isEmpty() && s2kr == null){
+        if(s2.isEmpty() || s2kr == null){
             holder.coma.setVisibility(View.GONE);
         }
         holder.linear.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +116,8 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
             pillname.setText(list.getPillname());
             s1kr = list.getSymptom1kr();
             s2kr = list.getSymptom2kr();
+            symptom1.setTypeface(symptom1.getTypeface(), Typeface.BOLD);
+            symptom2.setTypeface(symptom2.getTypeface(), Typeface.BOLD);
         }
 
     }

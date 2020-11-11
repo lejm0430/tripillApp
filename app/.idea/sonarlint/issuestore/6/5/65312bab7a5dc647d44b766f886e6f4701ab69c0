@@ -1,0 +1,31 @@
+
+a
+java:S2147]"DCombine this catch with the one at line 91, which has the same body.(ï­£Ä8øüŠ‹Û.
+e
+java:S1854,"CRemove this useless assignment to local variable "pharmacyName_kr".(äÂ¬ûÿÿÿÿ8øüŠ‹Û.
+r	java:S117,"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äÂ¬ûÿÿÿÿ8½‡ÅŠÛ.
+i
+java:S2095R"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(ÓÒ«8…ê…‹Û.
+r	java:S117-"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜ˆ¢‚ÿÿÿÿÿ8½‡ÅŠÛ.
+H
+java:S1172M"&Remove these unused method parameters.(Ñí¦£ıÿÿÿÿ8ìÇ¯‹Û.
+V
+java:S1481-"4Remove this unused "pharmacyName_en" local variable.(˜ˆ¢‚ÿÿÿÿÿ8øüŠ‹Û.
+W
+java:S1161'":Add the "@Override" annotation above this method signature(˜ıÉ8øüŠ‹Û.
+m	java:S117P"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦Éá±8…ê…‹Û.
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ô·¡
+D
+java:S1185!"(Remove this method to simply inherit it.(¥Ë©8øüŠ‹Û.
+e
+java:S1854-"CRemove this useless assignment to local variable "pharmacyName_en".(˜ˆ¢‚ÿÿÿÿÿ8øüŠ‹Û.
+V
+java:S1481,"4Remove this unused "pharmacyName_kr" local variable.(äÂ¬ûÿÿÿÿ8øüŠ‹Û.
+n
+java:S3252)"QUse static access with "androidx.fragment.app.DialogFragment" for "STYLE_NORMAL".(‚»Ò»8øüŠ‹Û.
+D
+java:S16043"(Make this anonymous inner class a lambda(šä¨8½‡ÅŠÛ.
+T
+java:S11352"2Complete the task associated to this TODO comment.(…øíùÿÿÿÿ8øüŠ‹Û.
+N
+java:S1135>"2Complete the task associated to this TODO comment.(«µß8øüŠ‹Û.

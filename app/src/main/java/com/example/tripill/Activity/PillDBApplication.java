@@ -1,18 +1,8 @@
 package com.example.tripill.Activity;
 
-import android.app.Activity;
 import android.app.Application;
-import android.os.Bundle;
-import android.widget.TextView;
-
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.tripill.Adapter.PillList;
-
-import java.util.ArrayList;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 public class PillDBApplication extends Application {
 

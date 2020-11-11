@@ -3,7 +3,6 @@ package com.example.tripill.Dialog;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tripill.Activity.AgeActivity;
 import com.example.tripill.Adapter.ChoiceSymptomRecyclerAdapter;
-import com.example.tripill.Adapter.SymptomList;
+import com.example.tripill.DataBase.SymptomList;
 import com.example.tripill.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ChoicedSymptomSlide extends BottomSheetDialogFragment {

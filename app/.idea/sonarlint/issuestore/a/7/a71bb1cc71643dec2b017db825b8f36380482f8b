@@ -1,0 +1,11 @@
+
+k
+java:S3252#"PUse static access with "android.view.ViewGroup$LayoutParams" for "MATCH_PARENT".(—ïˆíûÿÿÿÿ
+k
+java:S3252$"PUse static access with "android.view.ViewGroup$LayoutParams" for "WRAP_CONTENT".(È÷„öýÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ŽÔ·¡
+Q	java:S110"<This class has 9 parents which is greater than 5 authorized.(ø®­Þ
+n
+java:S1104"SMake context a static final constant or non-public and provide accessors if needed.(±¹ï±úÿÿÿÿ
+C
+java:S16040"(Make this anonymous inner class a lambda(÷“ïÁýÿÿÿÿ

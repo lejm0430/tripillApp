@@ -2,19 +2,17 @@ package com.example.tripill.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.tripill.Activity.PillRecommendActivity;
+import com.example.tripill.DataBase.PillList;
 import com.example.tripill.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

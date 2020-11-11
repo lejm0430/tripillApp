@@ -1,26 +1,26 @@
 
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(°Ê€úøÿÿÿÿ
->	java:S108+")Either remove or fill this block of code.(ÈÀã‡
-a
-java:S2184"FCast one of the operands of this multiplication operation to a "long".(”¶ðÔúÿÿÿÿ
-—
-java:S1186}"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¥Ã½ë
-O
-java:S1128"9Remove this unused import 'androidx.annotation.Nullable'.(¾Èêš
-f
-java:S1874Œ"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(Ž‡ÙÂýÿÿÿÿ
 ˜
 java:S1186‚"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÑëùÀ
-N
-java:S1128"8Remove this unused import 'androidx.annotation.NonNull'.(ˆÛúÜ
-J
-java:S1066P"/Merge this if statement with the enclosing one.(÷•ê¡ÿÿÿÿÿ
 C	java:S1086")Either remove or fill this block of code.(Éµûãÿÿÿÿÿ
-
-java:S1186Œ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ž‡ÙÂýÿÿÿÿ
-c
-java:S2259R"MA "NullPointerException" could be thrown; "locationManager" is nullable here.(¡ßÒŠ
 ˜
 java:S1186‡"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(²¢½×
+—
+java:S1186}"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¥Ã½ë
+f
+java:S1874Œ"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(Ž‡ÙÂýÿÿÿÿ
+a
+java:S2184"FCast one of the operands of this multiplication operation to a "long".(”¶ðÔúÿÿÿÿ
+N
+java:S1128"8Remove this unused import 'androidx.annotation.NonNull'.(ˆÛúÜ
+O
+java:S1128"9Remove this unused import 'androidx.annotation.Nullable'.(¾Èêš
+
+java:S1186Œ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ž‡ÙÂýÿÿÿÿ
+J
+java:S1066P"/Merge this if statement with the enclosing one.(÷•ê¡ÿÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(°Ê€úøÿÿÿÿ
+>	java:S108+")Either remove or fill this block of code.(ÈÀã‡
+c
+java:S2259R"MA "NullPointerException" could be thrown; "locationManager" is nullable here.(¡ßÒŠ
 m
 java:S3776$"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(øˆ÷Ãùÿÿÿÿ

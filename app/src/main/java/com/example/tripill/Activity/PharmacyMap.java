@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
@@ -193,7 +194,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
 
         }
-
 
 
         mMap.getUiSettings().setMyLocationButtonEnabled(true); //gps버튼

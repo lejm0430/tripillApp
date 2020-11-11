@@ -25,14 +25,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
     ArrayList<SymptomList> list = new ArrayList();
-    ArrayList<Integer> scorelist;
     ArrayList<String> symptomlist;
 
     public String title;
 
     private static final int REQUEST_CODE = 1001;
-
-    ChoicedSymptomSlide choicedSymptomSlide;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

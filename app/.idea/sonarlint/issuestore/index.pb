@@ -133,8 +133,6 @@ D.idea/libraries/Gradle__androidx_transition_transition_1_2_0_aar.xml,0\9\093a2
 P.idea/libraries/Gradle__com_google_android_gms_play_services_base_17_3_0_aar.xml,d\f\df09d9133dc3ffcc01458e6e3ecdae2f622120ee
 „
 T.idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_3_0_aar.xml,7\4\746ccd00526d9878ae6743ab059d55c7c02f6635
-]
--src/main/res/layout/activity_pharmacy_map.xml,a\0\a0c8b8ccb789adea52f8dd3f14e8528a91034304
 l
 <src/main/java/com/example/tripill/Dialog/FullImagDialog.java,3\2\324ec9f5e2fb51cff46fd03edeffddb48cead520
 m

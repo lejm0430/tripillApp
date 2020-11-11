@@ -111,7 +111,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
     public static Context context_bottom;
 
-
+    LatLng currentLatLng;
 
 
     @Override
@@ -195,10 +195,24 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
         }
 
+        ImageView gpsBtn = findViewById(R.id.gpsBtn);
+        gpsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
+                showPlaceInformation(currentPosition);
+            }
+        });
+
+
+<<<<<<< HEAD
         mMap.getUiSettings().setMyLocationButtonEnabled(true); //gps버튼
+=======
+        mMap.getUiSettings().setMyLocationButtonEnabled(false); //gps버튼
 
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+>>>>>>> fb59aaf96641007f0f3ac22828144d3526504765
+
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
@@ -232,13 +246,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
 
 
-        mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
-            @Override
-            public boolean onMyLocationButtonClick() {
-                showPlaceInformation(currentPosition);
-                return false;
-            }
-        });
 
 
     }
@@ -376,7 +383,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         if (currentMarker != null) currentMarker.remove();
 
 
-        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+        currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
 //        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
 //        mMap.moveCamera(cameraUpdate);

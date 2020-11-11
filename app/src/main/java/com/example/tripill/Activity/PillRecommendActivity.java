@@ -225,10 +225,10 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         name = null;
 
-        if(s2 == null || s2.isEmpty()){
-            sym.setText(s1);
+        if(s2kr == null || s2kr.isEmpty()){
+            sym.setText(s1kr);
         }else {
-            sym.setText(s1 + "/" + s2);
+            sym.setText(s1kr + "/" + s2kr);
         }
 
         pullimg.setOnClickListener(new View.OnClickListener() {

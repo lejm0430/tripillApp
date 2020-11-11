@@ -36,13 +36,11 @@ public class NaverMapBottomSheet extends BottomSheetDialogFragment {
 
         TextView pharmacyName_kr = v.findViewById(R.id.pharmacyName_kr);
         TextView pharmacyName_en = v.findViewById(R.id.pharmacyName_en);
-        RelativeLayout findroadBtn = v.findViewById(R.id.findroadBtn);
+        TextView findroadBtn = v.findViewById(R.id.findroadBtn);
 
 
         pharmacyName_kr.setText(name);
-
-
-        pharmacyName_en.setText(name);
+        pharmacyName_en.setText("phamacy");
         //각국언어
 
 

@@ -27,7 +27,7 @@
     <string name="enter_age">Please enter\nthe age of the user.</string>
     <string name="age">years old</string>
     <string name="recommend_drug">Get drug recommendations</string>
-    <string name="not_recommend">There is no recommended medicine for the age you entered.</string>
+    <string name="not_recommend">There is no recommended medicine for\nthe age you entered.</string>
     <string name="show_pharmacist">Show the pharmacist the sentence.</string>
     <string name="expect">Expectation effectiveness</string>
     <string name="precautions">Precautions</string>

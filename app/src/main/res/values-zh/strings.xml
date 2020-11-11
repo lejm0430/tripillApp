@@ -82,4 +82,5 @@
     <string name="search_load">寻路</string>
     <string name="preference_none">权利被否决了. 请允许我的权限.</string>
     <string name="preference_none_setting">权利被否决了. 在设置（应用程序信息）中应该允许权限.</string>
+    <string name="pharmacy">药房</string>
 </resources>

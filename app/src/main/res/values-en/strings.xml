@@ -82,4 +82,5 @@
     <string name="search_load">Finding a way</string>
     <string name="preference_none">Permission denied. Please allow permission.</string>
     <string name="preference_none_setting">Permission denied. The settings (app information) must allow permissions.</string>
+    <string name="pharmacy">Pharmacy</string>
 </resources>

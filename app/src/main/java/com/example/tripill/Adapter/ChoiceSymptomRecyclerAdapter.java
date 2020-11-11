@@ -72,18 +72,16 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
         CheckBox.OnCheckedChangeListener checkedChangeListener =new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Log.d("TAG :" , "pre Count : " + count);
 
                 if (b) {
                     count++;
                     selected_list.add(list.get(position));
-                    Log.d("TAG","선택된 아이템 : "+selected_list.toString());
 
                     if (count > 2) {
                         // 3개쨰 선택시
                         holder.SymptomBtn.setOnCheckedChangeListener(null); //리스너 막기
                         holder.SymptomBtn.setChecked(false);  //체크 금지
-                        Toast.makeText(context, "2개까지만 선택가능", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,R.string.maximum_two_choice_toast, Toast.LENGTH_SHORT).show();
                         holder.SymptomBtn.setOnCheckedChangeListener(this);
 
                         count--;
@@ -93,10 +91,7 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
                 }else{
                     count--;
                     selected_list.remove(list.get(position));
-                    Log.d("TAG","해체된 아이템 : "+selected_list.toString());
                 }
-                Log.d("TAG :" , "post Count : " + count);
-
             }
         };
 
@@ -138,9 +133,6 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
                 public void onClick(View view) {
                     pos = getAdapterPosition();
                     notifyDataSetChanged();
-
-
-                    Log.d("TAG","선택한 값 : "+list.get(pos));
                 }
             });
 

@@ -50,7 +50,6 @@ public class NaverMapBottomSheet extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
 
-//                ((PharmacyMap)PharmacyMap.context_bottom).intent1();
 
 
                 Uri gmmIntentUri = Uri.parse("google.navigation:q="+Snippet+"&mode=w");

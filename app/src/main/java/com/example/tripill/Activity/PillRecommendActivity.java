@@ -242,10 +242,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         sos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                SosDialog dialog = new SosDialog(PillRecommendActivity.this);
-//                dialog.callFunction();
-
-
                 check();
                 callFunction();
             }

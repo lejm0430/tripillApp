@@ -82,4 +82,5 @@
     <string name="preference_none">권한이 거부되었습니다. 권한을 허용해주세요.</string>
     <string name="preference_none_setting">권한이 거부되었습니다. 설정(앱 정보)에서 권한을 허용해야 합니다.</string>
     <string name="pharmacy">약국</string>
+    <string name="maximum_two_choice_toast">2개까지만 선택가능</string>
 </resources>

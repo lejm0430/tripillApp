@@ -83,4 +83,5 @@
     <string name="preference_none">権限が拒否されました. 権限を許可してください.</string>
     <string name="preference_none_setting">権限が拒否されました. 設定(アプリ情報)で権限を許可する必要があります.</string>
     <string name="pharmacy">売薬店</string>
+    <string name="maximum_two_choice_toast">2つまで選択可能</string>
 </resources>

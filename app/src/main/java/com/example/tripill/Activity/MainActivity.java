@@ -29,11 +29,8 @@ import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity{
 
-    static final int SYMPTOMCODE = 1111;
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
-
-    public static final String TAG = MainActivity.class.getName();
 
     String name;
     int age;

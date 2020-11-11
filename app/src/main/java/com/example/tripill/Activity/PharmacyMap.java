@@ -59,7 +59,6 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -92,7 +91,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
     Location mCurrentLocatiion;
     LatLng currentPosition;
-    private Location location;
+    Location location;
 
 
     private FusedLocationProviderClient mFusedLocationClient;
@@ -112,7 +111,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     public static Context context_bottom;
 
     LatLng currentLatLng;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,13 +135,9 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         builder.addLocationRequest(locationRequest);
 
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
 
         RelativeLayout head = findViewById(R.id.head);
         head.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +147,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
                 }
         });
-
     }
 
 
@@ -163,6 +156,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
 
+        setDefaultLocation();
 
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -170,28 +164,23 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) { //퍼미션 허용 O
-
+            mMap.setMyLocationEnabled(true);
             startLocationUpdates(); // 위치 업데이트 시작
 
-        }else {  //퍼미션 허용
+        }else {  //퍼미션 허용x
 
-            // 사용자가 퍼미션 거부를 한 적이 있는 경우에는
+
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
-                //스낵바 설명
                 Snackbar.make(mLayout, R.string.snackbar_body,
                         Snackbar.LENGTH_INDEFINITE).setAction(R.string.confirm, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // 퍼미션 허용됨. 요청 결과는 onRequestPermissionResult에서 수신
                         ActivityCompat.requestPermissions( PharmacyMap.this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
                     }
                 }).show();
             } else {
-                // 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로
-                // 요청 결과는 onRequestPermissionResult에서 수신
                 ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
             }
-
 
         }
 
@@ -200,7 +189,10 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             @Override
             public void onClick(View view) {
 
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
+//                mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
+
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentLatLng, 17);
+                mMap.moveCamera(cameraUpdate);
                 showPlaceInformation(currentPosition);
             }
         });
@@ -230,9 +222,13 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     lastClicked.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
                 }
                 lastClicked = marker;
+
+
                 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_choice));
                 naverMapBottomSheet.name = marker.getTitle();
                 naverMapBottomSheet.Snippet = marker.getSnippet();
+
+
                 naverMapBottomSheet.show(getSupportFragmentManager(),"naverMapBottomSheet");
                 return true;
             }
@@ -244,6 +240,32 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
 
     }
+
+
+
+    public void setDefaultLocation() {
+
+        int hasFineLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ){
+
+            // TODO: 2020-11-11 현재위치
+            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+            mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+
+
+        }else{
+            LatLng DEFAULT_LOCATION = new LatLng(37.566614, 126.977919);
+            Toast.makeText(this, R.string.DefaultLocation_check, Toast.LENGTH_LONG).show();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 17);
+            mMap.moveCamera(cameraUpdate);
+        }
+
+
+    }
+
 
 
 
@@ -268,9 +290,11 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
                 //현재 위치에 마커 생성하고 이동
                 setCurrentLocation(location, markerTitle, markerSnippet_location);
-
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
                 mCurrentLocatiion = location;
+
+
+
+
             }
 
 
@@ -298,13 +322,12 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
                 return;
             }
-
-
-
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
-            if (checkPermission())
+            if (checkPermission()){
                 mMap.setMyLocationEnabled(true);
+
+            }
 
         }
 
@@ -333,7 +356,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             return true;
         }
 
-        return false;
+        return true;
 
     }
 
@@ -377,11 +400,12 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
         if (currentMarker != null) currentMarker.remove();
 
-
         currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+       /* CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
+        mMap.moveCamera(cameraUpdate);*/
 
-//        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-//        mMap.moveCamera(cameraUpdate);
+
+
 
     }
 

@@ -85,4 +85,6 @@
     <string name="pharmacy">Pharmacy</string>
     <string name="maximum_two_choice_toast">Only two can be selected</string>
     <string name="snackbar_body">You need access to the location when you run this app.</string>
+    <string name="DefaultLocation_notlocation">Unable to get location information.</string>
+    <string name="DefaultLocation_check">Check location rights and GPS activity.</string>
 </resources>

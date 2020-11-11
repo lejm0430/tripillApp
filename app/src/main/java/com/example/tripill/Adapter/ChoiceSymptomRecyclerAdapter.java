@@ -48,7 +48,7 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
         return mainHolder;
     }
 
-    public List<SymptomList> getSelected_list() { // // TODO: 2020-11-04 선택된 아이템 스코어값
+    public List<SymptomList> getSelected_list() {
         return selected_list;
     }
 

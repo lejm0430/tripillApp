@@ -41,7 +41,6 @@ public class NaverMapBottomSheet extends BottomSheetDialogFragment {
 
         pharmacyName_kr.setText(name);
         pharmacyName_en.setText(R.string.pharmacy);
-        //각국언어
 
 
 

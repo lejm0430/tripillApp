@@ -130,6 +130,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
         });
 
+
     }
 
 
@@ -195,7 +196,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 }
                 lastClicked = marker;
                 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_choice));
-                return true;
+                Log.e("name / address",marker.getTitle()+marker.getSnippet());
+                return false;
             }
         });
         mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
@@ -401,8 +403,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     }).show();
 
                 }else {
-
-
                     // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우에는 설정(앱 정보)에서 퍼미션을 허용해야 앱을 사용할 수 있습니다.
                     Snackbar.make(mLayout, getString(R.string.preference_none_setting),
                             Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.confirm), new View.OnClickListener() {

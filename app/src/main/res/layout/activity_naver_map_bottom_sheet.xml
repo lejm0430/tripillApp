@@ -34,31 +34,26 @@
         android:fontFamily="@font/noto_sans_cj_kkr_regular"
         android:includeFontPadding="false"/>
 
-    <RelativeLayout
-        android:id="@+id/findroadBtn"
-        android:layout_width="93dp"
-        android:layout_height="32dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        android:layout_gravity="right">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/circle_border_sunflower_navermap"/>
-
         <TextView
+            android:id="@+id/findroadBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:layout_gravity="right"
             android:text="@string/search_load"
+            android:background="@drawable/circle_border_sunflower_navermap"
             android:textSize="16dp"
             android:textColor="#194f82"
             android:fontFamily="@font/noto_sans_cj_kkr_regular"
             android:includeFontPadding="false"
             android:layout_centerInParent="true"/>
 
-    </RelativeLayout>
 
 
 </LinearLayout>

@@ -83,4 +83,5 @@
     <string name="preference_none_setting">권한이 거부되었습니다. 설정(앱 정보)에서 권한을 허용해야 합니다.</string>
     <string name="pharmacy">약국</string>
     <string name="maximum_two_choice_toast">2개까지만 선택가능</string>
+    <string name="snackbar_body">이 앱을 실행하여면 위치 접근 권한이 필요합니다.</string>
 </resources>

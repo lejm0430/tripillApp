@@ -177,8 +177,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             // 사용자가 퍼미션 거부를 한 적이 있는 경우에는
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
                 //스낵바 설명
-                Snackbar.make(mLayout, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.",
-                        Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                Snackbar.make(mLayout, R.string.snackbar_body,
+                        Snackbar.LENGTH_INDEFINITE).setAction(R.string.confirm, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         // 퍼미션 허용됨. 요청 결과는 onRequestPermissionResult에서 수신

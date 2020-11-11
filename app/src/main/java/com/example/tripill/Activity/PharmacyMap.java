@@ -197,7 +197,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 lastClicked = marker;
                 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_choice));
                 Log.e("name / address",marker.getTitle()+marker.getSnippet());
-                return false;
+                return true;
             }
         });
         mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {

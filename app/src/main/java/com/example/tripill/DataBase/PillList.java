@@ -1,4 +1,4 @@
-package com.example.tripill.Adapter;
+package com.example.tripill.DataBase;
 
 import com.example.tripill.DataBase.PillDB;
 

@@ -4,7 +4,6 @@ package com.example.tripill.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tripill.Adapter.PillHistoryAdapter;
-import com.example.tripill.Adapter.PillList;
+import com.example.tripill.DataBase.PillList;
 import com.example.tripill.DataBase.PillDB;
 import com.example.tripill.Dialog.ChoicedSymptomSlide;
 import com.example.tripill.R;

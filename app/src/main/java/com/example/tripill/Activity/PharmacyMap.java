@@ -222,23 +222,12 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 }
                 lastClicked = marker;
                 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_choice));
-<<<<<<< HEAD
-                Log.e("name / address",marker.getTitle()+marker.getSnippet());
-                return true;
-            }
-=======
-
-
-
-
-                Log.e("name / address",marker.getTitle()+marker.getSnippet());  //로그
-
                 naverMapBottomSheet.name = marker.getTitle();
                 naverMapBottomSheet.Snippet = marker.getSnippet();
                 naverMapBottomSheet.show(getSupportFragmentManager(),"naverMapBottomSheet");
-                        return true; //false true 차이
-                    }
->>>>>>> cdf5f628a6e50952e9a7977c76a5e27da001ed5e
+                return true;
+            }
+
         });
 
 

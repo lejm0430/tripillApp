@@ -45,6 +45,16 @@
         android:name="com.google.android.gms.maps.SupportMapFragment" />
 
 
+        <ImageView
+        android:id="@+id/gpsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/white_rec_r8_map_gps"
+        android:src="@drawable/ic_gps" />
     </RelativeLayout>
 
 

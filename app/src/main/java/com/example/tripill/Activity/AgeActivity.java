@@ -13,8 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tripill.Adapter.SymptomAdapter;
-import com.example.tripill.Dialog.AgeDialog;
-import com.example.tripill.Dialog.ChoicedSymptomSlide;
+import com.example.tripill.Dialog.BaseDialog;
 import com.example.tripill.R;
 
 import androidx.annotation.RequiresApi;
@@ -89,24 +88,28 @@ public class AgeActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
-                if (age.length() > 0) {
                     Integer i = Integer.parseInt(age.getText().toString());
+                    Log.e("age",age.getText().toString());
                     if (sum>=1 && sum<=3 && i < 15 || sum >=4 && sum <=6 && i<7 || sum ==8 && i <2 || sum ==15 && i<2 || sum == 20 && i<15 || sum == 35 && i<15 || sum == 50 && i<15 || sum >= 100 && i<8){
-                        AgeDialog dialog = new AgeDialog(AgeActivity.this);
-                        dialog.callFunction();
+                        BaseDialog dialog = new BaseDialog(AgeActivity.this);
+                        String contents,confirm;
+                        contents = getString(R.string.not_recommend);
+                        confirm = getString(R.string.confirm);
+                        dialog.init(contents," ",confirm);
+                        dialog.show();
                     }else{
                         if(sum>=1 && sum <=3) {
                             name = getString(R.string.penzal);
                         }else if(sum>=4 && sum<=6){
                             name = getString(R.string.tylenol);
-                        }else if(sum ==7){
+                        }else if(sum ==7 && i>=12){
                             name = getString(R.string.strepsil);
                         }
-                        else if(sum == 7 && i < 12){
+                        else if(sum == 7 && i<12){
                             name = getString(R.string.minol);
-                        }else if(sum ==8 || sum == 15) {
+                        }else if(sum ==8 && i >= 15 || sum == 15 && i >= 15) {
                             name = getString(R.string.mucopect_Tab);
-                        }else if(sum ==8 || sum == 15 && i < 15){
+                        }else if(sum ==8 && i < 15 || sum == 15 && i < 15){
                             name = getString(R.string.mucopect_Syrup);
                         }else if(sum == 20 ){
                             name = getString(R.string.lirexpen);
@@ -134,7 +137,6 @@ public class AgeActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
-            }
         });
 
         recyclerView = findViewById(R.id.recycle);
@@ -145,23 +147,10 @@ public class AgeActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
 
+        String[] main_text =  part == null ?  new String[]{symptom1} : symptom2 == null && part != null ? new String[]{part, symptom1} : new String[]{part, symptom1, symptom2};
+        adapter = new SymptomAdapter(main_text);
+        recyclerView.setAdapter(adapter);
 
-        if(symptom2 == null && part != null) {
-            String[] main_text = {part, symptom1};
-            adapter = new SymptomAdapter(main_text);
-
-            recyclerView.setAdapter(adapter);
-        }else if(part == null){
-            String[] main_text = {symptom1};
-            adapter = new SymptomAdapter(main_text);
-
-            recyclerView.setAdapter(adapter);
-        }else{
-            String[] main_text = {part, symptom1, symptom2};
-            adapter = new SymptomAdapter(main_text);
-
-            recyclerView.setAdapter(adapter);
-        }
 
     }
 

@@ -85,4 +85,6 @@
     <string name="pharmacy">药房</string>
     <string name="maximum_two_choice_toast">只能选择2个</string>
     <string name="snackbar_body">执行该程序需要有接近位置接近位置的权利</string>
+    <string name="DefaultLocation_notlocation">不能带来位置信息.</string>
+    <string name="DefaultLocation_check">请确认位置权限和GPS是否活跃.</string>
 </resources>

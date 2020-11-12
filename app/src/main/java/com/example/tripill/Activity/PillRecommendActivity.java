@@ -1,23 +1,16 @@
 package com.example.tripill.Activity;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,6 +21,7 @@ import com.example.tripill.DataBase.PillList;
 import com.example.tripill.Adapter.SymptomRecommendAdpater;
 import com.example.tripill.DataBase.PillDB;
 import com.example.tripill.Dialog.FullImagDialog;
+import com.example.tripill.Dialog.BaseDialog;
 import com.example.tripill.R;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -35,7 +29,6 @@ import androidx.annotation.NonNull;
 
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -173,7 +166,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             pillname = "Tylenol";
             expecttext.setText(R.string.tylenol_expect);
             precautionstext.setText(R.string.tylenol_precautions);
-        }else if(sum ==7 || name.equals(getString(R.string.strepsil))){
+        }else if(sum ==7 && age>=12 || name.equals(getString(R.string.strepsil))){
             pillphoto.setImageResource(R.drawable.strepsil);
             pillname = "Strepsil";
             expecttext.setText(R.string.strepsil_expect);
@@ -184,12 +177,12 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             pillname = "Minol-F Troche";
             expecttext.setText(R.string.minol_expect);
             precautionstext.setText(R.string.minol_precautions);
-        }else if(sum ==8 || sum == 15 || name.equals(getString(R.string.mucopect_Tab))) {
+        }else if(sum ==8 && age >= 15 || sum == 15 && age >= 15 || name.equals(getString(R.string.mucopect_Tab))) {
             pillphoto.setImageResource(R.drawable.mucoj);
             pillname = "Mucopect Tab";
             expecttext.setText(R.string.mucopect_Tab_expect);
             precautionstext.setText(R.string.mucopect_Tab_precautions);
-        }else if(sum ==8 || sum == 15 && age < 15 || name.equals(getString(R.string.mucopect_Syrup))){
+        }else if(sum ==8 && age < 15 || sum == 15 && age < 15 || name.equals(getString(R.string.mucopect_Syrup))){
             pillphoto.setImageResource(R.drawable.mucos);
             pillname = "Mucopect Syrup";
             expecttext.setText(R.string.mucopect_Syrup_expect);
@@ -243,7 +236,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             @Override
             public void onClick(View view) {
                 FullImagDialog dialog = new FullImagDialog(PillRecommendActivity.this);
-                dialog.callFunction(pillname);
+                dialog.init(pillname);
+                dialog.show();
             }
         });
 
@@ -251,7 +245,12 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             @Override
             public void onClick(View view) {
                 check();
-                callFunction();
+                BaseDialog dialog = new BaseDialog(PillRecommendActivity.this);
+                String canclecontents,confirm;
+                canclecontents = getString(R.string.sos);
+                confirm = getString(R.string.send);
+                dialog.init(null,canclecontents,confirm);
+                dialog.show();
             }
         });
 
@@ -371,67 +370,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         ((MainActivity)MainActivity.mcontext).drawer_recycler.setAdapter(((MainActivity)MainActivity.mcontext).historyadapter);
 
     }
-
-
-
-
-
-    public void callFunction() {
-
-        final Dialog dlg=new Dialog(this);
-
-        dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dlg.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        dlg.setContentView(R.layout.dialog_alluse);
-
-        WindowManager.LayoutParams params=dlg.getWindow().getAttributes();
-        params.width=WindowManager.LayoutParams.MATCH_PARENT;
-        params.height=WindowManager.LayoutParams.WRAP_CONTENT;
-
-        dlg.show();
-        dlg.setCancelable(true);
-
-        final Button cancle=(Button) dlg.findViewById(R.id.canclebtn);
-        final Button ok=(Button) dlg.findViewById(R.id.okbtn);
-        final RelativeLayout layout=(RelativeLayout) dlg.findViewById(R.id.layout);
-        final TextView text=(TextView) dlg.findViewById(R.id.text);
-
-        text.setText(R.string.sos);
-        ok.setText(R.string.send);
-
-        layout.setClipToOutline(true);
-
-        cancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dlg.dismiss();
-            }
-        });
-
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-                int hasFineLocationPermission = ContextCompat.checkSelfPermission(PillRecommendActivity.this,
-                        Manifest.permission.ACCESS_FINE_LOCATION);
-                int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(PillRecommendActivity.this,
-                        Manifest.permission.ACCESS_COARSE_LOCATION);
-
-                if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                        hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED){
-                    messege();
-                }
-
-                dlg.dismiss();
-
-            }
-        });
-
-    }
-
 
     public void check(){
         int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);

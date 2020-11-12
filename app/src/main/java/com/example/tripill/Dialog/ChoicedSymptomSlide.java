@@ -1,6 +1,7 @@
 package com.example.tripill.Dialog;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,7 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
     private static final int REQUEST_CODE = 1001;
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -48,6 +50,7 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -104,7 +107,7 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
                 intent.putExtra("part",title);
 
                 if (adapter.getSelected_list().isEmpty()){
-                   // NotChoiceDialog dialog = new NotChoiceDialog(ChoicedSymptomSlide.this);
+                   //BaseDialog dialog = new BaseDialog(context);
 
                 } else if(adapter.getSelected_list().size() == 1){
                         intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());

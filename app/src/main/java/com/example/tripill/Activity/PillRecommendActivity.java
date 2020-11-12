@@ -1,6 +1,7 @@
 package com.example.tripill.Activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -99,10 +100,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     SimpleDateFormat formats = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 
-
     private Realm realm;
 
-    public static Context prcontext; //--
     private TextToSpeech tts;
 
 //    private GpsTracker gpsTracker;
@@ -116,12 +115,13 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
 
+    public static Context prcontext;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pill_recommend);
-
-        prcontext = this;
 
         pillphoto = findViewById(R.id.pillphoto);
         viewArea = findViewById(R.id.viewArea);
@@ -363,7 +363,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         }
         ///////list
 
-        ((MainActivity)MainActivity.mcontext).pillList = new ArrayList<PillList>();
+        ((MainActivity)MainActivity.context).pillList = new ArrayList<PillList>();
 
         realm = Realm.getDefaultInstance();
         basicCRUD(realm);
@@ -371,10 +371,10 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
-        ((MainActivity)MainActivity.mcontext).drawer_recycler.setLayoutManager(linearLayoutManager);
+        ((MainActivity)MainActivity.context).drawer_recycler.setLayoutManager(linearLayoutManager);
 
-        ((MainActivity)MainActivity.mcontext).historyadapter = new PillHistoryAdapter(((MainActivity)MainActivity.mcontext).pillList,this);
-        ((MainActivity)MainActivity.mcontext).drawer_recycler.setAdapter(((MainActivity)MainActivity.mcontext).historyadapter);
+        ((MainActivity)MainActivity.context).historyadapter = new PillHistoryAdapter(((MainActivity)MainActivity.context).pillList,this);
+        ((MainActivity)MainActivity.context).drawer_recycler.setAdapter(((MainActivity)MainActivity.context).historyadapter);
 
     }
 
@@ -623,14 +623,14 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 pd.setS1kr(s1kr);
                 pd.setS2kr(s2kr);
                 if(pd.getName() == null){
-                    ((MainActivity)MainActivity.mcontext).drawer_recycler.setVisibility(View.GONE);
+                    ((MainActivity)MainActivity.context).drawer_recycler.setVisibility(View.GONE);
                 }else{
                     RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
 
                     for (PillDB pill : result) {
-                        ((MainActivity)MainActivity.mcontext).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
+                        ((MainActivity)MainActivity.context).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
                     }
-                    ((MainActivity)MainActivity.mcontext).nonehistory.setVisibility(View.GONE);
+                    ((MainActivity)MainActivity.context).nonehistory.setVisibility(View.GONE);
                 }
             }
         });

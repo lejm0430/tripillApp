@@ -1,6 +1,7 @@
 
 package com.example.tripill.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.example.tripill.R;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,7 +47,6 @@ public class MainActivity extends AppCompatActivity{
 
     ArrayList<PillList> pillList;
 
-    public static Context mcontext;
 
     PillHistoryAdapter historyadapter;
 
@@ -53,13 +54,14 @@ public class MainActivity extends AppCompatActivity{
 
     private Realm realm;
 
+    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mcontext = this;
+        context = this;
 
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);

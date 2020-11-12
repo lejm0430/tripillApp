@@ -107,7 +107,13 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
                 intent.putExtra("part",title);
 
                 if (adapter.getSelected_list().isEmpty()){
-                   //BaseDialog dialog = new BaseDialog(context);
+                   BaseDialog dialog = new BaseDialog(getActivity());
+                    String contents,confirm;
+                    contents = getString(R.string.select_symptom);
+                    confirm = getString(R.string.confirm);
+                    dialog.init(contents,null,confirm);
+                    dialog.show();
+
 
                 } else if(adapter.getSelected_list().size() == 1){
                         intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());

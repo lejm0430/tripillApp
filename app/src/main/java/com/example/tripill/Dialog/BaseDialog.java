@@ -79,7 +79,7 @@ public class BaseDialog extends Dialog {
                 if(contents != null){
                     dismiss();
                 }else{
-                    ((PillRecommendActivity)PillRecommendActivity.prcontext).messege();
+                    //((PillRecommendActivity)PillRecommendActivity.prcontext).messege();
                 }
 
             }
@@ -91,42 +91,4 @@ public class BaseDialog extends Dialog {
             }
         });
     }
-//    public void callFunction(){
-//
-//        final Dialog dlg = new Dialog(context);
-//
-//        dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dlg.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//
-//        dlg.setContentView(R.layout.dialog_alluse);
-//
-//
-//
-//        WindowManager.LayoutParams params = dlg.getWindow().getAttributes();
-//        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-//        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//
-//
-//        final RelativeLayout layout = (RelativeLayout) dlg.findViewById(R.id.layout);
-//        final Button okbtn = (Button) dlg.findViewById(R.id.okbtn);
-//        final Button canclebtn = (Button) dlg.findViewById(R.id.canclebtn);
-//        final TextView text = dlg.findViewById(R.id.text);
-//
-//
-//        text.setText(R.string.select_symptom);
-//
-//        canclebtn.setVisibility(View.GONE);
-//
-//        dlg.show();
-//        dlg.setCancelable(true);
-//
-//        layout.setClipToOutline(true);
-//
-//        okbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dlg.dismiss();
-//            }
-//        });
-//    }
 }

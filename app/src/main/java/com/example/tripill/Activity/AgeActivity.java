@@ -89,7 +89,6 @@ public class AgeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                     Integer i = Integer.parseInt(age.getText().toString());
-                    Log.e("age",age.getText().toString());
                     if (sum>=1 && sum<=3 && i < 15 || sum >=4 && sum <=6 && i<7 || sum ==8 && i <2 || sum ==15 && i<2 || sum == 20 && i<15 || sum == 35 && i<15 || sum == 50 && i<15 || sum >= 100 && i<8){
                         BaseDialog dialog = new BaseDialog(AgeActivity.this);
                         String contents,confirm;
@@ -149,7 +148,7 @@ public class AgeActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        String[] main_text =  part == null ?  new String[]{symptom1} : symptom2 == null && part != null ? new String[]{part, symptom1} : new String[]{part, symptom1, symptom2};
+        String[] main_text =  part == null ?  new String[]{symptom1} : symptom2 == null ? new String[]{part, symptom1} : new String[]{part, symptom1, symptom2};
         adapter = new SymptomAdapter(main_text);
         recyclerView.setAdapter(adapter);
 

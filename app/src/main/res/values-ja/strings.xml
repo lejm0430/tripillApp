@@ -6,7 +6,7 @@
     <string name="cancle">キャンセル</string>
     <string name="recommend_you">あなたの症状に適した薬をお勧めします.</string>
     <string name="safe_trip">安全な旅行になってください.</string>
-    <string name="select_part">痛みがある部位を選んでください.</string>
+    <string name="select_part">痛みがある部位を選ん\nでください.</string>
     <string name="head">あたま</string>
     <string name="neck">び</string>
     <string name="abdominal">腹部</string>

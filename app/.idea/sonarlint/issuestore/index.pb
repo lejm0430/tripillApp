@@ -1,6 +1,6 @@
 
 <
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
 q
 Asrc/main/java/com/example/tripill/Dialog/ChoicedSymptomSlide.java,1\b\1bfaf1bd8f0dd37b4e6ee8422e0d701b4c3a5d51
 q
@@ -137,16 +137,12 @@ l
 <src/main/java/com/example/tripill/Dialog/FullImagDialog.java,3\2\324ec9f5e2fb51cff46fd03edeffddb48cead520
 m
 =src/main/java/com/example/tripill/Dialog/NotChoiceDialog.java,f\e\fe3453871e162aff8e3bd030ebb61aa46f294b9d
-g
-7src/main/java/com/example/tripill/Dialog/SosDialog.java,1\4\14cbf64f8dbda60365f309a2e4da805ee464ff6e
 f
 6src/main/java/com/example/tripill/DataBase/PillDB.java,a\d\ad7c49e2a18fb26f9158ea6237228b0009875700
 h
 8src/main/java/com/example/tripill/DataBase/PillList.java,3\f\3fcf91a4f2884e6f4037abc5fe78e9e622d0cea4
 q
 Asrc/main/java/com/example/tripill/Adapter/PillHistoryAdapter.java,9\5\956901750a39492c0e049d958b6bcb956ae7d514
-f
-6src/main/java/com/example/tripill/API/PharmacyApi.java,2\8\28591c8946cd6409004ec1ec608f734d069122a0
 g
 7src/main/java/com/example/tripill/Dialog/AgeDialog.java,a\7\a71bb1cc71643dec2b017db825b8f36380482f8b
 l

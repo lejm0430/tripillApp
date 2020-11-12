@@ -173,6 +173,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
             startLocationUpdates(); // 위치 업데이트 시작
 
+
+
         }else {  //퍼미션 허용
 
             // 사용자가 퍼미션 거부를 한 적이 있는 경우에는
@@ -269,7 +271,10 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 //현재 위치에 마커 생성하고 이동
                 setCurrentLocation(location, markerTitle, markerSnippet_location);
 
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+//                mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+//                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
+//                mMap.moveCamera(cameraUpdate);
+
                 mCurrentLocatiion = location;
             }
 
@@ -379,9 +384,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
 
         currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-//        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-//        mMap.moveCamera(cameraUpdate);
 
     }
 

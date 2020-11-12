@@ -21,30 +21,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="증상1"
-            android:textColor="@color/slate"
-            android:textSize="16dp"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-            android:includeFontPadding="false" />
+            style="@style/TextStyle15" />
 
         <TextView
             android:id="@+id/coma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=", "
-            android:textColor="@color/slate"
-            android:textSize="16dp"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-            android:includeFontPadding="false"/>
+            style="@style/TextStyle15"/>
 
         <TextView
             android:id="@+id/symptom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="증상2"
-            android:textColor="@color/slate"
-            android:textSize="16dp"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-            android:includeFontPadding="false"/>
+            style="@style/TextStyle15"/>
 
     </LinearLayout>
 
@@ -59,10 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/history_age"
-            android:textSize="16dp"
-            android:textColor="@color/slate"
-            android:fontFamily="@font/noto_sans_cj_kkr_regular"
-            android:includeFontPadding="false"/>
+            style="@style/TextStyle16"/>
 
 
         <TextView
@@ -71,10 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ageText"
             android:text="20"
-            android:textSize="16dp"
-            android:textColor="@color/slate"
-            android:fontFamily="@font/noto_sans_cj_kkr_regular"
-            android:includeFontPadding="false"/>
+            style="@style/TextStyle16"/>
 
 
         <TextView
@@ -83,10 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="01.31.2020"
-            android:textSize="14dp"
-            android:textColor="@color/warm_grey"
-            android:fontFamily="@font/noto_sans_cj_kkr_regular"
-            android:includeFontPadding="false"/>
+            style="@style/TextStyle17"/>
 
 
     </RelativeLayout>
@@ -97,10 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="약이름"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:fontFamily="@font/noto_sans_cj_kkr_medium"
-        android:includeFontPadding="false"/>
+        style="@style/TextStyle18"/>
 
 
     <View

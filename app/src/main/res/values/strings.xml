@@ -83,7 +83,8 @@
     <string name="preference_none_setting">권한이 거부되었습니다. 설정(앱 정보)에서 권한을 허용해야 합니다.</string>
     <string name="pharmacy">약국</string>
     <string name="maximum_two_choice_toast">2개까지만 선택가능</string>
-    <string name="snackbar_body">이 앱을 실행하여면 위치 접근 권한이 필요합니다.</string>
-    <string name="DefaultLocation_notlocation">위치정보를 가져올 수 없습니다.</string>
-    <string name="DefaultLocation_check">위치 권한과 GPS 활성 여부 확인하세요.</string>
+    <string name="snackbar_body">이 앱을 실행하려면 위치 접근 권한이 필요합니다.</string>
+    <string name="no_gocode">지오코더 서비스 사용불가</string>
+    <string name="Invalid_GPS">잘못된 GPS 좌표</string>
+    <string name="cant_find_address">주소 미발견</string>
 </resources>

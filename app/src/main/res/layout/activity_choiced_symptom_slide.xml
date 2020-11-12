@@ -38,10 +38,7 @@
         android:paddingTop="4dp"
         android:layout_marginLeft="16dp"
         android:text="부위"
-        android:textColor="@color/white"
-        android:textSize="14dp"
-        android:fontFamily="@font/noto_sans_cj_kkr_demilight"
-        android:includeFontPadding="false"
+        style="@style/TextStyle9"
         android:background="@drawable/rec_coner_button"/>
 
     <TextView
@@ -50,10 +47,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/select_symptom"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/noto_sans_cj_kkr_demilight"
-        android:includeFontPadding="false"/>
+        style="@style/TextStyle6"/>
 
     <TextView
         android:id="@+id/TwoChoiceMungu"
@@ -62,52 +56,9 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
         android:text="@string/maximum_two_choice"
-        android:textColor="@color/coral"
-        android:textSize="14dp"
-        android:fontFamily="@font/noto_sans_cj_kkr_regular"
-        android:includeFontPadding="false"
+        style="@style/TextStyle7"
         android:visibility="gone"/>
 
-<!--    <CheckBox
-        android:id="@+id/Symptom1"
-        android:layout_width="wrap_content"
-        android:layout_height="44dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:paddingLeft="12dp"
-        android:text="증상1"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/noto_sans_cj_kkr_regular"
-        android:includeFontPadding="false"
-        android:button="@drawable/symptom_check_selector"
-        />
-
-    <CheckBox
-        android:id="@+id/Symptom2"
-        android:layout_width="wrap_content"
-        android:layout_height="44dp"
-        android:layout_marginLeft="16dp"
-        android:paddingLeft="12dp"
-        android:text="증상2"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/noto_sans_cj_kkr_regular"
-        android:includeFontPadding="false"
-        android:button="@drawable/symptom_check_selector"/>
-
-    <CheckBox
-        android:id="@+id/Symptom3"
-        android:layout_width="wrap_content"
-        android:layout_height="44dp"
-        android:layout_marginLeft="16dp"
-        android:paddingLeft="12dp"
-        android:text="증상3"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/noto_sans_cj_kkr_regular"
-        android:includeFontPadding="false"
-        android:button="@drawable/symptom_check_selector"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_symptom"
@@ -129,10 +80,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/textview_bottom_button_border"
         android:text="@string/next"
-        android:textSize="16dp"
-        android:textColor="@color/cobalt"
-        android:fontFamily="@font/noto_sans_cj_kkr_medium"
-        android:includeFontPadding="false"/>
+        style="@style/TextStyle8"/>
 
 
 </LinearLayout>

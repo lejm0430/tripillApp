@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         ImageView menuBtn = findViewById(R.id.menuBtn);
-        final ImageView headBtn = findViewById(R.id.headBtn_ring);
+        ImageView headBtn = findViewById(R.id.headBtn_ring);
         ImageView neckBtn = findViewById(R.id.neckBtn_ring);
         ImageView stomachBtn = findViewById(R.id.stomachBtn_ring);
         ImageView musclePainBtn = findViewById(R.id.musclePainBtn_ring);

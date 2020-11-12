@@ -9,9 +9,11 @@ import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -103,12 +105,18 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     private Realm realm;
 
     private TextToSpeech tts;
-
-//    private GpsTracker gpsTracker;
-
     LatLng currentPosition;
-
     Location location;
+
+
+
+
+    protected LocationManager locationManager;
+    Context mContext;
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
+
+
 
     private static final int GPS_ENABLE_REQUEST_CODE = 300;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -429,37 +437,39 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
 
 
+    public Location getLocation() {
+        try {
+            locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
+
+            boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            if (!isGPSEnabled && !isNetworkEnabled) {
+                Toast.makeText(this, "gps를 키거나 네트워크 연결", Toast.LENGTH_SHORT).show();
+            } else {
+
+                int hasFineLocationPermission = ContextCompat.checkSelfPermission(mContext,
+                        Manifest.permission.ACCESS_FINE_LOCATION);
+                int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(mContext,
+                        Manifest.permission.ACCESS_COARSE_LOCATION);
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-
-            case GPS_ENABLE_REQUEST_CODE:
-
-                //사용자가 GPS 활성 시켰는지 검사
-                if (!checkLocationServicesStatus()) {
-                    Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
-                    if (checkLocationServicesStatus()) {
-
-                        return;
-                    }
+                if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                        hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
+                    //둘다 켜져있음.
+                } else{
+                    return null;
                 }
 
-                break;
+            }
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return location;
     }
-
-    public boolean checkLocationServicesStatus() {   //gps 네트워크 여부
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
-
 
 
 
@@ -500,34 +510,15 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     }
 
-    LocationCallback locationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(LocationResult locationResult) {
-            super.onLocationResult(locationResult);
 
-            List<Location> locationList = locationResult.getLocations();
-
-            if (locationList.size() > 0) {
-                location = locationList.get(locationList.size() - 1);
-                //location = locationList.get(0);
-
-                currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
-
-                location = location;
-
-
-
-
-            }
-
-
-        }
-
-    };
 
     public void messege() {
 
-        String address = getCurrentAddress(location.getLatitude(), location.getLongitude());
+//        getLocation();
+        double latitude = getLocation().getLatitude();
+        double longtitude = getLocation().getLongitude();
+
+        String address = getCurrentAddress(latitude,longtitude);
 
         ageS = getIntent().getStringExtra("age");
         s1kr = getIntent().getStringExtra("s1kr");

@@ -41,18 +41,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -74,8 +64,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     private Marker currentMarker = null;
     private Marker lastClicked;
 
-    ImageView imgmarker;
-
     List<Marker> previous_marker = null;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -85,27 +73,16 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
-
-//    Location mCurrentLocatiion;
     LatLng currentPosition;
     Location location;
-
 
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
 
-
     private View mLayout;  // Snackbar 사용하기 위해서는 View
 
-    private PharmacyMap pharmacyMap;
-
-    StringBuilder responseBuilder = new StringBuilder();
-    ArrayList<pharmacyList> list = new ArrayList<>();
-
-    String name;
     String markerSnippet;
 
-    public static Context context_bottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,14 +133,13 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
+
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) { //퍼미션 허용 O
+
             startLocationUpdates(); // 위치 업데이트 시작
 
-
-
-
-        }else {  //퍼미션 허용
+        }else {  //퍼미션 허용x
 
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
@@ -251,7 +227,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ){
 
-
         }else{
             LatLng DEFAULT_LOCATION = new LatLng(37.566614, 126.977919);
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 17);
@@ -278,9 +253,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
 
                 location = location;
-
-
-
 
 
             }
@@ -312,10 +284,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             }
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
-            if (checkPermission()){
+            if (checkPermission())
                 mMap.setMyLocationEnabled(true);
-
-            }
 
         }
 
@@ -344,7 +314,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             return true;
         }
 
-        return true;
+        return false;
 
     }
 
@@ -367,7 +337,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         } catch (IllegalArgumentException illegalArgumentException) {
             Toast.makeText(this, R.string.Invalid_GPS, Toast.LENGTH_LONG).show();
             return String.valueOf(R.string.Invalid_GPS);
-
         }
 
 
@@ -381,6 +350,9 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         }
 
     }
+
+
+
 
     @Override
     public void onRequestPermissionsResult(int permsRequestCode,

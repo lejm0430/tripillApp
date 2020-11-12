@@ -18,10 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="증상2"
-        android:textSize="16dp"
         android:layout_marginLeft="8dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/noto_sans_cj_kkr_regular"
-        android:includeFontPadding="false"/>
+        style="@style/TextStyle5"/>
 
 </LinearLayout>

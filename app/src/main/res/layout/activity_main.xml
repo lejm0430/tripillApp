@@ -47,8 +47,7 @@
         android:layout_height="wrap_content"
         android:text="@string/select_part"
         android:layout_below="@+id/action_bar"
-        android:textSize="24dp"
-        android:textColor="@color/black"
+        style="@style/TextStyle4"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"/>
 
@@ -87,13 +86,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/head"
-                            android:textColor="@color/slate"
-                            android:textSize="16dp"
                             android:layout_below="@id/headBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-                            android:includeFontPadding="false"/>
+                            style="@style/TextStyle3"/>
 
                     </RelativeLayout>
 
@@ -118,13 +114,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/neck"
-                            android:textColor="@color/slate"
-                            android:textSize="16dp"
+                            style="@style/TextStyle3"
                             android:layout_below="@id/neckBtn_ring"
                             android:layout_marginTop="8dp"
-                            android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-                            android:includeFontPadding="false"/>
+                            android:layout_centerHorizontal="true"/>
 
                     </RelativeLayout>
 
@@ -150,13 +143,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/abdominal"
-                            android:textColor="@color/slate"
-                            android:textSize="16dp"
                             android:layout_below="@id/stomachBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-                            android:includeFontPadding="false"/>
+                            style="@style/TextStyle3"/>
 
                     </RelativeLayout>
                 </LinearLayout>
@@ -190,13 +180,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/muscle_pain"
-                            android:textColor="@color/slate"
-                            android:textSize="16dp"
+                            style="@style/TextStyle3"
                             android:layout_below="@id/musclePainBtn_ring"
                             android:layout_marginTop="8dp"
-                            android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-                            android:includeFontPadding="false"/>
+                            android:layout_centerHorizontal="true"/>
 
                     </RelativeLayout>
 
@@ -223,13 +210,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/burn"
-                            android:textColor="@color/slate"
-                            android:textSize="16dp"
                             android:layout_below="@id/burnBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-                            android:includeFontPadding="false"/>
+                            style="@style/TextStyle3"/>
 
                     </RelativeLayout>
 
@@ -255,13 +239,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/wound"
-                            android:textColor="@color/slate"
-                            android:textSize="16dp"
                             android:layout_below="@id/woundBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-                            android:includeFontPadding="false"/>
+                            style="@style/TextStyle3"/>
 
                     </RelativeLayout>
                 </LinearLayout>
@@ -295,13 +276,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/hangover"
-                            android:textColor="@color/slate"
-                            android:textSize="16dp"
                             android:layout_below="@id/beerBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-                            android:includeFontPadding="false"/>
+                            style="@style/TextStyle3"/>
 
                     </RelativeLayout>
 

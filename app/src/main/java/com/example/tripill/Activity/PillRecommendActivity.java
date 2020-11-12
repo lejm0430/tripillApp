@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -23,6 +24,10 @@ import com.example.tripill.DataBase.PillDB;
 import com.example.tripill.Dialog.FullImagDialog;
 import com.example.tripill.Dialog.BaseDialog;
 import com.example.tripill.R;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.maps.model.LatLng;
+
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import androidx.annotation.NonNull;
@@ -100,9 +105,11 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     public static Context prcontext; //--
     private TextToSpeech tts;
 
-    private GpsTracker gpsTracker;
+//    private GpsTracker gpsTracker;
 
+    LatLng currentPosition;
 
+    Location location;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 300;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -438,7 +445,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                     startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
                     if (checkLocationServicesStatus()) {
 
-                        checkRunTimePermission();
                         return;
                     }
                 }
@@ -455,31 +461,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     }
 
 
-    void checkRunTimePermission(){
-
-        // 위치 퍼미션을 가지고 있는지 체크
-        int hasFineLocationPermission = ContextCompat.checkSelfPermission(PillRecommendActivity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(PillRecommendActivity.this,
-                Manifest.permission.ACCESS_COARSE_LOCATION);
-
-        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
-
-        } else {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
-
-                Toast.makeText(this, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
-                ActivityCompat.requestPermissions(PillRecommendActivity.this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
 
 
-            } else {
-                ActivityCompat.requestPermissions(PillRecommendActivity.this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
-            }
-
-        }
-
-    }
 
     public String getCurrentAddress( double latitude, double longitude) {
 
@@ -496,19 +479,19 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                     7);
         } catch (IOException ioException) {
             //네트워크 문제
-            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
-            return "지오코더 서비스 사용불가";
+            Toast.makeText(this, R.string.no_gocode, Toast.LENGTH_LONG).show();
+            return String.valueOf(R.string.no_gocode);
         } catch (IllegalArgumentException illegalArgumentException) {
-            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
-            return "잘못된 GPS 좌표";
+            Toast.makeText(this, R.string.Invalid_GPS, Toast.LENGTH_LONG).show();
+            return String.valueOf(R.string.Invalid_GPS);
 
         }
 
 
 
         if (addresses == null || addresses.size() == 0) {
-            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
-            return "'주소 미발견'";
+            Toast.makeText(this, R.string.cant_find_address, Toast.LENGTH_LONG).show();
+            return String.valueOf(R.string.cant_find_address);
 
         }
 
@@ -517,19 +500,35 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     }
 
+    LocationCallback locationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            super.onLocationResult(locationResult);
+
+            List<Location> locationList = locationResult.getLocations();
+
+            if (locationList.size() > 0) {
+                location = locationList.get(locationList.size() - 1);
+                //location = locationList.get(0);
+
+                currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
+
+                location = location;
+
+
+
+
+            }
+
+
+        }
+
+    };
 
     public void messege() {
 
+        String address = getCurrentAddress(location.getLatitude(), location.getLongitude());
 
-        gpsTracker = new GpsTracker(PillRecommendActivity.this);
-        double latitude = gpsTracker.getLatitude();
-        double longitude = gpsTracker.getLongitude();
-
-        String address = getCurrentAddress(latitude,longitude);
-
-
-
-//        String address ="서울 강남구 신사동 123-123";
         ageS = getIntent().getStringExtra("age");
         s1kr = getIntent().getStringExtra("s1kr");
         s2kr= getIntent().getStringExtra("s2kr");
@@ -537,7 +536,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 
         if(s2kr != null){
-            String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1kr+ "," + s2kr +"입니다. 살려줘";
+            String smsBody = "저는 외국인입니다." + "저의 위치는 '" + address + "'이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1kr+ "," + s2kr +"입니다. 살려줘";
 
             sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
 

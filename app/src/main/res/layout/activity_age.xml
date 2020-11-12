@@ -48,9 +48,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/enter_age"
-            android:textColor="@color/black"
-            android:fontFamily="@font/noto_sans_cj_kkr_demilight"
-            android:textSize="20dp"
             style="@style/TextStyle6"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,8 +58,6 @@
             android:layout_width="132dp"
             android:layout_height="54dp"
             android:layout_marginTop="24dp"
-            android:textSize="36dp"
-            android:textColor="@color/cobalt"
             android:background="@drawable/age_underline"
             style="@style/TextStyle10"
             android:maxLength="2"
@@ -77,8 +72,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/age"
-                android:textSize="20dp"
-                android:textColor="@color/warm_grey"
                 style="@style/TextStyle11"/>
         </LinearLayout>
     </LinearLayout>
@@ -94,12 +87,11 @@
         <TextView
             android:id="@+id/recobtn"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="match_parent"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="@string/recommend_drug"
-            android:textColor="@color/cobalt"
             style="@style/TextStyle8"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-            android:textSize="16dp"
             android:background="@drawable/textview_bottom_button_border"
             android:gravity="center"/>
     </LinearLayout>

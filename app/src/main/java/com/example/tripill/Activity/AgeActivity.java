@@ -107,9 +107,11 @@ public class AgeActivity extends AppCompatActivity {
                         }
                         else if(sum == 7 && i<12){
                             name = getString(R.string.minol);
-                        }else if(sum ==8 && i >= 15 || sum == 15 && i >= 15) {
+                        }else if(sum ==8 && i >= 15 || sum == 15 && i >= 15)
+                        {
                             name = getString(R.string.mucopect_Tab);
-                        }else if(sum ==8 && i < 15 || sum == 15 && i < 15){
+                        }
+                        else if(sum ==8 && i < 15 || sum == 15 && i < 15){
                             name = getString(R.string.mucopect_Syrup);
                         }else if(sum == 20 ){
                             name = getString(R.string.lirexpen);

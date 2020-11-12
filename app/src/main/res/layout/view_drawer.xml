@@ -32,9 +32,7 @@
             android:layout_height="wrap_content"
             android:text="@string/previous"
             android:textSize="24dp"
-            android:textColor="@color/white"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/noto_sans_cj_kkr_demi_light"
+            style="@style/TextStyle14"
             android:layout_below="@+id/circle"/>
 
     </RelativeLayout>
@@ -70,9 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/not_use"
-            android:textSize="16dp"
-            android:textColor="@color/warm_grey"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
+            style="@style/TextStyle13"
             android:layout_gravity="center"/>
 
     </LinearLayout>

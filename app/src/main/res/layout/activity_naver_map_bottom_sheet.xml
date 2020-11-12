@@ -16,10 +16,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
         android:text="약국 한글 이름"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:fontFamily="@font/noto_sans_cj_kkr_demilight"
-        android:includeFontPadding="false"/>
+        style="@style/TextStyle6"/>
 
     <TextView
         android:id="@+id/pharmacyName_en"
@@ -29,10 +26,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:text="약국 영어 이름"
-        android:textSize="14dp"
-        android:textColor="@color/warm_grey"
-        android:fontFamily="@font/noto_sans_cj_kkr_regular"
-        android:includeFontPadding="false"/>
+        style="@style/TextStyle17"/>
 
         <TextView
             android:id="@+id/findroadBtn"
@@ -48,10 +42,7 @@
             android:layout_gravity="right"
             android:text="@string/search_load"
             android:background="@drawable/circle_border_sunflower_navermap"
-            android:textSize="16dp"
-            android:textColor="#194f82"
-            android:fontFamily="@font/noto_sans_cj_kkr_regular"
-            android:includeFontPadding="false"
+            style="@style/TextStyle25"
             android:layout_centerInParent="true"/>
 
 

@@ -19,30 +19,23 @@
             android:src="@drawable/ic_back_arrow_blue"
             android:padding="16dp"
             />
+
         <TextView
             android:id="@+id/sos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_alignParentRight="true"
-            android:layout_width="86dp"
-            android:layout_height="30dp"
             android:text="SOS"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-            android:background="@drawable/rec_coner_cobalt_symptom_textview"
-            android:backgroundTint="@color/coral"
-            android:paddingLeft="40dp"
-            android:gravity="center"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_sos_white"
-            android:layout_alignTop="@+id/sos"
-            android:layout_alignLeft="@+id/sos"
-            android:layout_marginLeft="14dp"
-            android:layout_marginTop="8dp" />
+            style="@style/TextStyle19"
+            android:background="@drawable/rec_coner_coral_sos"
+            android:drawableLeft="@drawable/ic_sos_white"
+            android:drawablePadding="8dp"/>
+
+
+
     </RelativeLayout>
     <ScrollView
         android:layout_below="@+id/head"
@@ -98,10 +91,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cj_kkr_regular"
-                    android:text="@string/symptom"
-                    android:textColor="@color/warm_grey"
-                    android:textSize="14dp" />
+                    style="@style/TextStyle17"
+                    android:text="@string/symptom" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycle"
@@ -125,9 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/show_pharmacist"
-            android:textSize="14dp"
-            android:textColor="@color/warm_grey"
-            android:fontFamily="@font/noto_sans_cj_kkr_regular"/>
+            style="@style/TextStyle17"/>
             <LinearLayout
                 android:layout_below="@id/tv"
                 android:layout_width="wrap_content"
@@ -144,9 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="두통 / 어지럼증 /aksjdbfkasjdbfkajsdbfkajsbdfka"
-                    android:textSize="24dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/noto_sans_cj_kkr_regular"
+                    style="@style/TextStyle20"
                     android:layout_marginRight="8dp"/>
 
             </RelativeLayout>
@@ -205,11 +192,12 @@
             android:paddingRight="16dp"
             android:paddingBottom="16dp"
             android:paddingLeft="16dp"
-            android:textSize="16dp"
-            android:includeFontPadding="false"
             android:fontFamily="@font/bold"
             android:textColor="@color/cobalt"
+            android:textSize="16dp"
+            android:includeFontPadding="false"
             />
+
        <ImageView
            android:id="@+id/arrowIc"
            android:layout_width="wrap_content"
@@ -263,10 +251,10 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="16dp"
                 android:paddingLeft="16dp"
-                android:includeFontPadding="false"
                 android:textSize="16dp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/medium"
+                android:includeFontPadding="false"
                 />
             <ImageView
                 android:id="@+id/arrowIcWarning"
@@ -302,9 +290,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="그것은 동력은 것이 있는가? 인류의 같은 풍부하게 봄날의 인도하겠다는 든 어디 보라. 거선의 것은 그들의 따뜻한 별과 물방아 영원히 고동을 이것이야말로 사막이다. 인간의 얼음에 두기 굳세게 피어나는 있는 이상은 이상은 용감하고 피다. 부패를 청춘의 심장은 방황하였으며, 피어나는 인생에 때문이다. 가치를 곧 인도하겠다는 예수는 원대하고, 아니더면, 열락의 날카로우나 보라. 못하다 일월과 우리 때에, 넣는 사막이다. 청춘의 곧 착목한는 전인 내려온 되려니와, 칼이다. 우리의 피어나는 못하다 뿐이다.."
-                    android:textSize="14dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/noto_sans_cj_kkr_regular"/>
+                    style="@style/TextStyle21"/>
             </RelativeLayout>
         </net.cachapa.expandablelayout.ExpandableLayout>
         </LinearLayout>
@@ -316,10 +302,7 @@
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:text="@string/find_pharmacy"
-            android:textColor="@color/cobalt"
             style="@style/TextStyle8"
-            android:fontFamily="@font/noto_sans_cj_kkr_medium"
-            android:textSize="16dp"
             android:background="@drawable/textview_bottom_button_border"
             android:gravity="center"
             android:layout_alignParentBottom="true"/>

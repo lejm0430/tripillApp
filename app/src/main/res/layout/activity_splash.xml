@@ -22,25 +22,21 @@
         android:layout_marginRight="16dp"
         android:gravity="center"
         android:text="@string/recommend_you"
-        android:textColor="@color/slate"
-        android:textSize="14dp"
-        android:fontFamily="@font/noto_sans_cj_kkr_demilight"
-        android:includeFontPadding="false"
+        style="@style/TextStyle"
         android:layout_below="@+id/splash_icon"
         android:layout_marginTop="24dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:lineHeight="17dp"/>
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/safe_trip"
-        android:textColor="@color/greyish_brown"
-        android:textSize="14dp"
-        android:fontFamily="@font/noto_sans_cj_kkr_medium"
-        android:includeFontPadding="false"
+        style="@style/TextStyle2"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="32dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:lineHeight="20dp"/>
 
 </RelativeLayout>

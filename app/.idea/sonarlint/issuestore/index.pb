@@ -87,8 +87,6 @@ l
 <src/main/java/com/example/tripill/Activity/MainActivity.java,e\d\ed113c6bc39ac1480dc570214c10f885485508ec
 j
 :src/main/res/drawable/bottomsheet_background_white_r24.xml,7\c\7cf032d1ddf90019aa4b94f6196eed24a3fa9c98
-f
-6src/main/res/layout/activity_choiced_symptom_slide.xml,7\6\76fb4caa5d8071eadba4c271859247d1c2217c89
 N
 src/main/res/ic_map_marker.svg,4\5\45658113a3dc35825703bbed218026582348d8a4
 U
@@ -101,8 +99,6 @@ u
 Esrc/main/java/com/example/tripill/Activity/PillRecommendActivity.java,8\c\8cd208d508324a1b65f4adbf89d38e3b0f9f645c
 L
 src/main/AndroidManifest.xml,0\6\066a3db98a4a279fde40d6ddf92c417b5c93198b
-j
-:src/main/java/com/example/tripill/Activity/GpsTracker.java,b\2\b269ab7c861c338476142d184d665333872e8d38
 k
 ;src/main/java/com/example/tripill/Activity/PharmacyMap.java,9\8\982e5f7ee3be1f85daf1cb75c6ae3f04447ffade
 

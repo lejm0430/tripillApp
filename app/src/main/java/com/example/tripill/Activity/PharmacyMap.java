@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.tripill.Activity.GpsTracker;
 import com.example.tripill.DataBase.pharmacyList;
 import com.example.tripill.Dialog.NaverMapBottomSheet;
 import com.example.tripill.R;
@@ -77,19 +77,16 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     ImageView imgmarker;
 
     List<Marker> previous_marker = null;
-    private GpsTracker gpsTracker;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
 
-    boolean needRequest = false;
-
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
 
-    Location mCurrentLocatiion;
+//    Location mCurrentLocatiion;
     LatLng currentPosition;
     Location location;
 
@@ -109,8 +106,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     String markerSnippet;
 
     public static Context context_bottom;
-
-    LatLng currentLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +129,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
         builder.addLocationRequest(locationRequest);
 
-
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -161,15 +156,15 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
-
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) { //퍼미션 허용 O
-            mMap.setMyLocationEnabled(true);
             startLocationUpdates(); // 위치 업데이트 시작
 
 
 
+
         }else {  //퍼미션 허용
+
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
                 Snackbar.make(mLayout, R.string.snackbar_body,
@@ -192,7 +187,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
 //                mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
 
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentLatLng, 17);
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentPosition, 17);
                 mMap.moveCamera(cameraUpdate);
                 showPlaceInformation(currentPosition);
             }
@@ -229,8 +224,12 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 naverMapBottomSheet.name = marker.getTitle();
                 naverMapBottomSheet.Snippet = marker.getSnippet();
 
+                View include = findViewById(R.id.include);
 
-                naverMapBottomSheet.show(getSupportFragmentManager(),"naverMapBottomSheet");
+                include.setVisibility(View.VISIBLE);
+
+
+//                naverMapBottomSheet.show(getSupportFragmentManager(),"naverMapBottomSheet");
                 return true;
             }
 
@@ -252,14 +251,9 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ){
 
-            // TODO: 2020-11-11 현재위치
-            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-            mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
-
 
         }else{
             LatLng DEFAULT_LOCATION = new LatLng(37.566614, 126.977919);
-            Toast.makeText(this, R.string.DefaultLocation_check, Toast.LENGTH_LONG).show();
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 17);
             mMap.moveCamera(cameraUpdate);
         }
@@ -283,19 +277,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
                 currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
 
+                location = location;
 
-                String markerTitle = getCurrentAddress(currentPosition);
-                String markerSnippet_location = "위도:" + String.valueOf(location.getLatitude())
-                        + " 경도:" + String.valueOf(location.getLongitude());
-
-
-                //현재 위치에 마커 생성하고 이동
-                setCurrentLocation(location, markerTitle, markerSnippet_location);
-
-//                mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
-//                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-//                mMap.moveCamera(cameraUpdate);
-                mCurrentLocatiion = location;
 
 
 
@@ -379,35 +362,23 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     1);
         } catch (IOException ioException) {
             //네트워크 문제
-            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
-            return "지오코더 서비스 사용불가";
+            Toast.makeText(this, R.string.no_gocode, Toast.LENGTH_LONG).show();
+            return String.valueOf(R.string.no_gocode);
         } catch (IllegalArgumentException illegalArgumentException) {
-            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
-            return "잘못된 GPS 좌표";
+            Toast.makeText(this, R.string.Invalid_GPS, Toast.LENGTH_LONG).show();
+            return String.valueOf(R.string.Invalid_GPS);
 
         }
 
 
         if (addresses == null || addresses.size() == 0) {
-            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
-            return "주소 미발견";
+            Toast.makeText(this, R.string.cant_find_address, Toast.LENGTH_LONG).show();
+            return String.valueOf(R.string.cant_find_address);
 
         } else {
             Address address = addresses.get(0);
             return address.getAddressLine(0).toString();
         }
-
-    }
-
-
-    public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
-
-
-        if (currentMarker != null) currentMarker.remove();
-
-        currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-//        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentLatLng,17);
-//        mMap.moveCamera(cameraUpdate);
 
     }
 
@@ -442,9 +413,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
                         || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
-
-
-                    // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
                             Snackbar.make(mLayout, getString(R.string.preference_none),
                             Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.confirm), new View.OnClickListener() {
                         @Override
@@ -455,12 +423,13 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     }).show();
 
                 }else {
-                    // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우에는 설정(앱 정보)에서 퍼미션을 허용해야 앱을 사용할 수 있습니다.
+                    // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우
                     Snackbar.make(mLayout, getString(R.string.preference_none_setting),
                             Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.confirm), new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            finish();
+                            Intent intent= new Intent(Settings.ACTION_SETTINGS);
+                            startActivityForResult(intent,0);
                         }
                     }).show();
                 }
@@ -483,16 +452,14 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             case GPS_ENABLE_REQUEST_CODE:
 
                 //사용자가 GPS 활성 시켰는지 검사
-                if (checkLocationServicesStatus()) {
+                if (!checkLocationServicesStatus()) {
+                    Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
                     if (checkLocationServicesStatus()) {
-
-
-                        needRequest = true;
 
                         return;
                     }
                 }
-
                 break;
         }
     }

@@ -122,13 +122,15 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
+
+
+
+
         headBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String s_head = head.getText().toString();
-
-                ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
 
                 bottomSheet.title = s_head;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
@@ -141,8 +143,6 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
 
                 String s_neck = neck.getText().toString();
-
-                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
 
                 bottomSheet.title = s_neck;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
@@ -158,8 +158,6 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_stomach = stomach.getText().toString();
 
-                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
-
                 bottomSheet.title = s_stomach;
                 bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
 
@@ -167,6 +165,12 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
+
+
+
+
+
+
 
         musclePainBtn.setOnClickListener(new View.OnClickListener() {
             @Override

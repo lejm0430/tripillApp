@@ -13,6 +13,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -81,7 +82,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     SymptomRecommendAdpater adapter;
     ExpandableLayout expectexp;
     ExpandableLayout warningexp;
-    RelativeLayout speaker;
+    ImageView speaker;
 
     ImageView arrowIc;
     ImageView arrowIcWarning;

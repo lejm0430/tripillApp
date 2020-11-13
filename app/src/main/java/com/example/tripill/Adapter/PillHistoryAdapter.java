@@ -100,7 +100,6 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
         public TextView coma;
         public TextView pillname;
         public LinearLayout linear;
-        String sum;
 
         public MainHolder(View v){
             super(v);

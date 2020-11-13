@@ -32,6 +32,7 @@ import static com.example.tripill.Props.FINISH_INTERVAL_TIME;
 import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
 import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
 import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
+import static com.example.tripill.Props.REQUEST_CODE;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -43,19 +44,20 @@ public class MainActivity extends AppCompatActivity{
     DrawerLayout mainDrawer;
     LinearLayout menuDrawer;
 
+    String TAG = "ChoicedSymptomSlide";
+
     //static 수정
-    public TextView nonehistory;
+    TextView nonehistory;
 
     RecyclerView drawer_recycler;
 
     ArrayList<PillList> pillList;
 
-
     PillHistoryAdapter historyadapter;
 
     public ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
 
-    private Realm realm;
+    Realm realm;
 
     public static Context context;
 
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity{
                 ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
 
                 bottomSheet.title = s_head;
-                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+                bottomSheet.show(getSupportFragmentManager(), TAG);
 
             }
         });
@@ -145,7 +147,7 @@ public class MainActivity extends AppCompatActivity{
                 ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
 
                 bottomSheet.title = s_neck;
-                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+                bottomSheet.show(getSupportFragmentManager(), TAG);
 
 
 
@@ -161,7 +163,7 @@ public class MainActivity extends AppCompatActivity{
                 ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
 
                 bottomSheet.title = s_stomach;
-                bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+                bottomSheet.show(getSupportFragmentManager(), TAG);
 
 
 
@@ -260,5 +262,7 @@ public class MainActivity extends AppCompatActivity{
         super.onDestroy();
         realm.close();
     }
+
+
 
 }

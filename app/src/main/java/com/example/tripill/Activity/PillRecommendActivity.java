@@ -1,26 +1,18 @@
 package com.example.tripill.Activity;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,8 +25,6 @@ import com.example.tripill.DataBase.PillDB;
 import com.example.tripill.Dialog.FullImagDialog;
 import com.example.tripill.Dialog.BaseDialog;
 import com.example.tripill.R;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.model.LatLng;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -118,8 +108,10 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     SimpleDateFormat formats = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 
-    private Realm realm;
-    public static Context prcontext;
+    Realm realm;
+    Context prcontext;
+
+
     private TextToSpeech tts;
 
     private GpsTracker gpsTracker;
@@ -388,6 +380,15 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         ((MainActivity)MainActivity.context).historyadapter = new PillHistoryAdapter(((MainActivity)MainActivity.context).pillList,this);
         ((MainActivity)MainActivity.context).drawer_recycler.setAdapter(((MainActivity)MainActivity.context).historyadapter);
+
+
+        RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
+        for (PillDB pill : result) {
+            ((MainActivity)MainActivity.context).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
+            if(pill.getName() != null){
+                ((MainActivity)MainActivity.context).nonehistory.setVisibility(View.GONE);
+            }
+        }
 
     }
 

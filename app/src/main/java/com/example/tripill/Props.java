@@ -13,8 +13,6 @@ public class Props {
 
 
 
-
-
     public static final int FINISH_INTERVAL_TIME = 2000;
     public static final int REQUEST_CODE = 1001;
     public static final int MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;

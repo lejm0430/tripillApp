@@ -4,7 +4,7 @@ apply plugin: 'realm-android'
 android {
     signingConfigs {
         release {
-            storeFile file('C:\\kraken\\tripillApp\\app\\key\\trpillkey.jks')
+            storeFile file('key\\trpillkey.jks')
             storePassword 'tripill'
             keyAlias 'tripillkey'
             keyPassword 'tripill'

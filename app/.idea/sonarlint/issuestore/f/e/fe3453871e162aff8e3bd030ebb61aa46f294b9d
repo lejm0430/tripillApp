@@ -1,15 +1,0 @@
-
-V	java:S110"<This class has 9 parents which is greater than 5 authorized.(´üº±ùÿÿÿÿ
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ô·¡
-C
-java:S16048"(Make this anonymous inner class a lambda(÷“ïÁıÿÿÿÿ
-n
-java:S1104"SMake context a static final constant or non-public and provide accessors if needed.(±¹ï±úÿÿÿÿ
-H
-java:S1128"-Remove this unused import 'org.w3c.dom.Text'.(¶Äè‹şÿÿÿÿ
-P
-java:S1128"5Remove this unused import 'android.widget.ImageView'.(ú¯ëàüÿÿÿÿ
-k
-java:S3252%"PUse static access with "android.view.ViewGroup$LayoutParams" for "MATCH_PARENT".(—ïˆíûÿÿÿÿ
-k
-java:S3252&"PUse static access with "android.view.ViewGroup$LayoutParams" for "WRAP_CONTENT".(È÷„öıÿÿÿÿ

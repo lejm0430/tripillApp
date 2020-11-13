@@ -18,7 +18,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tripill.DataBase.pharmacyList;
@@ -64,6 +66,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     private Marker currentMarker = null;
     private Marker lastClicked;
 
+
     List<Marker> previous_marker = null;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -73,16 +76,18 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
+
     LatLng currentPosition;
     Location location;
+
 
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
 
+
     private View mLayout;  // Snackbar 사용하기 위해서는 View
 
     String markerSnippet;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +124,10 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
                 }
         });
+
+
+
+
     }
 
 
@@ -200,12 +209,28 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 naverMapBottomSheet.name = marker.getTitle();
                 naverMapBottomSheet.Snippet = marker.getSnippet();
 
-                View include = findViewById(R.id.include);
+                LinearLayout bottomsheet = findViewById(R.id.bottom_sheet);
+                bottomsheet.setVisibility(View.VISIBLE);
 
-                include.setVisibility(View.VISIBLE);
+
+                TextView pharmacyName_kr = findViewById(R.id.pharmacyName_kr);
+                TextView pharmacyName_en = findViewById(R.id.pharmacyName_en);
+                TextView findroadBtn = findViewById(R.id.findroadBtn);
 
 
-//                naverMapBottomSheet.show(getSupportFragmentManager(),"naverMapBottomSheet");
+                pharmacyName_kr.setText(marker.getTitle());
+                pharmacyName_en.setText(R.string.pharmacy);
+
+                findroadBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri gmmIntentUri = Uri.parse("google.navigation:q="+marker.getSnippet()+"&mode=w");
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);
+                    }
+                });
+//                        Log.e("name / address",marker.getTitle()+marker.getSnippet());
                 return true;
             }
 
@@ -284,8 +309,10 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             }
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
-            if (checkPermission())
+            if (checkPermission()){
                 mMap.setMyLocationEnabled(true);
+
+            }
 
         }
 
@@ -472,11 +499,48 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     previous_marker.add(item);
 
 
+
+
+                    /*mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+
+
+                if(lastClicked != null){
+                    lastClicked.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
                 }
+                lastClicked = marker;
 
 
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_choice));
+
+                LinearLayout bottomsheet = findViewById(R.id.bottom_sheet);
+                bottomsheet.setVisibility(View.VISIBLE);
 
 
+                TextView pharmacyName_kr = findViewById(R.id.pharmacyName_kr);
+                TextView pharmacyName_en = findViewById(R.id.pharmacyName_en);
+                TextView findroadBtn = findViewById(R.id.findroadBtn);
+
+
+                pharmacyName_kr.setText(name);
+                pharmacyName_en.setText(R.string.pharmacy);
+
+                findroadBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri gmmIntentUri = Uri.parse("google.navigation:q="+getCurrentAddress(latLng_place)+"&mode=w");
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);
+                    }
+                });
+                return true;
+            }
+
+        });*/
+
+                }
                 //중복 마커 제거
                 HashSet<Marker> hashSet = new HashSet<Marker>();
                 hashSet.addAll(previous_marker);

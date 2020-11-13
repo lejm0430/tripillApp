@@ -1,29 +1,187 @@
 package com.example.tripill.Activity;
 
 import android.Manifest;
-<<<<<<< HEAD
-import android.app.Activity;
-=======
-import android.app.Dialog;
->>>>>>> 8b3f718... bottomsheet_done
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
+import android.os.IBinder;
 import android.util.Log;
+
+import androidx.core.content.ContextCompat;
+
+public class GpsTracker extends Service implements LocationListener {
+
+    private final Context mContext;
+    Location location;
+    double latitude;
+    double longitude;
+
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
+    protected LocationManager locationManager;
+
+
+    public GpsTracker(Context context) {
+        this.mContext = context;
+        getLocation();
+    }
+
+
+    public Location getLocation() {
+        try {
+            locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
+
+            boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            if (!isGPSEnabled && !isNetworkEnabled) {
+
+            } else {
+
+                int hasFineLocationPermission = ContextCompat.checkSelfPermission(mContext,
+                        Manifest.permission.ACCESS_FINE_LOCATION);
+                int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(mContext,
+                        Manifest.permission.ACCESS_COARSE_LOCATION);
+
+
+                if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                        hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
+
+                } else
+                    return null;
+
+
+                if (isNetworkEnabled) {
+
+
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+
+                    if (locationManager != null)
+                    {
+                        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        if (location != null)
+                        {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                        }
+                    }
+                }
+
+
+                if (isGPSEnabled)
+                {
+                    if (location == null)
+                    {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                        if (locationManager != null)
+                        {
+                            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            if (location != null)
+                            {
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Log.d("@@@", ""+e.toString());
+        }
+
+        return location;
+    }
+
+    public double getLatitude()
+    {
+        if(location != null)
+        {
+            latitude = location.getLatitude();
+        }
+
+        return latitude;
+    }
+
+    public double getLongitude()
+    {
+        if(location != null)
+        {
+            longitude = location.getLongitude();
+        }
+
+        return longitude;
+    }
+
+    @Override
+    public void onLocationChanged(Location location)
+    {
+    }
+
+    @Override
+    public void onProviderDisabled(String provider)
+    {
+    }
+
+    @Override
+    public void onProviderEnabled(String provider)
+    {
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras)
+    {
+    }
+
+    @Override
+    public IBinder onBind(Intent arg0)
+    {
+        return null;
+    }
+
+
+    public void stopUsingGPS()
+    {
+        if(locationManager != null)
+        {
+            locationManager.removeUpdates(GpsTracker.this);
+        }
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+//////////PillRecommend
+/*
+package com.example.tripill.Activity;
+
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -111,32 +269,29 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     SimpleDateFormat formats = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 
+
     private Realm realm;
 
-<<<<<<< HEAD
-=======
-    public static Context prcontext;
->>>>>>> 8b3f718... bottomsheet_done
+    public static Context prcontext; //--
     private TextToSpeech tts;
 
-    private GpsTracker gpsTracker;
+//    private GpsTracker gpsTracker;
 
     LatLng currentPosition;
-
     Location location;
+
 
     private static final int GPS_ENABLE_REQUEST_CODE = 300;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
 
-    public static Context prcontext;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pill_recommend);
+
+        prcontext = this;
 
         pillphoto = findViewById(R.id.pillphoto);
         viewArea = findViewById(R.id.viewArea);
@@ -378,7 +533,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         }
         ///////list
 
-        ((MainActivity)MainActivity.context).pillList = new ArrayList<PillList>();
+        ((MainActivity)MainActivity.mcontext).pillList = new ArrayList<PillList>();
 
         realm = Realm.getDefaultInstance();
         basicCRUD(realm);
@@ -386,13 +541,12 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
-        ((MainActivity)MainActivity.context).drawer_recycler.setLayoutManager(linearLayoutManager);
+        ((MainActivity)MainActivity.mcontext).drawer_recycler.setLayoutManager(linearLayoutManager);
 
-        ((MainActivity)MainActivity.context).historyadapter = new PillHistoryAdapter(((MainActivity)MainActivity.context).pillList,this);
-        ((MainActivity)MainActivity.context).drawer_recycler.setAdapter(((MainActivity)MainActivity.context).historyadapter);
+        ((MainActivity)MainActivity.mcontext).historyadapter = new PillHistoryAdapter(((MainActivity)MainActivity.mcontext).pillList,this);
+        ((MainActivity)MainActivity.mcontext).drawer_recycler.setAdapter(((MainActivity)MainActivity.mcontext).historyadapter);
 
     }
-
 
     public void check(){
         int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
@@ -476,7 +630,29 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
+    LocationCallback locationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            super.onLocationResult(locationResult);
 
+            List<Location> locationList = locationResult.getLocations();
+
+            if (locationList.size() > 0) {
+                location = locationList.get(locationList.size() - 1);
+                //location = locationList.get(0);
+
+                currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
+
+                location = location;
+
+
+
+
+            }
+
+        }
+
+    };
 
 
 
@@ -494,14 +670,16 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                     longitude,
                     7);
         } catch (IOException ioException) {
-            //네트워크
+            //네트워크 문제
             Toast.makeText(this, R.string.no_gocode, Toast.LENGTH_LONG).show();
             return String.valueOf(R.string.no_gocode);
         } catch (IllegalArgumentException illegalArgumentException) {
-            //GPS
             Toast.makeText(this, R.string.Invalid_GPS, Toast.LENGTH_LONG).show();
             return String.valueOf(R.string.Invalid_GPS);
+
         }
+
+
 
         if (addresses == null || addresses.size() == 0) {
             Toast.makeText(this, R.string.cant_find_address, Toast.LENGTH_LONG).show();
@@ -514,15 +692,11 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     }
 
+
+
     public void messege() {
 
-
-        gpsTracker = new GpsTracker(PillRecommendActivity.this);
-        double latitude = gpsTracker.getLatitude();
-        double longitude = gpsTracker.getLongitude();
-
-        String address = getCurrentAddress(latitude,longitude);
-
+        String address = getCurrentAddress(location.getLatitude(), location.getLongitude());
 
         ageS = getIntent().getStringExtra("age");
         s1kr = getIntent().getStringExtra("s1kr");
@@ -618,16 +792,16 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 pd.setS1kr(s1kr);
                 pd.setS2kr(s2kr);
                 if(pd.getName() == null){
-                    ((MainActivity)MainActivity.context).drawer_recycler.setVisibility(View.GONE);
+                    ((MainActivity)MainActivity.mcontext).drawer_recycler.setVisibility(View.GONE);
                 }else{
                     RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
 
                     for (PillDB pill : result) {
-                        ((MainActivity)MainActivity.context).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
+                        ((MainActivity)MainActivity.mcontext).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
                     }
-                    ((MainActivity)MainActivity.context).nonehistory.setVisibility(View.GONE);
+                    ((MainActivity)MainActivity.mcontext).nonehistory.setVisibility(View.GONE);
                 }
             }
         });
     }
-}
+}*/

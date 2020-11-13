@@ -62,6 +62,22 @@ public class MainActivity extends AppCompatActivity{
 
     public static Context context;
 
+
+
+    View.OnClickListener onClickListener1 = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            bottomInfoShow((String) view.getTag());
+        }
+    };
+
+    View.OnClickListener onClickListener2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            test((SympTomModel) view.getTag());
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,9 +126,8 @@ public class MainActivity extends AppCompatActivity{
         RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
         for (PillDB pill : result) {
             pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
-            if(pill.getName() != null){
-                nonehistory.setVisibility(View.GONE);
-            }
+        if(pill.getName() != null){
+            nonehistory.setVisibility(View.GONE);
         }
 
         Intent intent = new Intent(getApplicationContext(), AgeActivity.class);
@@ -123,119 +138,92 @@ public class MainActivity extends AppCompatActivity{
                 mainDrawer.openDrawer(menuDrawer);
             }
         });
-
-
-
-
-
-
-        headBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String s_head = head.getText().toString();
-
-                bottomSheet.title = s_head;
-                bottomSheet.show(getSupportFragmentManager(), TAG);
-
-            }
-        });
-
-        neckBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String s_neck = neck.getText().toString();
-
-                bottomSheet.title = s_neck;
-                bottomSheet.show(getSupportFragmentManager(), TAG);
-
-
-
-            }
-        });
-
-        stomachBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String s_stomach = stomach.getText().toString();
-
-                bottomSheet.title = s_stomach;
-                bottomSheet.show(getSupportFragmentManager(), TAG);
-
-
-
-            }
-        });
-
-
-
-
-
-
-
-        musclePainBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.muscle_pain));
-                intent.putExtra(INTE_SYMPTOM_SUM,"20");
-                intent.putExtra(INTE_SELECT_SYMPTOM1_KR,"근육통");
-                startActivity(intent);
-
-            }
-        });
-
-        burnBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.burn));
-                intent.putExtra(INTE_SYMPTOM_SUM,"60");
-                intent.putExtra(INTE_SELECT_SYMPTOM1_KR,"화상");
-                startActivity(intent);
-
-
-
-            }
-        });
-
-        woundBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.wound));
-                intent.putExtra(INTE_SYMPTOM_SUM,"25");
-                intent.putExtra(INTE_SELECT_SYMPTOM1_KR,"상처");
-                startActivity(intent);
-
-
-
-
-            }
-        });
-
-        beerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.hangover));
-                intent.putExtra(INTE_SYMPTOM_SUM,"35");
-                intent.putExtra(INTE_SELECT_SYMPTOM1_KR,"숙취");
-                startActivity(intent);
-
-
-
-            }
-        });
-
-
     }
 
 
 
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            mainDrawer.openDrawer(menuDrawer);
+        }
+    });
 
+
+
+        headBtn.setOnClickListener(onClickListener1);
+        neckBtn.setOnClickListener(onClickListener1);
+        stomachBtn.setOnClickListener(onClickListener1);
+
+
+        musclePainBtn.setOnClickListener(onClickListener2);
+        burnBtn.setOnClickListener(onClickListener2);
+        woundBtn.setOnClickListener(onClickListener2);
+        beerBtn.setOnClickListener(onClickListener2);
+        musclePainBtn.setTag(new SympTomModel(getString(R.string.muscle_pain),getString(R.string.muscle_pain),"근육통","20"));
+        burnBtn.setTag(new SympTomModel(getString(R.string.burn),getString(R.string.burn),"화상","60"));
+        woundBtn.setTag(new SympTomModel(getString(R.string.wound),getString(R.string.wound),"상처","25"));
+        beerBtn.setTag(new SympTomModel(getString(R.string.hangover),getString(R.string.hangover),"숙취","35"));
+
+    }
+
+    void test(SympTomModel md){
+        Intent intent = new Intent(getApplicationContext(), AgeActivity.class);
+
+        String s = md.getS();
+        intent.putExtra(INTE_SELECT_SYMPTOM1,md.getS1());
+        intent.putExtra(INTE_SYMPTOM_SUM,md.getSum());
+        intent.putExtra(INTE_SELECT_SYMPTOM1_KR,md.getS1kr());
+        startActivity(intent);
+    }
+
+    class SympTomModel{
+        String s,s1,s1kr,sum;
+
+        public SympTomModel(String s, String s1, String s1kr, String sum) {
+            this.s=s;
+            this.s1=s1;
+            this.s1kr=s1kr;
+            this.sum=sum;
+        }
+
+        public String getS() {
+            return s;
+        }
+
+        public void setS(String s) {
+            this.s=s;
+        }
+
+        public String getS1() {
+            return s1;
+        }
+
+        public void setS1(String s1) {
+            this.s1=s1;
+        }
+
+        public String getS1kr() {
+            return s1kr;
+        }
+
+        public void setS1kr(String s1kr) {
+            this.s1kr=s1kr;
+        }
+
+        public String getSum() {
+            return sum;
+        }
+
+        public void setSum(String sum) {
+            this.sum=sum;
+        }
+    }
+
+    void bottomInfoShow(String str){
+        bottomSheet.title = str;
+        bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+    }
 
 
     @Override

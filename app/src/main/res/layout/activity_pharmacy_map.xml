@@ -53,15 +53,6 @@
         android:background="@drawable/white_rec_r8_map_gps"
         android:src="@drawable/ic_gps" />
 
-        <!--<include
-            android:id="@+id/include"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            app:behavior_peekHeight="0dp"
-            android:visibility="invisible"
-            layout="@layout/activity_naver_map_bottom_sheet" />-->
-
         <LinearLayout
             android:id="@+id/bottom_sheet"
             android:layout_width="match_parent"

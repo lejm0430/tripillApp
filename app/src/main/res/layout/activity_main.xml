@@ -73,6 +73,7 @@
                         android:layout_weight="1">
 
                         <ImageView
+                            android:tag="@string/head"
                             android:id="@+id/headBtn_ring"
                             android:layout_centerHorizontal="true"
                             android:layout_width="88dp"
@@ -102,6 +103,7 @@
 
 
                         <ImageView
+                            android:tag="@string/neck"
                             android:id="@+id/neckBtn_ring"
                             android:layout_centerHorizontal="true"
                             android:layout_width="88dp"
@@ -129,6 +131,7 @@
 
 
                         <ImageView
+                            android:tag="@string/abdominal"
                             android:id="@+id/stomachBtn_ring"
                             android:layout_centerHorizontal="true"
                             android:layout_width="88dp"
@@ -166,6 +169,7 @@
 
 
                         <ImageView
+                            android:tag="@string/muscle_pain"
                             android:id="@+id/musclePainBtn_ring"
                             android:layout_centerHorizontal="true"
                             android:layout_width="88dp"
@@ -196,6 +200,7 @@
 
 
                         <ImageView
+                            android:tag="@string/burn"
                             android:id="@+id/burnBtn_ring"
                             android:layout_centerHorizontal="true"
                             android:layout_width="88dp"
@@ -225,6 +230,7 @@
 
 
                         <ImageView
+                            android:tag="@string/wound"
                             android:id="@+id/woundBtn_ring"
                             android:layout_width="88dp"
                             android:layout_height="88dp"
@@ -262,6 +268,7 @@
 
 
                         <ImageView
+                            android:tag="@string/hangover"
                             android:id="@+id/beerBtn_ring"
                             android:layout_centerHorizontal="true"
                             android:layout_width="88dp"

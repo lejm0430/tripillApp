@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -70,9 +71,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     private LocationRequest locationRequest;
     private View mLayout;  // Snackbar
 
-    int hasFineLocationPermission;
-    int hasCoarseLocationPermission;
-
     List<Marker> previous_marker=null;
 
     String[] REQUIRED_PERMISSIONS={Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
@@ -81,6 +79,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     Location location;
     String markerSnippet;
     ImageView gpsBtn;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,9 +118,18 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             }
         });
 
+        LinearLayout bottom_sheet = findViewById(R.id.bottom_sheet);
+        bottom_sheet.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
+
+
 
     }
-
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
@@ -128,15 +137,15 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
         setDefaultLocation();
 
-        int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+/*        int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-
 
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) { //퍼미션 허용 O
             startLocationUpdates(); // 위치 업데이트 시작
         } else {  //퍼미션 허용x
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
+
                 Snackbar.make(mLayout, R.string.snackbar_body,
                         Snackbar.LENGTH_INDEFINITE).setAction(R.string.confirm, new View.OnClickListener() {
                     @Override
@@ -147,8 +156,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             } else {
                 ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
             }
-//            gpsBtn.setOnClickListener(null);
-        }
+        }*/
 
         gpsBtn=findViewById(R.id.gpsBtn);
         gpsBtn.setOnClickListener(new View.OnClickListener() {
@@ -179,23 +187,18 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             @Override
             public boolean onMarkerClick(Marker marker) {
 
-
                 if (lastClicked != null) {
                     lastClicked.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
                 }
                 lastClicked=marker;
-
-
                 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_choice));
 
                 LinearLayout bottomsheet=findViewById(R.id.bottom_sheet);
                 bottomsheet.setVisibility(View.VISIBLE);
 
-
                 TextView pharmacyName_kr=findViewById(R.id.pharmacyName_kr);
                 TextView pharmacyName_en=findViewById(R.id.pharmacyName_en);
                 TextView findroadBtn=findViewById(R.id.findroadBtn);
-
 
                 pharmacyName_kr.setText(marker.getTitle());
                 pharmacyName_en.setText(R.string.pharmacy);
@@ -216,22 +219,50 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         });
 
 
-    }
+    }  //스낵바_맨처음
 
 
     public void setDefaultLocation() {
 
+        int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
+            startLocationUpdates(); // 위치 업데이트 시작
+
 
         } else {
             LatLng DEFAULT_LOCATION=new LatLng(37.566614, 126.977919);
             CameraUpdate cameraUpdate=CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 17);
             mMap.moveCamera(cameraUpdate);
+
+
+
+
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
+                //완전 맨 처음 거부시
+                Snackbar.make(mLayout, R.string.snackbar_body,
+                        Snackbar.LENGTH_INDEFINITE).setAction(R.string.confirm, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ActivityCompat.requestPermissions(PharmacyMap.this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
+                    }
+                }).show();
+            } else {
+                ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
+            }
+
+
+
+
+
         }
 
 
     }  //지도 default 위치
+
     @Override
     public void onRequestPermissionsResult(int permsRequestCode,
                                            @NonNull String[] permissions,
@@ -240,12 +271,9 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         if ( permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
 
             // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
-
             boolean check_result = true;
 
-
             // 모든 퍼미션을 허용했는지 체크
-
             for (int result : grandResults) {
                 if (result != PackageManager.PERMISSION_GRANTED) {
                     check_result = false;
@@ -253,16 +281,15 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 }
             }
 
-
             if ( check_result ) {
                 //모든 퍼미션을 허용했다면 위치 업데이트를 시작
                 startLocationUpdates();
             }
             else {
-
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
-                        || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
-
+                if (
+                        ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0]) ||
+                    ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
+                    // 거부 한 적이 있고 또 거부
                     Snackbar.make(mLayout, getString(R.string.preference_none),
                             Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.confirm), new View.OnClickListener() {
                         @Override
@@ -277,12 +304,11 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                             Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.confirm), new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent= new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            Intent intent= new Intent(Settings.ACTION_APPLICATION_SETTINGS);
                             startActivityForResult(intent,0);
                         }
                     }).show();
                 }
-                //                gpsBtn.setOnClickListener(null);
             }
 
         }
@@ -298,7 +324,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
                 //사용자가 GPS 활성 시켰는지 검사
                 if (!checkLocationServicesStatus()) {
-                    Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    Intent callGPSSettingIntent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
                     startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
                     if (checkLocationServicesStatus()) {
                         return;
@@ -343,9 +369,15 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     }   //gps, 네트워크 여부 boolean
 
     private boolean checkPermission() {
+
+        int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
             return true;
+        }else{
+
         }
 
         return false;
@@ -353,6 +385,9 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     }  //퍼미션 여부 boolean
 
     private void startLocationUpdates() {
+
+        int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
         if (!checkLocationServicesStatus()) {
 
@@ -362,36 +397,17 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) {
 
                 return;
+            }if (checkPermission()){
+                mMap.setMyLocationEnabled(true);
             }
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
+
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
-            if (checkPermission()){
-                mMap.setMyLocationEnabled(true);
 
-            }
 
         }
 
     }  //사용자위치 업데이트
-
-
-
-
-
-
-
-
-
 
 
 

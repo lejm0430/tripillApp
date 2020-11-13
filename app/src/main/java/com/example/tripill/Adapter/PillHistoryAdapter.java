@@ -35,8 +35,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
     private RecyclerView recyclerView;
     private LayoutInflater inflate;
     String s2;
-    String s1kr;
-    String s2kr;
+
 
 
     public PillHistoryAdapter(ArrayList<PillList> pilllist,Context context) {
@@ -62,7 +61,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
     public void onBindViewHolder(@NonNull MainHolder holder, int position) {
         holder.onBind(pilllist.get(position));
         s2 = holder.symptom2.getText().toString();
-        if(s2.isEmpty() || s2kr == null){
+        if(s2.isEmpty() || holder.s2kr == null){
             holder.coma.setVisibility(View.GONE);
         }
         holder.linear.setOnClickListener(new View.OnClickListener() {
@@ -74,9 +73,9 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
                 intent.putExtra(INTE_SELECT_SYMPTOM2,holder.symptom2.getText().toString());
                 intent.putExtra(INTE_INPUT_AGE,holder.age.getText().toString());
                 intent.putExtra(INTE_SELECT_PILLNAME,holder.pillname.getText().toString());
-                intent.putExtra(INTE_SELECT_SYMPTOM1_KR,s1kr);
-                intent.putExtra(INTE_SELECT_SYMPTOM2_KR,s2kr);
-                Log.e("TESThistory",s1kr);
+                intent.putExtra(INTE_SELECT_SYMPTOM1_KR,holder.s1kr);
+                intent.putExtra(INTE_SELECT_SYMPTOM2_KR,holder.s2kr);
+                Log.e("TESThistory",holder.s1kr);
                 Log.e("s1,s2,pillhistory",holder.symptom1.getText().toString()+","+holder.symptom2.getText().toString());
                 context.startActivity(intent);
 
@@ -102,6 +101,8 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
         public TextView coma;
         public TextView pillname;
         public LinearLayout linear;
+        public String s1kr;
+        public String s2kr;
 
         public MainHolder(View v){
             super(v);

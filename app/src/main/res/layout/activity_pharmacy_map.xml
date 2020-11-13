@@ -53,14 +53,62 @@
         android:background="@drawable/white_rec_r8_map_gps"
         android:src="@drawable/ic_gps" />
 
-        <include
+        <!--<include
             android:id="@+id/include"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             app:behavior_peekHeight="0dp"
             android:visibility="invisible"
-            layout="@layout/activity_naver_map_bottom_sheet" />
+            layout="@layout/activity_naver_map_bottom_sheet" />-->
+
+        <LinearLayout
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bottomsheet_background_white_r24"
+            android:layout_alignParentBottom="true"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/pharmacyName_kr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="약국 한글 이름"
+                style="@style/TextStyle6"/>
+
+            <TextView
+                android:id="@+id/pharmacyName_en"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="약국 영어 이름"
+                style="@style/TextStyle17"/>
+
+            <TextView
+                android:id="@+id/findroadBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="6dp"
+                android:paddingTop="6dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:layout_gravity="right"
+                android:text="@string/search_load"
+                android:background="@drawable/circle_border_sunflower_navermap"
+                style="@style/TextStyle25"
+                android:layout_centerInParent="true"/>
+        </LinearLayout>
+
     </RelativeLayout>
 
 

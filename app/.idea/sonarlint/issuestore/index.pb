@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
@@ -141,3 +142,5 @@ l
 <src/main/java/com/example/tripill/DataBase/pharmacyList.java,9\c\9c8a0a80d33cf6d47dc497243326bcd8f6eb933f
 q
 Asrc/main/java/com/example/tripill/Dialog/NaverMapBottomSheet.java,6\5\65312bab7a5dc647d44b766f886e6f4701ab69c0
+=======
+>>>>>>> 64079015fe69a6ec49b812b3316972a4479bac08

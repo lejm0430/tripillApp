@@ -20,6 +20,13 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.example.tripill.Props.INTE_INPUT_AGE;
+import static com.example.tripill.Props.INTE_SELECT_PILLNAME;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
+
 public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.MainHolder>{
 
     ArrayList<PillList> pilllist = new ArrayList<PillList>();
@@ -63,12 +70,12 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
             public void onClick(View v) {
                 Context mcontext = v.getContext();
                 Intent intent = new Intent(v.getContext(), PillRecommendActivity.class);
-                intent.putExtra("s1",holder.symptom1.getText().toString());
-                intent.putExtra("s2",holder.symptom2.getText().toString());
-                intent.putExtra("age",holder.age.getText().toString());
-                intent.putExtra("name",holder.pillname.getText().toString());
-                intent.putExtra("s1kr",s1kr);
-                intent.putExtra("s2kr",s2kr);
+                intent.putExtra(INTE_SELECT_SYMPTOM1,holder.symptom1.getText().toString());
+                intent.putExtra(INTE_SELECT_SYMPTOM2,holder.symptom2.getText().toString());
+                intent.putExtra(INTE_INPUT_AGE,holder.age.getText().toString());
+                intent.putExtra(INTE_SELECT_PILLNAME,holder.pillname.getText().toString());
+                intent.putExtra(INTE_SELECT_SYMPTOM1_KR,s1kr);
+                intent.putExtra(INTE_SELECT_SYMPTOM2_KR,s2kr);
                 context.startActivity(intent);
 
             }

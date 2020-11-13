@@ -24,6 +24,14 @@ import java.util.ArrayList;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.example.tripill.Props.INTE_SELECT_PART;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
+import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
+import static com.example.tripill.Props.REQUEST_CODE;
+
 public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
     ArrayList<SymptomList> list = new ArrayList();
@@ -31,7 +39,6 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
     public String title;
 
-    private static final int REQUEST_CODE = 1001;
 
 
     @Override
@@ -104,7 +111,7 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
             public void onClick(View view) {
 
                 Intent intent=new Intent(getContext(), AgeActivity.class);
-                intent.putExtra("part",title);
+                intent.putExtra(INTE_SELECT_PART,title);
 
                 if (adapter.getSelected_list().isEmpty()){
                    BaseDialog dialog = new BaseDialog(getActivity());
@@ -116,18 +123,17 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 
 
                 } else if(adapter.getSelected_list().size() == 1){
-                        intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());
-                        intent.putExtra("s1kr",adapter.getSelected_list().get(0).getSymptomkr());
-                        intent.putExtra("sum",Integer.toString(adapter.getSelected_list().get(0).getScore()));
+                        intent.putExtra(INTE_SELECT_SYMPTOM1,adapter.getSelected_list().get(0).getSymptom());
+                        intent.putExtra(INTE_SELECT_SYMPTOM1_KR,adapter.getSelected_list().get(0).getSymptomkr());
+                        intent.putExtra(INTE_SYMPTOM_SUM,Integer.toString(adapter.getSelected_list().get(0).getScore()));
                     startActivityForResult(intent,REQUEST_CODE);
 
                 } else {
-                    intent.putExtra("s1",adapter.getSelected_list().get(0).getSymptom());
-                    intent.putExtra("s1kr",adapter.getSelected_list().get(0).getSymptomkr());
-                    intent.putExtra("s2",adapter.getSelected_list().get(1).getSymptom());
-                    intent.putExtra("s2kr",adapter.getSelected_list().get(1).getSymptomkr());
-                    intent.putExtra("sum", Integer.toString(sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore())));
-                    Log.d("TAG","sum"+ sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore()));
+                    intent.putExtra(INTE_SELECT_SYMPTOM1,adapter.getSelected_list().get(0).getSymptom());
+                    intent.putExtra(INTE_SELECT_SYMPTOM1_KR,adapter.getSelected_list().get(0).getSymptomkr());
+                    intent.putExtra(INTE_SELECT_SYMPTOM2,adapter.getSelected_list().get(1).getSymptom());
+                    intent.putExtra(INTE_SELECT_SYMPTOM2_KR,adapter.getSelected_list().get(1).getSymptomkr());
+                    intent.putExtra(INTE_SYMPTOM_SUM, Integer.toString(sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore())));
                     startActivityForResult(intent,REQUEST_CODE);
                 }
 

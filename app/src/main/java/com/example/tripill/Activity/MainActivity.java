@@ -28,10 +28,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
+import static com.example.tripill.Props.FINISH_INTERVAL_TIME;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
+import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
+
 
 public class MainActivity extends AppCompatActivity{
-
-    private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
 
     String name;
@@ -171,9 +174,9 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_musclePain = muscle_pain.getText().toString();
 
-                intent.putExtra("s1",getString(R.string.muscle_pain));
-                intent.putExtra("sum","20");
-                intent.putExtra("s1kr","근육통");
+                intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.muscle_pain));
+                intent.putExtra(INTE_SYMPTOM_SUM,"20");
+                intent.putExtra(INTE_SELECT_SYMPTOM1_KR,"근육통");
                 startActivity(intent);
 
             }
@@ -185,9 +188,9 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_burn = burn.getText().toString();
 
-                intent.putExtra("s1",getString(R.string.burn));
-                intent.putExtra("sum","60");
-                intent.putExtra("s1kr","화상");
+                intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.burn));
+                intent.putExtra(INTE_SYMPTOM_SUM,"60");
+                intent.putExtra(INTE_SELECT_SYMPTOM1_KR,"화상");
                 startActivity(intent);
 
 
@@ -201,9 +204,9 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_wound = wound.getText().toString();
 
-                intent.putExtra("s1",getString(R.string.wound));
-                intent.putExtra("sum","25");
-                intent.putExtra("s1kr","상처");
+                intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.wound));
+                intent.putExtra(INTE_SYMPTOM_SUM,"25");
+                intent.putExtra(INTE_SELECT_SYMPTOM1_KR,"상처");
                 startActivity(intent);
 
 
@@ -217,9 +220,9 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_beer = hangover.getText().toString();
 
-                intent.putExtra("s1",getString(R.string.hangover));
-                intent.putExtra("sum","35");
-                intent.putExtra("s1kr","숙취");
+                intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.hangover));
+                intent.putExtra(INTE_SYMPTOM_SUM,"35");
+                intent.putExtra(INTE_SELECT_SYMPTOM1_KR,"숙취");
                 startActivity(intent);
 
 

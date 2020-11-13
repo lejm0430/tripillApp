@@ -21,6 +21,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.example.tripill.Props.INTE_INPUT_AGE;
+import static com.example.tripill.Props.INTE_SELECT_PART;
+import static com.example.tripill.Props.INTE_SELECT_PILLNAME;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
+import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
+
 public class AgeActivity extends AppCompatActivity {
     EditText age;
     RecyclerView recyclerView;
@@ -53,12 +62,12 @@ public class AgeActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
-        String part = getIntent().getStringExtra("part");
-        String symptom1 = getIntent().getStringExtra("s1");
-        String symptom2 = getIntent().getStringExtra("s2");
-        String sumS = getIntent().getStringExtra("sum");
-        s1kr = getIntent().getStringExtra("s1kr");
-        s2kr = getIntent().getStringExtra("s2kr");
+        String part = getIntent().getStringExtra(INTE_SELECT_PART);
+        String symptom1 = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1);
+        String symptom2 = getIntent().getStringExtra(INTE_SELECT_SYMPTOM2);
+        String sumS = getIntent().getStringExtra(INTE_SYMPTOM_SUM);
+        s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
+        s2kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);
         int sum = Integer.parseInt(sumS);
 
 
@@ -128,13 +137,13 @@ public class AgeActivity extends AppCompatActivity {
                             name = getString(R.string.ezn);
                         }
                         Intent intent = new Intent(getApplicationContext(), PillRecommendActivity.class);
-                        intent.putExtra("age",age.getText().toString());
-                        intent.putExtra("sum",sumS);
-                        intent.putExtra("s1",symptom1);
-                        intent.putExtra("s2",symptom2);
-                        intent.putExtra("name",name);
-                        intent.putExtra("s1kr",s1kr);
-                        intent.putExtra("s2kr",s2kr);
+                        intent.putExtra(INTE_INPUT_AGE,age.getText().toString());
+                        intent.putExtra(INTE_SYMPTOM_SUM,sumS);
+                        intent.putExtra(INTE_SELECT_SYMPTOM1,symptom1);
+                        intent.putExtra(INTE_SELECT_SYMPTOM2,symptom2);
+                        intent.putExtra(INTE_SELECT_PILLNAME,name);
+                        intent.putExtra(INTE_SELECT_SYMPTOM1_KR,s1kr);
+                        intent.putExtra(INTE_SELECT_SYMPTOM2_KR,s2kr);
                         startActivity(intent);
                     }
                 }

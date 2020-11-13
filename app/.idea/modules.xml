@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app.iml" group="tripill/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1792137551/tripill.iml" filepath="$PROJECT_DIR$/.idea/modules/1792137551/tripill.iml" group="tripill" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tripill-app.iml" filepath="$PROJECT_DIR$/.idea/modules/tripill-app.iml" group="tripill/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-806454438/tripillApp-tripill.iml" filepath="$PROJECT_DIR$/.idea/modules/-806454438/tripillApp-tripill.iml" group="tripill" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-806454438/tripill.iml" filepath="$PROJECT_DIR$/.idea/modules/-806454438/tripill.iml" group="tripill" />
     </modules>
   </component>
 </project>

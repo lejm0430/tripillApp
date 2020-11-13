@@ -1,7 +1,5 @@
 package com.example.tripill.Activity;
 import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -10,19 +8,16 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tripill.DataBase.pharmacyList;
-import com.example.tripill.Dialog.NaverMapBottomSheet;
 import com.example.tripill.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -59,30 +54,34 @@ import noman.googleplaces.PlaceType;
 import noman.googleplaces.PlacesException;
 import noman.googleplaces.PlacesListener;
 
+import static com.example.tripill.Props.FASTEST_UPDATE_INTERVAL_MS;
+import static com.example.tripill.Props.GPS_ENABLE_REQUEST_CODE;
+import static com.example.tripill.Props.PERMISSIONS_REQUEST_CODE;
+import static com.example.tripill.Props.UPDATE_INTERVAL_MS;
+
 public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener {
     private GoogleMap mMap;
     private Marker currentMarker = null;
     private Marker lastClicked;
 
+
     List<Marker> previous_marker = null;
 
-    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
 
-    private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
+
 
     LatLng currentPosition;
     Location location;
 
+
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
 
-    private View mLayout;  // Snackbar 사용하기 위해서는 View
+
+    private View mLayout;  // Snackbar 사용하기 위해서
 
     String markerSnippet;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +118,10 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
                 }
         });
+
+
+
+
     }
 
 
@@ -188,7 +191,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     @Override
                     public boolean onMarkerClick(Marker marker) {
 
-                        NaverMapBottomSheet naverMapBottomSheet= new NaverMapBottomSheet();
 
                 if(lastClicked != null){
                     lastClicked.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
@@ -197,15 +199,29 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
 
                 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_choice));
-                naverMapBottomSheet.name = marker.getTitle();
-                naverMapBottomSheet.Snippet = marker.getSnippet();
 
-                View include = findViewById(R.id.include);
-
-                include.setVisibility(View.VISIBLE);
+                LinearLayout bottomsheet = findViewById(R.id.bottom_sheet);
+                bottomsheet.setVisibility(View.VISIBLE);
 
 
-//                naverMapBottomSheet.show(getSupportFragmentManager(),"naverMapBottomSheet");
+                TextView pharmacyName_kr = findViewById(R.id.pharmacyName_kr);
+                TextView pharmacyName_en = findViewById(R.id.pharmacyName_en);
+                TextView findroadBtn = findViewById(R.id.findroadBtn);
+
+
+                pharmacyName_kr.setText(marker.getTitle());
+                pharmacyName_en.setText(R.string.pharmacy);
+
+                findroadBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri gmmIntentUri = Uri.parse("google.navigation:q="+marker.getSnippet()+"&mode=w");
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);
+                    }
+                });
+//                        Log.e("name / address",marker.getTitle()+marker.getSnippet());
                 return true;
             }
 
@@ -284,8 +300,10 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             }
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
-            if (checkPermission())
+            if (checkPermission()){
                 mMap.setMyLocationEnabled(true);
+
+            }
 
         }
 
@@ -473,10 +491,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
 
                 }
-
-
-
-
                 //중복 마커 제거
                 HashSet<Marker> hashSet = new HashSet<Marker>();
                 hashSet.addAll(previous_marker);

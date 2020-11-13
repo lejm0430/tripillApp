@@ -59,6 +59,13 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 import static com.example.tripill.Props.GPS_ENABLE_REQUEST_CODE;
+import static com.example.tripill.Props.INTE_INPUT_AGE;
+import static com.example.tripill.Props.INTE_SELECT_PILLNAME;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2;
+import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
+import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
 import static com.example.tripill.Props.PERMISSIONS_REQUEST_CODE;
 
 public class PillRecommendActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
@@ -154,13 +161,13 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         tts = new TextToSpeech(this, this);
 
-        ageS = getIntent().getStringExtra("age");
-        s1 = getIntent().getStringExtra("s1");
-        s2 = getIntent().getStringExtra("s2");
-        sumS = getIntent().getStringExtra("sum");
-        name  = getIntent().getStringExtra("name");
-        s1kr = getIntent().getStringExtra("s1kr");
-        s2kr = getIntent().getStringExtra("s2kr");
+        ageS = getIntent().getStringExtra(INTE_INPUT_AGE);
+        s1 = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1);
+        s2 = getIntent().getStringExtra(INTE_SELECT_SYMPTOM2);
+        sumS = getIntent().getStringExtra(INTE_SYMPTOM_SUM);
+        name  = getIntent().getStringExtra(INTE_SELECT_PILLNAME);
+        s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
+        s2kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);
 
         age = Integer.parseInt(ageS);
 
@@ -515,9 +522,9 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         String address = getCurrentAddress(latitude,longitude);
 
 
-        ageS = getIntent().getStringExtra("age");
-        s1kr = getIntent().getStringExtra("s1kr");
-        s2kr= getIntent().getStringExtra("s2kr");
+        ageS = getIntent().getStringExtra(INTE_INPUT_AGE);
+        s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
+        s2kr= getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);
 
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 

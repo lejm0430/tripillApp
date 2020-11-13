@@ -125,6 +125,7 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
                 } else if(adapter.getSelected_list().size() == 1){
                         intent.putExtra(INTE_SELECT_SYMPTOM1,adapter.getSelected_list().get(0).getSymptom());
                         intent.putExtra(INTE_SELECT_SYMPTOM1_KR,adapter.getSelected_list().get(0).getSymptomkr());
+                        Log.e("TESTslide",adapter.getSelected_list().get(0).getSymptomkr());
                         intent.putExtra(INTE_SYMPTOM_SUM,Integer.toString(adapter.getSelected_list().get(0).getScore()));
                     startActivityForResult(intent,REQUEST_CODE);
 
@@ -133,6 +134,7 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
                     intent.putExtra(INTE_SELECT_SYMPTOM1_KR,adapter.getSelected_list().get(0).getSymptomkr());
                     intent.putExtra(INTE_SELECT_SYMPTOM2,adapter.getSelected_list().get(1).getSymptom());
                     intent.putExtra(INTE_SELECT_SYMPTOM2_KR,adapter.getSelected_list().get(1).getSymptomkr());
+                    Log.e("TESTslidesecond",adapter.getSelected_list().get(0).getSymptomkr()+adapter.getSelected_list().get(1).getSymptomkr());
                     intent.putExtra(INTE_SYMPTOM_SUM, Integer.toString(sum(adapter.getSelected_list().get(0).getScore(),adapter.getSelected_list().get(1).getScore())));
                     startActivityForResult(intent,REQUEST_CODE);
                 }

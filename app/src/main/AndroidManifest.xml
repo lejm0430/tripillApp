@@ -17,20 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-<!--        <activity android:name=".Dialog.NaverMapBottomSheet"></activity>-->
-
         <activity android:name=".Activity.PharmacyMap" android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Activity.PillRecommendActivity"
             android:screenOrientation="portrait" />
-        <!--<activity
-            android:name=".Dialog.ChoicedSymptomSlide"
-<<<<<<< Updated upstream
-            android:screenOrientation="portrait"
-            tools:ignore="Instantiatable" />
-=======
-            android:screenOrientation="portrait" />-->
         <activity
             android:name=".Activity.AgeActivity"
             android:screenOrientation="portrait" />

@@ -1,6 +1,7 @@
 package com.example.tripill.Activity;
 
 import android.Manifest;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,8 +10,10 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -72,7 +75,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     SymptomRecommendAdpater adapter;
     ExpandableLayout expectexp;
     ExpandableLayout warningexp;
-    RelativeLayout speaker;
+    ImageView speaker;
 
     ImageView arrowIc;
     ImageView arrowIcWarning;
@@ -108,17 +111,14 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     SimpleDateFormat formats = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 
-    Realm realm;
-    Context prcontext;
+    private Realm realm;
+    public static Context prcontext;
 
 
     private TextToSpeech tts;
 
     private GpsTracker gpsTracker;
 
-    LatLng currentPosition;
-
-    Location location;
 
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
@@ -160,6 +160,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         name  = getIntent().getStringExtra(INTE_SELECT_PILLNAME);
         s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
         s2kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);
+        Log.e("TESTAGEPILLget",s1kr+s2kr);
+        Log.e("s1,s2,pillhistory",s1+","+s2);
 
         age = Integer.parseInt(ageS);
 
@@ -240,6 +242,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         if(s2kr == null || s2kr.isEmpty()){
             sym.setText(s1kr);
+            Log.e("test",s1kr+s2kr);
         }else {
             sym.setText(s1kr + "/" + s2kr);
         }
@@ -366,6 +369,12 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
             recyclerView.setAdapter(adapter);
         }
+        recyclerView.setAdapter(adapter);
+
+
+
+
+
         ///////list
 
         ((MainActivity)MainActivity.context).pillList = new ArrayList<PillList>();
@@ -381,14 +390,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         ((MainActivity)MainActivity.context).historyadapter = new PillHistoryAdapter(((MainActivity)MainActivity.context).pillList,this);
         ((MainActivity)MainActivity.context).drawer_recycler.setAdapter(((MainActivity)MainActivity.context).historyadapter);
 
-
-        RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
-        for (PillDB pill : result) {
-            ((MainActivity)MainActivity.context).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
-            if(pill.getName() != null){
-                ((MainActivity)MainActivity.context).nonehistory.setVisibility(View.GONE);
-            }
-        }
 
     }
 
@@ -426,7 +427,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
 
             boolean check_result = true;
-
 
             // 모든 퍼미션을 허용했는지 체크
 
@@ -530,7 +530,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 
         if(s2kr != null){
-            String smsBody = "저는 외국인입니다." + "저의 위치는 '" + address + "'이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1kr+ "," + s2kr +"입니다. 살려줘";
+            String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1kr+ "," + s2kr +"입니다. 살려줘";
 
             sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
 
@@ -616,6 +616,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 }
                 pd.setS1kr(s1kr);
                 pd.setS2kr(s2kr);
+                Log.e("TESTbasic",s1kr+s2kr);
                 if(pd.getName() == null){
                     ((MainActivity)MainActivity.context).drawer_recycler.setVisibility(View.GONE);
                 }else{

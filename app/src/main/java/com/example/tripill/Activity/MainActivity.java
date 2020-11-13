@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity{
 
     public ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
 
-    Realm realm;
+    private Realm realm;
 
     public static Context context;
 
@@ -124,13 +125,15 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
+
+
+
+
         headBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String s_head = head.getText().toString();
-
-                ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
 
                 bottomSheet.title = s_head;
                 bottomSheet.show(getSupportFragmentManager(), TAG);
@@ -143,8 +146,6 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
 
                 String s_neck = neck.getText().toString();
-
-                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
 
                 bottomSheet.title = s_neck;
                 bottomSheet.show(getSupportFragmentManager(), TAG);
@@ -160,8 +161,6 @@ public class MainActivity extends AppCompatActivity{
 
                 String s_stomach = stomach.getText().toString();
 
-                ChoicedSymptomSlide bottomSheet=new ChoicedSymptomSlide();
-
                 bottomSheet.title = s_stomach;
                 bottomSheet.show(getSupportFragmentManager(), TAG);
 
@@ -170,11 +169,15 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+
+
+
+
+
+
         musclePainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String s_musclePain = muscle_pain.getText().toString();
 
                 intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.muscle_pain));
                 intent.putExtra(INTE_SYMPTOM_SUM,"20");
@@ -187,8 +190,6 @@ public class MainActivity extends AppCompatActivity{
         burnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String s_burn = burn.getText().toString();
 
                 intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.burn));
                 intent.putExtra(INTE_SYMPTOM_SUM,"60");
@@ -204,12 +205,11 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                String s_wound = wound.getText().toString();
-
                 intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.wound));
                 intent.putExtra(INTE_SYMPTOM_SUM,"25");
                 intent.putExtra(INTE_SELECT_SYMPTOM1_KR,"상처");
                 startActivity(intent);
+
 
 
 
@@ -219,8 +219,6 @@ public class MainActivity extends AppCompatActivity{
         beerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String s_beer = hangover.getText().toString();
 
                 intent.putExtra(INTE_SELECT_SYMPTOM1,getString(R.string.hangover));
                 intent.putExtra(INTE_SYMPTOM_SUM,"35");

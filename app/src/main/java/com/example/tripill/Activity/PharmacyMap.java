@@ -1,5 +1,7 @@
 package com.example.tripill.Activity;
+
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -60,28 +62,25 @@ import static com.example.tripill.Props.PERMISSIONS_REQUEST_CODE;
 import static com.example.tripill.Props.UPDATE_INTERVAL_MS;
 
 public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener {
+
     private GoogleMap mMap;
-    private Marker currentMarker = null;
+    private Marker currentMarker=null;
     private Marker lastClicked;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationRequest locationRequest;
+    private View mLayout;  // Snackbar
 
+    int hasFineLocationPermission;
+    int hasCoarseLocationPermission;
 
-    List<Marker> previous_marker = null;
+    List<Marker> previous_marker=null;
 
-
-    String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
-
+    String[] REQUIRED_PERMISSIONS={Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
     LatLng currentPosition;
     Location location;
-
-
-    private FusedLocationProviderClient mFusedLocationClient;
-    private LocationRequest locationRequest;
-
-
-    private View mLayout;  // Snackbar 사용하기 위해서
-
     String markerSnippet;
+    ImageView gpsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,122 +90,111 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
         setContentView(R.layout.activity_pharmacy_map);
 
-        mLayout = findViewById(R.id.layout_main);
+        mLayout=findViewById(R.id.layout_main);
 
-        previous_marker = new ArrayList<Marker>();
+        previous_marker=new ArrayList<Marker>();
 
-        locationRequest = new LocationRequest()
+        locationRequest=new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS)
                 .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
 
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        LocationSettingsRequest.Builder builder=new LocationSettingsRequest.Builder();
 
         builder.addLocationRequest(locationRequest);
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mFusedLocationClient=LocationServices.getFusedLocationProviderClient(this);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        RelativeLayout head = findViewById(R.id.head);
+        RelativeLayout head=findViewById(R.id.head);
         head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
 
-                }
+            }
         });
-
-
 
 
     }
 
 
-
-
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-        mMap = googleMap;
+        mMap=googleMap;
 
         setDefaultLocation();
 
-        int hasFineLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
 
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) { //퍼미션 허용 O
-
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) { //퍼미션 허용 O
             startLocationUpdates(); // 위치 업데이트 시작
-
-        }else {  //퍼미션 허용x
-
-
+        } else {  //퍼미션 허용x
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
                 Snackbar.make(mLayout, R.string.snackbar_body,
                         Snackbar.LENGTH_INDEFINITE).setAction(R.string.confirm, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ActivityCompat.requestPermissions( PharmacyMap.this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
+                        ActivityCompat.requestPermissions(PharmacyMap.this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
                     }
                 }).show();
             } else {
-                ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
+                ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
             }
-
+//            gpsBtn.setOnClickListener(null);
         }
 
-        ImageView gpsBtn = findViewById(R.id.gpsBtn);
+        gpsBtn=findViewById(R.id.gpsBtn);
         gpsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
-
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentPosition, 17);
+                CameraUpdate cameraUpdate=CameraUpdateFactory.newLatLngZoom(currentPosition, 17);
                 mMap.moveCamera(cameraUpdate);
                 showPlaceInformation(currentPosition);
             }
         });
 
-        mMap.getUiSettings().setMyLocationButtonEnabled(false); //gps버튼
+        mMap.getUiSettings().setMyLocationButtonEnabled(false); //기본 gps버튼
 
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng latLng) {
-                if(lastClicked != null){
+                if (lastClicked != null) {
                     lastClicked.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
                 }
-                lastClicked = null;
+                lastClicked=null;
             }
         });
 
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
 
 
-                if(lastClicked != null){
+                if (lastClicked != null) {
                     lastClicked.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
                 }
-                lastClicked = marker;
+                lastClicked=marker;
 
 
                 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_choice));
 
-                LinearLayout bottomsheet = findViewById(R.id.bottom_sheet);
+                LinearLayout bottomsheet=findViewById(R.id.bottom_sheet);
                 bottomsheet.setVisibility(View.VISIBLE);
 
 
-                TextView pharmacyName_kr = findViewById(R.id.pharmacyName_kr);
-                TextView pharmacyName_en = findViewById(R.id.pharmacyName_en);
-                TextView findroadBtn = findViewById(R.id.findroadBtn);
+                TextView pharmacyName_kr=findViewById(R.id.pharmacyName_kr);
+                TextView pharmacyName_en=findViewById(R.id.pharmacyName_en);
+                TextView findroadBtn=findViewById(R.id.findroadBtn);
 
 
                 pharmacyName_kr.setText(marker.getTitle());
@@ -215,60 +203,128 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 findroadBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri gmmIntentUri = Uri.parse("google.navigation:q="+marker.getSnippet()+"&mode=w");
-                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        Uri gmmIntentUri=Uri.parse("google.navigation:q=" + marker.getSnippet() + "&mode=w");
+                        Intent mapIntent=new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                         mapIntent.setPackage("com.google.android.apps.maps");
                         startActivity(mapIntent);
                     }
                 });
-//                        Log.e("name / address",marker.getTitle()+marker.getSnippet());
+
                 return true;
             }
 
         });
 
 
-
-
-
     }
-
 
 
     public void setDefaultLocation() {
 
-        int hasFineLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ){
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
 
-        }else{
-            LatLng DEFAULT_LOCATION = new LatLng(37.566614, 126.977919);
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 17);
+        } else {
+            LatLng DEFAULT_LOCATION=new LatLng(37.566614, 126.977919);
+            CameraUpdate cameraUpdate=CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 17);
             mMap.moveCamera(cameraUpdate);
         }
 
 
-    }
+    }  //지도 default 위치
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grandResults) {
+
+        if ( permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
+
+            // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
+
+            boolean check_result = true;
+
+
+            // 모든 퍼미션을 허용했는지 체크
+
+            for (int result : grandResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    check_result = false;
+                    break;
+                }
+            }
+
+
+            if ( check_result ) {
+                //모든 퍼미션을 허용했다면 위치 업데이트를 시작
+                startLocationUpdates();
+            }
+            else {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
+                        || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
+
+                    Snackbar.make(mLayout, getString(R.string.preference_none),
+                            Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.confirm), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ActivityCompat.requestPermissions( PharmacyMap.this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
+                        }
+                    }).show();
+
+                }else {
+                    // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우
+                    Snackbar.make(mLayout, getString(R.string.preference_none_setting),
+                            Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.confirm), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent= new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            startActivityForResult(intent,0);
+                        }
+                    }).show();
+                }
+                //                gpsBtn.setOnClickListener(null);
+            }
+
+        }
+    } //한번 거부 후 위치권한 다이얼로그
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+
+            case GPS_ENABLE_REQUEST_CODE:
+
+                //사용자가 GPS 활성 시켰는지 검사
+                if (!checkLocationServicesStatus()) {
+                    Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
+                    if (checkLocationServicesStatus()) {
+                        return;
+                    }
+                }
+                break;
+        }
+    }//gps 네트워크
 
 
 
 
-    LocationCallback locationCallback = new LocationCallback() {
+    LocationCallback locationCallback=new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
             super.onLocationResult(locationResult);
 
-            List<Location> locationList = locationResult.getLocations();
+            List<Location> locationList=locationResult.getLocations();
 
             if (locationList.size() > 0) {
-                location = locationList.get(locationList.size() - 1);
+                location=locationList.get(locationList.size() - 1);
                 //location = locationList.get(0);
 
-                currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
+                currentPosition=new LatLng(location.getLatitude(), location.getLongitude());
 
-                location = location;
+                location=location;
 
 
             }
@@ -279,23 +335,42 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     };
 
 
+    public boolean checkLocationServicesStatus() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }   //gps, 네트워크 여부 boolean
+
+    private boolean checkPermission() {
+        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
+            return true;
+        }
+
+        return false;
+
+    }  //퍼미션 여부 boolean
 
     private void startLocationUpdates() {
 
         if (!checkLocationServicesStatus()) {
 
-        }else {
-
-            int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION);
-            int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION);
-
-
+        } else {
 
             if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED ||
-                    hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED   ) {
+                    hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) {
 
+                return;
+            }
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
                 return;
             }
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
@@ -307,34 +382,18 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
         }
 
-    }
-
-
-    public boolean checkLocationServicesStatus() {
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
-
-
-    private boolean checkPermission() {
-
-        int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION);
+    }  //사용자위치 업데이트
 
 
 
-        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
-            return true;
-        }
 
-        return false;
 
-    }
+
+
+
+
+
+
 
     public String getCurrentAddress(LatLng latlng) {
 
@@ -367,108 +426,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             return address.getAddressLine(0).toString();
         }
 
-    }
-
-
-
-
-    @Override
-    public void onRequestPermissionsResult(int permsRequestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grandResults) {
-
-        if ( permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
-
-            // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
-
-            boolean check_result = true;
-
-
-            // 모든 퍼미션을 허용했는지 체크
-
-            for (int result : grandResults) {
-                if (result != PackageManager.PERMISSION_GRANTED) {
-                    check_result = false;
-                    break;
-                }
-            }
-
-
-            if ( check_result ) {
-
-                // 퍼미션을 허용했다면 위치 업데이트를 시작
-                startLocationUpdates();
-            }
-            else {
-
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
-                        || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
-                            Snackbar.make(mLayout, getString(R.string.preference_none),
-                            Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.confirm), new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ActivityCompat.requestPermissions( PharmacyMap.this, REQUIRED_PERMISSIONS,PERMISSIONS_REQUEST_CODE);
-//                            finish();
-                        }
-                    }).show();
-
-                }else {
-                    // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우
-                    Snackbar.make(mLayout, getString(R.string.preference_none_setting),
-                            Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.confirm), new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent= new Intent(Settings.ACTION_SETTINGS);
-                            startActivityForResult(intent,0);
-                        }
-                    }).show();
-                }
-            }
-
-        }
-    }
-
-
-
-
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-
-            case GPS_ENABLE_REQUEST_CODE:
-
-                //사용자가 GPS 활성 시켰는지 검사
-                if (!checkLocationServicesStatus()) {
-                    Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
-                    if (checkLocationServicesStatus()) {
-
-                        return;
-                    }
-                }
-                break;
-        }
-    }
-
-    @Override
-    public void onPlacesFailure(PlacesException e) {
-
-    }
-
-    @Override
-    public void onPlacesStart() {
-
-    }
-
-
-    @Override
-    public void onPlacesFinished() {
-
-    }
+    }  //지오코더
 
     @Override
     public void onPlacesSuccess(final List<Place> places) {
@@ -500,9 +458,9 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             }
         });
 
-    }
+    }  //약국 place
 
-    public void showPlaceInformation(LatLng location)
+    public void showPlaceInformation(LatLng location)  //약국 api
     {
         mMap.clear();//지도 클리어
 
@@ -517,6 +475,23 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 .type(PlaceType.PHARMACY) //약국
                 .build()
                 .execute();
+
+    }
+
+
+    @Override
+    public void onPlacesFailure(PlacesException e) {
+
+    }
+
+    @Override
+    public void onPlacesStart() {
+
+    }
+
+
+    @Override
+    public void onPlacesFinished() {
 
     }
 

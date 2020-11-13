@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,6 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MainHolder holder, int position) {
-        //final PillList pillList = pilllist.get(position);
         holder.onBind(pilllist.get(position));
         s2 = holder.symptom2.getText().toString();
         if(s2.isEmpty() || s2kr == null){
@@ -76,6 +76,8 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
                 intent.putExtra(INTE_SELECT_PILLNAME,holder.pillname.getText().toString());
                 intent.putExtra(INTE_SELECT_SYMPTOM1_KR,s1kr);
                 intent.putExtra(INTE_SELECT_SYMPTOM2_KR,s2kr);
+                Log.e("TESThistory",s1kr);
+                Log.e("s1,s2,pillhistory",holder.symptom1.getText().toString()+","+holder.symptom2.getText().toString());
                 context.startActivity(intent);
 
             }
@@ -124,6 +126,7 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
             s2kr = list.getSymptom2kr();
             symptom1.setTypeface(symptom1.getTypeface(), Typeface.BOLD);
             symptom2.setTypeface(symptom2.getTypeface(), Typeface.BOLD);
+
         }
 
     }

@@ -85,7 +85,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     private LocationRequest locationRequest;
 
 
-    private View mLayout;  // Snackbar 사용하기 위해서는 View
+    private View mLayout;  // Snackbar 사용하기 위해서
 
     String markerSnippet;
 

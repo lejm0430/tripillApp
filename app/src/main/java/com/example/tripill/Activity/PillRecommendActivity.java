@@ -1,8 +1,7 @@
 package com.example.tripill.Activity;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.Dialog;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -425,7 +424,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
 
             boolean check_result = true;
-
 
             // 모든 퍼미션을 허용했는지 체크
 

@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity{
 
         context = this;
 
-<<<<<<< HEAD
 
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);
@@ -89,8 +88,6 @@ public class MainActivity extends AppCompatActivity{
         TextView wound = findViewById(R.id.wound);
         TextView hangover = findViewById(R.id.hangover);
 
-=======
->>>>>>> 7ae82f8f4786eddca8b5014a45eb906ad92d99c8
 
         ImageView menuBtn = findViewById(R.id.menuBtn);
         ImageView headBtn = findViewById(R.id.headBtn_ring);
@@ -128,10 +125,8 @@ public class MainActivity extends AppCompatActivity{
                 nonehistory.setVisibility(View.GONE);
             }
         }
-<<<<<<< HEAD
+
         Intent intent = new Intent(getApplicationContext(), AgeActivity.class);
-=======
->>>>>>> 7ae82f8f4786eddca8b5014a45eb906ad92d99c8
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,17 +135,12 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-
-
-<<<<<<< HEAD
-=======
         menuBtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             mainDrawer.openDrawer(menuDrawer);
         }
     });
->>>>>>> 7ae82f8f4786eddca8b5014a45eb906ad92d99c8
 
         headBtn.setOnClickListener(onClickListener1);
         neckBtn.setOnClickListener(onClickListener1);
@@ -202,15 +192,6 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-<<<<<<< HEAD
-    void bottomInfoShow(String str){
-        bottomSheet.title = str;
-        bottomSheet.show(getSupportFragmentManager(), TAG);
-    }
-
-
-=======
->>>>>>> 7ae82f8f4786eddca8b5014a45eb906ad92d99c8
     @Override
     public void onBackPressed() {
         if(mainDrawer.isDrawerOpen(menuDrawer)){

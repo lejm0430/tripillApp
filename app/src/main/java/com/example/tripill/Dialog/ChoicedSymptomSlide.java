@@ -65,7 +65,7 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
         View v=inflater.inflate(R.layout.activity_choiced_symptom_slide, container, false);
 
         TextView nextBtn=v.findViewById(R.id.nextBtn);
-        TextView TwoChoiceMungu=v.findViewById(R.id.TwoChoiceMungu);
+        TextView select_symptom=v.findViewById(R.id.select_symptom);
         ImageView backBtn=v.findViewById(R.id.backbtn);
         RecyclerView recyclerView=v.findViewById(R.id.recycler_symptom);
         LinearLayout bottom_sheet = v.findViewById(R.id.bottom_sheet);
@@ -78,19 +78,19 @@ public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
         list=new ArrayList<>();
 
         if(title.contains(getString(R.string.head))){
-            TwoChoiceMungu.setVisibility((View.VISIBLE));
+            select_symptom.setVisibility((View.VISIBLE));
 
             list.add(new SymptomList(getString(R.string.headache), 1 ,"두통"));
             list.add(new SymptomList(getString(R.string.dizziness),2, "어지럼증"));
             list.add(new SymptomList(getString(R.string.fever),4, "발열"));
         }else if(title.contains(getString(R.string.neck))){
-            TwoChoiceMungu.setVisibility((View.VISIBLE));
+            select_symptom.setVisibility((View.VISIBLE));
 
             list.add(new SymptomList(getString(R.string.sore_throat),7, "인후통"));
             list.add(new SymptomList(getString(R.string.cough),8, "기침"));
         }else if(title.contains(getString(R.string.abdominal))){
 
-            TwoChoiceMungu.setVisibility((View.VISIBLE));
+            select_symptom.setVisibility((View.VISIBLE));
 
             list.add(new SymptomList(getString(R.string.indigestion),40, "소화불량"));
             list.add(new SymptomList(getString(R.string.colic),50, "복통"));

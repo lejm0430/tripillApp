@@ -21,21 +21,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="증상1"
-            style="@style/TextStyle15" />
+            style="@style/medium_white_16" />
 
         <TextView
             android:id="@+id/coma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=", "
-            style="@style/TextStyle15"/>
+            style="@style/medium_white_16"/>
 
         <TextView
             android:id="@+id/symptom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="증상2"
-            style="@style/TextStyle15"/>
+            style="@style/medium_white_16"/>
 
     </LinearLayout>
 
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/history_age"
-            style="@style/TextStyle16"/>
+            style="@style/kkr_slate_16"/>
 
 
         <TextView
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ageText"
             android:text="20"
-            style="@style/TextStyle16"/>
+            style="@style/kkr_slate_16"/>
 
 
         <TextView
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="01.31.2020"
-            style="@style/TextStyle17"/>
+            style="@style/kkr_warm_grey_14"/>
 
 
     </RelativeLayout>
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="약이름"
-        style="@style/TextStyle18"/>
+        style="@style/medium_black_20"/>
 
 
     <View

@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="@string/previous"
             android:textSize="24dp"
-            style="@style/TextStyle14"
+            style="@style/demilight_white_24"
             android:layout_below="@+id/circle"/>
 
     </RelativeLayout>
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/not_use"
-            style="@style/TextStyle13"
+            style="@style/medium_warm_grey_16"
             android:layout_gravity="center"/>
 
     </LinearLayout>

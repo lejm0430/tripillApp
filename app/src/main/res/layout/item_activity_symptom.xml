@@ -11,7 +11,7 @@
         android:background="@drawable/rec_coner_cobalt_symptom_textview"
         android:textColor="@color/white"
         android:textSize="14dp"
-        style="@style/TextStyle9"
+        style="@style/demilight_white_14"
         android:layout_marginLeft="4dp"
         android:fontFamily="@font/noto_sans_cj_kkr_demilight"/>
 

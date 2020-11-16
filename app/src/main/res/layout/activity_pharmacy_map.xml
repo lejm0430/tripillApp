@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search_pharmacy_round"
-            style="@style/TextStyle24"
+            style="@style/demilight_black_16"
             android:layout_toRightOf="@+id/backbtn"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
@@ -70,7 +70,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
                 android:text="약국 한글 이름"
-                style="@style/TextStyle6"/>
+                style="@style/demilight_black_20"/>
 
             <TextView
                 android:id="@+id/pharmacyName_en"
@@ -80,7 +80,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="약국 영어 이름"
-                style="@style/TextStyle17"/>
+                style="@style/kkr_warm_grey_14"/>
 
             <TextView
                 android:id="@+id/findroadBtn"
@@ -96,7 +96,7 @@
                 android:layout_gravity="right"
                 android:text="@string/search_load"
                 android:background="@drawable/circle_border_sunflower_navermap"
-                style="@style/TextStyle25"
+                style="@style/kkr_light_navy_16"
                 android:layout_centerInParent="true"/>
         </LinearLayout>
 

@@ -38,7 +38,7 @@
         android:paddingTop="4dp"
         android:layout_marginLeft="16dp"
         android:text="부위"
-        style="@style/TextStyle9"
+        style="@style/demilight_white_14"
         android:background="@drawable/rec_coner_button"/>
 
     <TextView
@@ -47,16 +47,16 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/select_symptom"
-        style="@style/TextStyle6"/>
+        style="@style/demilight_black_20"/>
 
     <TextView
-        android:id="@+id/TwoChoiceMungu"
+        android:id="@+id/select_symptom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
         android:text="@string/maximum_two_choice"
-        style="@style/TextStyle7"
+        style="@style/kkr_coral_14"
         android:visibility="gone"/>
 
 
@@ -80,7 +80,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/textview_bottom_button_border"
         android:text="@string/next"
-        style="@style/TextStyle8"/>
+        style="@style/medium_cobalt_16"/>
 
 
 </LinearLayout>

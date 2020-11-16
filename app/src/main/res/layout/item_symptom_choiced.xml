@@ -19,6 +19,6 @@
         android:layout_height="wrap_content"
         android:text="증상2"
         android:layout_marginLeft="8dp"
-        style="@style/TextStyle5"/>
+        style="@style/kkr_black_16"/>
 
 </LinearLayout>

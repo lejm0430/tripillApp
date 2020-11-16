@@ -52,7 +52,7 @@ public class AgeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_age);
 
         age = (EditText)findViewById(R.id.age);
-        TextView recobtn = (TextView)findViewById(R.id.recobtn);
+        TextView recommendbtn = (TextView)findViewById(R.id.recommendbtn);
         ImageView xbtn = (ImageView)findViewById(R.id.xbtn);
         backbtn = findViewById(R.id.backbtn);
 
@@ -94,7 +94,7 @@ public class AgeActivity extends AppCompatActivity {
         });
 
 
-        recobtn.setOnClickListener(new View.OnClickListener() { //점수랑 나이 비교해서 dialog띄우기
+        recommendbtn.setOnClickListener(new View.OnClickListener() { //점수랑 나이 비교해서 dialog띄우기
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {

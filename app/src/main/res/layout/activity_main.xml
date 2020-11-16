@@ -47,12 +47,12 @@
         android:layout_height="wrap_content"
         android:text="@string/select_part"
         android:layout_below="@+id/action_bar"
-        style="@style/TextStyle4"
+        style="@style/demilight_black_24"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"/>
 
             <LinearLayout
-                android:id="@+id/linear_wrap"
+                android:id="@+id/body_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/mainText"
@@ -61,7 +61,7 @@
                 android:weightSum="3">
 
                 <LinearLayout
-                    android:id="@+id/linear1"
+                    android:id="@+id/firstline_area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -90,7 +90,7 @@
                             android:layout_below="@id/headBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"
-                            style="@style/TextStyle3"/>
+                            style="@style/kkr_slate_16_horizontal"/>
 
                     </RelativeLayout>
 
@@ -116,7 +116,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/neck"
-                            style="@style/TextStyle3"
+                            style="@style/kkr_slate_16_horizontal"
                             android:layout_below="@id/neckBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"/>
@@ -149,17 +149,17 @@
                             android:layout_below="@id/stomachBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"
-                            style="@style/TextStyle3"/>
+                            style="@style/kkr_slate_16_horizontal"/>
 
                     </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linear2"
+                    android:id="@+id/secondline_area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_below="@+id/linear1">
+                    android:layout_below="@+id/firstline_area">
 
                     <RelativeLayout
                         android:id="@+id/musclePainBtn"
@@ -184,7 +184,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/muscle_pain"
-                            style="@style/TextStyle3"
+                            style="@style/kkr_slate_16_horizontal"
                             android:layout_below="@id/musclePainBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"/>
@@ -218,7 +218,7 @@
                             android:layout_below="@id/burnBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"
-                            style="@style/TextStyle3"/>
+                            style="@style/kkr_slate_16_horizontal"/>
 
                     </RelativeLayout>
 
@@ -248,17 +248,17 @@
                             android:layout_below="@id/woundBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"
-                            style="@style/TextStyle3"/>
+                            style="@style/kkr_slate_16_horizontal"/>
 
                     </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linear3"
+                    android:id="@+id/thirdline_area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_below="@+id/linear2">
+                    android:layout_below="@+id/secondline_area">
 
                     <RelativeLayout
                         android:id="@+id/beerBtn"
@@ -286,7 +286,7 @@
                             android:layout_below="@id/beerBtn_ring"
                             android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"
-                            style="@style/TextStyle3"/>
+                            style="@style/kkr_slate_16_horizontal"/>
 
                     </RelativeLayout>
 

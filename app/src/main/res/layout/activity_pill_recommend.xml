@@ -29,7 +29,7 @@
             android:layout_marginRight="16dp"
             android:layout_alignParentRight="true"
             android:text="SOS"
-            style="@style/TextStyle19"
+            style="@style/medium_white_16"
             android:background="@drawable/rec_coner_coral_sos"
             android:drawableLeft="@drawable/ic_sos_white"
             android:drawablePadding="8dp"/>
@@ -93,7 +93,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/TextStyle17"
+                    style="@style/kkr_warm_grey_14"
                     android:text="@string/symptom" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -115,14 +115,14 @@
             android:padding="8dp"
             android:background="@drawable/rec_view_whitetwo_border">
         <TextView
-            android:id="@+id/tv"
+            android:id="@+id/show_parmarcy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/show_pharmacist"
-            style="@style/TextStyle17"/>
+            style="@style/kkr_warm_grey_14"/>
 
             <RelativeLayout
-                android:layout_below="@id/tv"
+                android:layout_below="@id/show_parmarcy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
@@ -134,7 +134,7 @@
                     android:layout_toLeftOf="@+id/speaker"
                     android:layout_alignParentLeft="true"
                     android:text="두통"
-                    style="@style/TextStyle20"
+                    style="@style/kkr_black_24"
                     android:layout_marginRight="8dp"/>
 
                     <ImageView
@@ -282,7 +282,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="그것은 동력은 것이 있는가? 인류의 같은 풍부하게 봄날의 인도하겠다는 든 어디 보라. 거선의 것은 그들의 따뜻한 별과 물방아 영원히 고동을 이것이야말로 사막이다. 인간의 얼음에 두기 굳세게 피어나는 있는 이상은 이상은 용감하고 피다. 부패를 청춘의 심장은 방황하였으며, 피어나는 인생에 때문이다. 가치를 곧 인도하겠다는 예수는 원대하고, 아니더면, 열락의 날카로우나 보라. 못하다 일월과 우리 때에, 넣는 사막이다. 청춘의 곧 착목한는 전인 내려온 되려니와, 칼이다. 우리의 피어나는 못하다 뿐이다.."
-                    style="@style/TextStyle21"/>
+                    style="@style/kkr_black_14"/>
             </RelativeLayout>
         </net.cachapa.expandablelayout.ExpandableLayout>
         </LinearLayout>
@@ -295,7 +295,7 @@
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:text="@string/find_pharmacy"
-            style="@style/TextStyle8"
+            style="@style/medium_cobalt_16"
             android:background="@drawable/textview_bottom_button_border"
             android:gravity="center"
             android:layout_alignParentBottom="true"/>

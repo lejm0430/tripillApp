@@ -478,16 +478,16 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         } catch (IOException ioException) {
             //네트워크
             Toast.makeText(this, R.string.no_gocode, Toast.LENGTH_LONG).show();
-            return String.valueOf(R.string.no_gocode);
+            return "지오코더 사용 불가";
         } catch (IllegalArgumentException illegalArgumentException) {
             //GPS
             Toast.makeText(this, R.string.Invalid_GPS, Toast.LENGTH_LONG).show();
-            return String.valueOf(R.string.Invalid_GPS);
+            return "잘못된 GPS 좌표";
         }
 
         if (addresses == null || addresses.size() == 0) {
             Toast.makeText(this, R.string.cant_find_address, Toast.LENGTH_LONG).show();
-            return String.valueOf(R.string.cant_find_address);
+            return "주소 미발견";
 
         }
 

@@ -85,7 +85,4 @@
     <string name="pharmacy">Pharmacy</string>
     <string name="maximum_two_choice_toast">Only two can be selected</string>
     <string name="snackbar_body">You need access to the location when you run this app.</string>
-    <string name="no_gocode">Geocoder Service Not Available</string>
-    <string name="Invalid_GPS">Invalid GPS Coordinate</string>
-    <string name="cant_find_address">address not found</string>
 </resources>

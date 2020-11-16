@@ -85,7 +85,4 @@
     <string name="pharmacy">売薬店</string>
     <string name="maximum_two_choice_toast">2つまで選択可能</string>
     <string name="snackbar_body">このアプリを実行するには、場所へのアクセス権限が必要です.</string>
-    <string name="no_gocode">ジオコーダサービスを使用不可</string>
-    <string name="Invalid_GPS">GPSの誤った座標</string>
-    <string name="cant_find_address">住所未発見</string>
 </resources>

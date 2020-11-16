@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity{
 
         context = this;
 
-
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);
         TextView stomach = findViewById(R.id.stomach);
@@ -87,7 +86,6 @@ public class MainActivity extends AppCompatActivity{
         TextView burn = findViewById(R.id.burn);
         TextView wound = findViewById(R.id.wound);
         TextView hangover = findViewById(R.id.hangover);
-
 
         ImageView menuBtn = findViewById(R.id.menuBtn);
         ImageView headBtn = findViewById(R.id.headBtn_ring);

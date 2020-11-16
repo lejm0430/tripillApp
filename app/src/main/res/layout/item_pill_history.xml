@@ -21,21 +21,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="증상1"
-            style="@style/medium_white_16" />
+            />
 
         <TextView
             android:id="@+id/coma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=", "
-            style="@style/medium_white_16"/>
+            />
 
         <TextView
             android:id="@+id/symptom2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="증상2"
-            style="@style/medium_white_16"/>
+            />
 
     </LinearLayout>
 

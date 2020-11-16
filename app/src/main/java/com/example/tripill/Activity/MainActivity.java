@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,7 +32,6 @@ import static com.example.tripill.Props.FINISH_INTERVAL_TIME;
 import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
 import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
 import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
-import static com.example.tripill.Props.REQUEST_CODE;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -60,8 +58,7 @@ public class MainActivity extends AppCompatActivity{
 
     private Realm realm;
 
-    public static Context context;
-
+    public Context context;
 
 
     View.OnClickListener onClickListener1 = new View.OnClickListener() {
@@ -84,6 +81,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         context = this;
+
 
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);
@@ -125,11 +123,11 @@ public class MainActivity extends AppCompatActivity{
 
         RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
         for (PillDB pill : result) {
-            pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
-        if(pill.getName() != null){
-            nonehistory.setVisibility(View.GONE);
+            pillList.add(new PillList(pill.getS1(), pill.getS2(), pill.getAge(), pill.getDate(), pill.getName(), pill.getS1kr(), pill.getS2kr()));
+            if (pill.getName() != null) {
+                nonehistory.setVisibility(View.GONE);
+            }
         }
-
         Intent intent = new Intent(getApplicationContext(), AgeActivity.class);
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
@@ -138,16 +136,7 @@ public class MainActivity extends AppCompatActivity{
                 mainDrawer.openDrawer(menuDrawer);
             }
         });
-    }
 
-
-
-        menuBtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            mainDrawer.openDrawer(menuDrawer);
-        }
-    });
 
 
 
@@ -222,7 +211,7 @@ public class MainActivity extends AppCompatActivity{
 
     void bottomInfoShow(String str){
         bottomSheet.title = str;
-        bottomSheet.show(getSupportFragmentManager(), "ChoicedSymptomSlide");
+        bottomSheet.show(getSupportFragmentManager(), TAG);
     }
 
 
@@ -242,6 +231,29 @@ public class MainActivity extends AppCompatActivity{
             }
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        drawer_recycler.setLayoutManager(linearLayoutManager);
+
+        pillList= new ArrayList<PillList>();
+        historyadapter = new PillHistoryAdapter(pillList,this);
+        drawer_recycler.setAdapter(historyadapter);
+
+
+        RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
+        for (PillDB pill : result) {
+            pillList.add(new PillList(pill.getS1(), pill.getS2(), pill.getAge(), pill.getDate(), pill.getName(), pill.getS1kr(), pill.getS2kr()));
+            if (pill.getName() != null) {
+                nonehistory.setVisibility(View.GONE);
+            }
+        }
     }
 
     protected void onDestroy(){

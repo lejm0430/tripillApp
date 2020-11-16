@@ -68,7 +68,6 @@ public class AgeActivity extends AppCompatActivity {
         String sumS = getIntent().getStringExtra(INTE_SYMPTOM_SUM);
         s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
         s2kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);
-        Log.e("TESTMainAGEget",s1kr+","+s2kr);
         int sum = Integer.parseInt(sumS);
 
 
@@ -145,7 +144,6 @@ public class AgeActivity extends AppCompatActivity {
                         intent.putExtra(INTE_SELECT_PILLNAME,name);
                         intent.putExtra(INTE_SELECT_SYMPTOM1_KR,s1kr);
                         intent.putExtra(INTE_SELECT_SYMPTOM2_KR,s2kr);
-                        Log.e("TESTAGEPILLput",s1kr+s2kr);
                         startActivity(intent);
                     }
                 }

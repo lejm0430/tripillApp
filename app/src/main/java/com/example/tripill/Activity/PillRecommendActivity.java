@@ -2,7 +2,9 @@ package com.example.tripill.Activity;
 
 import android.Manifest;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -61,7 +63,7 @@ import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
 import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
 import static com.example.tripill.Props.PERMISSIONS_REQUEST_CODE;
 
-public class PillRecommendActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+public class PillRecommendActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
 
     ImageView pillphoto;
     RelativeLayout viewArea;
@@ -112,8 +114,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
 
     private Realm realm;
-    public static Context prcontext;
-
+    public Context prcontext;
 
     private TextToSpeech tts;
 
@@ -121,7 +122,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
 
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,8 +160,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         name  = getIntent().getStringExtra(INTE_SELECT_PILLNAME);
         s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
         s2kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);
-        Log.e("TESTAGEPILLget",s1kr+s2kr);
-        Log.e("s1,s2,pillhistory",s1+","+s2);
 
         age = Integer.parseInt(ageS);
 
@@ -242,7 +240,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         if(s2kr == null || s2kr.isEmpty()){
             sym.setText(s1kr);
-            Log.e("test",s1kr+s2kr);
         }else {
             sym.setText(s1kr + "/" + s2kr);
         }
@@ -374,23 +371,9 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
 
 
-
         ///////list
-
-        ((MainActivity)MainActivity.context).pillList = new ArrayList<PillList>();
-
         realm = Realm.getDefaultInstance();
         basicCRUD(realm);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
-        ((MainActivity)MainActivity.context).drawer_recycler.setLayoutManager(linearLayoutManager);
-
-        ((MainActivity)MainActivity.context).historyadapter = new PillHistoryAdapter(((MainActivity)MainActivity.context).pillList,this);
-        ((MainActivity)MainActivity.context).drawer_recycler.setAdapter(((MainActivity)MainActivity.context).historyadapter);
-
-
     }
 
 
@@ -616,17 +599,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 }
                 pd.setS1kr(s1kr);
                 pd.setS2kr(s2kr);
-                Log.e("TESTbasic",s1kr+s2kr);
-                if(pd.getName() == null){
-                    ((MainActivity)MainActivity.context).drawer_recycler.setVisibility(View.GONE);
-                }else{
-                    RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
-
-                    for (PillDB pill : result) {
-                        ((MainActivity)MainActivity.context).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
-                    }
-                    ((MainActivity)MainActivity.context).nonehistory.setVisibility(View.GONE);
-                }
             }
         });
     }

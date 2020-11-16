@@ -79,7 +79,7 @@ public class BaseDialog extends Dialog {
                 if(contents != null){
                     dismiss();
                 }else{
-                    ((PillRecommendActivity)PillRecommendActivity.prcontext).messege();
+                    ((PillRecommendActivity)activity).messege();
                     dismiss();
                 }
 

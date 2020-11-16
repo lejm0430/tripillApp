@@ -95,8 +95,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         previous_marker=new ArrayList<Marker>();
 
         locationRequest=new LocationRequest()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(UPDATE_INTERVAL_MS)
+                .setInterval(UPDATE_INTERVAL_MS)  //위치가 업데이트 되는 주기
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)  //위치 획득 후 업데이트 되는 주기
                 .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
 
@@ -134,41 +134,25 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap=googleMap;
+        mMap.getUiSettings().setMyLocationButtonEnabled(false); //기본 gps버튼
 
         setDefaultLocation();
-
-/*        int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-
-        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) { //퍼미션 허용 O
-            startLocationUpdates(); // 위치 업데이트 시작
-        } else {  //퍼미션 허용x
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
-
-                Snackbar.make(mLayout, R.string.snackbar_body,
-                        Snackbar.LENGTH_INDEFINITE).setAction(R.string.confirm, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        ActivityCompat.requestPermissions(PharmacyMap.this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
-                    }
-                }).show();
-            } else {
-                ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
-            }
-        }*/
 
         gpsBtn=findViewById(R.id.gpsBtn);
         gpsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CameraUpdate cameraUpdate=CameraUpdateFactory.newLatLngZoom(currentPosition, 17);
-                mMap.moveCamera(cameraUpdate);
-                showPlaceInformation(currentPosition);
+                if(currentPosition != null){
+                    CameraUpdate cameraUpdate=CameraUpdateFactory.newLatLngZoom(currentPosition, 17);
+                    mMap.moveCamera(cameraUpdate);
+                    showPlaceInformation(currentPosition);
+                }else {
+                    gpsBtn.setSelected(false);
+                }
+
             }
         });
 
-        mMap.getUiSettings().setMyLocationButtonEnabled(false); //기본 gps버튼
 
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -181,7 +165,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 lastClicked=null;
             }
         });
-
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -224,13 +207,14 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
     public void setDefaultLocation() {
 
+
         int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
-            startLocationUpdates(); // 위치 업데이트 시작
 
+            startLocationUpdates(); // 위치 업데이트 시작
 
         } else {
             LatLng DEFAULT_LOCATION=new LatLng(37.566614, 126.977919);
@@ -284,6 +268,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             if ( check_result ) {
                 //모든 퍼미션을 허용했다면 위치 업데이트를 시작
                 startLocationUpdates();
+                /*CameraUpdate cameraUpdate=CameraUpdateFactory.newLatLngZoom(currentPosition, 17);
+                mMap.moveCamera(cameraUpdate);*/
             }
             else {
                 if (
@@ -349,6 +335,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 //location = locationList.get(0);
 
                 currentPosition=new LatLng(location.getLatitude(), location.getLongitude());
+
+
 
                 location=location;
 

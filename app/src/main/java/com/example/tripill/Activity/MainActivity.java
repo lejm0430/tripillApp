@@ -37,9 +37,6 @@ import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
 public class MainActivity extends AppCompatActivity{
     private long backPressedTime = 0;
 
-    String name;
-    int age;
-
     DrawerLayout mainDrawer;
     LinearLayout menuDrawer;
 
@@ -54,7 +51,7 @@ public class MainActivity extends AppCompatActivity{
 
     PillHistoryAdapter historyadapter;
 
-    public ChoicedSymptomSlide bottomSheet = new ChoicedSymptomSlide();
+    public ChoicedSymptomSlide choicedSymptomSlide = new ChoicedSymptomSlide();
 
     private Realm realm;
 
@@ -64,14 +61,14 @@ public class MainActivity extends AppCompatActivity{
     View.OnClickListener onClickListener1 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            bottomInfoShow((String) view.getTag());
+            IntentchoicedSymptomSlide((String) view.getTag());
         }
     };
 
     View.OnClickListener onClickListener2 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            test((SympTomModel) view.getTag());
+            IntentAge((IntentAge_sytmptom) view.getTag());
         }
     };
 
@@ -82,6 +79,7 @@ public class MainActivity extends AppCompatActivity{
 
         context = this;
 
+<<<<<<< HEAD
 
         TextView head = findViewById(R.id.head);
         TextView neck = findViewById(R.id.neck);
@@ -91,6 +89,8 @@ public class MainActivity extends AppCompatActivity{
         TextView wound = findViewById(R.id.wound);
         TextView hangover = findViewById(R.id.hangover);
 
+=======
+>>>>>>> 7ae82f8f4786eddca8b5014a45eb906ad92d99c8
 
         ImageView menuBtn = findViewById(R.id.menuBtn);
         ImageView headBtn = findViewById(R.id.headBtn_ring);
@@ -128,7 +128,10 @@ public class MainActivity extends AppCompatActivity{
                 nonehistory.setVisibility(View.GONE);
             }
         }
+<<<<<<< HEAD
         Intent intent = new Intent(getApplicationContext(), AgeActivity.class);
+=======
+>>>>>>> 7ae82f8f4786eddca8b5014a45eb906ad92d99c8
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,82 +142,75 @@ public class MainActivity extends AppCompatActivity{
 
 
 
+<<<<<<< HEAD
+=======
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            mainDrawer.openDrawer(menuDrawer);
+        }
+    });
+>>>>>>> 7ae82f8f4786eddca8b5014a45eb906ad92d99c8
 
         headBtn.setOnClickListener(onClickListener1);
         neckBtn.setOnClickListener(onClickListener1);
         stomachBtn.setOnClickListener(onClickListener1);
 
-
         musclePainBtn.setOnClickListener(onClickListener2);
         burnBtn.setOnClickListener(onClickListener2);
         woundBtn.setOnClickListener(onClickListener2);
         beerBtn.setOnClickListener(onClickListener2);
-        musclePainBtn.setTag(new SympTomModel(getString(R.string.muscle_pain),getString(R.string.muscle_pain),"근육통","20"));
-        burnBtn.setTag(new SympTomModel(getString(R.string.burn),getString(R.string.burn),"화상","60"));
-        woundBtn.setTag(new SympTomModel(getString(R.string.wound),getString(R.string.wound),"상처","25"));
-        beerBtn.setTag(new SympTomModel(getString(R.string.hangover),getString(R.string.hangover),"숙취","35"));
-
+        musclePainBtn.setTag(new IntentAge_sytmptom(getString(R.string.muscle_pain),"근육통","20"));
+        burnBtn.setTag(new IntentAge_sytmptom(getString(R.string.burn),"화상","60"));
+        woundBtn.setTag(new IntentAge_sytmptom(getString(R.string.wound),"상처","25"));
+        beerBtn.setTag(new IntentAge_sytmptom(getString(R.string.hangover),"숙취","35"));
     }
 
-    void test(SympTomModel md){
+    void IntentchoicedSymptomSlide(String title){
+        choicedSymptomSlide.title = title;
+        choicedSymptomSlide.show(getSupportFragmentManager(), TAG);
+    }
+
+    void IntentAge(IntentAge_sytmptom intentAge_sytmptom){
         Intent intent = new Intent(getApplicationContext(), AgeActivity.class);
 
-        String s = md.getS();
-        intent.putExtra(INTE_SELECT_SYMPTOM1,md.getS1());
-        intent.putExtra(INTE_SYMPTOM_SUM,md.getSum());
-        intent.putExtra(INTE_SELECT_SYMPTOM1_KR,md.getS1kr());
+        intent.putExtra(INTE_SELECT_SYMPTOM1,intentAge_sytmptom.getSytmptom_name());
+        intent.putExtra(INTE_SYMPTOM_SUM,intentAge_sytmptom.getSum());
+        intent.putExtra(INTE_SELECT_SYMPTOM1_KR,intentAge_sytmptom.getSytmptom_name_kr());
         startActivity(intent);
     }
 
-    class SympTomModel{
-        String s,s1,s1kr,sum;
+    class IntentAge_sytmptom{
+        String sytmptom_name,sytmptom_name_kr,sum;
 
-        public SympTomModel(String s, String s1, String s1kr, String sum) {
-            this.s=s;
-            this.s1=s1;
-            this.s1kr=s1kr;
+        public IntentAge_sytmptom(String sytmptom_name, String sytmptom_name_kr, String sum) {
+            this.sytmptom_name=sytmptom_name;
+            this.sytmptom_name_kr=sytmptom_name_kr;
             this.sum=sum;
         }
 
-        public String getS() {
-            return s;
+        public String getSytmptom_name() {
+            return sytmptom_name;
         }
 
-        public void setS(String s) {
-            this.s=s;
-        }
-
-        public String getS1() {
-            return s1;
-        }
-
-        public void setS1(String s1) {
-            this.s1=s1;
-        }
-
-        public String getS1kr() {
-            return s1kr;
-        }
-
-        public void setS1kr(String s1kr) {
-            this.s1kr=s1kr;
+        public String getSytmptom_name_kr() {
+            return sytmptom_name_kr;
         }
 
         public String getSum() {
             return sum;
         }
-
-        public void setSum(String sum) {
-            this.sum=sum;
-        }
     }
 
+<<<<<<< HEAD
     void bottomInfoShow(String str){
         bottomSheet.title = str;
         bottomSheet.show(getSupportFragmentManager(), TAG);
     }
 
 
+=======
+>>>>>>> 7ae82f8f4786eddca8b5014a45eb906ad92d99c8
     @Override
     public void onBackPressed() {
         if(mainDrawer.isDrawerOpen(menuDrawer)){

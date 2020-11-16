@@ -85,7 +85,4 @@
     <string name="pharmacy">药房</string>
     <string name="maximum_two_choice_toast">只能选择2个</string>
     <string name="snackbar_body">执行该程序需要有接近位置接近位置的权利</string>
-    <string name="no_gocode">Geo Cother服务禁止使用</string>
-    <string name="Invalid_GPS">错误的GPS坐标</string>
-    <string name="cant_find_address">未发现地址</string>
 </resources>

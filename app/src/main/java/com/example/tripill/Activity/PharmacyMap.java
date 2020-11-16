@@ -1,6 +1,7 @@
 package com.example.tripill.Activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -207,7 +208,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
     public void setDefaultLocation() {
 
-
         int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
@@ -217,13 +217,10 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             startLocationUpdates(); // 위치 업데이트 시작
 
         } else {
+
             LatLng DEFAULT_LOCATION=new LatLng(37.566614, 126.977919);
-            CameraUpdate cameraUpdate=CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 17);
+            CameraUpdate cameraUpdate=CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
             mMap.moveCamera(cameraUpdate);
-
-
-
-
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
                 //완전 맨 처음 거부시
@@ -237,15 +234,11 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             } else {
                 ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
             }
-
-
-
-
-
         }
 
 
     }  //지도 default 위치
+
 
     @Override
     public void onRequestPermissionsResult(int permsRequestCode,
@@ -268,8 +261,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             if ( check_result ) {
                 //모든 퍼미션을 허용했다면 위치 업데이트를 시작
                 startLocationUpdates();
-                /*CameraUpdate cameraUpdate=CameraUpdateFactory.newLatLngZoom(currentPosition, 17);
-                mMap.moveCamera(cameraUpdate);*/
             }
             else {
                 if (
@@ -325,21 +316,22 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
     LocationCallback locationCallback=new LocationCallback() {
         @Override
-        public void onLocationResult(LocationResult locationResult) {
+        public void onLocationResult(LocationResult locationResult) {   //요청한 결과
             super.onLocationResult(locationResult);
 
             List<Location> locationList=locationResult.getLocations();
 
             if (locationList.size() > 0) {
                 location=locationList.get(locationList.size() - 1);
-                //location = locationList.get(0);
+//                location = locationList.get(0);
 
                 currentPosition=new LatLng(location.getLatitude(), location.getLongitude());
 
-
-
                 location=location;
 
+                CameraUpdate cameraUpdate=CameraUpdateFactory.newLatLngZoom(currentPosition, 15);
+                mMap.moveCamera(cameraUpdate);
+                mFusedLocationClient.removeLocationUpdates(this);
 
             }
 
@@ -362,37 +354,28 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
-            return true;
+                    hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
+                return true;
         }else{
 
+            return false;
         }
 
-        return false;
 
     }  //퍼미션 여부 boolean
 
+    @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
-
-        int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
         if (!checkLocationServicesStatus()) {
 
         } else {
 
-            if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED ||
-                    hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) {
-
-                return;
-            }if (checkPermission()){
+            if (true){
                 mMap.setMyLocationEnabled(true);
             }
-
-            mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
-
-
-
+            mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());  //콜백한테 요청만함 //비동기
+//플래그
         }
 
     }  //사용자위치 업데이트

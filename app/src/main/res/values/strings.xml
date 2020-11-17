@@ -84,7 +84,7 @@
     <string name="pharmacy">약국</string>
     <string name="maximum_two_choice_toast">2개까지만 선택가능</string>
     <string name="snackbar_body">이 앱을 실행하려면 위치 접근 권한이 필요합니다.</string>
-    <string name="no_gocode">지오코더 서비스 사용불가</string>
-    <string name="Invalid_GPS">잘못된 GPS 좌표</string>
-    <string name="cant_find_address">주소 미발견</string>
+    <string name="fail_location_network">위치 불러오기를 실패하였습니다. 네트워크를 활성화해주세요.</string>
+    <string name="fail_location_gps">위치 불러오기를 실패하였습니다. GPS를 활성화해주세요.</string>
+    <string name="fail_Address">주소찾기에 실패하였습니다.</string>
 </resources>

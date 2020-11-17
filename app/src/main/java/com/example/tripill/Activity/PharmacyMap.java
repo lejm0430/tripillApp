@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -66,7 +67,6 @@ import static com.example.tripill.Props.UPDATE_INTERVAL_MS;
 public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener {
 
     private GoogleMap mMap;
-    private Marker currentMarker=null;
     private Marker lastClicked;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
@@ -192,10 +192,23 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 findroadBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri gmmIntentUri=Uri.parse("google.navigation:q=" + marker.getSnippet() + "&mode=w");
-                        Intent mapIntent=new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                        mapIntent.setPackage("com.google.android.apps.maps");
-                        startActivity(mapIntent);
+
+
+                        LatLng marker_position = marker.getPosition();
+                        getCurrentAddress(marker_position);
+
+                        double markerlat = marker_position.latitude;
+                        double markerlong = marker_position.longitude;
+
+                        String url = "nmap://route/walk?dlat="+markerlat+"&dlng="+markerlong+"&dname="+marker.getTitle()+"&appname=com.example.tripill";
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                        List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                        if (list == null || list.isEmpty()) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nhn.android.nmap")));
+                        } else {
+                            startActivity(intent);
+                        }
                     }
                 });
 
@@ -383,17 +396,16 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     1);
         } catch (IOException ioException) {
             //네트워크 문제
-            Toast.makeText(this, R.string.no_gocode, Toast.LENGTH_LONG).show();
-            return "지오코더를 사용불가";
+            Toast.makeText(this, R.string.fail_Address, Toast.LENGTH_LONG).show();
+            return "'주소 미발견'";
         } catch (IllegalArgumentException illegalArgumentException) {
-            Toast.makeText(this, R.string.Invalid_GPS, Toast.LENGTH_LONG).show();
-            return "잘못된 GPS 좌표";
+            Toast.makeText(this, R.string.fail_location_network, Toast.LENGTH_LONG).show();
+            return "'주소 미발견'";
         }
 
-
         if (addresses == null || addresses.size() == 0) {
-            Toast.makeText(this, R.string.cant_find_address, Toast.LENGTH_LONG).show();
-            return "주소 미발견";
+            Toast.makeText(this, R.string.fail_location_gps, Toast.LENGTH_LONG).show();
+            return "'주소 미발견'";
 
         } else {
             Address address = addresses.get(0);
@@ -408,6 +420,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             @Override
             public void run() {
                 for (noman.googleplaces.Place place : places) {
+
+
 
                     LatLng latLng_place = new LatLng(place.getLatitude(), place.getLongitude());
 

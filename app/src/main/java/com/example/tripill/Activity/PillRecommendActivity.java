@@ -505,6 +505,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     }
 
 
+
+
     public String getCurrentAddress( double mlatitude, double mlongitude) {
 
         //GPS를 주소로 변환
@@ -516,25 +518,26 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             addresses = geocoder.getFromLocation(
                     mlatitude,
                     mlongitude,
-                    7);
+                    1);  //조회개수
         } catch (IOException ioException) {
-            //네트워크
-            Toast.makeText(this, R.string.no_gocode, Toast.LENGTH_LONG).show();
-            return "지오코더를 사용불가";
+            //네트워크 x   GPS x
+            Toast.makeText(this, R.string.fail_Address, Toast.LENGTH_LONG).show();
+            return "'주소 미발견'";
         } catch (IllegalArgumentException illegalArgumentException) {
-            //GPS
-            Toast.makeText(this, R.string.Invalid_GPS, Toast.LENGTH_LONG).show();
-            return "잘못된 GPS 좌표";
+            //네트워크 x   GPS o
+            Toast.makeText(this, R.string.fail_location_network, Toast.LENGTH_LONG).show();
+            return "'주소 미발견'";
         }
 
-        if (addresses == null || addresses.size() == 0) {
-            Toast.makeText(this, R.string.cant_find_address, Toast.LENGTH_LONG).show();
-            return "주소 미발견";
+        if (addresses == null || addresses.size() == 0) {  //주소 미발견
+            //네트워크 o   GPS x  //위치 권한 거부
+            Toast.makeText(this, R.string.fail_location_gps, Toast.LENGTH_LONG).show();
+            return "'주소 미발견'";
 
         }
 
         Address address = addresses.get(0);
-        return address.getAddressLine(0).toString()+"\n";
+        return address.getAddressLine(0).toString()+"\n";  //주소 전체 출력
 
     }
 
@@ -543,6 +546,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         getLocation();
 
         String address = getCurrentAddress(getLatitude(), getLongitude());
+
         ageS = getIntent().getStringExtra(INTE_INPUT_AGE);
         s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
         s2kr= getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);

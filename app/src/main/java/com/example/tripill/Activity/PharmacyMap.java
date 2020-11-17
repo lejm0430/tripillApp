@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -71,6 +72,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private View mLayout;  // Snackbar
+    double lat;
+    double log;
 
     List<Marker> previous_marker=null;
 
@@ -137,6 +140,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         mMap=googleMap;
         mMap.getUiSettings().setMyLocationButtonEnabled(false); //기본 gps버튼
 
+        LinearLayout bottomsheet=findViewById(R.id.bottom_sheet);
+
         setDefaultLocation();
 
         gpsBtn=findViewById(R.id.gpsBtn);
@@ -164,6 +169,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     lastClicked.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
                 }
                 lastClicked=null;
+
+                bottomsheet.setVisibility(View.GONE);
             }
         });
 
@@ -177,7 +184,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 lastClicked=marker;
                 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_choice));
 
-                LinearLayout bottomsheet=findViewById(R.id.bottom_sheet);
                 bottomsheet.setVisibility(View.VISIBLE);
 
                 TextView pharmacyName_kr=findViewById(R.id.pharmacyName_kr);
@@ -190,10 +196,22 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 findroadBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri gmmIntentUri=Uri.parse("google.navigation:q=" + marker.getSnippet() + "&mode=w");
-                        Intent mapIntent=new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                        mapIntent.setPackage("com.google.android.apps.maps");
-                        startActivity(mapIntent);
+//                        Uri gmmIntentUri=Uri.parse("google.navigation:q=" + marker.getSnippet() + "&mode=w");
+//                        Intent mapIntent=new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//                        mapIntent.setPackage("com.google.android.apps.maps");
+//                        startActivity(mapIntent);
+                        String url = "nmap://route/walk?dlat="+marker.getPosition(lat)+"&dlng="+location.getLongitude()+"&appname=com.example.tripill";
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+
+                        List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                        if (list == null || list.isEmpty()) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nhn.android.nmap")));
+                        } else {
+                            startActivity(intent);
+                        }
+
                     }
                 });
 

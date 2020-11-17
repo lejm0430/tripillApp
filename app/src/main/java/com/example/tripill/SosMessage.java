@@ -29,13 +29,10 @@ public class SosMessage {
             smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + age +"세 입니다. 저의 증상은 "+ s1kr+ "," + s2kr +"입니다. 살려줘";
         }else{
             smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + age +"세 입니다. 저의 증상은 "+ s1kr+"입니다. 살려줘";
-
         }
         sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
 
         sendIntent.putExtra("address", "01011112222"); // 받는사람 번호
-
-        sendIntent.setType("vnd.android-dir/mms-sms");
 
         sendIntent.setType("vnd.android-dir/mms-sms");
 

@@ -200,7 +200,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 //                        Intent mapIntent=new Intent(Intent.ACTION_VIEW, gmmIntentUri);
 //                        mapIntent.setPackage("com.google.android.apps.maps");
 //                        startActivity(mapIntent);
-                        String url = "nmap://route/walk?dlat="+marker.getPosition(lat)+"&dlng="+location.getLongitude()+"&appname=com.example.tripill";
+                        String url = "nmap://route/walk?dlat="+location.getLatitude()+"&dlng="+location.getLongitude()+"&appname=com.example.tripill";
 
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                         intent.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -366,21 +366,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }   //gps, 네트워크 여부 boolean
 
-    private boolean checkPermission() {
-
-        int hasFineLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        int hasCoarseLocationPermission=ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-
-        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                    hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
-                return true;
-        }else{
-
-            return false;
-        }
-
-
-    }  //퍼미션 여부 boolean
 
     @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
@@ -393,7 +378,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 mMap.setMyLocationEnabled(true);
             }
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());  //콜백한테 요청만함 //비동기
-//플래그
+
         }
 
     }  //사용자위치 업데이트
@@ -415,16 +400,16 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         } catch (IOException ioException) {
             //네트워크 문제
             Toast.makeText(this, R.string.no_gocode, Toast.LENGTH_LONG).show();
-            return String.valueOf(R.string.no_gocode);
+            return "지오코더를 사용불가";
         } catch (IllegalArgumentException illegalArgumentException) {
             Toast.makeText(this, R.string.Invalid_GPS, Toast.LENGTH_LONG).show();
-            return String.valueOf(R.string.Invalid_GPS);
+            return "잘못된 GPS 좌표";
         }
 
 
         if (addresses == null || addresses.size() == 0) {
             Toast.makeText(this, R.string.cant_find_address, Toast.LENGTH_LONG).show();
-            return String.valueOf(R.string.cant_find_address);
+            return "주소 미발견";
 
         } else {
             Address address = addresses.get(0);

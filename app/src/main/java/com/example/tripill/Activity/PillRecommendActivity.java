@@ -2,27 +2,36 @@ package com.example.tripill.Activity;
 
 import android.Manifest;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tripill.Adapter.PillHistoryAdapter;
 import com.example.tripill.Adapter.SymptomRecommendAdpater;
 import com.example.tripill.DataBase.PillDB;
+import com.example.tripill.DataBase.PillList;
 import com.example.tripill.Dialog.FullImagDialog;
 import com.example.tripill.Dialog.BaseDialog;
 import com.example.tripill.R;
 import com.example.tripill.SosMessage;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -31,6 +40,7 @@ import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -42,8 +52,8 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
-import static com.example.tripill.Props.GPS_ENABLE_REQUEST_CODE;
 import static com.example.tripill.Props.INTE_INPUT_AGE;
 import static com.example.tripill.Props.INTE_SELECT_PILLNAME;
 import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
@@ -51,9 +61,11 @@ import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
 import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2;
 import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
 import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
+import static com.example.tripill.Props.MIN_DISTANCE_CHANGE_FOR_UPDATES;
+import static com.example.tripill.Props.MIN_TIME_BW_UPDATES;
 import static com.example.tripill.Props.PERMISSIONS_REQUEST_CODE;
 
-public class PillRecommendActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
+public class PillRecommendActivity extends AppCompatActivity implements TextToSpeech.OnInitListener, LocationListener {
 
 
     RelativeLayout viewArea;
@@ -109,12 +121,18 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     public Context prcontext;
 
+
     private TextToSpeech tts;
 
-    private GpsTracker gpsTracker;
+    Location location;
+    double mlatitude;
+    double mlongitude;
 
 
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +171,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         name  = getIntent().getStringExtra(INTE_SELECT_PILLNAME);
         s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
         s2kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);
+        Log.e("TESTAGEPILLget",s1kr+s2kr);
+        Log.e("s1,s2,pillhistory",s1+","+s2);
 
         age = Integer.parseInt(ageS);
 
@@ -233,6 +253,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         if(s2kr == null || s2kr.isEmpty()){
             sym.setText(s1kr);
+            Log.e("test",s1kr+s2kr);
         }else {
             sym.setText(s1kr + "/" + s2kr);
         }
@@ -349,10 +370,22 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         recyclerView.setAdapter(adapter);
 
 
-
         ///////list
+
+        ((MainActivity)MainActivity.context).pillList = new ArrayList<PillList>();
+
         realm = Realm.getDefaultInstance();
         basicCRUD(realm);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        ((MainActivity)MainActivity.context).drawer_recycler.setLayoutManager(linearLayoutManager);
+
+        ((MainActivity)MainActivity.context).historyadapter = new PillHistoryAdapter(((MainActivity)MainActivity.context).pillList,this);
+        ((MainActivity)MainActivity.context).drawer_recycler.setAdapter(((MainActivity)MainActivity.context).historyadapter);
+
+
     }
 
 
@@ -405,43 +438,74 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
 
 
+    @SuppressLint("MissingPermission")
+    public Location getLocation() {
+        try {
+            LocationManager locationManager=(LocationManager) this.getSystemService(LOCATION_SERVICE);
 
+            boolean isGPSEnabled=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean isNetworkEnabled=locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
+            if (!isGPSEnabled && !isNetworkEnabled) {
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+            } else {
+                if (isNetworkEnabled) {
 
-        switch (requestCode) {
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
 
-            case GPS_ENABLE_REQUEST_CODE:
-
-                //사용자가 GPS 활성 시켰는지 검사
-                if (!checkLocationServicesStatus()) {
-                    Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
-                    if (checkLocationServicesStatus()) {
-
-                        return;
+                    if (locationManager != null) {
+                        location=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        if (location != null) {
+                            mlatitude=location.getLatitude();
+                            mlongitude=location.getLongitude();
+                            Log.d("TAG1","getLatitude"+getLatitude());
+                            Log.d("TAG1","getLongitude"+getLongitude());
+                        }
                     }
                 }
 
-                break;
+
+                if (isGPSEnabled) {
+                    if (location == null) {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
+                        if (locationManager != null) {
+                            location=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            if (location != null) {
+                                mlatitude=location.getLatitude();
+                                mlongitude=location.getLongitude();
+                                Log.d("TAG2","getLatitude"+getLatitude());
+                                Log.d("TAG2","getLongitude"+getLongitude());
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+
         }
-    }
 
-    public boolean checkLocationServicesStatus() {   //gps 네트워크 여부
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        return location;
     }
 
 
+    public double getLatitude() {
+        if (location != null) {
+            mlatitude=location.getLatitude();
+        }
+
+        return mlatitude;
+    }
+
+    public double getLongitude() {
+        if (location != null) {
+            mlongitude=location.getLongitude();
+        }
+
+        return mlongitude;
+    }
 
 
-
-    public String getCurrentAddress( double latitude, double longitude) {
+    public String getCurrentAddress( double mlatitude, double mlongitude) {
 
         //GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -449,15 +513,14 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         List<Address> addresses;
 
         try {
-
             addresses = geocoder.getFromLocation(
-                    latitude,
-                    longitude,
+                    mlatitude,
+                    mlongitude,
                     7);
         } catch (IOException ioException) {
             //네트워크
             Toast.makeText(this, R.string.no_gocode, Toast.LENGTH_LONG).show();
-            return "지오코더 사용 불가";
+            return "지오코더를 사용불가";
         } catch (IllegalArgumentException illegalArgumentException) {
             //GPS
             Toast.makeText(this, R.string.Invalid_GPS, Toast.LENGTH_LONG).show();
@@ -477,14 +540,9 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     public void messege() {
 
+        getLocation();
 
-        gpsTracker = new GpsTracker(PillRecommendActivity.this);
-        double latitude = gpsTracker.getLatitude();
-        double longitude = gpsTracker.getLongitude();
-
-        String address = getCurrentAddress(latitude,longitude);
-
-
+        String address = getCurrentAddress(getLatitude(), getLongitude());
         ageS = getIntent().getStringExtra(INTE_INPUT_AGE);
         s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
         s2kr= getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);
@@ -558,7 +616,23 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 }
                 pd.setS1kr(s1kr);
                 pd.setS2kr(s2kr);
+                Log.e("TESTbasic",s1kr+s2kr);
+                if(pd.getName() == null){
+                    ((MainActivity)MainActivity.context).drawer_recycler.setVisibility(View.GONE);
+                }else{
+                    RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
+
+                    for (PillDB pill : result) {
+                        ((MainActivity)MainActivity.context).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
+                    }
+                    ((MainActivity)MainActivity.context).nonehistory.setVisibility(View.GONE);
+                }
             }
         });
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+
     }
 }

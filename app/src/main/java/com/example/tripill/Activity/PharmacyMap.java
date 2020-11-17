@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -72,8 +73,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private View mLayout;  // Snackbar
-    double lat;
-    double log;
+    String lat;
+    String log;
 
     List<Marker> previous_marker=null;
 
@@ -171,6 +172,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 lastClicked=null;
 
                 bottomsheet.setVisibility(View.GONE);
+
             }
         });
 
@@ -193,18 +195,20 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 pharmacyName_kr.setText(marker.getTitle());
                 pharmacyName_en.setText(R.string.pharmacy);
 
+                Double markerlat = currentPosition.latitude;
+                Double markerlong = currentPosition.longitude;
+
+
                 findroadBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        Uri gmmIntentUri=Uri.parse("google.navigation:q=" + marker.getSnippet() + "&mode=w");
-//                        Intent mapIntent=new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                        mapIntent.setPackage("com.google.android.apps.maps");
-//                        startActivity(mapIntent);
-                        String url = "nmap://route/walk?dlat="+location.getLatitude()+"&dlng="+location.getLongitude()+"&appname=com.example.tripill";
-
+                        LatLng marker_position = marker.getPosition();
+                        getCurrentAddress(marker_position);
+                        double markerlat = marker_position.latitude;
+                        double markerlong = marker_position.longitude;
+                        String url = "nmap://route/walk?dlat="+markerlat+"&dlng="+markerlong+"&dname="+marker.getTitle()+"&appname=com.example.tripill";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                         intent.addCategory(Intent.CATEGORY_BROWSABLE);
-
                         List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
                         if (list == null || list.isEmpty()) {
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nhn.android.nmap")));
@@ -436,7 +440,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
                     Marker item = mMap.addMarker(markerOptions);
                     previous_marker.add(item);
-
 
                 }
                 //중복 마커 제거

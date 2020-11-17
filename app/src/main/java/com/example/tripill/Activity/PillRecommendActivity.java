@@ -171,8 +171,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         name  = getIntent().getStringExtra(INTE_SELECT_PILLNAME);
         s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
         s2kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);
-        Log.e("TESTAGEPILLget",s1kr+s2kr);
-        Log.e("s1,s2,pillhistory",s1+","+s2);
 
         age = Integer.parseInt(ageS);
 
@@ -253,7 +251,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         if(s2kr == null || s2kr.isEmpty()){
             sym.setText(s1kr);
-            Log.e("test",s1kr+s2kr);
         }else {
             sym.setText(s1kr + "/" + s2kr);
         }
@@ -458,8 +455,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                         if (location != null) {
                             mlatitude=location.getLatitude();
                             mlongitude=location.getLongitude();
-                            Log.d("TAG1","getLatitude"+getLatitude());
-                            Log.d("TAG1","getLongitude"+getLongitude());
                         }
                     }
                 }
@@ -473,8 +468,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                             if (location != null) {
                                 mlatitude=location.getLatitude();
                                 mlongitude=location.getLongitude();
-                                Log.d("TAG2","getLatitude"+getLatitude());
-                                Log.d("TAG2","getLongitude"+getLongitude());
                             }
                         }
                     }
@@ -616,7 +609,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 }
                 pd.setS1kr(s1kr);
                 pd.setS2kr(s2kr);
-                Log.e("TESTbasic",s1kr+s2kr);
                 if(pd.getName() == null){
                     ((MainActivity)MainActivity.context).drawer_recycler.setVisibility(View.GONE);
                 }else{

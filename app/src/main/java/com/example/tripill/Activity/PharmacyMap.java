@@ -72,9 +72,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private View mLayout;  // Snackbar
-    String lat;
-    String log;
-
     List<Marker> previous_marker=null;
 
     String[] REQUIRED_PERMISSIONS={Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
@@ -195,9 +192,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
                 pharmacyName_kr.setText(marker.getTitle());
                 pharmacyName_en.setText(R.string.pharmacy);
-
-                Double markerlat = currentPosition.latitude;
-                Double markerlong = currentPosition.longitude;
 
 
                 findroadBtn.setOnClickListener(new View.OnClickListener() {

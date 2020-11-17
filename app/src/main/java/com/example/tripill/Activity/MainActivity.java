@@ -35,6 +35,24 @@ import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
 
 
 public class MainActivity extends AppCompatActivity{
+
+    TextView head;
+    TextView neck;
+    TextView stomach;
+    TextView muscle_pain;
+    TextView burn;
+    TextView wound;
+    TextView hangover;
+
+    ImageView menuBtn;
+    ImageView headBtn;
+    ImageView neckBtn;
+    ImageView stomachBtn;
+    ImageView musclePainBtn;
+    ImageView burnBtn;
+    ImageView woundBtn;
+    ImageView beerBtn;
+
     private long backPressedTime = 0;
 
     DrawerLayout mainDrawer;
@@ -42,7 +60,6 @@ public class MainActivity extends AppCompatActivity{
 
     String TAG = "ChoicedSymptomSlide";
 
-    //static 수정
     TextView nonehistory;
 
     RecyclerView drawer_recycler;
@@ -79,22 +96,22 @@ public class MainActivity extends AppCompatActivity{
 
         context = this;
 
-        TextView head = findViewById(R.id.head);
-        TextView neck = findViewById(R.id.neck);
-        TextView stomach = findViewById(R.id.stomach);
-        TextView muscle_pain = findViewById(R.id.muscle_pain);
-        TextView burn = findViewById(R.id.burn);
-        TextView wound = findViewById(R.id.wound);
-        TextView hangover = findViewById(R.id.hangover);
+        head = findViewById(R.id.head);
+        neck = findViewById(R.id.neck);
+        stomach = findViewById(R.id.stomach);
+        muscle_pain = findViewById(R.id.muscle_pain);
+        burn = findViewById(R.id.burn);
+        wound = findViewById(R.id.wound);
+        hangover = findViewById(R.id.hangover);
 
-        ImageView menuBtn = findViewById(R.id.menuBtn);
-        ImageView headBtn = findViewById(R.id.headBtn_ring);
-        ImageView neckBtn = findViewById(R.id.neckBtn_ring);
-        ImageView stomachBtn = findViewById(R.id.stomachBtn_ring);
-        ImageView musclePainBtn = findViewById(R.id.musclePainBtn_ring);
-        ImageView burnBtn = findViewById(R.id.burnBtn_ring);
-        ImageView woundBtn = findViewById(R.id.woundBtn_ring);
-        ImageView beerBtn = findViewById(R.id.beerBtn_ring);
+        menuBtn = findViewById(R.id.menuBtn);
+        headBtn = findViewById(R.id.headBtn_ring);
+        neckBtn = findViewById(R.id.neckBtn_ring);
+        stomachBtn = findViewById(R.id.stomachBtn_ring);
+        musclePainBtn = findViewById(R.id.musclePainBtn_ring);
+        burnBtn = findViewById(R.id.burnBtn_ring);
+        woundBtn = findViewById(R.id.woundBtn_ring);
+        beerBtn = findViewById(R.id.beerBtn_ring);
         mainDrawer = findViewById(R.id.main_drawer);
         menuDrawer = findViewById(R.id.menu_drawer);
 

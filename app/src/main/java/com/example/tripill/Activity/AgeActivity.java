@@ -32,15 +32,15 @@ import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
 
 public class AgeActivity extends AppCompatActivity {
     EditText age;
+    TextView recommendbtn;
     RecyclerView recyclerView;
+    ImageView xbtn;
 
     RecyclerView.LayoutManager layoutManager;
 
     SymptomAdapter adapter;
 
     ImageView backbtn;
-
-    public Context mcontext;
 
     String name;
     String s1kr;
@@ -51,9 +51,9 @@ public class AgeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_age);
 
-        age = (EditText)findViewById(R.id.age);
-        TextView recommendbtn = (TextView)findViewById(R.id.recommendbtn);
-        ImageView xbtn = (ImageView)findViewById(R.id.xbtn);
+        age = findViewById(R.id.age);
+        recommendbtn = findViewById(R.id.recommendbtn);
+        xbtn = findViewById(R.id.xbtn);
         backbtn = findViewById(R.id.backbtn);
 
 

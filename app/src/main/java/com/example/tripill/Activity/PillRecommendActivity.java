@@ -2,35 +2,27 @@ package com.example.tripill.Activity;
 
 import android.Manifest;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.location.LocationManager;
-import android.media.Image;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tripill.Adapter.PillHistoryAdapter;
-import com.example.tripill.DataBase.PillList;
 import com.example.tripill.Adapter.SymptomRecommendAdpater;
 import com.example.tripill.DataBase.PillDB;
 import com.example.tripill.Dialog.FullImagDialog;
 import com.example.tripill.Dialog.BaseDialog;
 import com.example.tripill.R;
-import com.google.android.gms.maps.model.LatLng;
+import com.example.tripill.SosMessage;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -39,7 +31,6 @@ import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -51,7 +42,6 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 import static com.example.tripill.Props.GPS_ENABLE_REQUEST_CODE;
 import static com.example.tripill.Props.INTE_INPUT_AGE;
@@ -350,24 +340,10 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         recyclerView.setLayoutManager(layoutManager);
 
+        String[] main_text = s2 == null ? new String[]{s1} : new String[]{s1,s2};
+        adapter = new SymptomRecommendAdpater(main_text);
 
-        if(s2 == null || s2.isEmpty()){
-            String[] main_text =  {s1};
-
-
-            adapter = new SymptomRecommendAdpater(main_text);
-
-            recyclerView.setAdapter(adapter);
-        }else{
-            String[] main_text =  {s1,s2};
-
-
-            adapter = new SymptomRecommendAdpater(main_text);
-
-            recyclerView.setAdapter(adapter);
-        }
         recyclerView.setAdapter(adapter);
-
 
 
 
@@ -510,29 +486,9 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
         s2kr= getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);
 
-        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-
-        if(s2kr != null){
-            String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1kr+ "," + s2kr +"입니다. 살려줘";
-
-            sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
-
-            sendIntent.putExtra("address", "01011112222"); // 받는사람 번호
-
-            sendIntent.setType("vnd.android-dir/mms-sms");
-
-            startActivity(sendIntent);
-        }else{
-            String smsBody = "저는 외국인입니다." + "저의 위치는 " + address + "이고, 저의 나이는 " + ageS +"세 입니다. 저의 증상은 "+ s1kr+"입니다. 살려줘";
-
-            sendIntent.putExtra("sms_body", smsBody); // 보낼 문자
-
-            sendIntent.putExtra("address", "01011112222"); // 받는사람 번호
-
-            sendIntent.setType("vnd.android-dir/mms-sms");
-
-            startActivity(sendIntent);
-        }
+        SosMessage sos = new SosMessage(PillRecommendActivity.this);
+        sos.init(address,ageS,s1kr,s2kr);
+        sos.intent();
 
     }
 

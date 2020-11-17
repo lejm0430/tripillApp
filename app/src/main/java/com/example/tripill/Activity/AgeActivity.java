@@ -32,15 +32,17 @@ import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
 
 public class AgeActivity extends AppCompatActivity {
     EditText age;
+
     TextView recommendbtn;
-    RecyclerView recyclerView;
+
     ImageView xbtn;
+    ImageView backbtn;
+
+    RecyclerView recyclerView;
 
     RecyclerView.LayoutManager layoutManager;
 
     SymptomAdapter adapter;
-
-    ImageView backbtn;
 
     String name;
     String s1kr;

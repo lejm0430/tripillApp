@@ -63,6 +63,8 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
         s2 = holder.symptom2.getText().toString();
         if(s2.isEmpty() || holder.s2kr == null){
             holder.coma.setVisibility(View.GONE);
+        }else{
+            holder.coma.setVisibility(View.VISIBLE);
         }
         holder.linear.setOnClickListener(new View.OnClickListener() {
             @Override

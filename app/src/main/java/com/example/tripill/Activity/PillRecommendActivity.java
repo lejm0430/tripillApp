@@ -55,20 +55,20 @@ import static com.example.tripill.Props.PERMISSIONS_REQUEST_CODE;
 
 public class PillRecommendActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
 
-    ImageView pillphoto;
+
     RelativeLayout viewArea;
     RelativeLayout warningArea;
     RelativeLayout expectArea;
 
     RecyclerView recyclerView;
-
     RecyclerView.LayoutManager layoutManager;
-
     SymptomRecommendAdpater adapter;
+
     ExpandableLayout expectexp;
     ExpandableLayout warningexp;
-    ImageView speaker;
 
+    ImageView speaker;
+    ImageView pillphoto;
     ImageView arrowIc;
     ImageView arrowIcWarning;
     ImageView backbtn;
@@ -81,16 +81,18 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     TextView sos;
     TextView goPHbtn;
     TextView sym;
+
     String ageS;
-    int age;
     String s1;
     String s2;
     String sumS;
-    int sum;
     String pillname;
     String name;
     String s1kr;
     String s2kr;
+
+    int age;
+    int sum;
 
     long now;
     long nows;
@@ -104,6 +106,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
 
     private Realm realm;
+
     public Context prcontext;
 
     private TextToSpeech tts;
@@ -340,7 +343,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         recyclerView.setLayoutManager(layoutManager);
 
-        String[] main_text = s2 == null ? new String[]{s1} : new String[]{s1,s2};
+        String[] main_text = s2 == null || s2.isEmpty() ? new String[]{s1} : new String[]{s1,s2};
         adapter = new SymptomRecommendAdpater(main_text);
 
         recyclerView.setAdapter(adapter);
@@ -395,7 +398,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                     break;
                 }
 
-            } //for
+            }
         }
 
     }

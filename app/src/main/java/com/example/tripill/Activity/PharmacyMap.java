@@ -162,6 +162,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             public void onMapClick(LatLng latLng) {
                 if (lastClicked != null) {
                     lastClicked.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
+                    LinearLayout bottomsheet=findViewById(R.id.bottom_sheet);
+                    bottomsheet.setVisibility(View.INVISIBLE);
                 }
                 lastClicked=null;
             }

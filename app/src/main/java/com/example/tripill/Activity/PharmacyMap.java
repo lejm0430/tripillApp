@@ -203,21 +203,11 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                 findroadBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-<<<<<<< HEAD
                         LatLng marker_position = marker.getPosition();
                         getCurrentAddress(marker_position);
                         double markerlat = marker_position.latitude;
                         double markerlong = marker_position.longitude;
-=======
 
-
-                        LatLng marker_position = marker.getPosition();
-                        getCurrentAddress(marker_position);
-
-                        double markerlat = marker_position.latitude;
-                        double markerlong = marker_position.longitude;
-
->>>>>>> f94aacb45a850ffc5fc5aa7b0e54d3129cd94ffc
                         String url = "nmap://route/walk?dlat="+markerlat+"&dlng="+markerlong+"&dname="+marker.getTitle()+"&appname=com.example.tripill";
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                         intent.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -227,10 +217,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                         } else {
                             startActivity(intent);
                         }
-<<<<<<< HEAD
-
-=======
->>>>>>> f94aacb45a850ffc5fc5aa7b0e54d3129cd94ffc
                     }
                 });
 

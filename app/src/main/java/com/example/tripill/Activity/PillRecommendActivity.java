@@ -14,6 +14,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
+import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.example.tripill.R;
 import com.example.tripill.SosMessage;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.material.snackbar.Snackbar;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -131,8 +133,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
-
-
+    private BaseDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -268,7 +269,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             @Override
             public void onClick(View view) {
                 check();
-                BaseDialog dialog = new BaseDialog(PillRecommendActivity.this);
+                dialog = new BaseDialog(PillRecommendActivity.this);
                 String canclecontents,confirm;
                 canclecontents = getString(R.string.sos);
                 confirm = getString(R.string.send);
@@ -397,7 +398,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         } else {  //퍼미션 허용 X
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
-
                 ActivityCompat.requestPermissions(PillRecommendActivity.this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE);
 
             } else {
@@ -429,6 +429,28 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 }
 
             }
+
+            if ( check_result ) {
+                //모든 퍼미션을 허용했다면 위치 업데이트를 시작
+            }
+            else {
+                if (
+                        ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0]) ||
+                                ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
+                    // 거부 한 적이 있고 또 거부
+                    Toast.makeText(this, R.string.snackbar_body, Toast.LENGTH_LONG).show();
+
+                    dialog.dismiss();
+                }else {
+                    // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우
+                    Toast.makeText(this, R.string.preference_none_setting, Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
+                        Intent intent=new Intent(Settings.ACTION_APPLICATION_SETTINGS);
+                        startActivityForResult(intent, 0);
+
+                }
+            }
+
         }
 
     }
@@ -447,6 +469,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
             } else { //둘다 켜졌을때
                 if (isNetworkEnabled) {
+<<<<<<< HEAD
                     if (location == null) {
                         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
                         if (locationManager != null) {
@@ -455,14 +478,24 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                                 mlatitude = location.getLatitude();
                                 mlongitude = location.getLongitude();
                             }
+=======
+
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES,  this);
+
+                    if (locationManager != null) {
+                        location=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        if (location != null) {
+                            mlatitude=location.getLatitude();
+                            mlongitude=location.getLongitude();
+>>>>>>> e3e89212aa7d54f6637c08ffe7d6a91a43b8c302
                         }
                     }
                 }
 
 
                 if (isGPSEnabled) {
-                    if (location == null) {
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
+                    if (location != null) {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES,  this);
                         if (locationManager != null) {
                             location=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             if (location != null) {
@@ -479,25 +512,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         return location;
     }
-
-
-    public double getLatitude() {
-        if (location != null) {
-            mlatitude=location.getLatitude();
-        }
-
-        return mlatitude;
-    }
-
-    public double getLongitude() {
-        if (location != null) {
-            mlongitude=location.getLongitude();
-        }
-
-        return mlongitude;
-    }
-
-
 
 
     public String getCurrentAddress( double mlatitude, double mlongitude) {
@@ -523,7 +537,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         }
 
         if (addresses == null || addresses.size() == 0) {  //주소 미발견
-            //네트워크 o   GPS x  //위치 권한 거부
+            //네트워크 o   GPS x
             Toast.makeText(this, R.string.fail_location_gps, Toast.LENGTH_LONG).show();
             return "'주소 미발견'";
 
@@ -538,7 +552,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         getLocation();
 
-        String address = getCurrentAddress(getLatitude(), getLongitude());
+        String address = getCurrentAddress(mlatitude, mlongitude);
 
         ageS = getIntent().getStringExtra(INTE_INPUT_AGE);
         s1kr = getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);

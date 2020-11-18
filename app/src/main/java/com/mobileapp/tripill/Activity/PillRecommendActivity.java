@@ -512,9 +512,26 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     public void messege() {
         getLocation();
 
-        String address=getCurrentAddress(mlatitude, mlongitude);
-        String asdf = address.replaceAll("Korea","");
-        Log.e("asdf",asdf);
+        String koreaaddress=getCurrentAddress(mlatitude, mlongitude);
+
+        Locale locale=getResources().getConfiguration().locale;
+        String language=locale.getLanguage();
+        String address = null;
+
+        if (language == "ja") {
+            String japanadress = address.replace(", 大韓民国","");
+            address = japanadress;
+        }else if(language == "zh"){
+            String chinaadress = address.replace(", 韩国","");
+            address = chinaadress;
+
+        }else if(language == "en"){
+            String englishaddress = address.replace(", South Korea","");
+            address = englishaddress;
+        }else{
+             address = koreaaddress;
+        }
+
 
         ageS=getIntent().getStringExtra(INTE_INPUT_AGE);
         s1kr=getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);

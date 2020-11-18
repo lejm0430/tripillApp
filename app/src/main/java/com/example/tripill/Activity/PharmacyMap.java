@@ -164,12 +164,10 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
             public void onMapClick(LatLng latLng) {
                 if (lastClicked != null) {
                     lastClicked.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
-                    LinearLayout bottomsheet=findViewById(R.id.bottom_sheet);
-                    bottomsheet.setVisibility(View.INVISIBLE);
                 }
                 lastClicked=null;
 
-                bottomsheet.setVisibility(View.GONE);
+                bottomsheet.setVisibility(View.INVISIBLE);
 
             }
         });
@@ -220,7 +218,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         });
 
 
-    }  //스낵바_맨처음
+    }
 
 
     public void setDefaultLocation() {

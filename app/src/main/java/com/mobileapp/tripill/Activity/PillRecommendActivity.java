@@ -139,8 +139,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     String koreaaddress;
     String result;
     String address;
-    String asdf;
-    String test = "hellow";
+    String trnaslatelocation;
 
 
     String[] REQUIRED_PERMISSIONS={Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
@@ -382,7 +381,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         realm=Realm.getDefaultInstance();
         basicCRUD(realm);
 
-
+        new BackgroundTask().execute();
     }
 
 
@@ -532,8 +531,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     }
 
     public void messege() {
-        new BackgroundTask().execute();
-
         ageS=getIntent().getStringExtra(INTE_INPUT_AGE);
         s1kr=getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
         s2kr=getIntent().getStringExtra(INTE_SELECT_SYMPTOM2_KR);
@@ -627,16 +624,16 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
             if (language == "ja") {
                 japanadress = koreaaddress.replace(", 大韓民国","");
-                asdf = japanadress;
+                trnaslatelocation = japanadress;
             }else if(language == "zh"){
                 chinaadress = koreaaddress.replace(", 韩国","");
-                asdf = chinaadress;
+                trnaslatelocation = chinaadress;
 
             }else if(language == "en"){
                 englishaddress = koreaaddress.replace(", South Korea","");
-                asdf = englishaddress;
+                trnaslatelocation = englishaddress;
             }else{
-                asdf = koreaaddress;
+                trnaslatelocation = koreaaddress;
             }
 
         }
@@ -649,7 +646,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
             try{
 
-                String text = URLEncoder.encode(asdf,"UTF-8");
+                String text = URLEncoder.encode(trnaslatelocation,"UTF-8");
                 String apiUrl = "https://openapi.naver.com/v1/papago/n2mt";
 
                 URL url = new URL(apiUrl);
@@ -689,10 +686,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
             if(element.getAsJsonObject().get("errorMessage") != null){
-                Log.e("asdf",element.getAsJsonObject().get("errorCode").getAsString());
             }else if(element.getAsJsonObject().get("message") != null){
                 address = element.getAsJsonObject().get("message").getAsJsonObject().get("result").getAsJsonObject().get("translatedText").getAsString();
-                Log.e("asdf",address);
             }
         }
     }

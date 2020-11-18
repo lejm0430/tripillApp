@@ -85,7 +85,6 @@
     <string name="pharmacy">药房</string>
     <string name="maximum_two_choice_toast">只能选择2个</string>
     <string name="snackbar_body">执行该程序需要有接近位置接近位置的权利</string>
-    <string name="fail_location_network">叫到位置失败了. 请激活网络.</string>
-    <string name="fail_location_gps">叫到位置失败了. 请激活GPS.</string>
+    <string name="turn_gps_or_network">叫到位置失败了. 激活网络或GPS.</string>
     <string name="fail_Address">找到地址失败.</string>
 </resources>

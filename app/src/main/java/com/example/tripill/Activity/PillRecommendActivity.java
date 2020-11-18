@@ -443,18 +443,18 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             boolean isGPSEnabled=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
             boolean isNetworkEnabled=locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-            if (!isGPSEnabled && !isNetworkEnabled) {
+            if (!isGPSEnabled && !isNetworkEnabled) { //둘다 꺼졌을때
 
-            } else {
+            } else { //둘다 켜졌을때
                 if (isNetworkEnabled) {
-
-                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
-
-                    if (locationManager != null) {
-                        location=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                        if (location != null) {
-                            mlatitude=location.getLatitude();
-                            mlongitude=location.getLongitude();
+                    if (location == null) {
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
+                        if (locationManager != null) {
+                            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                            if (location != null) {
+                                mlatitude = location.getLatitude();
+                                mlongitude = location.getLongitude();
+                            }
                         }
                     }
                 }

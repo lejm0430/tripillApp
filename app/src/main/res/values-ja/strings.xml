@@ -85,7 +85,6 @@
     <string name="pharmacy">売薬店</string>
     <string name="maximum_two_choice_toast">2つまで選択可能</string>
     <string name="snackbar_body">このアプリを実行するには、場所へのアクセス権限が必要です.</string>
-    <string name="fail_location_network">位置読み込みに失敗しました. ネットワークを有効にしてください.</string>
-    <string name="fail_location_gps">位置読み込みに失敗しました. GPSを有効にしてください.</string>
+    <string name="turn_gps_or_network">位置読み込みに失敗しました. ネットワークやGPSを有効にしてください.</string>
     <string name="fail_Address">住所探しに失敗しました.</string>
 </resources>

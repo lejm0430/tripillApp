@@ -61,7 +61,6 @@ import noman.googleplaces.PlacesException;
 import noman.googleplaces.PlacesListener;
 
 import static com.example.tripill.Props.FASTEST_UPDATE_INTERVAL_MS;
-import static com.example.tripill.Props.GPS_ENABLE_REQUEST_CODE;
 import static com.example.tripill.Props.PERMISSIONS_REQUEST_CODE;
 import static com.example.tripill.Props.STRING_FAIL_ADDRESS;
 import static com.example.tripill.Props.UPDATE_INTERVAL_MS;
@@ -307,28 +306,6 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         }
     } //한번 거부 후 위치권한 다이얼로그
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-
-            case GPS_ENABLE_REQUEST_CODE:
-
-                //사용자가 GPS 활성 시켰는지 검사
-                if (!checkLocationServicesStatus()) {
-                    Intent callGPSSettingIntent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
-                    startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
-                    if (checkLocationServicesStatus()) {
-                        return;
-                    }
-                }
-                break;
-        }
-    }//gps 네트워크
-
-
-
 
     LocationCallback locationCallback=new LocationCallback() {
         @Override
@@ -362,8 +339,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }   //gps, 네트워크 여부 boolean
-
+    }   //gps, 네트워크
 
     @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
@@ -385,7 +361,7 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
 
     public String getCurrentAddress(LatLng latlng) {
 
-        //지오코더... GPS를 주소로 변환
+        // GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
         List<Address> addresses;
@@ -396,16 +372,15 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     latlng.longitude,
                     1);
         } catch (IOException ioException) {
-            //네트워크 문제
             Toast.makeText(this, R.string.fail_Address, Toast.LENGTH_LONG).show();
             return STRING_FAIL_ADDRESS;
         } catch (IllegalArgumentException illegalArgumentException) {
-            Toast.makeText(this, R.string.fail_location_network, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.turn_gps_or_network, Toast.LENGTH_LONG).show();
             return STRING_FAIL_ADDRESS;
         }
 
         if (addresses == null || addresses.size() == 0) {
-            Toast.makeText(this, R.string.fail_location_gps, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.fail_Address, Toast.LENGTH_LONG).show();
             return STRING_FAIL_ADDRESS;
 
         } else {

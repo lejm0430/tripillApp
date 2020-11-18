@@ -521,16 +521,14 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
             Toast.makeText(this, R.string.fail_Address, Toast.LENGTH_LONG).show();
             return STRING_FAIL_ADDRESS;
         } catch (IllegalArgumentException illegalArgumentException) {
-            //네트워크 x   GPS o
-            Toast.makeText(this, R.string.fail_location_network, Toast.LENGTH_LONG).show();
+            //네트워크 x   GPS o  ||  네트워크 o   GPS x
+            Toast.makeText(this, R.string.turn_gps_or_network, Toast.LENGTH_LONG).show();
             return STRING_FAIL_ADDRESS;
         }
 
         if (addresses == null || addresses.size() == 0) {  //주소 미발견
-            //네트워크 o   GPS x
-            Toast.makeText(this, R.string.fail_location_gps, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.fail_Address, Toast.LENGTH_LONG).show();
             return STRING_FAIL_ADDRESS;
-
         }
 
         Address address = addresses.get(0);

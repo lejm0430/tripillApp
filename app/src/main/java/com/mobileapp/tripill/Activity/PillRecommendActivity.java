@@ -12,6 +12,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
@@ -22,6 +23,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.mobileapp.tripill.Adapter.SymptomRecommendAdpater;
 import com.mobileapp.tripill.DataBase.PillDB;
 import com.mobileapp.tripill.Dialog.FullImagDialog;
@@ -33,7 +36,14 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 import androidx.annotation.NonNull;
 
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +53,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.loader.content.AsyncTaskLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
@@ -122,10 +133,21 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     double mlatitude;
     double mlongitude;
 
+    String japanadress;
+    String chinaadress;
+    String englishaddress;
+    String koreaaddress;
+    String result;
+    String address;
+    String asdf;
+    String test = "hellow";
+
 
     String[] REQUIRED_PERMISSIONS={Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
     private BaseDialog dialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -510,28 +532,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     }
 
     public void messege() {
-        getLocation();
-
-        String koreaaddress=getCurrentAddress(mlatitude, mlongitude);
-
-        Locale locale=getResources().getConfiguration().locale;
-        String language=locale.getLanguage();
-        String address = null;
-
-        if (language == "ja") {
-            String japanadress = address.replace(", 大韓民国","");
-            address = japanadress;
-        }else if(language == "zh"){
-            String chinaadress = address.replace(", 韩国","");
-            address = chinaadress;
-
-        }else if(language == "en"){
-            String englishaddress = address.replace(", South Korea","");
-            address = englishaddress;
-        }else{
-             address = koreaaddress;
-        }
-
+        new BackgroundTask().execute();
 
         ageS=getIntent().getStringExtra(INTE_INPUT_AGE);
         s1kr=getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);
@@ -611,5 +612,88 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     @Override
     public void onLocationChanged(@NonNull Location location) {
 
+    }
+
+
+    class  BackgroundTask extends AsyncTask<Integer, Integer, Integer>{
+        protected void onPreExecute(){
+            getLocation();
+
+            koreaaddress=getCurrentAddress(mlatitude, mlongitude);
+
+            Locale locale=getResources().getConfiguration().locale;
+            String language=locale.getLanguage();
+
+
+            if (language == "ja") {
+                japanadress = koreaaddress.replace(", 大韓民国","");
+                asdf = japanadress;
+            }else if(language == "zh"){
+                chinaadress = koreaaddress.replace(", 韩国","");
+                asdf = chinaadress;
+
+            }else if(language == "en"){
+                englishaddress = koreaaddress.replace(", South Korea","");
+                asdf = englishaddress;
+            }else{
+                asdf = koreaaddress;
+            }
+
+        }
+
+        @Override
+        protected Integer doInBackground(Integer ... arg0){
+            StringBuilder output = new StringBuilder();
+            String clientId = "Doo2VYpjkFiwoJwRz6Ux";
+            String clientSecret = "EDtnwCxip_";
+
+            try{
+
+                String text = URLEncoder.encode(asdf,"UTF-8");
+                String apiUrl = "https://openapi.naver.com/v1/papago/n2mt";
+
+                URL url = new URL(apiUrl);
+                HttpURLConnection con = (HttpURLConnection)url.openConnection();
+                con.setRequestMethod("POST");
+                con.setRequestProperty("X-Naver-Client-Id", clientId);
+                con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
+
+                String postParams = "source=en&target=ko&text=" + text;
+                con.setDoOutput(true);
+                DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+                wr.writeBytes(postParams);
+                wr.flush();
+                wr.close();
+
+                int responseCode = con.getResponseCode();
+                BufferedReader br;
+                if(responseCode == 200){
+                    br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                }else{
+                    br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+                }
+                String inputLine;
+                while((inputLine = br.readLine()) != null){
+                    output.append(inputLine);
+                }
+                br.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            result = output.toString();
+            return null;
+        }
+
+        protected void onPostExecute(Integer a){
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+            if(element.getAsJsonObject().get("errorMessage") != null){
+                Log.e("asdf",element.getAsJsonObject().get("errorCode").getAsString());
+            }else if(element.getAsJsonObject().get("message") != null){
+                address = element.getAsJsonObject().get("message").getAsJsonObject().get("result").getAsJsonObject().get("translatedText").getAsString();
+                Log.e("asdf",address);
+            }
+        }
     }
 }

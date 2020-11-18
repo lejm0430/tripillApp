@@ -1,4 +1,4 @@
-package com.example.tripill.DataBase;
+package com.mobileapp.tripill.DataBase;
 public class SymptomList {
     String symptom;
     boolean isSelected;

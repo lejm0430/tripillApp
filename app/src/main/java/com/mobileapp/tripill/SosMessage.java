@@ -1,11 +1,9 @@
-package com.example.tripill;
+package com.mobileapp.tripill;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class SosMessage {
     Activity activity;

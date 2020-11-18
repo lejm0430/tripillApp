@@ -1,8 +1,4 @@
-package com.example.tripill.DataBase;
-
-import com.example.tripill.DataBase.PillDB;
-
-import java.util.ArrayList;
+package com.mobileapp.tripill.DataBase;
 
 public class PillList {
 

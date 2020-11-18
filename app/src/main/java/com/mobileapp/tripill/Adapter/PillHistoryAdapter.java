@@ -1,32 +1,29 @@
-package com.example.tripill.Adapter;
+package com.mobileapp.tripill.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.tripill.Activity.PillRecommendActivity;
-import com.example.tripill.DataBase.PillList;
-import com.example.tripill.R;
+import com.mobileapp.tripill.Activity.PillRecommendActivity;
+import com.mobileapp.tripill.DataBase.PillList;
+import com.mobileapp.tripill.R;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.example.tripill.Props.INTE_INPUT_AGE;
-import static com.example.tripill.Props.INTE_SELECT_PILLNAME;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
+import static com.mobileapp.tripill.Props.INTE_INPUT_AGE;
+import static com.mobileapp.tripill.Props.INTE_SELECT_PILLNAME;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM1;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM2;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
 
 public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.MainHolder>{
 

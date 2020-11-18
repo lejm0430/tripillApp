@@ -1,9 +1,6 @@
-package com.example.tripill.Activity;
+package com.mobileapp.tripill.Activity;
 
 import android.app.Application;
-import android.content.Context;
-
-import com.example.tripill.DataBase.PillDB;
 
 import io.realm.Realm;
 

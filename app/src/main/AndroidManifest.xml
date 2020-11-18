@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.tripill">
+    package="com.mobileapp.tripill">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -9,7 +9,7 @@
 
 
     <application
-        android:name=".Activity.PillDBApplication"
+        android:name="com.mobileapp.tripill.Activity.PillDBApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,16 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Activity.PharmacyMap" android:screenOrientation="portrait"/>
+        <activity android:name="com.mobileapp.tripill.Activity.PharmacyMap" android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".Activity.PillRecommendActivity"
+            android:name="com.mobileapp.tripill.Activity.PillRecommendActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.AgeActivity"
+            android:name="com.mobileapp.tripill.Activity.AgeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.SplashActivity"
+            android:name="com.mobileapp.tripill.Activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.MainActivity"
+            android:name="com.mobileapp.tripill.Activity.MainActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

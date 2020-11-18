@@ -1,10 +1,8 @@
-package com.example.tripill.Dialog;
+package com.mobileapp.tripill.Dialog;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.tripill.Activity.AgeActivity;
-import com.example.tripill.Activity.MainActivity;
-import com.example.tripill.Adapter.ChoiceSymptomRecyclerAdapter;
-import com.example.tripill.DataBase.SymptomList;
-import com.example.tripill.R;
+import com.mobileapp.tripill.Activity.AgeActivity;
+import com.mobileapp.tripill.Adapter.ChoiceSymptomRecyclerAdapter;
+import com.mobileapp.tripill.DataBase.SymptomList;
+import com.mobileapp.tripill.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
@@ -24,13 +21,13 @@ import java.util.ArrayList;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.example.tripill.Props.INTE_SELECT_PART;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
-import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
-import static com.example.tripill.Props.REQUEST_CODE;
+import static com.mobileapp.tripill.Props.INTE_SELECT_PART;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM1;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM2;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
+import static com.mobileapp.tripill.Props.INTE_SYMPTOM_SUM;
+import static com.mobileapp.tripill.Props.REQUEST_CODE;
 
 public class ChoicedSymptomSlide extends BottomSheetDialogFragment {
 

@@ -1,4 +1,4 @@
-package com.example.tripill.Activity;
+package com.mobileapp.tripill.Activity;
 
 import android.Manifest;
 
@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
@@ -22,12 +21,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tripill.Adapter.SymptomRecommendAdpater;
-import com.example.tripill.DataBase.PillDB;
-import com.example.tripill.Dialog.FullImagDialog;
-import com.example.tripill.Dialog.BaseDialog;
-import com.example.tripill.R;
-import com.example.tripill.SosMessage;
+import com.mobileapp.tripill.Adapter.SymptomRecommendAdpater;
+import com.mobileapp.tripill.DataBase.PillDB;
+import com.mobileapp.tripill.Dialog.FullImagDialog;
+import com.mobileapp.tripill.Dialog.BaseDialog;
+import com.mobileapp.tripill.R;
+import com.mobileapp.tripill.SosMessage;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import androidx.annotation.NonNull;
@@ -47,17 +46,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
 
-import static com.example.tripill.Props.INTE_INPUT_AGE;
-import static com.example.tripill.Props.INTE_SELECT_PILLNAME;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
-import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
-import static com.example.tripill.Props.MIN_DISTANCE_CHANGE_FOR_UPDATES;
-import static com.example.tripill.Props.MIN_TIME_BW_UPDATES;
-import static com.example.tripill.Props.PERMISSIONS_REQUEST_CODE;
-import static com.example.tripill.Props.STRING_FAIL_ADDRESS;
+import static com.mobileapp.tripill.Props.INTE_INPUT_AGE;
+import static com.mobileapp.tripill.Props.INTE_SELECT_PILLNAME;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM1;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM2;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
+import static com.mobileapp.tripill.Props.INTE_SYMPTOM_SUM;
+import static com.mobileapp.tripill.Props.MIN_DISTANCE_CHANGE_FOR_UPDATES;
+import static com.mobileapp.tripill.Props.MIN_TIME_BW_UPDATES;
+import static com.mobileapp.tripill.Props.PERMISSIONS_REQUEST_CODE;
+import static com.mobileapp.tripill.Props.STRING_FAIL_ADDRESS;
 
 public class PillRecommendActivity extends AppCompatActivity implements TextToSpeech.OnInitListener, LocationListener {
 

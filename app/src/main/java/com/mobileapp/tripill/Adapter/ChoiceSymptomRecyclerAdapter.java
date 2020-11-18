@@ -1,7 +1,6 @@
-package com.example.tripill.Adapter;
+package com.mobileapp.tripill.Adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tripill.DataBase.SymptomList;
-import com.example.tripill.R;
+import com.mobileapp.tripill.DataBase.SymptomList;
+import com.mobileapp.tripill.R;
 
 import java.util.ArrayList;
 import java.util.List;

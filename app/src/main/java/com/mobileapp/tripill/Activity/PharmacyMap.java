@@ -1,8 +1,7 @@
-package com.example.tripill.Activity;
+package com.mobileapp.tripill.Activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -14,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,7 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tripill.R;
+import com.mobileapp.tripill.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -60,10 +58,10 @@ import noman.googleplaces.PlaceType;
 import noman.googleplaces.PlacesException;
 import noman.googleplaces.PlacesListener;
 
-import static com.example.tripill.Props.FASTEST_UPDATE_INTERVAL_MS;
-import static com.example.tripill.Props.PERMISSIONS_REQUEST_CODE;
-import static com.example.tripill.Props.STRING_FAIL_ADDRESS;
-import static com.example.tripill.Props.UPDATE_INTERVAL_MS;
+import static com.mobileapp.tripill.Props.FASTEST_UPDATE_INTERVAL_MS;
+import static com.mobileapp.tripill.Props.PERMISSIONS_REQUEST_CODE;
+import static com.mobileapp.tripill.Props.STRING_FAIL_ADDRESS;
+import static com.mobileapp.tripill.Props.UPDATE_INTERVAL_MS;
 
 public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener {
 

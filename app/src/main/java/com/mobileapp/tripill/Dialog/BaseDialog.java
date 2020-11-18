@@ -1,31 +1,22 @@
-package com.example.tripill.Dialog;
+package com.mobileapp.tripill.Dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tripill.Activity.PillRecommendActivity;
-import com.example.tripill.R;
-
-import org.w3c.dom.Text;
-
-import java.util.Locale;
+import com.mobileapp.tripill.Activity.PillRecommendActivity;
+import com.mobileapp.tripill.R;
 
 public class BaseDialog extends Dialog {
     Activity activity;

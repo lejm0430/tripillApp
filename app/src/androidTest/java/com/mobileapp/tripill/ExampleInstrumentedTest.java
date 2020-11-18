@@ -1,4 +1,4 @@
-package com.example.tripill;
+package com.mobileapp.tripill;
 
 import android.content.Context;
 

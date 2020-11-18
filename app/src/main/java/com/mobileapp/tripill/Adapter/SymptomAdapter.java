@@ -1,11 +1,11 @@
-package com.example.tripill.Adapter;
+package com.mobileapp.tripill.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.tripill.R;
+import com.mobileapp.tripill.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

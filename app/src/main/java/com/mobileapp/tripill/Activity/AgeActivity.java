@@ -1,34 +1,33 @@
-package com.example.tripill.Activity;
+package com.mobileapp.tripill.Activity;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.tripill.Adapter.SymptomAdapter;
-import com.example.tripill.Dialog.BaseDialog;
-import com.example.tripill.R;
+import com.mobileapp.tripill.Adapter.SymptomAdapter;
+import com.mobileapp.tripill.Dialog.BaseDialog;
+import com.mobileapp.tripill.R;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.example.tripill.Props.INTE_INPUT_AGE;
-import static com.example.tripill.Props.INTE_SELECT_PART;
-import static com.example.tripill.Props.INTE_SELECT_PILLNAME;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
-import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
+import static com.mobileapp.tripill.Props.INTE_INPUT_AGE;
+import static com.mobileapp.tripill.Props.INTE_SELECT_PART;
+import static com.mobileapp.tripill.Props.INTE_SELECT_PILLNAME;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM1;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM2;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM2_KR;
+import static com.mobileapp.tripill.Props.INTE_SYMPTOM_SUM;
 
 public class AgeActivity extends AppCompatActivity {
     EditText age;

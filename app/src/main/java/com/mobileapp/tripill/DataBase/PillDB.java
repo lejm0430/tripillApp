@@ -1,10 +1,6 @@
-package com.example.tripill.DataBase;
+package com.mobileapp.tripill.DataBase;
 
 
-import android.app.Application;
-
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 

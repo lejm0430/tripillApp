@@ -1,10 +1,10 @@
-package com.example.tripill.Activity;
+package com.mobileapp.tripill.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.tripill.R;
+import com.mobileapp.tripill.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 

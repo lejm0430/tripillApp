@@ -1,7 +1,6 @@
 
-package com.example.tripill.Activity;
+package com.mobileapp.tripill.Activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tripill.Adapter.PillHistoryAdapter;
-import com.example.tripill.DataBase.PillList;
-import com.example.tripill.DataBase.PillDB;
-import com.example.tripill.Dialog.ChoicedSymptomSlide;
-import com.example.tripill.R;
+import com.mobileapp.tripill.Adapter.PillHistoryAdapter;
+import com.mobileapp.tripill.DataBase.PillList;
+import com.mobileapp.tripill.DataBase.PillDB;
+import com.mobileapp.tripill.Dialog.ChoicedSymptomSlide;
+import com.mobileapp.tripill.R;
 
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,10 +26,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-import static com.example.tripill.Props.FINISH_INTERVAL_TIME;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1;
-import static com.example.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
-import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
+import static com.mobileapp.tripill.Props.FINISH_INTERVAL_TIME;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM1;
+import static com.mobileapp.tripill.Props.INTE_SELECT_SYMPTOM1_KR;
+import static com.mobileapp.tripill.Props.INTE_SYMPTOM_SUM;
 
 
 public class MainActivity extends AppCompatActivity{

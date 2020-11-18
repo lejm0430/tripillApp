@@ -444,6 +444,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 }else {
                     // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우
                     Toast.makeText(this, R.string.preference_none_setting, Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
                         Intent intent=new Intent(Settings.ACTION_APPLICATION_SETTINGS);
                         startActivityForResult(intent, 0);
 

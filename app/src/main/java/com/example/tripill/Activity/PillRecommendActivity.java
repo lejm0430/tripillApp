@@ -66,6 +66,7 @@ import static com.example.tripill.Props.INTE_SYMPTOM_SUM;
 import static com.example.tripill.Props.MIN_DISTANCE_CHANGE_FOR_UPDATES;
 import static com.example.tripill.Props.MIN_TIME_BW_UPDATES;
 import static com.example.tripill.Props.PERMISSIONS_REQUEST_CODE;
+import static com.example.tripill.Props.STRING_FAIL_ADDRESS;
 
 public class PillRecommendActivity extends AppCompatActivity implements TextToSpeech.OnInitListener, LocationListener {
 
@@ -518,17 +519,17 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         } catch (IOException ioException) {
             //네트워크 x   GPS x
             Toast.makeText(this, R.string.fail_Address, Toast.LENGTH_LONG).show();
-            return "'주소 미발견'";
+            return STRING_FAIL_ADDRESS;
         } catch (IllegalArgumentException illegalArgumentException) {
             //네트워크 x   GPS o
             Toast.makeText(this, R.string.fail_location_network, Toast.LENGTH_LONG).show();
-            return "'주소 미발견'";
+            return STRING_FAIL_ADDRESS;
         }
 
         if (addresses == null || addresses.size() == 0) {  //주소 미발견
             //네트워크 o   GPS x
             Toast.makeText(this, R.string.fail_location_gps, Toast.LENGTH_LONG).show();
-            return "'주소 미발견'";
+            return STRING_FAIL_ADDRESS;
 
         }
 

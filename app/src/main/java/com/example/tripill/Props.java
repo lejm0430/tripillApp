@@ -12,6 +12,9 @@ public class Props {
     public static final String INTE_SELECT_PILLNAME = "INTE_SELECT_PILLNAME";
 
 
+    public static final String STRING_FAIL_ADDRESS = "주소 미발견";
+
+
 
     public static final int FINISH_INTERVAL_TIME = 2000;
     public static final int REQUEST_CODE = 1001;

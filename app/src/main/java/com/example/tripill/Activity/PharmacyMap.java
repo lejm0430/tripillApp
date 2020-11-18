@@ -63,6 +63,7 @@ import noman.googleplaces.PlacesListener;
 import static com.example.tripill.Props.FASTEST_UPDATE_INTERVAL_MS;
 import static com.example.tripill.Props.GPS_ENABLE_REQUEST_CODE;
 import static com.example.tripill.Props.PERMISSIONS_REQUEST_CODE;
+import static com.example.tripill.Props.STRING_FAIL_ADDRESS;
 import static com.example.tripill.Props.UPDATE_INTERVAL_MS;
 
 public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener {
@@ -397,15 +398,15 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
         } catch (IOException ioException) {
             //네트워크 문제
             Toast.makeText(this, R.string.fail_Address, Toast.LENGTH_LONG).show();
-            return "'주소 미발견'";
+            return STRING_FAIL_ADDRESS;
         } catch (IllegalArgumentException illegalArgumentException) {
             Toast.makeText(this, R.string.fail_location_network, Toast.LENGTH_LONG).show();
-            return "'주소 미발견'";
+            return STRING_FAIL_ADDRESS;
         }
 
         if (addresses == null || addresses.size() == 0) {
             Toast.makeText(this, R.string.fail_location_gps, Toast.LENGTH_LONG).show();
-            return "'주소 미발견'";
+            return STRING_FAIL_ADDRESS;
 
         } else {
             Address address = addresses.get(0);

@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -512,6 +513,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
         getLocation();
 
         String address=getCurrentAddress(mlatitude, mlongitude);
+        String asdf = address.replaceAll("Korea","");
+        Log.e("asdf",asdf);
 
         ageS=getIntent().getStringExtra(INTE_INPUT_AGE);
         s1kr=getIntent().getStringExtra(INTE_SELECT_SYMPTOM1_KR);

@@ -25,6 +25,8 @@ import com.example.tripill.R;
 
 import org.w3c.dom.Text;
 
+import java.util.Locale;
+
 public class BaseDialog extends Dialog {
     Activity activity;
     String canclecontents,contents, confirm;

@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
@@ -370,20 +371,8 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         ///////list
 
-        ((MainActivity)MainActivity.context).pillList = new ArrayList<PillList>();
-
         realm = Realm.getDefaultInstance();
         basicCRUD(realm);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
-        ((MainActivity)MainActivity.context).drawer_recycler.setLayoutManager(linearLayoutManager);
-
-        ((MainActivity)MainActivity.context).historyadapter = new PillHistoryAdapter(((MainActivity)MainActivity.context).pillList,this);
-        ((MainActivity)MainActivity.context).drawer_recycler.setAdapter(((MainActivity)MainActivity.context).historyadapter);
-
-
     }
 
 
@@ -394,7 +383,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) { //퍼미션 허용 O
-
         } else {  //퍼미션 허용 X
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
@@ -459,6 +447,7 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
     @SuppressLint("MissingPermission")
     public Location getLocation() {
+
         try {
             LocationManager locationManager=(LocationManager) this.getSystemService(LOCATION_SERVICE);
 
@@ -469,17 +458,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
 
             } else { //둘다 켜졌을때
                 if (isNetworkEnabled) {
-<<<<<<< HEAD
-                    if (location == null) {
-                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
-                        if (locationManager != null) {
-                            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                            if (location != null) {
-                                mlatitude = location.getLatitude();
-                                mlongitude = location.getLongitude();
-                            }
-=======
-
                     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES,  this);
 
                     if (locationManager != null) {
@@ -487,7 +465,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                         if (location != null) {
                             mlatitude=location.getLatitude();
                             mlongitude=location.getLongitude();
->>>>>>> e3e89212aa7d54f6637c08ffe7d6a91a43b8c302
                         }
                     }
                 }
@@ -549,7 +526,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
     }
 
     public void messege() {
-
         getLocation();
 
         String address = getCurrentAddress(mlatitude, mlongitude);
@@ -627,16 +603,6 @@ public class PillRecommendActivity extends AppCompatActivity implements TextToSp
                 }
                 pd.setS1kr(s1kr);
                 pd.setS2kr(s2kr);
-                if(pd.getName() == null){
-                    ((MainActivity)MainActivity.context).drawer_recycler.setVisibility(View.GONE);
-                }else{
-                    RealmResults<PillDB> result = realm.where(PillDB.class).findAll();
-
-                    for (PillDB pill : result) {
-                        ((MainActivity)MainActivity.context).pillList.add(new PillList(pill.getS1(),pill.getS2(),pill.getAge(),pill.getDate(),pill.getName(), pill.getS1kr(), pill.getS2kr()));
-                    }
-                    ((MainActivity)MainActivity.context).nonehistory.setVisibility(View.GONE);
-                }
             }
         });
     }

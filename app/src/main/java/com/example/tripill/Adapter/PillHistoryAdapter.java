@@ -69,7 +69,6 @@ public class PillHistoryAdapter extends RecyclerView.Adapter<PillHistoryAdapter.
         holder.linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context mcontext = v.getContext();
                 Intent intent = new Intent(v.getContext(), PillRecommendActivity.class);
                 intent.putExtra(INTE_SELECT_SYMPTOM1,holder.symptom1.getText().toString());
                 intent.putExtra(INTE_SELECT_SYMPTOM2,holder.symptom2.getText().toString());

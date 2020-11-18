@@ -149,6 +149,8 @@ public class PharmacyMap extends FragmentActivity implements OnMapReadyCallback,
                     CameraUpdate cameraUpdate=CameraUpdateFactory.newLatLngZoom(currentPosition, 17);
                     mMap.moveCamera(cameraUpdate);
                     showPlaceInformation(currentPosition);
+                    lastClicked = null;
+                    bottomsheet.setVisibility(View.GONE);
                 }else {
                     gpsBtn.setSelected(false);
                 }

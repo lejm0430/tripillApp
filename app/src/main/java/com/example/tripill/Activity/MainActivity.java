@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity{
 
     private Realm realm;
 
-    public static Context context;
+    public Context context;
 
 
     View.OnClickListener onClickListener1 = new View.OnClickListener() {

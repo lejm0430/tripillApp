@@ -19,15 +19,13 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSymptomRecyclerAdapter.MainHolder> implements View.OnClickListener{
+public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSymptomRecyclerAdapter.MainHolder>{
 
     private List<SymptomList> list;
     private List<SymptomList> selected_list = new ArrayList<>();
     public static Context context;
-    private RecyclerView recyclerView;
-    private LayoutInflater inflate;
+    LayoutInflater inflate;
 
-    public int pos = -1;
 
     int count = 0;
 
@@ -105,10 +103,6 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
         return list.size();
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 
 
 
@@ -130,7 +124,6 @@ public class ChoiceSymptomRecyclerAdapter extends RecyclerView.Adapter<ChoiceSym
             SymptomBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pos = getAdapterPosition();
                     notifyDataSetChanged();
                 }
             });

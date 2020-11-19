@@ -223,9 +223,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="그것은 동력은 것이 있는가? 인류의 같은 풍부하게 봄날의 인도하겠다는 든 어디 보라. 거선의 것은 그들의 따뜻한 별과 물방아 영원히 고동을 이것이야말로 사막이다. 인간의 얼음에 두기 굳세게 피어나는 있는 이상은 이상은 용감하고 피다. 부패를 청춘의 심장은 방황하였으며, 피어나는 인생에 때문이다. 가치를 곧 인도하겠다는 예수는 원대하고, 아니더면, 열락의 날카로우나 보라. 못하다 일월과 우리 때에, 넣는 사막이다. 청춘의 곧 착목한는 전인 내려온 되려니와, 칼이다. 우리의 피어나는 못하다 뿐이다."
-                    android:textSize="14dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/noto_sans_cj_kkr_regular"/>
+                    style="@style/kkr_black_14"/>
             </RelativeLayout>
         </net.cachapa.expandablelayout.ExpandableLayout>
 

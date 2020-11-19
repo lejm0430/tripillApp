@@ -50,7 +50,6 @@ public class BaseDialog extends Dialog {
         setContentView(layout);
         setCancelable(false);
 
-        RelativeLayout realtive = (RelativeLayout)findViewById(R.id.layout);
         Button okbtn = (Button)findViewById(R.id.okbtn);
         Button canclebtn = (Button)findViewById(R.id.canclebtn);
         TextView text = (TextView) findViewById(R.id.text);
